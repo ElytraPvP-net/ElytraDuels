@@ -1,0 +1,7 @@
+name: ElytraDuels
+version: ${project.version}
+main: net.elytrapvp.elytraduels.ElytraDuels
+prefix: Duels
+authors: [ ElytraPvP ]
+description: Duels Server code for ElytraPvP
+website: https://www.elytrapvp.net
