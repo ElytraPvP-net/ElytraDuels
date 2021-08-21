@@ -1,0 +1,174 @@
+Maps:
+  desert-1:
+    name: Desert
+    builder: deep_dark_blue
+    kits:
+      - uhc
+      - iron
+      - diamond
+      - classic
+      - no debuff
+      - op
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: maps
+            X: 253.5
+            Y: 62.5
+            Z: 9.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: 208.5
+            Y: 62.5
+            Z: 54.5
+            Pitch: 0
+            Yaw: -135
+      '2':
+        spawns:
+          '1':
+            World: maps
+            X: 253.5
+            Y: 62.5
+            Z: 209.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: 208.5
+            Y: 62.5
+            Z: 254.5
+            Pitch: 0
+            Yaw: -135
+      '3':
+        spawns:
+          '1':
+            World: maps
+            X: 253.5
+            Y: 62.5
+            Z: 409.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: 208.5
+            Y: 62.5
+            Z: 454.5
+            Pitch: 0
+            Yaw: -135
+  woodlands-1:
+    name: Woodlands
+    builder: deep_dark_blue
+    kits:
+      - uhc
+      - iron
+      - diamond
+      - classic
+      - no debuff
+      - op
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: maps
+            X: 450.5
+            Y: 62.5
+            Z: 13.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: 412.5
+            Y: 62.5
+            Z: 51.5
+            Pitch: 0
+            Yaw: -135
+      '2':
+        spawns:
+          '1':
+            World: maps
+            X: 450.5
+            Y: 62.5
+            Z: 213.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: 412.5
+            Y: 62.5
+            Z: 251.5
+            Pitch: 0
+            Yaw: -135
+      '3':
+        spawns:
+          '1':
+            World: maps
+            X: 450.5
+            Y: 62.5
+            Z: 413.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: 412.5
+            Y: 62.5
+            Z: 451.5
+            Pitch: 0
+            Yaw: -135
+  mesa-2:
+    name: Mesa
+    builder: deep_dark_blue
+    kits:
+      - archer
+      - bow
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: maps
+            X: -209.5
+            Y: 62.5
+            Z: 11.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: -264.5
+            Y: 62.5
+            Z: 66.5
+            Pitch: 0
+            Yaw: -135
+      '2':
+        spawns:
+          '1':
+            World: maps
+            X: -209.5
+            Y: 62.5
+            Z: 211.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: -264.5
+            Y: 62.5
+            Z: 266.5
+            Pitch: 0
+            Yaw: -135
+      '3':
+        spawns:
+          '1':
+            World: maps
+            X: -209.5
+            Y: 62.5
+            Z: 411.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: maps
+            X: -264.5
+            Y: 62.5
+            Z: 466.5
+            Pitch: 0
+            Yaw: -135
