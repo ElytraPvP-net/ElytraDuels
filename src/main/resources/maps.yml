@@ -1,7 +1,8 @@
 Maps:
   desert-1:
     name: Desert
-    builder: deep_dark_blue
+    builders:
+      - deep_dark_blue
     kits:
       - uhc
       - iron
@@ -60,7 +61,8 @@ Maps:
             Yaw: -135
   woodlands-1:
     name: Woodlands
-    builder: deep_dark_blue
+    builders:
+      - deep_dark_blue
     kits:
       - uhc
       - iron
@@ -119,7 +121,8 @@ Maps:
             Yaw: -135
   mesa-2:
     name: Mesa
-    builder: deep_dark_blue
+    builders:
+      - deep_dark_blue
     kits:
       - archer
       - bow
