@@ -23,7 +23,7 @@ public final class ElytraDuels extends JavaPlugin {
         partyManager = new PartyManager();
         arenaManager = new ArenaManager(this);
         gameManager = new GameManager(this);
-        queueManager = new QueueManager();
+        queueManager = new QueueManager(this);
     }
 
     @Override

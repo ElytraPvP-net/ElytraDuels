@@ -163,4 +163,8 @@ public class Game {
     public void removeSpectator(Player player) {
 
     }
+
+    public void start() {
+        countdown();
+    }
 }
