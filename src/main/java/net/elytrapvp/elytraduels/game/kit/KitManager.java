@@ -9,12 +9,7 @@ import java.util.Set;
  * Manages all existing kits.
  */
 public class KitManager {
-    private final ElytraDuels plugin;
     private final Set<Kit> kits = new LinkedHashSet<>();
-
-    public KitManager(ElytraDuels plugin) {
-        this.plugin = plugin;
-    }
 
     /**
      * Get a kit from its name,

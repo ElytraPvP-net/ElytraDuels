@@ -19,7 +19,7 @@ public final class ElytraDuels extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         settingsManager = new SettingsManager(this);
-        kitManager = new KitManager(this);
+        kitManager = new KitManager();
         partyManager = new PartyManager();
         arenaManager = new ArenaManager(this);
         gameManager = new GameManager(this);
