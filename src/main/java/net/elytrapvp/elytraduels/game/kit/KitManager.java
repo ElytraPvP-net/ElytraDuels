@@ -16,6 +16,25 @@ public class KitManager {
         this.plugin = plugin;
     }
 
+    /**
+     * Get a kit from its name,
+     * @param str Name of the kit.
+     * @return Kit from name.
+     */
+    public Kit getKit(String str) {
+        for(Kit kit : getKits()) {
+            if(kit.getName().equalsIgnoreCase(str)) {
+                return kit;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get all existing kits.
+     * @return All kits.
+     */
     public Set<Kit> getKits() {
         return kits;
     }
