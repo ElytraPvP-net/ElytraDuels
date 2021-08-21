@@ -15,10 +15,12 @@ public abstract class Kit {
 
     // integer settings.
     private int voidLevel;
+    private double rodMultiplier;
 
     // boolean settings.
     private boolean hasRanked;
     private boolean naturalRegen;
+    private boolean rangedDamage;
     private boolean waterKills;
 
     /**
@@ -33,9 +35,11 @@ public abstract class Kit {
         tripleShots = 0;
 
         voidLevel = 16;
+        rodMultiplier = 1.0;
 
         hasRanked = false;
         naturalRegen = true;
+        rangedDamage = false;
         waterKills = false;
     }
 
@@ -80,6 +84,14 @@ public abstract class Kit {
     }
 
     /**
+     * Get the kit's rod multiplier.
+     * @return Rod multiplier.
+     */
+    public double getRodMultiplier() {
+        return rodMultiplier;
+    }
+
+    /**
      * Get the total number of triple shots
      * that can be used in this kit.
      * @return Amount of triple shots.
@@ -97,11 +109,27 @@ public abstract class Kit {
     }
 
     /**
+     * Get whether the kit has any abilities.
+     * @return Whether or not the kit has abilities.
+     */
+    public boolean hasAbilities() {
+        return doubleJumps > 0 || repulsors > 0 || tripleShots > 0;
+    }
+
+    /**
      * Get if the kit will be available ranked.
      * @return Whether or not the kit will have ranked.
      */
     public boolean hasRanked() {
         return hasRanked;
+    }
+
+    /**
+     * Get if the kit will have ranged ranged.
+     * @return Whether or not the kit as ranged damage.
+     */
+    public boolean hasRangedDamage() {
+        return rangedDamage;
     }
 
     /**
@@ -138,11 +166,27 @@ public abstract class Kit {
     }
 
     /**
+     * Set if the kit should have ranged damage.
+     * @param rangedDamage Whether or not the kit has ranged damage.
+     */
+    public void setRangedDamage(boolean rangedDamage) {
+        this.rangedDamage = rangedDamage;
+    }
+
+    /**
      * Set the amount of repulsors the kit has.
      * @param repulsors Amount of repulsors.
      */
     public void setRepulsors(int repulsors) {
         this.repulsors = repulsors;
+    }
+
+    /**
+     * Get the rod multiplier of the kit.
+     * @param rodMultiplier New rod multiplier.
+     */
+    public void setRodMultiplier(double rodMultiplier) {
+        this.rodMultiplier = rodMultiplier;
     }
 
     /**
