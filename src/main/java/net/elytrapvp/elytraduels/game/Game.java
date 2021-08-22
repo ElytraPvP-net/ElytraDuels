@@ -131,6 +131,10 @@ public class Game {
      * @param loser Losing team.
      */
     private void end(Team winner, Team loser) {
+        if(gameState == GameState.END) {
+            return;
+        }
+
         gameState = GameState.END;
 
         timer.stop();
