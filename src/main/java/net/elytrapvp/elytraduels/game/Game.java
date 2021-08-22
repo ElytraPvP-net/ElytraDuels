@@ -1,15 +1,25 @@
 package net.elytrapvp.elytraduels.game;
 
+import net.elytrapvp.elytraduels.utils.ItemUtils;
+import net.elytrapvp.elytraduels.utils.Timer;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.arena.Arena;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.game.team.Team;
 import net.elytrapvp.elytraduels.game.team.TeamManager;
+import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
+import net.elytrapvp.elytraduels.utils.LocationUtils;
+import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
@@ -20,11 +30,14 @@ public class Game {
     private final ElytraDuels plugin;
     private final TeamManager teamManager = new TeamManager();
 
+    private int players;
     private GameState gameState;
     private final Kit kit;
     private final Arena arena;
+    private final Timer timer;
 
     private final Set<Player> spectators = new HashSet<>();
+    private final HashMap<Location, Material> blocks = new HashMap<>();
 
     private final HashMap<Player, Integer> tripleShot = new HashMap<>();
     private final HashMap<Player, Integer> repulsor = new HashMap<>();
@@ -37,36 +50,162 @@ public class Game {
      * @param arena Arena to use.
      * @param gameType GameType to use.
      */
-    // TODO: Create a Game object
     public Game(ElytraDuels plugin, Kit kit, Arena arena, GameType gameType) {
         this.plugin = plugin;
         this.kit = kit;
         this.arena = arena;
 
         gameState = GameState.WAITING;
+        timer = new Timer(plugin);
+        plugin.getArenaManager().removeArena(arena);
     }
 
-    // ----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
-    //TODO: Finish countdown
+    /**
+     * Starts the game.
+     */
+    public void start() {
+        players = getAlivePlayers().size();
+        kit.addPlaying(players);
+
+        int spawn = 0;
+        for(Team team : teamManager.getTeams()) {
+            for(Player p : team.getPlayers()) {
+                p.teleport(arena.getSpawns().get(spawn));
+                kit.apply(p);
+            }
+            spawn++;
+        }
+        countdown();
+    }
+
+    /**
+     * Runs the game countdown.
+     */
     private void countdown() {
         gameState = GameState.COUNTDOWN;
+        BukkitRunnable countdown = new  BukkitRunnable() {
+            int counter = 4;
+            public void run() {
+                counter--;
+                if(counter  != 0) {
+                    broadcast("&aStarting in " + counter + "...");
+                    for (Player p : getPlayers()) {
+                        p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+                    }
+                }
+                else {
+                    for(Player p : getPlayers()) {
+                        p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 2);
+                        cancel();
+                        running();
+                    }
+                }
+            }
+        };
+        countdown.runTaskTimer(plugin, 0, 20);
     }
 
-    // TODO: Finish running
+    /**
+     * Marks the game as running.
+     */
     private void running() {
         gameState = GameState.RUNNING;
+        timer.start();
+
+        if(kit.getDoubleJumps() > 0) {
+            getPlayers().forEach(player -> player.setAllowFlight(true));
+        }
     }
 
-    // TODO: Finish end
-    private void end() {
+    /**
+     * Ends the game.
+     * @param winner Winning team.
+     * @param loser Losing team.
+     */
+    private void end(Team winner, Team loser) {
         gameState = GameState.END;
 
-        plugin.getGameManager().destroyGame(this);
+        timer.stop();
+
+        broadcast("&8&m+-----------------------***-----------------------+");
+        broadcast(" ");
+        broadcastCenter("&a&l" + kit.getName() + " Duel &7- &f&l" + timer.toString());
+        broadcast(" ");;
+        if(winner.getPlayers().size() > 1) {
+            broadcastCenter("&aWinners:");
+        }
+        else {
+            broadcastCenter("&aWinner:");
+        }
+
+        for(Player player : winner.getPlayers()) {
+            broadcastCenter("&f" + player.getName() + " &a(" + ChatUtils.getFormattedHealthPercent(player) + "&a)");
+        }
+        broadcast(" ");
+        broadcast("&8&m+-----------------------***-----------------------+");
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            for(Player player : getPlayers()) {
+                player.getInventory().clear();
+                player.getInventory().setArmorContents(null);
+                player.setAllowFlight(false);
+                player.setFlying(false);
+                player.setHealth(20.0);
+                player.teleport(LocationUtils.getSpawn(plugin));
+                player.spigot().setCollidesWithEntities(true);
+                ((CraftPlayer) player).getHandle().getDataWatcher().watch(9, (byte) 0);
+
+                ItemUtils.giveLobbyItems(player);
+                new LobbyScoreboard(plugin, player);
+
+                for(Player pl : Bukkit.getOnlinePlayers()) {
+                    player.showPlayer(pl);
+                }
+
+                for(PotionEffect effect : player.getActivePotionEffects()) {
+                    player.removePotionEffect(effect.getType());
+                }
+            }
+
+            for(Team team : teamManager.getTeams()) {
+                team.getPlayers().clear();
+                team.getAlivePlayers().clear();
+                team.getDeadPlayers().clear();
+            }
+
+            kit.removePlaying(players);
+
+            spectators.clear();
+            teamManager.getTeams().clear();
+            plugin.getArenaManager().addArena(arena);
+
+            plugin.getGameManager().destroyGame(this);
+        }, 100);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            for(Location location : blocks.keySet()) {
+                location.getWorld().getBlockAt(location).setType(blocks.get(location));
+            }
+        }, 100);
+    }
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Add a block to the game cache.
+     * Used for arena resetting.
+     * @param location Location of the block.
+     * @param material Material of the block.
+     */
+    public void addBlock(Location location, Material material) {
+        blocks.put(location, material);
     }
 
-    // ----------------------------------------------------------------------------------------------------------------
-
+    /**
+     * Add a player to the game.
+     * @param player Player to add.
+     */
     public void addPlayer(Player player) {
         Team team = teamManager.getTeam(player);
 
@@ -82,7 +221,10 @@ public class Game {
         tripleShot.put(player, kit.getTripleShots());
     }
 
-    // TODO: Complete addSpectator() method.
+    /**
+     * Add a spectator to the game.
+     * @param player Spectator to add.
+     */
     public void addSpectator(Player player) {
         spectators.add(player);
 
@@ -114,6 +256,26 @@ public class Game {
     }
 
     /**
+     * Broadcast a message to the arena.
+     * @param message Message to broadcast.
+     */
+    public void broadcast(String message) {
+        for(Player player : getPlayers()) {
+            ChatUtils.chat(player, message);
+        }
+    }
+
+    /**
+     * Broadcast a centered message to the arena.
+     * @param message Message to broadcast.
+     */
+    public void broadcastCenter(String message) {
+        for(Player player : getPlayers()) {
+            ChatUtils.centeredChat(player, message);
+        }
+    }
+
+    /**
      * Get all players in the arena.
      * @return All players in the arena.
      */
@@ -125,6 +287,23 @@ public class Game {
         }
 
         return players;
+    }
+
+    /**
+     * Get the arena being used in the game.
+     * @return Arena being used.
+     */
+    public Arena getArena() {
+        return arena;
+    }
+
+    /**
+     * Get the amount of double jumps a player has left.
+     * @param player Player to get double jumps of.
+     * @return Amount of double jumps left.
+     */
+    public int getDoubleJumps(Player player) {
+        return doubleJump.get(player);
     }
 
     /**
@@ -144,6 +323,19 @@ public class Game {
     }
 
     /**
+     * Get the opposing team.
+     * @param team Team to get opposing team of.
+     * @return Opposing team.
+     */
+    public Team getOpposingTeam(Team team) {
+        if(team.equals(teamManager.getTeams().get(1))) {
+            return teamManager.getTeams().get(0);
+        }
+
+        return teamManager.getTeams().get(1);
+    }
+
+    /**
      * Get all players in the game.
      * This includes spectators.
      * @return All players in the game.
@@ -160,6 +352,15 @@ public class Game {
     }
 
     /**
+     * Get the amount of repulsors a player has left.
+     * @param player Player to get repulsors of.
+     * @return Amount of repulsors left.
+     */
+    public int getRepulsors(Player player) {
+        return repulsor.get(player);
+    }
+
+    /**
      * Get all current spectators.
      * @return All current spectators.
      */
@@ -167,50 +368,107 @@ public class Game {
         return spectators;
     }
 
-    // TODO: Complete removeSpectator() method.
-    public void removeSpectator(Player player) {
+    /**
+     * Runs when a played disconnects.
+     * @param player Player who disconnected.
+     */
+    public void playerDisconnect(Player player) {
+        if(spectators.contains(player)) {
+            return;
+        }
 
+        broadcast("&a" + player.getName() + " disconnected.");
+        teamManager.getTeam(player).killPlayer(player);
+        player.getLocation().getWorld().strikeLightning(player.getLocation());
+
+        for(Team team : teamManager.getTeams()) {
+            if(team.getAlivePlayers().size() == 0) {
+                Team winner = getOpposingTeam(team);
+                end(winner, team);
+                break;
+            }
+        }
     }
 
-    public void start() {
-        countdown();
+    /**
+     * Runs when a player is killed.
+     * @param player Player who was killed.
+     */
+    public void playerKilled(Player player) {
+        addSpectator(player);
+        teamManager.getTeam(player).killPlayer(player);
+        player.getLocation().getWorld().strikeLightning(player.getLocation());
+        broadcast("&a" + player.getName() + " has died!");
+
+        // Prevents stuff from breaking if the game is already over.
+        if(gameState == GameState.END) {
+            return;
+        }
+
+        for(Team team : teamManager.getTeams()) {
+            if(team.getAlivePlayers().size() == 0) {
+                Team winner = getOpposingTeam(team);
+                end(winner, team);
+            }
+        }
     }
 
-    public int getRepulsors(Player player) {
-        return repulsor.get(player);
-    }
-
-    public int getTripleShots(Player player) {
-        return tripleShot.get(player);
-    }
-
-    public int getDoubleJumps(Player player) {
-        return doubleJump.get(player);
-    }
-
-    public void removeRepulsor(Player player) {
-        repulsor.put(player, getRepulsors(player) - 1);
-    }
-
-    public void removeTripleShot(Player player) {
-        tripleShot.put(player, getTripleShots(player) - 1);
-    }
-
+    /**
+     * Remove a double jump from a player.
+     * @param player Player to double jump from.
+     */
     public void removeDoubleJump(Player player) {
         doubleJump.put(player, getDoubleJumps(player) - 1);
     }
 
-    // TODO: Complete playerKilled method.
-    public void playerKilled(Player player) {
-
+    /**
+     * Get the amount of triple shots a player has left.
+     * @param player Player to get triple shots of.
+     * @return Amount of triple shots left.
+     */
+    public int getTripleShots(Player player) {
+        return tripleShot.get(player);
     }
 
-    // TODO: Complete playerDisconnect method.
-    public void playerDisconnect(Player player) {
-
+    /**
+     * Remove a repulsor from a player.
+     * @param player Player to remove repulsor of.
+     */
+    public void removeRepulsor(Player player) {
+        repulsor.put(player, getRepulsors(player) - 1);
     }
 
-    public Arena getArena() {
-        return arena;
+    /**
+     * Remove a spectator from the game.
+     * @param player Spectator to remove.
+     */
+    public void removeSpectator(Player player) {
+        spectators.remove(player);
+
+        player.getInventory().clear();
+        player.getInventory().setArmorContents(null);
+        player.setAllowFlight(false);
+        player.setFlying(false);
+        player.setHealth(20);
+        player.setFoodLevel(20);
+        player.teleport(LocationUtils.getSpawn(plugin));
+        player.spigot().setCollidesWithEntities(true);
+
+        // Clears arrows from the player. Requires craftbukkit.
+        ((CraftPlayer) player).getHandle().getDataWatcher().watch(9, (byte) 0);
+
+        new LobbyScoreboard(plugin, player);
+
+        for(Player pl : Bukkit.getOnlinePlayers()) {
+            pl.showPlayer(player);
+        }
+    }
+
+    /**
+     * Remove a triple shot from a player.
+     * @param player Player to remove triple shot from.
+     */
+    public void removeTripleShot(Player player) {
+        tripleShot.put(player, getTripleShots(player) - 1);
     }
 }
