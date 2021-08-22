@@ -2,11 +2,12 @@ package net.elytrapvp.elytraduels.game.team;
 
 import org.bukkit.entity.Player;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class TeamManager {
-    private final Set<Team> teams = new HashSet<>();
+    private final List<Team> teams = new ArrayList<>();
 
     /**
      * Create a new team.
@@ -47,7 +48,7 @@ public class TeamManager {
      * Get all existing teams in the manager.
      * @return All existing teams.
      */
-    public Set<Team> getTeams() {
+    public List<Team> getTeams() {
         return teams;
     }
 }
