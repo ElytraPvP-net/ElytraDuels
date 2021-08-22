@@ -68,6 +68,7 @@ public class Game {
     public void start() {
         players = getAlivePlayers().size();
         kit.addPlaying(players);
+        plugin.getQueueManager().addPlaying(players);
 
         int spawn = 0;
         for(Team team : teamManager.getTeams()) {
@@ -181,6 +182,7 @@ public class Game {
             }
 
             kit.removePlaying(players);
+            plugin.getQueueManager().removePlaying(players);
 
             spectators.clear();
             teamManager.getTeams().clear();
