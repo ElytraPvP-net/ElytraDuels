@@ -41,6 +41,12 @@ public class SpectateCMD extends AbstractCommand {
         }
 
         Player player = (Player) sender;
+
+        if(plugin.getGameManager().getGame(player) != null) {
+            ChatUtils.chat(sender, "&cError &8» &cYou are already spectating someone!");
+            return;
+        }
+
         game.addSpectator(player);
         game.broadcast("&a" + player.getName() + " is now spectating.");
     }
