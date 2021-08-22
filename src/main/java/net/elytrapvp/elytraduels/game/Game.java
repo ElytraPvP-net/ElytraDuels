@@ -99,8 +99,8 @@ public class Game {
                 else {
                     for(Player p : getPlayers()) {
                         p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 2);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> running(), 1);
                         cancel();
-                        running();
                     }
                 }
             }
@@ -112,6 +112,10 @@ public class Game {
      * Marks the game as running.
      */
     private void running() {
+        if(gameState == GameState.RUNNING) {
+           return;
+        }
+
         gameState = GameState.RUNNING;
         timer.start();
 
@@ -345,7 +349,7 @@ public class Game {
         List<Player> players = new ArrayList<>();
 
         for(Team team : teamManager.getTeams()) {
-            players.addAll(team.getPlayers());
+            players.addAll(team.getAlivePlayers());
         }
         players.addAll(getSpectators());
 

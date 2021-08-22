@@ -33,12 +33,12 @@ public class Arena {
         // Loops though all spawns for this arena in maps.yml
         ConfigurationSection section = maps.getConfigurationSection(path + "spawns");
         for(String spawn : section.getKeys(false)) {
-            String world = maps.getString(path + spawn + ".World");
-            double x = maps.getDouble(path + spawn + ".X");
-            double y = maps.getDouble(path + spawn + ".Y");
-            double z = maps.getDouble(path + spawn + ".Z");
-            float pitch = (float) maps.getDouble(path + spawn + ".Pitch");
-            float yaw = (float) maps.getDouble(path + spawn + ".Yaw");
+            String world = maps.getString(path + "spawns." + spawn + ".World");
+            double x = maps.getDouble(path + "spawns." +  spawn + ".X");
+            double y = maps.getDouble(path + "spawns." +  spawn + ".Y");
+            double z = maps.getDouble(path + "spawns." +  spawn + ".Z");
+            float pitch = (float) maps.getDouble(path + "spawns." +  spawn + ".Pitch");
+            float yaw = (float) maps.getDouble(path + "spawns." +  spawn + ".Yaw");
 
             spawns.add(new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch));
         }

@@ -18,6 +18,6 @@ public class LocationUtils {
         float pitch = (float) plugin.getSettingsManager().getConfig().getDouble("Spawn.Pitch");
         float yaw = (float) plugin.getSettingsManager().getConfig().getDouble("Spawn.Yaw");
 
-        return new Location(Bukkit.getWorld("world"), x, y, z, yaw, pitch);
+        return new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
     }
 }

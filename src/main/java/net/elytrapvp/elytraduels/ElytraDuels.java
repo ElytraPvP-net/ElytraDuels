@@ -6,6 +6,8 @@ import net.elytrapvp.elytraduels.game.kit.KitManager;
 import net.elytrapvp.elytraduels.game.queue.QueueManager;
 import net.elytrapvp.elytraduels.listeners.*;
 import net.elytrapvp.elytraduels.party.PartyManager;
+import net.elytrapvp.elytraduels.utils.gui.GUIListeners;
+import net.elytrapvp.elytraduels.utils.scoreboard.ScoreboardUpdate;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,6 +34,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EntityRegainhealthListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDropItemListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(this), this);
@@ -42,6 +45,8 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
+
+        new ScoreboardUpdate().runTaskTimer(this, 20L, 20L);
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }

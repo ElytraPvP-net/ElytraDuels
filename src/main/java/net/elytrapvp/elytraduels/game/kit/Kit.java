@@ -46,6 +46,7 @@ public abstract class Kit {
         hunger = false;
         naturalRegen = true;
         rangedDamage = false;
+        takeDamage = true;
         waterKills = false;
     }
 

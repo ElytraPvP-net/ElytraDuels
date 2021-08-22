@@ -11,7 +11,7 @@ public class Timer {
     private final ElytraDuels plugin;
     private int seconds;
     private int minutes;
-    private BukkitRunnable task;
+    private final BukkitRunnable task;
 
     /**
      * Create a timer.

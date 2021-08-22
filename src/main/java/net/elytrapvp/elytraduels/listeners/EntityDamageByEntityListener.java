@@ -5,6 +5,7 @@ import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -72,6 +73,12 @@ public class EntityDamageByEntityListener implements Listener {
         }
 
         ChatUtils.chat(shooter, "&f" + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
+
+        if(event.getFinalDamage() >= player.getHealth()) {
+            event.setCancelled(true);
+
+            Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player), 1);
+        }
     }
 
     /**

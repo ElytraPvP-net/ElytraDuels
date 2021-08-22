@@ -27,7 +27,6 @@ public class EntityDamageListener implements Listener {
             case LIGHTNING:
             case ENTITY_EXPLOSION:
             case FALL:
-            case PROJECTILE:
                 event.setCancelled(true);
                 return;
         }
@@ -42,6 +41,11 @@ public class EntityDamageListener implements Listener {
         // Players can only take damage when the game is running.
         if(game.getGameState() != GameState.RUNNING) {
             event.setCancelled(true);
+            return;
+        }
+
+        // Prevents "killing" a player twice.
+        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
             return;
         }
 

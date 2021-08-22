@@ -17,6 +17,7 @@ public class ItemUtils {
         ItemStack spectate = new ItemBuilder(Material.EYE_OF_ENDER)
                 .setDisplayName("&aSpectate")
                 .build();
+        player.getInventory().setItem(0, spectate);
 
         ItemStack unranked = new ItemBuilder(Material.STONE_SWORD)
                 .setDisplayName("&aKits")

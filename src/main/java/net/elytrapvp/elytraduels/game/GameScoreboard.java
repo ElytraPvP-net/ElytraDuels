@@ -26,6 +26,8 @@ public class GameScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(player);
         }
 
+        helper.setTitle("&a&lDuels &b(Beta)");
+
         if(game.getKit().hasAbilities()) {
             helper.setSlot(13, "&7&m------------------");
             helper.setSlot(12, "&aTime: &f" + game.getTimer().toString());

@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.game.arena;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.arena.map.Map;
 import net.elytrapvp.elytraduels.game.kit.Kit;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -15,12 +16,15 @@ public class ArenaManager {
     private final Set<Arena> openArenas = new HashSet<>();
 
     public ArenaManager(ElytraDuels plugin) {
-        FileConfiguration maps = plugin.getSettingsManager().getMaps();
-        ConfigurationSection section = maps.getConfigurationSection("Maps");
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            FileConfiguration maps = plugin.getSettingsManager().getMaps();
+            ConfigurationSection section = maps.getConfigurationSection("Maps");
 
-        for(String map : section.getKeys(false)) {
-            new Map(plugin, map);
-        }
+            for(String map : section.getKeys(false)) {
+                new Map(plugin, map);
+            }
+        }, 1);
+
     }
 
     /**
