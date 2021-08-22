@@ -5,3 +5,9 @@ prefix: Duels
 authors: [ ElytraPvP ]
 description: Duels Server code for ElytraPvP
 website: https://www.elytrapvp.net
+
+commands:
+  spectate:
+    usage: /spectate <player>
+    description: Spectate a match
+    aliases: [spec]

@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels;
 
+import net.elytrapvp.elytraduels.commands.AbstractCommand;
 import net.elytrapvp.elytraduels.game.GameManager;
 import net.elytrapvp.elytraduels.game.arena.ArenaManager;
 import net.elytrapvp.elytraduels.game.kit.KitManager;
@@ -29,6 +30,8 @@ public final class ElytraDuels extends JavaPlugin {
         arenaManager = new ArenaManager(this);
         gameManager = new GameManager(this);
         queueManager = new QueueManager(this);
+
+        AbstractCommand.registerCommands(this);
 
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
