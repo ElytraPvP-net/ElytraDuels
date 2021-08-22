@@ -38,6 +38,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerToggleFlightListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerToggleSneakListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
     }

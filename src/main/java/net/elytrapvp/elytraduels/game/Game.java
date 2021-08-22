@@ -204,4 +204,9 @@ public class Game {
     public void playerKilled(Player player) {
 
     }
+
+    // TODO: Complete playerDisconnect method.
+    public void playerDisconnect(Player player) {
+
+    }
 }
