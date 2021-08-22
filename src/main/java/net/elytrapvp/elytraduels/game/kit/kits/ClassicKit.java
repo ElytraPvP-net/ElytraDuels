@@ -15,6 +15,7 @@ public class ClassicKit extends Kit {
 
     public void apply(Player p) {
         p.getInventory().clear();
+        p.setHealth(20);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)

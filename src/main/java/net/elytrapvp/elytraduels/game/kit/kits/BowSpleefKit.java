@@ -23,6 +23,7 @@ public class BowSpleefKit extends Kit {
     @Override
     public void apply(Player p) {
         p.getInventory().clear();
+        p.setHealth(20);
         p.setGameMode(GameMode.ADVENTURE);
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .addEnchantment(Enchantment.ARROW_FIRE, 1)

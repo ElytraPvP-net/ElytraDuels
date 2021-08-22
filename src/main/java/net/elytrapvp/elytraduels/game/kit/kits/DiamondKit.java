@@ -15,6 +15,7 @@ public class DiamondKit extends Kit {
 
     public void apply(Player p) {
         p.getInventory().clear();
+        p.setHealth(20);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)

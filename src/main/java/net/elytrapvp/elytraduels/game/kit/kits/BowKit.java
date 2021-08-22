@@ -17,6 +17,7 @@ public class BowKit extends Kit {
 
     public void apply(Player p) {
         p.getInventory().clear();
+        p.setHealth(20);
 
         ItemStack helmet = new ItemBuilder(Material.LEATHER_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1)

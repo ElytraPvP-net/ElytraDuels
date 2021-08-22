@@ -13,10 +13,12 @@ public class OPKit extends Kit {
 
     public OPKit() {
         super("OP");
+        setRodMultiplier(1.5);
     }
 
     public void apply(Player p) {
         p.getInventory().clear();
+        p.setHealth(20);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)

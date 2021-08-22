@@ -21,6 +21,7 @@ public class ArcherKit extends Kit {
     @Override
     public void apply(Player player) {
         player.getInventory().clear();
+        player.setHealth(20);
 
         ItemStack helmet = new ItemBuilder(Material.LEATHER_HELMET)
                 .setUnbreakable(true)
