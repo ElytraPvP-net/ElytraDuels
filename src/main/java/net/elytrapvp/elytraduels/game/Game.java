@@ -136,6 +136,14 @@ public class Game {
     }
 
     /**
+     * Get the kit used in the game.
+     * @return Kit being used.
+     */
+    public Kit getKit() {
+        return kit;
+    }
+
+    /**
      * Get all players in the game.
      * This includes spectators.
      * @return All players in the game.

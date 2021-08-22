@@ -4,6 +4,7 @@ import net.elytrapvp.elytraduels.game.GameManager;
 import net.elytrapvp.elytraduels.game.arena.ArenaManager;
 import net.elytrapvp.elytraduels.game.kit.KitManager;
 import net.elytrapvp.elytraduels.game.queue.QueueManager;
+import net.elytrapvp.elytraduels.listeners.EntityDamageByEntityListener;
 import net.elytrapvp.elytraduels.listeners.FoodLevelChangeListener;
 import net.elytrapvp.elytraduels.party.PartyManager;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public final class ElytraDuels extends JavaPlugin {
         queueManager = new QueueManager(this);
 
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
     }
 
     @Override
