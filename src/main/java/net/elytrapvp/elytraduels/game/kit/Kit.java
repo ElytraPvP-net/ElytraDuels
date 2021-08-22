@@ -19,6 +19,7 @@ public abstract class Kit {
 
     // boolean settings.
     private boolean hasRanked;
+    private boolean hunger;
     private boolean naturalRegen;
     private boolean rangedDamage;
     private boolean waterKills;
@@ -38,6 +39,7 @@ public abstract class Kit {
         rodMultiplier = 1.0;
 
         hasRanked = false;
+        hunger = false;
         naturalRegen = true;
         rangedDamage = false;
         waterKills = false;
@@ -117,6 +119,14 @@ public abstract class Kit {
     }
 
     /**
+     * Get if the kit should have hunger.
+     * @return Whether or not the kit has hunger.
+     */
+    public boolean hasHunger() {
+        return hunger;
+    }
+
+    /**
      * Get if the kit will be available ranked.
      * @return Whether or not the kit will have ranked.
      */
@@ -155,6 +165,14 @@ public abstract class Kit {
      */
     public void setHasRanked(boolean hasRanked) {
         this.hasRanked = hasRanked;
+    }
+
+    /**
+     * Set it the kit should have hunger.
+     * @param hunger Whether or not the kit has hunger.
+     */
+    public void setHunger(boolean hunger) {
+        this.hunger = hunger;
     }
 
     /**
