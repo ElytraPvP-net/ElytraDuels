@@ -42,6 +42,8 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
+
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @Override
