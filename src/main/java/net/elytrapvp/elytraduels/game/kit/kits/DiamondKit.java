@@ -11,6 +11,7 @@ public class DiamondKit extends Kit {
 
     public DiamondKit() {
         super("Diamond");
+        setHunger(true);
     }
 
     public void apply(Player p) {
@@ -48,8 +49,11 @@ public class DiamondKit extends Kit {
                 .build();
         ItemStack arrows = new ItemBuilder(Material.ARROW, 32).build();
 
+        ItemStack steak = new ItemBuilder(Material.COOKED_BEEF, 64).build();
+
         p.getInventory().setItem(0, sword);
         p.getInventory().setItem(1, bow);
+        p.getInventory().setItem(8, steak);
         p.getInventory().setItem(35, arrows);
     }
 
