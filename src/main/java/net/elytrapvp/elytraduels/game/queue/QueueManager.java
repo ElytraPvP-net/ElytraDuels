@@ -117,6 +117,21 @@ public class QueueManager {
     }
 
     /**
+     * Get the amount of people queuing a specific kit.
+     * @param kit Kit they could be queueing.
+     * @param gameType GameType they could be queueing.
+     * @return Amount of people queueing.
+     */
+    public int getQueueing(Kit kit, GameType gameType) {
+        if(getQueue(gameType).containsValue(kit)) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
      * Get the amount of players currently queueing.
      * @return Number of players queueing.
      */
