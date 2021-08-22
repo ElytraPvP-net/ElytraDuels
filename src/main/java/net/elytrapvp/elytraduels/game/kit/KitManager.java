@@ -1,6 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit;
 
-import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.game.kit.kits.ArcherKit;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class KitManager {
     private final Set<Kit> kits = new LinkedHashSet<>();
+
+    public KitManager() {
+        kits.add(new ArcherKit());
+    }
 
     /**
      * Get a kit from its name,
