@@ -1,7 +1,9 @@
 package net.elytrapvp.elytraduels.utils.chat;
 
+import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class ChatUtils {
     private final static int CENTER_PX = 154;
@@ -77,5 +79,30 @@ public class ChatUtils {
         }
 
         return arr;
+    }
+
+    /**
+     * Get the health of a player, formatted, and in percent form.
+     * @param player Player to get health of.
+     * @return Formatted health of player.
+     */
+    public static String getFormattedHealthPercent(Player player) {
+        int percent = MathUtils.percent(player.getHealth(), 20.0);
+        ChatColor color;
+
+        if(percent < 25) {
+            color = ChatColor.RED;
+        }
+        else if(percent < 50) {
+            color = ChatColor.GOLD;
+        }
+        else if(percent < 75) {
+            color = ChatColor.YELLOW;
+        }
+        else {
+            color = ChatColor.GREEN;
+        }
+
+        return "" + color + percent + "%";
     }
 }
