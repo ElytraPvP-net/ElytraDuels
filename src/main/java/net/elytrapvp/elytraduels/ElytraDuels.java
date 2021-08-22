@@ -31,6 +31,7 @@ public final class ElytraDuels extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new EntityExplodeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityRegainhealthListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);

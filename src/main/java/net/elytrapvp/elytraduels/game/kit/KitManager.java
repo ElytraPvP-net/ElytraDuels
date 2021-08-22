@@ -17,6 +17,7 @@ public class KitManager {
         kits.add(new UHCKit());
         kits.add(new IronKit());
         kits.add(new DiamondKit());
+        kits.add(new BowSpleefKit());
     }
 
     /**
