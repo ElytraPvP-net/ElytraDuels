@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 /**
@@ -53,6 +54,13 @@ public abstract class Kit {
      * @param player Player to apply to.
      */
     public abstract void apply(Player player);
+
+    /**
+     * Get the kit icon material.
+     * Used for GUIs.
+     * @return Icon Material.
+     */
+    public abstract Material getIconMaterial();
 
     /**
      * Add to the kit's playing counter.
