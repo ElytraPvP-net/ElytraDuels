@@ -11,3 +11,6 @@ commands:
     usage: /spectate <player>
     description: Spectate a match
     aliases: [spec]
+  ping:
+    usage: /ping <player>
+    description: Check a player's ping.
