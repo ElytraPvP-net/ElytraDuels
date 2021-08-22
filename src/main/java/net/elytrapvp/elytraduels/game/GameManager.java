@@ -4,7 +4,8 @@ import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import org.bukkit.entity.Player;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 public class GameManager {
     private final ElytraDuels plugin;
-    private final Set<Game> activeGames = new HashSet<>();
+    private final List<Game> activeGames = new ArrayList<>();
 
     public GameManager(ElytraDuels plugin) {
         this.plugin = plugin;
@@ -42,7 +43,7 @@ public class GameManager {
      * Get all currently active games.
      * @return All active games.
      */
-    public Set<Game> getActiveGames() {
+    public List<Game> getActiveGames() {
         return activeGames;
     }
 
