@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
  */
 public abstract class Kit {
     private final String name;
+    private int playing;
 
     // Information about abilities.
     private int doubleJumps;
@@ -31,6 +32,7 @@ public abstract class Kit {
      */
     public Kit(String name) {
         this.name = name;
+        playing = 0;
 
         doubleJumps = 0;
         repulsors = 0;
@@ -51,6 +53,14 @@ public abstract class Kit {
      * @param player Player to apply to.
      */
     public abstract void apply(Player player);
+
+    /**
+     * Add to the kit's playing counter.
+     * @param playing Amount to add.
+     */
+    public void addPlaying(int playing) {
+        this.playing += playing;
+    }
 
     /**
      * Get the total number of double jumps
@@ -75,6 +85,14 @@ public abstract class Kit {
      */
     public boolean naturalRegen() {
         return naturalRegen;
+    }
+
+    /**
+     * Get the number of people currently using this kit.
+     * @return Number of people using this kit.
+     */
+    public int getPlaying() {
+       return playing;
     }
 
     /**
@@ -158,6 +176,14 @@ public abstract class Kit {
      */
     public boolean waterKills() {
         return waterKills;
+    }
+
+    /**
+     * Remove players from the kit playing count.
+     * @param playing Number to remove from playing.
+     */
+    public void removePlaying(int playing) {
+        this.playing -= playing;
     }
 
     /**
