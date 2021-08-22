@@ -74,6 +74,7 @@ public class Game {
             for(Player p : team.getPlayers()) {
                 p.teleport(arena.getSpawns().get(spawn));
                 kit.apply(p);
+                new GameScoreboard(p, this);
             }
             spawn++;
         }
@@ -210,7 +211,7 @@ public class Game {
         Team team = teamManager.getTeam(player);
 
         if(team == null) {
-            Set<Player> members = new HashSet<>();
+            List<Player> members = new ArrayList<>();
             members.add(player);
 
             team = teamManager.createTeam(members);
@@ -340,8 +341,8 @@ public class Game {
      * This includes spectators.
      * @return All players in the game.
      */
-    public Set<Player> getPlayers() {
-        Set<Player> players = new HashSet<>();
+    public List<Player> getPlayers() {
+        List<Player> players = new ArrayList<>();
 
         for(Team team : teamManager.getTeams()) {
             players.addAll(team.getPlayers());
@@ -366,6 +367,38 @@ public class Game {
      */
     public Set<Player> getSpectators() {
         return spectators;
+    }
+
+    /**
+     * Get the team of a player.
+     * @param player Player to get team of.
+     * @return Team the player is in.
+     */
+    public Team getTeam(Player player) {
+        for(Team team : teamManager.getTeams()) {
+            if(team.getPlayers().contains(player)) {
+                return team;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the game timer.
+     * @return Game timer.
+     */
+    public Timer getTimer() {
+        return timer;
+    }
+
+    /**
+     * Get the amount of triple shots a player has left.
+     * @param player Player to get triple shots of.
+     * @return Amount of triple shots left.
+     */
+    public int getTripleShots(Player player) {
+        return tripleShot.get(player);
     }
 
     /**
@@ -419,15 +452,6 @@ public class Game {
      */
     public void removeDoubleJump(Player player) {
         doubleJump.put(player, getDoubleJumps(player) - 1);
-    }
-
-    /**
-     * Get the amount of triple shots a player has left.
-     * @param player Player to get triple shots of.
-     * @return Amount of triple shots left.
-     */
-    public int getTripleShots(Player player) {
-        return tripleShot.get(player);
     }
 
     /**

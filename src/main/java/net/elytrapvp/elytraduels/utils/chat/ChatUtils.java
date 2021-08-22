@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.utils.chat;
 import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class ChatUtils {
@@ -104,5 +105,24 @@ public class ChatUtils {
         }
 
         return "" + color + percent + "%";
+    }
+
+    public static String getFormattedPing(Player player) {
+        int ping = ((CraftPlayer) player).getHandle().ping;
+        ChatColor color;
+
+        if(ping < 40) {
+            color = ChatColor.GREEN;
+        }
+        else if(ping < 70) {
+            color = ChatColor.YELLOW;
+        }
+        else if (ping < 110) {
+            color = ChatColor.GOLD;
+        }
+        else {
+            color = ChatColor.RED;
+        }
+        return color + "" + ping + " ms";
     }
 }

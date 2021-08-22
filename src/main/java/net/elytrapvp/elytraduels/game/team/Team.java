@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.game.team;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Set;
  * working together in a Game.
  */
 public class Team {
-    private final Set<Player> players;
+    private final List<Player> players;
     private final Set<Player> alivePlayers;
     private final Set<Player> deadPlayers = new HashSet<>();
 
@@ -18,7 +19,7 @@ public class Team {
      * Creates a new team with specific players.
      * @param players Players to add to the team.
      */
-    public Team(Set<Player> players) {
+    public Team(List<Player> players) {
         this.players = players;
         this.alivePlayers = new HashSet<>(players);
     }
@@ -43,7 +44,7 @@ public class Team {
      * Gets all players on the team, alive and dead.
      * @return All players on the team.
      */
-    public Set<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 

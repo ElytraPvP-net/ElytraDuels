@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class TeamManager {
     private final List<Team> teams = new ArrayList<>();
@@ -14,7 +13,7 @@ public class TeamManager {
      * @param players Players to add to the team.
      * @return The new team.
      */
-    public Team createTeam(Set<Player> players) {
+    public Team createTeam(List<Player> players) {
         Team team = new Team(players);
         getTeams().add(team);
         return team;
