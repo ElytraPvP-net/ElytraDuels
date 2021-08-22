@@ -22,6 +22,7 @@ public abstract class Kit {
     private boolean hunger;
     private boolean naturalRegen;
     private boolean rangedDamage;
+    private boolean takeDamage;
     private boolean waterKills;
 
     /**
@@ -143,6 +144,14 @@ public abstract class Kit {
     }
 
     /**
+     * Get if players should take damage.
+     * @return Whether players should take damage.
+     */
+    public boolean hasTakeDamage() {
+        return takeDamage;
+    }
+
+    /**
      * Get if the kit should kill the player
      *  when they touch water.
      * @return Wether or not water kills the player.
@@ -205,6 +214,14 @@ public abstract class Kit {
      */
     public void setRodMultiplier(double rodMultiplier) {
         this.rodMultiplier = rodMultiplier;
+    }
+
+    /**
+     * Set if players should take damage.
+     * @param takeDamage Whether players should take damage.
+     */
+    public void setTakeDamage(boolean takeDamage) {
+        this.takeDamage = takeDamage;
     }
 
     /**
