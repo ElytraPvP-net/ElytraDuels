@@ -6,6 +6,7 @@ import net.elytrapvp.elytraduels.game.kit.KitManager;
 import net.elytrapvp.elytraduels.game.queue.QueueManager;
 import net.elytrapvp.elytraduels.listeners.*;
 import net.elytrapvp.elytraduels.party.PartyManager;
+import net.elytrapvp.elytraduels.runnables.AFKTimer;
 import net.elytrapvp.elytraduels.utils.gui.GUIListeners;
 import net.elytrapvp.elytraduels.utils.scoreboard.ScoreboardUpdate;
 import org.bukkit.Bukkit;
@@ -48,6 +49,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
 
         new ScoreboardUpdate().runTaskTimer(this, 20L, 20L);
+        new AFKTimer(this).runTaskTimer(this, 5 * 20, 5 * 20);
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }

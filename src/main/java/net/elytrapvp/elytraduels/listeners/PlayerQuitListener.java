@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.runnables.AFKTimer;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,5 +28,6 @@ public class PlayerQuitListener implements Listener {
         }
 
         plugin.getQueueManager().removePlayer(player);
+        AFKTimer.counter.remove(player.getUniqueId());
     }
 }
