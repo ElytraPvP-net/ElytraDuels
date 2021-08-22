@@ -175,4 +175,28 @@ public class Game {
     public void start() {
         countdown();
     }
+
+    public int getRepulsors(Player player) {
+        return repulsor.get(player);
+    }
+
+    public int getTripleShots(Player player) {
+        return tripleShot.get(player);
+    }
+
+    public int getDoubleJumps(Player player) {
+        return doubleJump.get(player);
+    }
+
+    public void removeRepulsor(Player player) {
+        repulsor.put(player, getRepulsors(player) - 1);
+    }
+
+    public void removeTripleShot(Player player) {
+        tripleShot.put(player, getTripleShots(player) - 1);
+    }
+
+    public void removeDoubleJump(Player player) {
+        doubleJump.put(player, getDoubleJumps(player) - 1);
+    }
 }
