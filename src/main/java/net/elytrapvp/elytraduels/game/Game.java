@@ -199,4 +199,9 @@ public class Game {
     public void removeDoubleJump(Player player) {
         doubleJump.put(player, getDoubleJumps(player) - 1);
     }
+
+    // TODO: Complete playerKilled method.
+    public void playerKilled(Player player) {
+
+    }
 }
