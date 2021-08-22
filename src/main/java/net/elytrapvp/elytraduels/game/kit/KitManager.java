@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.game.kit;
 
 import net.elytrapvp.elytraduels.game.kit.kits.ArcherKit;
 import net.elytrapvp.elytraduels.game.kit.kits.BowKit;
+import net.elytrapvp.elytraduels.game.kit.kits.UHCKit;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ public class KitManager {
     public KitManager() {
         kits.add(new ArcherKit());
         kits.add(new BowKit());
+        kits.add(new UHCKit());
     }
 
     /**
