@@ -20,6 +20,7 @@ public class KitManager {
         kits.add(new BowSpleefKit());
         kits.add(new ClassicKit());
         kits.add(new NoDebuffKit());
+        kits.add(new OPKit());
     }
 
     /**
