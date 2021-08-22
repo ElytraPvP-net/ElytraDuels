@@ -4,10 +4,7 @@ import net.elytrapvp.elytraduels.game.GameManager;
 import net.elytrapvp.elytraduels.game.arena.ArenaManager;
 import net.elytrapvp.elytraduels.game.kit.KitManager;
 import net.elytrapvp.elytraduels.game.queue.QueueManager;
-import net.elytrapvp.elytraduels.listeners.EntityDamageByEntityListener;
-import net.elytrapvp.elytraduels.listeners.FoodLevelChangeListener;
-import net.elytrapvp.elytraduels.listeners.ProjectileLaunchListener;
-import net.elytrapvp.elytraduels.listeners.TeleportFix;
+import net.elytrapvp.elytraduels.listeners.*;
 import net.elytrapvp.elytraduels.party.PartyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,10 +27,10 @@ public final class ElytraDuels extends JavaPlugin {
         gameManager = new GameManager(this);
         queueManager = new QueueManager(this);
 
-        Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
+        Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
-
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
     }
 
