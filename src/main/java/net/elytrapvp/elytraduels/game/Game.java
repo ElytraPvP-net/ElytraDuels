@@ -209,4 +209,8 @@ public class Game {
     public void playerDisconnect(Player player) {
 
     }
+
+    public Arena getArena() {
+        return arena;
+    }
 }
