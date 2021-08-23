@@ -198,6 +198,11 @@ public class Game {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             for(Location location : blocks.keySet()) {
                 location.getWorld().getBlockAt(location).setType(blocks.get(location));
+
+                if(!location.getChunk().isLoaded()) {
+                    location.getChunk().load();
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> location.getChunk().unload(), 100);
+                }
             }
         }, 100);
     }
