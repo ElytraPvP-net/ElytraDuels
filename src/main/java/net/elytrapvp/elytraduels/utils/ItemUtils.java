@@ -9,6 +9,9 @@ public class ItemUtils {
     public static void giveLobbyItems(Player player) {
         player.getInventory().clear();
 
+        player.setHealth(20);
+        player.setFoodLevel(20);
+
         player.getInventory().setHelmet(null);
         player.getInventory().setChestplate(null);
         player.getInventory().setLeggings(null);

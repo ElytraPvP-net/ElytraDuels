@@ -249,6 +249,7 @@ public class Game {
         player.setAllowFlight(true);
         player.setFlying(true);
         player.setHealth(20.0);
+        player.setFoodLevel(20);
 
         // Prevents player from interfering.
         player.spigot().setCollidesWithEntities(false);
