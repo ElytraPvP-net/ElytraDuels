@@ -108,6 +108,7 @@ public class PlayerInteractListener implements Listener {
             case "Leave Match":
                 if(game != null && game.getSpectators().contains(player)) {
                     game.removeSpectator(player);
+                    ItemUtils.giveLobbyItems(player);
                 }
                 event.setCancelled(true);
                 break;
