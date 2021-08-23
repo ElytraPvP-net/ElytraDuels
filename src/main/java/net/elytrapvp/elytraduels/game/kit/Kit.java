@@ -20,6 +20,7 @@ public abstract class Kit {
     private double rodMultiplier;
 
     // boolean settings.
+    private boolean arrowPickup;
     private boolean hasRanked;
     private boolean hunger;
     private boolean naturalRegen;
@@ -42,6 +43,7 @@ public abstract class Kit {
         voidLevel = 16;
         rodMultiplier = 1.0;
 
+        arrowPickup = false;
         hasRanked = false;
         hunger = false;
         naturalRegen = true;
@@ -147,6 +149,14 @@ public abstract class Kit {
     }
 
     /**
+     * Get whether the kit has arrow pickup enable.
+     * @return Wehther or not players can pick up arrows.
+     */
+    public boolean hasArrowPickup() {
+        return arrowPickup;
+    }
+
+    /**
      * Get if the kit should have hunger.
      * @return Whether or not the kit has hunger.
      */
@@ -193,6 +203,14 @@ public abstract class Kit {
      */
     public void removePlaying(int playing) {
         this.playing -= playing;
+    }
+
+    /**
+     * Set if players should be able to pickup arrows.
+     * @param arrowPickup Whether or not arrows can be picked up.
+     */
+    public void setArrowPickup(boolean arrowPickup) {
+        this.arrowPickup = arrowPickup;
     }
 
     /**

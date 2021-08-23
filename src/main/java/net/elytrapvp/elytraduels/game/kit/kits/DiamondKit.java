@@ -11,6 +11,8 @@ public class DiamondKit extends Kit {
 
     public DiamondKit() {
         super("Diamond");
+
+        setArrowPickup(true);
         setHunger(true);
     }
 

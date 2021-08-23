@@ -12,6 +12,8 @@ public class BowSpleefKit extends Kit {
 
     public BowSpleefKit() {
         super("Bow Spleef");
+
+        setArrowPickup(true);
         setTakeDamage(false);
         setVoidLevel(14);
 
