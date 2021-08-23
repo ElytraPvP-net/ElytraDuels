@@ -33,6 +33,7 @@ public final class ElytraDuels extends JavaPlugin {
 
         AbstractCommand.registerCommands(this);
 
+        Bukkit.getPluginManager().registerEvents(new BlockBreakListener(this), this);
         Bukkit.getPluginManager().registerEvents(new BlockFromToListener(this), this);
         Bukkit.getPluginManager().registerEvents(new BlockPlaceListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(this), this);
