@@ -27,7 +27,7 @@ public class CactusKit extends Kit {
         player.getInventory().setItem(0, cactus);
         player.getInventory().setItem(1, egg);
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200000, 100));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200000, 100, true));
     }
 
     @Override
