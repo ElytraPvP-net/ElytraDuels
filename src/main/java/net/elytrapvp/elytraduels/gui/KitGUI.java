@@ -16,7 +16,7 @@ public class KitGUI extends CustomGUI {
         super(45, "Kits");
         filler();
 
-        int[] iconSlots = new int[]{11,12,13,14,15,29,30,31,32,33};
+        int[] iconSlots = new int[]{10,11,12,13,14,15,16,28,29,30,31,32,33,34};
         int i = 0;
         for(Kit kit : plugin.getKitManager().getKits()) {
 

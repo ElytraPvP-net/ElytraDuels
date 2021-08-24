@@ -22,6 +22,7 @@ public class KitManager {
         kits.add(new NoDebuffKit());
         kits.add(new OPKit());
         kits.add(new StratusKit());
+        kits.add(new BuildUHCKit());
     }
 
     /**

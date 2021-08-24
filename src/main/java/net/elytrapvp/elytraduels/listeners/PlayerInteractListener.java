@@ -19,6 +19,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -93,6 +97,36 @@ public class PlayerInteractListener implements Listener {
         }
 
         switch (item) {
+            case "Golden Head":
+                if(pearlCooldown.contains(player)) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                pearlCooldown.add(player);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 100);
+
+                if(event.getItem().getAmount() == 1) {
+                    player.getInventory().remove(event.getItem());
+                }
+                else {
+                    event.getItem().setAmount(event.getItem().getAmount() - 1);
+                }
+
+                ItemStack newItem = new ItemStack(event.getItem());
+                newItem.setAmount(1);
+                player.getInventory().remove(newItem);
+
+                PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 0);
+                PotionEffect absorption = new PotionEffect(PotionEffectType.ABSORPTION, 2400, 0);
+                PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
+
+                player.addPotionEffect(speed);
+                player.addPotionEffect(absorption);
+                player.addPotionEffect(regen);
+                event.setCancelled(true);
+
+                break;
             case "Kits":
                 new KitGUI(plugin).open(player);
                 event.setCancelled(true);
