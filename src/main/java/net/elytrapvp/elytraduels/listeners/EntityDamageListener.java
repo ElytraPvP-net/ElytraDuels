@@ -38,6 +38,12 @@ public class EntityDamageListener implements Listener {
             return;
         }
 
+        // Prevent spectators from taking damage.
+        if(game.getSpectators().contains(player)) {
+            event.setCancelled(true);
+            return;
+        }
+
         // Players can only take damage when the game is running.
         if(game.getGameState() != GameState.RUNNING) {
             event.setCancelled(true);
