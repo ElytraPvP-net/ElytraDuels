@@ -23,6 +23,7 @@ public class KitManager {
         kits.add(new OPKit());
         kits.add(new StratusKit());
         kits.add(new BuildUHCKit());
+        kits.add(new CactusKit());
     }
 
     /**
