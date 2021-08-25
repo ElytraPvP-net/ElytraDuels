@@ -15,7 +15,7 @@ public class BowSpleefKit extends Kit {
 
         setArrowPickup(true);
         setTakeDamage(false);
-        setVoidLevel(14);
+        setVoidLevel(54);
 
         setDoubleJumps(10);
         setRepulsors(10);
