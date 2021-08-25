@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.game.GameState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +25,11 @@ public class PlayerMoveListener implements Listener {
         }
 
         if(player.getLocation().getY() < game.getKit().getVoidLevel()) {
+            if(game.getGameState() == GameState.COUNTDOWN) {
+                player.teleport(game.getArena().getSpawns().get(0));
+                return;
+            }
+
             if(game.getSpectators().contains(player)) {
                 player.teleport(game.getArena().getSpawns().get(0));
                 player.setFlying(true);
