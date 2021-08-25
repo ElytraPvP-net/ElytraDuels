@@ -120,6 +120,16 @@ public class Game {
         gameState = GameState.RUNNING;
         timer.start();
 
+        int spawn = 0;
+        for(Team team : teamManager.getTeams()) {
+            for(Player p : team.getPlayers()) {
+                p.teleport(arena.getSpawns().get(spawn));
+                kit.apply(p);
+                new GameScoreboard(p, this);
+            }
+            spawn++;
+        }
+
         if(kit.getDoubleJumps() > 0) {
             getPlayers().forEach(player -> player.setAllowFlight(true));
         }
