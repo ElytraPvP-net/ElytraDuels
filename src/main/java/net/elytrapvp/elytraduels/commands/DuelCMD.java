@@ -62,12 +62,16 @@ public class DuelCMD extends AbstractCommand {
             return;
         }
 
-        if(args.length != 2) {
+        if(args.length < 2) {
             new DuelGUI(plugin, t).open(p);
             return;
         }
 
         String kit = args[1];
+
+        if(args.length == 3) {
+            kit += " " + args[2];
+        }
 
         Kit k = plugin.getKitManager().getKit(kit);
         if(k == null) {
