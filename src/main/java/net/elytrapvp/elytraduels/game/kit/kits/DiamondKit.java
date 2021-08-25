@@ -58,7 +58,7 @@ public class DiamondKit extends Kit {
         p.getInventory().setItem(0, sword);
         p.getInventory().setItem(1, bow);
         p.getInventory().setItem(8, steak);
-        p.getInventory().setItem(35, arrows);
+        p.getInventory().setItem(7, arrows);
     }
 
     public Material getIconMaterial() {
