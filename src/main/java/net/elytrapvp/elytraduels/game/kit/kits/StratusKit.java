@@ -23,12 +23,15 @@ public class StratusKit extends Kit {
         player.setGameMode(GameMode.SURVIVAL);
 
         ItemStack helmet = new ItemBuilder(Material.CHAINMAIL_HELMET)
+                .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)
                 .setUnbreakable(true)
                 .build();
         ItemStack chestplate = new ItemBuilder(Material.LEATHER_CHESTPLATE)
+                .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)
                 .setUnbreakable(true)
                 .build();
         ItemStack leggings = new ItemBuilder(Material.CHAINMAIL_LEGGINGS)
+                .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)
                 .setUnbreakable(true)
                 .build();
         ItemStack boots = new ItemBuilder(Material.IRON_BOOTS)
