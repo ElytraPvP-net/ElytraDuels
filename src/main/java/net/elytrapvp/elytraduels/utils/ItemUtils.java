@@ -17,7 +17,7 @@ public class ItemUtils {
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
 
-        ItemStack spectate = new ItemBuilder(Material.EYE_OF_ENDER)
+        ItemStack spectate = new ItemBuilder(Material.NETHER_STAR)
                 .setDisplayName("&aSpectate")
                 .build();
         player.getInventory().setItem(0, spectate);
