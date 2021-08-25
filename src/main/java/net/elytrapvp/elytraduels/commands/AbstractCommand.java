@@ -33,6 +33,7 @@ public abstract class AbstractCommand implements CommandExecutor {
      */
     public static void registerCommands(ElytraDuels pl) {
         plugin = pl;
+        new DuelCMD(pl);
         new SpectateCMD(pl);
         new PingCMD();
     }

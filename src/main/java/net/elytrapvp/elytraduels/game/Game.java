@@ -238,6 +238,20 @@ public class Game {
     }
 
     /**
+     * Add a player to the arena.
+     * @param players Players to add.
+     */
+    public void addPlayers(List<Player> players) {
+        Team team = teamManager.createTeam(players);
+
+        for(Player player : players) {
+            doubleJump.put(player, kit.getDoubleJumps());
+            repulsor.put(player, kit.getRepulsors());
+            tripleShot.put(player, kit.getTripleShots());
+        }
+    }
+
+    /**
      * Add a spectator to the game.
      * @param player Spectator to add.
      */

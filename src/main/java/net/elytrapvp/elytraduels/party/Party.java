@@ -2,7 +2,9 @@ package net.elytrapvp.elytraduels.party;
 
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -52,8 +54,8 @@ public class Party {
      * Get all players in the party.
      * @return All players.
      */
-    public Set<Player> getPlayers() {
-        Set<Player> players = new HashSet<>(getMembers());
+    public List<Player> getPlayers() {
+        List<Player> players = new ArrayList<>(getMembers());
         players.add(getLeader());
         return players;
     }
