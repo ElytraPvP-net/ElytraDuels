@@ -444,6 +444,10 @@ public class Game {
      * @param player Player who was killed.
      */
     public void playerKilled(Player player) {
+        if(spectators.contains(player)) {
+            return;
+        }
+
         addSpectator(player);
         teamManager.getTeam(player).killPlayer(player);
         player.getLocation().getWorld().strikeLightning(player.getLocation());
