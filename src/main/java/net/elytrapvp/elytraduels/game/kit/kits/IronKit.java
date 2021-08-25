@@ -17,7 +17,7 @@ public class IronKit extends Kit {
         p.getInventory().clear();
         p.setHealth(20);
         p.setFoodLevel(20);
-        p.setSaturation(20);
+        p.setSaturation(10);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .setUnbreakable(true)
