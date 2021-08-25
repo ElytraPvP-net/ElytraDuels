@@ -48,7 +48,6 @@ public class BuildUHCKit extends Kit {
                 .addEnchantment(Enchantment.DAMAGE_ALL, 3)
                 .setUnbreakable(true).build();
         ItemStack fishingRod = new ItemBuilder(Material.FISHING_ROD)
-                .setUnbreakable(true)
                 .build();
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .addEnchantment(Enchantment.ARROW_DAMAGE, 3)

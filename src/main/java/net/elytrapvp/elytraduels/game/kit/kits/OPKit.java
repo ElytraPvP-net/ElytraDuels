@@ -51,7 +51,6 @@ public class OPKit extends Kit {
 
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .addEnchantment(Enchantment.ARROW_DAMAGE, 4)
-                .setUnbreakable(true)
                 .build();
 
         ItemStack goldenApples = new ItemBuilder(Material.GOLDEN_APPLE, 6).build();

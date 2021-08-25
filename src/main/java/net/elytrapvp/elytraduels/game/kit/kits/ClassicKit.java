@@ -37,7 +37,6 @@ public class ClassicKit extends Kit {
                 .setUnbreakable(true)
                 .build();
         ItemStack fishingRod = new ItemBuilder(Material.FISHING_ROD)
-                .setUnbreakable(true)
                 .build();
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .setUnbreakable(true)
