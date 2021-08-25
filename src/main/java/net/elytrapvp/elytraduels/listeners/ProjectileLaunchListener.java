@@ -27,7 +27,11 @@ public class ProjectileLaunchListener implements Listener {
 
             Player shooter = (Player) event.getEntity().getShooter();
 
-            Bukkit.getScheduler().runTaskLater(plugin, () -> shooter.getInventory().setItem(1, new ItemStack(Material.EGG)), 50);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                if(plugin.getGameManager().getGame(shooter) != null) {
+                    shooter.getInventory().setItem(1, new ItemStack(Material.EGG));
+                }
+            }, 50);
             return;
         }
 
