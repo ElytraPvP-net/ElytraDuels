@@ -68,15 +68,19 @@ public class OPKit extends Kit {
 
         ItemStack arrows = new ItemBuilder(Material.ARROW, 20).build();
 
+        ItemStack fns = new ItemStack(Material.FLINT_AND_STEEL);
+        fns.setDurability((short) 60);
+
         p.getInventory().setItem(0, sword);
         p.getInventory().setItem(1, rod);
         p.getInventory().setItem(2, bow);
-        p.getInventory().setItem(3, goldenApples);
-        p.getInventory().setItem(4, speed);
-        p.getInventory().setItem(5, regen);
-        p.getInventory().setItem(9, arrows);
-        p.getInventory().setItem(6, speed);
-        p.getInventory().setItem(7, regen);
+        p.getInventory().setItem(3, fns);
+        p.getInventory().setItem(4, goldenApples);
+        p.getInventory().setItem(5, speed);
+        p.getInventory().setItem(6, regen);
+        p.getInventory().setItem(8, arrows);
+        p.getInventory().setItem(9, speed);
+        p.getInventory().setItem(10, regen);
     }
 
     public Material getIconMaterial() {
