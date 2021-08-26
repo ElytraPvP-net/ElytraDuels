@@ -39,6 +39,9 @@ public class ProjectileLaunchListener implements Listener {
         if(event.getEntity() instanceof Arrow) {
             Arrow arrow = (Arrow) event.getEntity();
 
+            // Slow the arrow down.
+            arrow.getVelocity().multiply(0.9);
+
             if(!(arrow.getShooter() instanceof Player)) {
                 return;
             }
