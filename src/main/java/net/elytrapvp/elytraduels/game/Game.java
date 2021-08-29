@@ -123,6 +123,7 @@ public class Game {
         int spawn = 0;
         for(Team team : teamManager.getTeams()) {
             for(Player p : team.getPlayers()) {
+                p.closeInventory();
                 p.teleport(arena.getSpawns().get(spawn));
                 kit.apply(p);
                 new GameScoreboard(p, this);
