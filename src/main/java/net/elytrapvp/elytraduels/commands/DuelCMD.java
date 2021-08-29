@@ -136,6 +136,9 @@ public class DuelCMD extends AbstractCommand {
                 game.addPlayers(targetParty.getPlayers());
             }
 
+            // Remove players from queue.
+            plugin.getQueueManager().removePlayer(target);
+
             denied = true;
             game.start();
         }

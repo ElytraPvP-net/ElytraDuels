@@ -29,7 +29,10 @@ public class DuelGUI extends CustomGUI {
             setItem(i, item, (p, a) -> {
                 p.performCommand("duel " + target.getName() + " " + kit.getName().toLowerCase());
                 p.closeInventory();
-                ChatUtils.chat(p, "&a&l(&7!a&l) &aDuel request sent.");
+                ChatUtils.chat(p, "&a&l(&7!&a&l) &aDuel request sent.");
+
+                // Remove player from queue.
+                plugin.getQueueManager().removePlayer(p);
             });
             i++;
         }
