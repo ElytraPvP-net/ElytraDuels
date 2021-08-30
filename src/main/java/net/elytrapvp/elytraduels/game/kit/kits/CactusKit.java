@@ -14,6 +14,7 @@ public class CactusKit extends Kit {
         super("Cactus");
 
         setNaturalRegen(false);
+        setVoidLevel(50);
     }
 
 
