@@ -40,7 +40,7 @@ public class NoDebuffKit extends Kit {
                 .addEnchantment(Enchantment.DAMAGE_ALL, 3)
                 .setUnbreakable(true)
                 .build();
-        ItemStack pearls = new ItemBuilder(Material.ENDER_PEARL, 5).build();
+        ItemStack pearls = new ItemBuilder(Material.ENDER_PEARL, 16).build();
 
         Potion speedPot = new Potion(PotionType.SPEED);
         speedPot.setLevel(2);
