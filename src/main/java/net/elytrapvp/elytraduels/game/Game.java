@@ -473,9 +473,9 @@ public class Game {
             return;
         }
 
+        player.getLocation().getWorld().strikeLightning(player.getLocation());
         addSpectator(player);
         teamManager.getTeam(player).killPlayer(player);
-        player.getLocation().getWorld().strikeLightning(player.getLocation());
         broadcast("&a" + player.getName() + " has died!");
 
         // Prevents stuff from breaking if the game is already over.
