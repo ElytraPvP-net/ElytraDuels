@@ -47,7 +47,7 @@ public class PlayerInteractListener implements Listener {
             }
 
             pearlCooldown.add(player);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 100);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 200);
         }
 
         Game game = plugin.getGameManager().getGame(player);
@@ -112,10 +112,6 @@ public class PlayerInteractListener implements Listener {
                 else {
                     event.getItem().setAmount(event.getItem().getAmount() - 1);
                 }
-
-                ItemStack newItem = new ItemStack(event.getItem());
-                newItem.setAmount(1);
-                player.getInventory().remove(newItem);
 
                 PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 0);
                 PotionEffect absorption = new PotionEffect(PotionEffectType.ABSORPTION, 2400, 0);
