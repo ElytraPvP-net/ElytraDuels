@@ -113,6 +113,9 @@ public class PlayerInteractListener implements Listener {
                     event.getItem().setAmount(event.getItem().getAmount() - 1);
                 }
 
+                // Fix absorption from not resetting.
+                player.removePotionEffect(PotionEffectType.ABSORPTION);
+
                 PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 0);
                 PotionEffect absorption = new PotionEffect(PotionEffectType.ABSORPTION, 2400, 0);
                 PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
