@@ -31,6 +31,12 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
+        // Prevent spectators from placing/breaking blocks.
+        if(game.getSpectators().contains(player)) {
+            event.setCancelled(true);
+            return;
+        }
+
         // Get the drops from the block and add them to the inventory.
         Collection<ItemStack> drops = event.getBlock().getDrops();
         drops.forEach(drop -> player.getInventory().addItem(drop));
