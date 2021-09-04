@@ -20,6 +20,10 @@ public class ProjectileLaunchListener implements Listener {
 
     @EventHandler
     public void onLaunch(ProjectileLaunchEvent event) {
+        if (event.getEntityType().equals(EntityType.FISHING_HOOK)) {
+            event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(1.4D));
+        }
+
         if(event.getEntity() instanceof Egg) {
             if(!(event.getEntity().getShooter() instanceof Player)) {
                 return;
