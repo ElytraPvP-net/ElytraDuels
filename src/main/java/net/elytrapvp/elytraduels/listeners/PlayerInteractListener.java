@@ -104,7 +104,7 @@ public class PlayerInteractListener implements Listener {
                 }
 
                 pearlCooldown.add(player);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 100);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 60);
 
                 if(event.getItem().getAmount() == 1) {
                     player.getInventory().remove(event.getItem());
