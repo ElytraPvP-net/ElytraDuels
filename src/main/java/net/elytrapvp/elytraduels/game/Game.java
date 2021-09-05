@@ -125,7 +125,6 @@ public class Game {
             for(Player p : team.getPlayers()) {
                 p.closeInventory();
                 p.teleport(arena.getSpawns().get(spawn));
-                kit.apply(p);
                 new GameScoreboard(p, this);
             }
             spawn++;
