@@ -19,8 +19,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -38,6 +36,13 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+        Game game = plugin.getGameManager().getGame(player);
+
+        // Prevent using items during game countdown.
+        if(game != null && game.getGameState() == GameState.COUNTDOWN) {
+            event.setCancelled(true);
+            return;
+        }
 
         // Checks for the ender pearl cooldown.
         if(event.getItem() != null && event.getItem().getType() == Material.ENDER_PEARL && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
@@ -50,8 +55,6 @@ public class PlayerInteractListener implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 200);
         }
 
-        Game game = plugin.getGameManager().getGame(player);
-        //
         if(game != null) {
             if (game.getGameState() == GameState.RUNNING) {
                 if (game.getKit().getTripleShots() > 0) {
