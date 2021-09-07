@@ -25,9 +25,7 @@ public class PlayerBucketEmptyListener implements Listener {
             return;
         }
 
-        Location location = event.getBlockClicked().getLocation();
-        location.setY(location.getY() + 1);
-
+        Location location = event.getBlockClicked().getRelative(event.getBlockFace()).getLocation();
         game.addBlock(location, Material.AIR);
     }
 }
