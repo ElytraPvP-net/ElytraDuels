@@ -161,7 +161,12 @@ public class Game {
         }
 
         for(Player player : winner.getPlayers()) {
-            broadcastCenter("&f" + player.getName() + " &a(" + ChatUtils.getFormattedHealthPercent(player) + "&a)");
+            if(teamManager.getTeam(player).getDeadPlayers().contains(player)) {
+                broadcastCenter("&f" + player.getName() + " &a(&c0%&a)");
+            }
+            else {
+                broadcastCenter("&f" + player.getName() + " &a(" + ChatUtils.getFormattedHealthPercent(player) + "&a)");
+            }
         }
         broadcast(" ");
         broadcast("&8&m+-----------------------***-----------------------+");
@@ -177,7 +182,7 @@ public class Game {
                 player.spigot().setCollidesWithEntities(true);
                 ((CraftPlayer) player).getHandle().getDataWatcher().watch(9, (byte) 0);
 
-                ItemUtils.giveLobbyItems(player);
+                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
                 new LobbyScoreboard(plugin, player);
 
                 for(Player pl : Bukkit.getOnlinePlayers()) {

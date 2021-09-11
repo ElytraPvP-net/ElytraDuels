@@ -58,7 +58,13 @@ public class GameScoreboard extends CustomScoreboard {
                 Player o = opponents.get(i);
 
                 helper.setSlot(4 + (i * 2) + 1, "  &f" + o.getName());
-                helper.setSlot(4 + (i * 2), "  " + ChatUtils.getFormattedHealthPercent(o) + " &7- " + ChatUtils.getFormattedPing(o));
+
+                if(game.getTeam(player).getDeadPlayers().contains(player)) {
+                    helper.setSlot(4 + (i * 2), "  " + "&c0%" + " &7- " + ChatUtils.getFormattedPing(o));
+                }
+                else {
+                    helper.setSlot(4 + (i * 2), "  " + ChatUtils.getFormattedHealthPercent(o) + " &7- " + ChatUtils.getFormattedPing(o));
+                }
             }
             helper.setSlot(3, "");
             helper.setSlot(2, "&7&m------------------");
