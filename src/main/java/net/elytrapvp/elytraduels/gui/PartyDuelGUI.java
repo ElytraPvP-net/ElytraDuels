@@ -41,12 +41,16 @@ public class PartyDuelGUI extends CustomGUI {
                 List<Player> players = new ArrayList<>(party.getPlayers());
                 Collections.shuffle(players);
 
+                if(party.getMembers().size() == 1) {
+                    ChatUtils.chat(p, "&cYou cannot duel yourself!");
+                    return;
+                }
+
                 List<Player> team1 = new ArrayList<>();
                 List<Player> team2 = new ArrayList<>();
 
                 int team = 1;
                 for(Player player : players) {
-
                     if(team == 1) {
                         team1.add(player);
                         team = 2;
