@@ -2,14 +2,16 @@ package net.elytrapvp.elytraduels.party;
 
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Manages all existing party.
  */
 public class PartyManager {
-    private final Set<Party> parties = new HashSet<>();
+    private final List<Party> parties = new ArrayList<>();
 
     /**
      * Create a new party.
@@ -50,7 +52,7 @@ public class PartyManager {
      * Get all current parties.
      * @return All current paries.
      */
-    public Set<Party> getParties() {
+    public List<Party> getParties() {
         return parties;
     }
 }
