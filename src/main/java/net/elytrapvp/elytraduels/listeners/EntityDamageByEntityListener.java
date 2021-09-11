@@ -31,6 +31,14 @@ public class EntityDamageByEntityListener implements Listener {
                     event.setCancelled(true);
                     return;
                 }
+
+                if(event.getEntity() instanceof Player) {
+                    Player target = (Player) event.getEntity();
+                    if(game.getTeam(player).equals(game.getTeam(target))) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
             }
         }
 
@@ -66,6 +74,11 @@ public class EntityDamageByEntityListener implements Listener {
         }
 
         Player shooter = (Player) a.getShooter();
+
+        if(game.getTeam(player).equals(game.getTeam(shooter))) {
+            event.setCancelled(true);
+            return;
+        }
 
         // Applies ranged damage if enabled.
         if(game.getKit().hasRangedDamage()) {
