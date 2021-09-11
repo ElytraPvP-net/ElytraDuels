@@ -10,9 +10,11 @@ import net.elytrapvp.elytraduels.gui.SpectateGUI;
 import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.MathUtils;
+import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -126,6 +128,10 @@ public class PlayerInteractListener implements Listener {
                 player.addPotionEffect(speed);
                 player.addPotionEffect(absorption);
                 player.addPotionEffect(regen);
+
+                ChatUtils.chat(player, "&aYou ate a Golden Head!");
+                player.playSound(player.getLocation(), Sound.EAT, 1, 1);
+
                 event.setCancelled(true);
 
                 break;
