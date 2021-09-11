@@ -1,5 +1,8 @@
 package net.elytrapvp.elytraduels.party;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.utils.ItemUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -12,26 +15,34 @@ import java.util.Set;
  * outside of a Game.
  */
 public class Party {
-    private final PartyManager partyManager;
+    private final ElytraDuels plugin;
     private Player leader;
     private final Set<Player> members = new HashSet<>();
 
     /**
      * Create a new party.
-     * @param partyManager PartyManager used.
+     * @param plugin Plugin instance.
      * @param leader Leader of the party.
      */
-    public Party(PartyManager partyManager, Player leader) {
-        this.partyManager = partyManager;
+    public Party(ElytraDuels plugin, Player leader) {
+        this.plugin = plugin;
         this.leader = leader;
+    }
+
+    public void addPlayer(Player player) {
+        members.add(player);
+        ItemUtils.givePartyItems(plugin.getPartyManager(), player);
     }
 
     /**
      * Disband the party.
      */
     public void disband() {
-        // TODO: Properly handle players when disbanded.
-        partyManager.disbandParty(this);
+        for(Player player : getPlayers()) {
+            ItemUtils.giveLobbyItems(player);
+        }
+
+        plugin.getPartyManager().disbandParty(this);
     }
 
     /**
@@ -58,6 +69,24 @@ public class Party {
         List<Player> players = new ArrayList<>(getMembers());
         players.add(getLeader());
         return players;
+    }
+
+    /**
+     * Remove a player from the party.
+     * @param p Player to remove.
+     */
+    public void removePlayer(Player p) {
+        if(leader.equals(p)) {
+            disband();
+            return;
+        }
+
+        Game game = plugin.getGameManager().getGame(p);
+        if(game == null) {
+            ItemUtils.giveLobbyItems(p);
+        }
+
+        members.remove(p);
     }
 
     /**

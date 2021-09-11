@@ -36,6 +36,7 @@ public abstract class AbstractCommand implements CommandExecutor {
         new DuelCMD(pl);
         new SpectateCMD(pl);
         new PingCMD();
+        new PartyCMD(pl);
     }
 
     /**

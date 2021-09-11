@@ -17,6 +17,7 @@ public final class ElytraDuels extends JavaPlugin {
     private ArenaManager arenaManager;
     private GameManager gameManager;
     private KitManager kitManager;
+    private MySQL mySQL;
     private PartyManager partyManager;
     private QueueManager queueManager;
     private SettingsManager settingsManager;
@@ -26,10 +27,11 @@ public final class ElytraDuels extends JavaPlugin {
         // Plugin startup logic
         settingsManager = new SettingsManager(this);
         kitManager = new KitManager();
-        partyManager = new PartyManager();
+        partyManager = new PartyManager(this);
         arenaManager = new ArenaManager(this);
         gameManager = new GameManager(this);
         queueManager = new QueueManager(this);
+        mySQL = new MySQL(this);
 
         AbstractCommand.registerCommands(this);
 
@@ -53,6 +55,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerToggleFlightListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerToggleSneakListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new PrepareItemCraftListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileHitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
@@ -78,6 +81,14 @@ public final class ElytraDuels extends JavaPlugin {
 
     public KitManager getKitManager() {
         return kitManager;
+    }
+
+    /**
+     * Get the MySQL Database.
+     * @return MySQL Database.
+     */
+    public MySQL getMySQL() {
+        return mySQL;
     }
 
     public PartyManager getPartyManager() {

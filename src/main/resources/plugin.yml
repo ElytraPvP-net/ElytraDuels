@@ -17,3 +17,6 @@ commands:
   duel:
     usage: /duel player
     description: Duel someone
+  party:
+    usage: /party
+    description: party command

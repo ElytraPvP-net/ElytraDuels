@@ -1,5 +1,7 @@
 package net.elytrapvp.elytraduels.party;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.utils.ItemUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,7 +13,12 @@ import java.util.Set;
  * Manages all existing party.
  */
 public class PartyManager {
+    private final ElytraDuels plugin;
     private final List<Party> parties = new ArrayList<>();
+
+    public PartyManager(ElytraDuels plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Create a new party.
@@ -19,8 +26,8 @@ public class PartyManager {
      * @return Party that was created.
      */
     public Party createParty(Player leader) {
-        Party party = new Party(this, leader);
-        getParties().add(party);
+        Party party = new Party(plugin, leader);
+        parties.add(party);
         return party;
     }
 
@@ -40,7 +47,7 @@ public class PartyManager {
      */
     public Party getParty(Player player) {
         for(Party party : getParties()) {
-            if(party.getMembers().contains(player)) {
+            if(party.getPlayers().contains(player)) {
                 return party;
             }
         }

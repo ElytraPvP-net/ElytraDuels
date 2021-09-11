@@ -6,7 +6,10 @@ import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameState;
 import net.elytrapvp.elytraduels.gui.KitGUI;
+import net.elytrapvp.elytraduels.gui.PartyDuelGUI;
+import net.elytrapvp.elytraduels.gui.PartyListGUI;
 import net.elytrapvp.elytraduels.gui.SpectateGUI;
+import net.elytrapvp.elytraduels.party.Party;
 import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.MathUtils;
@@ -169,6 +172,42 @@ public class PlayerInteractListener implements Listener {
 
                 player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
                 break;
+
+            case "Create a party":
+                event.setCancelled(true);
+                plugin.getPartyManager().createParty(player);
+                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                break;
+
+            case "Leave Party":
+                event.setCancelled(true);
+
+                Party party = plugin.getPartyManager().getParty(player);
+                if(party == null) {
+                    return;
+                }
+
+                if(party.getLeader().equals(player)) {
+                    party.disband();
+                }
+                else {
+                    party.removePlayer(player);
+                }
+
+                ItemUtils.giveLobbyItems(player);
+
+                break;
+
+            case "Duel another party":
+                new PartyListGUI(plugin, player).open(player);
+                event.setCancelled(true);
+                break;
+
+            case "Duel Party Members":
+                new PartyDuelGUI(plugin).open(player);
+                event.setCancelled(true);
+                break;
         }
+
     }
 }
