@@ -6,6 +6,7 @@ import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -41,6 +42,11 @@ public class PartyCMD extends AbstractCommand {
             case "create":
                 if(plugin.getPartyManager().getParty(p) != null) {
                     ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are already in a party.");
+                    return;
+                }
+
+                if(plugin.getGameManager().getGame(p) != null) {
+                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are already in a game.");
                     return;
                 }
 
@@ -93,14 +99,32 @@ public class PartyCMD extends AbstractCommand {
                 plugin.getPartyManager().getParty(p).disband();
                 break;
             case "leave":
-                ChatUtils.chat(sender, "");
+                Party party = plugin.getPartyManager().getParty(p);
 
-                if(plugin.getPartyManager().getParty(p) == null) {
+                if(party == null) {
                     ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are not in a party! /party create.");
                     return;
                 }
 
-                plugin.getPartyManager().getParty(p).removePlayer(p);
+                party.removePlayer(p);
+                party.broadcast("&aParty &8» &f" + p.getName() + " &ahas left the party.");
+                break;
+
+            case "chat":
+                Party party1 = plugin.getPartyManager().getParty(p);
+
+                if(party1 == null) {
+                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are not in a party! /party create.");
+                    return;
+                }
+
+                if(args.length < 2) {
+                    return;
+                }
+
+                args[0] = "";
+                party1.broadcast("&aParty &8» &f" + p.getName() + "&8: &a" + StringUtils.join(args, " "));
+
                 break;
         }
     }
@@ -139,9 +163,10 @@ public class PartyCMD extends AbstractCommand {
         }
 
         private void accept() {
-            ChatUtils.chat(sender, "&aParty request has been accepted.");
+            //ChatUtils.chat(sender, "&aParty request has been accepted.");
             Party party = plugin.getPartyManager().getParty(sender);
             party.addPlayer(target);
+            party.broadcast("&aParty &8» &f" + target.getName() + " &ahas joined the party.");
             denied = true;
             target.closeInventory();
         }
