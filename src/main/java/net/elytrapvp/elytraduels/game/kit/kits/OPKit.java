@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.game.kit.kits;
 
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -19,6 +20,7 @@ public class OPKit extends Kit {
     public void apply(Player p) {
         p.getInventory().clear();
         p.setHealth(20);
+        p.setGameMode(GameMode.SURVIVAL);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
