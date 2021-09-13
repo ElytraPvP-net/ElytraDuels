@@ -73,11 +73,11 @@ public class PlayerInteractListener implements Listener {
                                         arrow.setFireTicks(100);
 
                                         Arrow arrow2 = player.launchProjectile(Arrow.class);
-                                        arrow2.setVelocity(MathUtils.rotateVector(arrow.getVelocity().clone(), 0.26179939).multiply(1.1));
+                                        arrow2.setVelocity(MathUtils.rotateVector(arrow.getVelocity().clone(), 0.21816616).multiply(1.1));
                                         arrow2.setFireTicks(100);
 
                                         Arrow arrow3 = player.launchProjectile(Arrow.class);
-                                        arrow3.setVelocity(MathUtils.rotateVector(arrow.getVelocity().clone(), -0.26179939).multiply(1.1));
+                                        arrow3.setVelocity(MathUtils.rotateVector(arrow.getVelocity().clone(), -0.21816616).multiply(1.1));
                                         arrow3.setFireTicks(100);
 
                                         game.removeTripleShot(player);
