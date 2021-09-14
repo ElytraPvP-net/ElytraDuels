@@ -25,6 +25,7 @@ public class KitManager {
         kits.add(new BuildUHCKit());
         kits.add(new CactusKit());
         kits.add(new SGKit());
+        kits.add(new FinalUHCKit());
     }
 
     /**
