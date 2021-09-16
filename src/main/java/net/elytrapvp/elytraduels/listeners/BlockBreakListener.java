@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,14 +26,25 @@ public class BlockBreakListener implements Listener {
         }
 
         Player player = event.getPlayer();
+
+        if(player.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+
         Game game = plugin.getGameManager().getGame(player);
 
         if(game == null) {
+            event.setCancelled(true);
             return;
         }
 
         // Prevent spectators from placing/breaking blocks.
         if(game.getSpectators().contains(player)) {
+            event.setCancelled(true);
+            return;
+        }
+
+        if(!game.getBlocks().contains(event.getBlock().getLocation())) {
             event.setCancelled(true);
             return;
         }

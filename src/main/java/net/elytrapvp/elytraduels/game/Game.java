@@ -344,6 +344,14 @@ public class Game {
     }
 
     /**
+     * Get all blocks that have been placed by players.
+     * @return All blocks placed by players.
+     */
+    public Collection<Location> getBlocks() {
+        return blocks.keySet();
+    }
+
+    /**
      * Get the amount of double jumps a player has left.
      * @param player Player to get double jumps of.
      * @return Amount of double jumps left.
