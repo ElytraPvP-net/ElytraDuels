@@ -463,7 +463,6 @@ Maps:
       - op
       - stratus
       - build uhc
-      - sg
     arenas:
       '1':
         spawns:
@@ -525,7 +524,6 @@ Maps:
       - classic
       - stratus
       - build uhc
-      - sg
     arenas:
       '1':
         spawns:
@@ -588,7 +586,6 @@ Maps:
       - op
       - stratus
       - build uhc
-      - sg
     arenas:
       '1':
         spawns:
@@ -651,7 +648,6 @@ Maps:
       - op
       - stratus
       - build uhc
-      - sg
     arenas:
       '1':
         spawns:
@@ -713,7 +709,6 @@ Maps:
       - op
       - stratus
       - build uhc
-      - sg
     arenas:
       '1':
         spawns:
@@ -825,3 +820,345 @@ Maps:
             Z: 4777.5
             Pitch: 0
             Yaw: 45
+  river:
+    name: River
+    builders:
+      - RMicky
+    kits:
+      - sg
+      - final uhc
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1979.5
+            Y: 67.5
+            Z: 5579.5
+            Pitch: 0
+            Yaw: 135
+          '2':
+            World: world
+            X: 2021.5
+            Y: 68.5
+            Z: 5621.5
+            Pitch: 0
+            Yaw: -45
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2179.5
+            Y: 67.5
+            Z: 5579.5
+            Pitch: 0
+            Yaw: 135
+          '2':
+            World: world
+            X: 2221.5
+            Y: 68.5
+            Z: 5621.5
+            Pitch: 0
+            Yaw: -45
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2379.5
+            Y: 67.5
+            Z: 5579.5
+            Pitch: 0
+            Yaw: 135
+          '2':
+            World: world
+            X: 2421.5
+            Y: 68.5
+            Z: 5621.5
+            Pitch: 0
+            Yaw: -45
+  final-desert:
+    name: Desert
+    builders:
+      - RMicky
+    kits:
+      - sg
+      - final uhc
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1979.5
+            Y: 67.5
+            Z: 5820.5
+            Pitch: 0
+            Yaw: -135
+          '2':
+            World: world
+            X: 2020.5
+            Y: 68.5
+            Z: 5779.5
+            Pitch: 0
+            Yaw: 45
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2179.5
+            Y: 67.5
+            Z: 5820.5
+            Pitch: 0
+            Yaw: -135
+          '2':
+            World: world
+            X: 2220.5
+            Y: 68.5
+            Z: 5779.5
+            Pitch: 0
+            Yaw: 45
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2379.5
+            Y: 67.5
+            Z: 5820.5
+            Pitch: 0
+            Yaw: -135
+          '2':
+            World: world
+            X: 2420.5
+            Y: 68.5
+            Z: 5779.5
+            Pitch: 0
+            Yaw: 45
+  mine:
+    name: Mine
+    builders:
+      - RMicky
+    kits:
+      - sg
+      - final uhc
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1979.5
+            Y: 67.5
+            Z: 5979.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2020.5
+            Y: 67.5
+            Z: 6020.5
+            Pitch: 0
+            Yaw: 135
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2179.5
+            Y: 67.5
+            Z: 5979.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2220.5
+            Y: 67.5
+            Z: 6020.5
+            Pitch: 0
+            Yaw: 135
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2379.5
+            Y: 67.5
+            Z: 5979.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2420.5
+            Y: 67.5
+            Z: 6020.5
+            Pitch: 0
+            Yaw: 135
+  final-nether:
+    name: Nether
+    builders:
+      - RMicky
+    kits:
+      - sg
+      - final uhc
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1979.5
+            Y: 67.5
+            Z: 6179.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2020.5
+            Y: 67.5
+            Z: 6220.5
+            Pitch: 0
+            Yaw: 135
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2179.5
+            Y: 67.5
+            Z: 6179.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2220.5
+            Y: 67.5
+            Z: 6220.5
+            Pitch: 0
+            Yaw: 135
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2379.5
+            Y: 67.5
+            Z: 6179.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2420.5
+            Y: 67.5
+            Z: 6220.5
+            Pitch: 0
+            Yaw: 135
+  final-end:
+    name: End
+    builders:
+      - RMicky
+    kits:
+      - sg
+      - final uhc
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1979.5
+            Y: 67.5
+            Z: 6379.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2020.5
+            Y: 67.5
+            Z: 6420.5
+            Pitch: 0
+            Yaw: 135
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2179.5
+            Y: 67.5
+            Z: 6379.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2220.5
+            Y: 67.5
+            Z: 6420.5
+            Pitch: 0
+            Yaw: 135
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2379.5
+            Y: 67.5
+            Z: 6379.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2420.5
+            Y: 67.5
+            Z: 6420.5
+            Pitch: 0
+            Yaw: 135
+  space:
+    name: Space
+    builders:
+      - Elodiez
+      - RMicky
+    kits:
+      - uhc
+      - iron
+      - diamond
+      - classic
+      - op
+      - stratus
+      - build uhc
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1969.5
+            Y: 65.5
+            Z: 5369.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2030.5
+            Y: 65.5
+            Z: 5430.5
+            Pitch: 0
+            Yaw: 135
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2169.5
+            Y: 65.5
+            Z: 5369.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2230.5
+            Y: 65.5
+            Z: 5430.5
+            Pitch: 0
+            Yaw: 135
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2369.5
+            Y: 65.5
+            Z: 5369.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2430.5
+            Y: 65.5
+            Z: 5430.5
+            Pitch: 0
+            Yaw: 135
