@@ -51,14 +51,14 @@ public class SGKit extends Kit {
                 .setUnbreakable(true)
                 .build();
 
-        ItemStack arrows = new ItemBuilder(Material.ARROW, 3).build();
+        ItemStack arrows = new ItemBuilder(Material.ARROW, 6).build();
         ItemStack steak = new ItemBuilder(Material.COOKED_BEEF, 10).build();
         ItemStack gapple = new ItemBuilder(Material.GOLDEN_APPLE, 1).build();
 
         ItemStack fns = new ItemStack(Material.FLINT_AND_STEEL);
         fns.setDurability((short) 60);
 
-        ItemStack cobwebs = new ItemBuilder(Material.WEB, 2).build();
+        ItemStack cobwebs = new ItemBuilder(Material.WEB, 1).build();
 
         p.getInventory().setItem(0, sword);
         p.getInventory().setItem(1, rod);
