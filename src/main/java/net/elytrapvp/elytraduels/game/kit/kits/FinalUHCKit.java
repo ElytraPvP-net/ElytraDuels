@@ -24,49 +24,41 @@ public class FinalUHCKit extends Kit {
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
-                .setUnbreakable(true)
                 .build();
         helmet.setDurability((short) 121);
 
         ItemStack chestplate = new ItemBuilder(Material.DIAMOND_CHESTPLATE)
                 .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3)
-                .setUnbreakable(true)
                 .build();
         chestplate.setDurability((short) 176);
 
         ItemStack leggings = new ItemBuilder(Material.DIAMOND_LEGGINGS)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
-                .setUnbreakable(true)
                 .build();
         leggings.setDurability((short) 165);
 
         ItemStack boots = new ItemBuilder(Material.DIAMOND_BOOTS)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
-                .setUnbreakable(true)
                 .build();
         boots.setDurability((short) 143);
 
         ItemStack spareHelmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
-                .setUnbreakable(true)
                 .build();
         spareHelmet.setDurability((short) 121);
 
         ItemStack spareChestplate = new ItemBuilder(Material.DIAMOND_CHESTPLATE)
                 .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2)
-                .setUnbreakable(true)
                 .build();
         spareChestplate.setDurability((short) 176);
 
         ItemStack spareLeggings = new ItemBuilder(Material.DIAMOND_LEGGINGS)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
-                .setUnbreakable(true)
                 .build();
         spareLeggings.setDurability((short) 165);
 
         ItemStack spareBoots = new ItemBuilder(Material.DIAMOND_BOOTS)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
-                .setUnbreakable(true)
                 .build();
         spareBoots.setDurability((short) 143);
 
