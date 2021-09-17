@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.util.Vector;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +62,13 @@ public class PlayerToggleFlightListener implements Listener {
         game.removeDoubleJump(player);
         player.setFlying(false);
 
-        player.setVelocity(player.getLocation().getDirection().setY((Math.abs(player.getLocation().getDirection().getY()) + 0.3) / 1.3).multiply(1.3));
+        //player.setVelocity(player.getLocation().getDirection().setY((Math.abs(player.getLocation().getDirection().getY()) + 0.3) / 1.3).multiply(1.3));
+
+        double boost = Math.abs(Math.cos(player.getLocation().getPitch()) * 0.3);
+        //Vector vector = player.getLocation().getDirection().normalize().setY(boost).multiply(1.3);
+        Vector vector = player.getLocation().getDirection().normalize().multiply(0.5).add(new Vector(0, 0.8, 0));
+        player.setVelocity(vector);
+
         player.getLocation().getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_LARGE,0, 20);
         event.setCancelled(true);
     }
