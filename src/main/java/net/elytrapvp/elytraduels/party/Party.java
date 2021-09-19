@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.party;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
+import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -29,9 +30,23 @@ public class Party {
         this.leader = leader;
     }
 
+    /**
+     * Add a player to the party.
+     * @param player Player to add.
+     */
     public void addPlayer(Player player) {
         members.add(player);
         ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+    }
+
+    /**
+     * Broadcast a message to all party members.
+     * @param message Message to broadcast.
+     */
+    public void broadcast(String message) {
+        for(Player player : getPlayers()) {
+            ChatUtils.chat(player, message);
+        }
     }
 
     /**
