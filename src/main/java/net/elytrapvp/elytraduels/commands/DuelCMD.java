@@ -62,6 +62,12 @@ public class DuelCMD extends AbstractCommand {
             return;
         }
 
+        Party targetParty = plugin.getPartyManager().getParty(t);
+        if(targetParty != null && targetParty.getMembers().contains(t)) {
+            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThat player is in a party.");
+            return;
+        }
+
         if(args.length < 2) {
             new DuelGUI(plugin, t).open(p);
             return;
