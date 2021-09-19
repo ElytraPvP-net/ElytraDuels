@@ -34,7 +34,7 @@ public class EntityDamageByEntityListener implements Listener {
 
                 if(event.getEntity() instanceof Player) {
                     Player target = (Player) event.getEntity();
-                    if(game.getTeam(player).equals(game.getTeam(target))) {
+                    if(game.getTeam(player).equals(game.getTeam(target)) && !player.equals(target)) {
                         event.setCancelled(true);
                         return;
                     }
@@ -75,7 +75,7 @@ public class EntityDamageByEntityListener implements Listener {
 
         Player shooter = (Player) a.getShooter();
 
-        if(game.getTeam(player).equals(game.getTeam(shooter))) {
+        if(game.getTeam(player).equals(game.getTeam(shooter)) && !player.equals(shooter)) {
             event.setCancelled(true);
             return;
         }
