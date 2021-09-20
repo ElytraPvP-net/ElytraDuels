@@ -1106,13 +1106,9 @@ Maps:
       - Elodiez
       - RMicky
     kits:
-      - uhc
-      - iron
-      - diamond
-      - classic
-      - op
-      - stratus
-      - build uhc
+      - archer
+      - bow
+      - no debuff
     arenas:
       '1':
         spawns:
@@ -1162,3 +1158,59 @@ Maps:
             Z: 5430.5
             Pitch: 0
             Yaw: 135
+  arena:
+    name: Arena
+    builders:
+      - Zevard
+      - Elodiez
+    kits:
+      - sumo
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1994.5
+            Y: 65.5
+            Z: 6600.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2006.5
+            Y: 65.5
+            Z: 6600.5
+            Pitch: 0
+            Yaw: 90
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2194.5
+            Y: 65.5
+            Z: 6600.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2206.5
+            Y: 65.5
+            Z: 6600.5
+            Pitch: 0
+            Yaw: 90
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2394.5
+            Y: 65.5
+            Z: 6600.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2406.5
+            Y: 65.5
+            Z: 6600.5
+            Pitch: 0
+            Yaw: 90

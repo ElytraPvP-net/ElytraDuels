@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -21,12 +22,16 @@ public abstract class Kit {
 
     // boolean settings.
     private boolean arrowPickup;
+    private boolean doDamage;
     private boolean hasRanked;
     private boolean hunger;
     private boolean naturalRegen;
     private boolean rangedDamage;
     private boolean takeDamage;
     private boolean waterKills;
+
+    // misc
+    private GameMode gameMode;
 
     /**
      * Creates a new kit.
@@ -44,12 +49,15 @@ public abstract class Kit {
         rodMultiplier = 1.0;
 
         arrowPickup = false;
+        doDamage = true;
         hasRanked = false;
         hunger = false;
         naturalRegen = true;
         rangedDamage = false;
         takeDamage = true;
         waterKills = false;
+
+        gameMode = GameMode.ADVENTURE;
     }
 
     /**
@@ -157,6 +165,14 @@ public abstract class Kit {
     }
 
     /**
+     * Check if players should do damage.
+     * @return If players should do damage.
+     */
+    public boolean hasDoDamage() {
+        return doDamage;
+    }
+
+    /**
      * Get if the kit should have hunger.
      * @return Whether or not the kit has hunger.
      */
@@ -211,6 +227,14 @@ public abstract class Kit {
      */
     public void setArrowPickup(boolean arrowPickup) {
         this.arrowPickup = arrowPickup;
+    }
+
+    /**
+     * Set whether or not players should do damage to others.
+     * @param doDamage If players should do damage.
+     */
+    public void setDoDamage(boolean doDamage) {
+        this.doDamage = doDamage;
     }
 
     /**

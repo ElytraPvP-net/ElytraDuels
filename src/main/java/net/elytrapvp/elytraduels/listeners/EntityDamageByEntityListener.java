@@ -61,6 +61,12 @@ public class EntityDamageByEntityListener implements Listener {
             return;
         }
 
+        // Check if players should do damage.
+        if(!game.getKit().hasDoDamage()) {
+            event.setDamage(0);
+            return;
+        }
+
         // Makes sure the damager is an arrow before continuing.
         if(!(event.getDamager() instanceof Arrow)) {
             return;
