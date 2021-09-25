@@ -126,6 +126,7 @@ public class Game {
                 p.closeInventory();
                 p.teleport(arena.getSpawns().get(spawn));
                 new GameScoreboard(p, this);
+                p.setFireTicks(0);
             }
             spawn++;
         }
@@ -146,7 +147,6 @@ public class Game {
         }
 
         gameState = GameState.END;
-
         timer.stop();
 
         broadcast("&8&m+-----------------------***-----------------------+");
