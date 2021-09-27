@@ -64,6 +64,12 @@ public class TeleportFix implements Listener {
         // Hide or show every player to tpedPlayer
         // and hide or show tpedPlayer to every player.
         for (Player player : players) {
+            // Fix spectators being seen after teleport.
+            Game game = plugin.getGameManager().getGame(player);
+            if(game != null && game.getSpectators().contains(player)) {
+                continue;
+            }
+
             if (visible) {
                 tpedPlayer.showPlayer(player);
                 player.showPlayer(tpedPlayer);
