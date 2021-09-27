@@ -62,10 +62,15 @@ public class ItemUtils {
                     .build();
             player.getInventory().setItem(1, partyDuel);
 
+            ItemStack ffa = new ItemBuilder(Material.GOLD_SWORD)
+                    .setDisplayName("&aFFA Duel")
+                    .build();
+            player.getInventory().setItem(2, ffa);
+
             ItemStack spectate = new ItemBuilder(Material.NETHER_STAR)
                     .setDisplayName("&aSpectate")
                     .build();
-            player.getInventory().setItem(2, spectate);
+            player.getInventory().setItem(3, spectate);
         }
 
         ItemStack leave = new ItemBuilder(Material.REDSTONE)

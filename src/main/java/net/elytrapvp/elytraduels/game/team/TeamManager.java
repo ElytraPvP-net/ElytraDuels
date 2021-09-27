@@ -7,6 +7,7 @@ import java.util.List;
 
 public class TeamManager {
     private final List<Team> teams = new ArrayList<>();
+    private final List<Team> aliveTeams = new ArrayList<>();
 
     /**
      * Create a new team.
@@ -16,6 +17,7 @@ public class TeamManager {
     public Team createTeam(List<Player> players) {
         Team team = new Team(players);
         getTeams().add(team);
+        aliveTeams.add(team);
         return team;
     }
 
@@ -25,6 +27,15 @@ public class TeamManager {
      */
     public void deleteTeam(Team team) {
         getTeams().remove(team);
+        aliveTeams.remove(team);
+    }
+
+    /**
+     * Get all teams that are still alive.
+     * @return All alive teams.
+     */
+    public List<Team> getAliveTeams() {
+        return aliveTeams;
     }
 
     /**
@@ -49,5 +60,12 @@ public class TeamManager {
      */
     public List<Team> getTeams() {
         return teams;
+    }
+
+    /**
+     * Kill a team.
+     */
+    public void killTeam(Team team) {
+        aliveTeams.remove(team);
     }
 }

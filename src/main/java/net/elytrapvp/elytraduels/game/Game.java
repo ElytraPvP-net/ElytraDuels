@@ -35,6 +35,7 @@ public class Game {
     private final Kit kit;
     private final Arena arena;
     private final Timer timer;
+    private final GameType gameType;
 
     private final Set<Player> spectators = new HashSet<>();
     private final HashMap<Location, Material> blocks = new HashMap<>();
@@ -54,6 +55,7 @@ public class Game {
         this.plugin = plugin;
         this.kit = kit;
         this.arena = arena;
+        this.gameType = gameType;
 
         gameState = GameState.WAITING;
         timer = new Timer(plugin);
@@ -72,6 +74,10 @@ public class Game {
 
         int spawn = 0;
         for(Team team : teamManager.getTeams()) {
+            if(spawn >= arena.getSpawns().size()) {
+                spawn = 0;
+            }
+
             for(Player p : team.getPlayers()) {
                 p.teleport(arena.getSpawns().get(spawn));
                 kit.apply(p);
@@ -369,6 +375,14 @@ public class Game {
     }
 
     /**
+     * Get the current game type.
+     * @return Game Type of the game.
+     */
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    /**
      * Get the kit used in the game.
      * @return Kit being used.
      */
@@ -438,6 +452,14 @@ public class Game {
     }
 
     /**
+     * Get the game's team manager.
+     * @return Team manager.
+     */
+    public TeamManager getTeamManager() {
+        return teamManager;
+    }
+
+    /**
      * Get the game timer.
      * @return Game timer.
      */
@@ -469,9 +491,13 @@ public class Game {
 
         for(Team team : teamManager.getTeams()) {
             if(team.getAlivePlayers().size() == 0) {
-                Team winner = getOpposingTeam(team);
-                end(winner, team);
-                break;
+                teamManager.killTeam(team);
+
+                if(teamManager.getAliveTeams().size() == 1) {
+                    Team winner = teamManager.getAliveTeams().get(0);
+                    end(winner, team);
+                    break;
+                }
             }
         }
     }
@@ -497,8 +523,13 @@ public class Game {
 
         for(Team team : teamManager.getTeams()) {
             if(team.getAlivePlayers().size() == 0) {
-                Team winner = getOpposingTeam(team);
-                end(winner, team);
+                teamManager.killTeam(team);
+
+                if(teamManager.getAliveTeams().size() == 1) {
+                    Team winner = teamManager.getAliveTeams().get(0);
+                    end(winner, team);
+                    break;
+                }
             }
         }
     }
