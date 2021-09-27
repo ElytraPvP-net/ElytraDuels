@@ -15,6 +15,7 @@ public class OPKit extends Kit {
     public OPKit() {
         super("OP");
         setRodMultiplier(1.5);
+        setStrongGapple(true);
     }
 
     public void apply(Player p) {

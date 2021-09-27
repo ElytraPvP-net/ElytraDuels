@@ -14,6 +14,7 @@ public class BuildUHCKit extends Kit {
     public BuildUHCKit() {
         super("Build UHC");
         setNaturalRegen(false);
+        setStrongGapple(true);
     }
 
     @Override

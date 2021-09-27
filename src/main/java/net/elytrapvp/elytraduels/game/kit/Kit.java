@@ -27,6 +27,7 @@ public abstract class Kit {
     private boolean hunger;
     private boolean naturalRegen;
     private boolean rangedDamage;
+    private boolean strongGapple;
     private boolean takeDamage;
     private boolean waterKills;
 
@@ -54,6 +55,7 @@ public abstract class Kit {
         hunger = false;
         naturalRegen = true;
         rangedDamage = false;
+        strongGapple = false;
         takeDamage = true;
         waterKills = false;
 
@@ -197,6 +199,14 @@ public abstract class Kit {
     }
 
     /**
+     * Get if the kit should have strong golden apples.
+     * @return Whether or not it has strong golden apples.
+     */
+    public boolean hasStrongGapple() {
+        return strongGapple;
+    }
+
+    /**
      * Get if players should take damage.
      * @return Whether players should take damage.
      */
@@ -291,6 +301,14 @@ public abstract class Kit {
      */
     public void setRodMultiplier(double rodMultiplier) {
         this.rodMultiplier = rodMultiplier;
+    }
+
+    /**
+     * Set it Golden Apples should be stronger.
+     * @param strongGapple Whether or not golden apples are stronger.
+     */
+    public void setStrongGapple(boolean strongGapple) {
+        this.strongGapple = strongGapple;
     }
 
     /**
