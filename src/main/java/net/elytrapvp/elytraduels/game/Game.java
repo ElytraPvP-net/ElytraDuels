@@ -11,6 +11,7 @@ import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.LocationUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -85,6 +86,38 @@ public class Game {
             }
             spawn++;
         }
+
+        broadcast("&8&m+-----------------------***-----------------------+");
+        for(Player player : getPlayers()) {
+            ChatUtils.chat(player, "");
+            ChatUtils.centeredChat(player, "&a&l" + kit.getName() + " Duel");
+            ChatUtils.chat(player, "");
+
+            if(getSpectators().contains(player)) {
+                continue;
+            }
+
+            ChatUtils.centeredChat(player, "&aOpponents:");
+
+            int i = 1;
+            for(Team team : teamManager.getTeams()) {
+                if(team.equals(getTeam(player))) {
+                    continue;
+                }
+
+                if(i == 6) {
+                    break;
+                }
+
+                for(Player opponent : team.getAlivePlayers()) {
+                    ChatUtils.centeredChat(player, opponent.getName());
+                    i++;
+                }
+            }
+            ChatUtils.chat(player, "");
+        }
+        broadcast("&8&m+-----------------------***-----------------------+");
+
         countdown();
     }
 
