@@ -85,6 +85,7 @@ public class DuelCMD extends AbstractCommand {
             return;
         }
 
+        ChatUtils.chat(p, "&a&l(&7!&a&l) &aDuel request sent.");
         new DuelRequest(p, t, k).open(t);
     }
 
