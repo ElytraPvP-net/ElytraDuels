@@ -66,6 +66,10 @@ public class GameScoreboard extends CustomScoreboard {
                         String line = "  &f" + opponent.getName() + "" + ChatUtils.getFormattedHealthPercent(opponent);
                         int spaces = 25 - line.length();
 
+                        if(spaces < 0) {
+                            spaces = 0;
+                        }
+
                         helper.setSlot(i, "  &f" + opponent.getName() + StringUtils.repeat(' ', spaces) + ChatUtils.getFormattedHealthPercent(opponent));
                         i++;
                     }
