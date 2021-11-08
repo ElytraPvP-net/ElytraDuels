@@ -41,7 +41,7 @@ public class PlayerInteractListener implements Listener {
         Game game = plugin.getGameManager().getGame(player);
 
         // Prevent using items during game countdown.
-        if(game != null && game.getGameState() == GameState.COUNTDOWN) {
+        if(game != null && game.getGameState() != GameState.RUNNING) {
             event.setCancelled(true);
 
             // Fixes visual glitch with throwables during countdown.
