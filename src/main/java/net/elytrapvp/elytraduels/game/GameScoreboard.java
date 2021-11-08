@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game;
 
+import net.dev.eazynick.api.NickManager;
 import net.elytrapvp.elytraduels.game.team.Team;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.scoreboard.CustomScoreboard;
@@ -63,14 +64,20 @@ public class GameScoreboard extends CustomScoreboard {
                     }
 
                     for(Player opponent : team.getAlivePlayers()) {
-                        String line = "  &f" + opponent.getName() + "" + ChatUtils.getFormattedHealthPercent(opponent);
+                        String opponentName = opponent.getName();
+                        NickManager nick = new NickManager(opponent);
+                        if(nick.getNickName() != null) {
+                            opponentName = nick.getNickName();
+                        }
+
+                        String line = "  &f" + opponentName + "" + ChatUtils.getFormattedHealthPercent(opponent);
                         int spaces = 25 - line.length();
 
                         if(spaces < 0) {
                             spaces = 0;
                         }
 
-                        helper.setSlot(i, "  &f" + opponent.getName() + StringUtils.repeat(' ', spaces) + ChatUtils.getFormattedHealthPercent(opponent));
+                        helper.setSlot(i, "  &f" + opponentName + StringUtils.repeat(' ', spaces) + ChatUtils.getFormattedHealthPercent(opponent));
                         i++;
                     }
                 }
@@ -92,8 +99,13 @@ public class GameScoreboard extends CustomScoreboard {
 
                 for(int i = 0; i < opponents.size(); i++) {
                     Player o = opponents.get(i);
+                    String opponentName = o.getName();
+                    NickManager nick = new NickManager(o);
+                    if(nick.getNickName() != null) {
+                        opponentName = nick.getNickName();
+                    }
 
-                    helper.setSlot(4 + (i * 2) + 1, "  &f" + o.getName());
+                    helper.setSlot(4 + (i * 2) + 1, "  &f" + opponentName);
 
                     if(game.getTeam(player).getDeadPlayers().contains(player)) {
                         helper.setSlot(4 + (i * 2), "  " + "&c0%" + " &7- " + ChatUtils.getFormattedPing(o));
