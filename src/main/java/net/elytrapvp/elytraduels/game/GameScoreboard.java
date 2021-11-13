@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.game;
 
-import net.dev.eazynick.api.NickManager;
 import net.elytrapvp.elytraduels.game.team.Team;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.scoreboard.CustomScoreboard;
@@ -65,10 +64,6 @@ public class GameScoreboard extends CustomScoreboard {
 
                     for(Player opponent : team.getAlivePlayers()) {
                         String opponentName = opponent.getName();
-                        NickManager nick = new NickManager(opponent);
-                        if(nick.getNickName() != null) {
-                            opponentName = nick.getNickName();
-                        }
 
                         String line = "  &f" + opponentName + "" + ChatUtils.getFormattedHealthPercent(opponent);
                         int spaces = 25 - line.length();
@@ -100,10 +95,6 @@ public class GameScoreboard extends CustomScoreboard {
                 for(int i = 0; i < opponents.size(); i++) {
                     Player o = opponents.get(i);
                     String opponentName = o.getName();
-                    NickManager nick = new NickManager(o);
-                    if(nick.getNickName() != null) {
-                        opponentName = nick.getNickName();
-                    }
 
                     helper.setSlot(4 + (i * 2) + 1, "  &f" + opponentName);
 

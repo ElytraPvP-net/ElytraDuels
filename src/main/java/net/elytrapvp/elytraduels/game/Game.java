@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.game;
 
-import net.dev.eazynick.api.NickManager;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.Timer;
 import net.elytrapvp.elytraduels.ElytraDuels;
@@ -12,7 +11,6 @@ import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.LocationUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
-import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -112,10 +110,6 @@ public class Game {
 
                 for(Player opponent : team.getAlivePlayers()) {
                     String opponentName = opponent.getName();
-                    NickManager nick = new NickManager(opponent);
-                    if(nick.getNickName() != null) {
-                        opponentName = nick.getNickName();
-                    }
 
                     ChatUtils.centeredChat(player, opponentName);
                     i++;
