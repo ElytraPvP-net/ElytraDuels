@@ -52,4 +52,8 @@ public class KitManager {
         return kits;
     }
 
+
+    public Set<Kit> getRankedKits() {
+        return kits;
+    }
 }

@@ -28,5 +28,7 @@ public class PlayerJoinListener implements Listener {
         event.setJoinMessage(ChatUtils.translate("&8[&a+&8] &a" + player.getName()));
 
         ItemUtils.giveLobbyItems(player);
+
+        plugin.getCustomPlayerManager().addPlayer(player);
     }
 }

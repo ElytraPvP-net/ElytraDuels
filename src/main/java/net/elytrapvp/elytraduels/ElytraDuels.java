@@ -1,6 +1,7 @@
 package net.elytrapvp.elytraduels;
 
 import net.elytrapvp.elytraduels.commands.AbstractCommand;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayerManager;
 import net.elytrapvp.elytraduels.game.GameManager;
 import net.elytrapvp.elytraduels.game.arena.ArenaManager;
 import net.elytrapvp.elytraduels.game.kit.KitManager;
@@ -15,9 +16,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ElytraDuels extends JavaPlugin {
     private ArenaManager arenaManager;
+    private CustomPlayerManager customPlayerManager;
     private GameManager gameManager;
     private KitManager kitManager;
-    private MySQL mySQL;
     private PartyManager partyManager;
     private QueueManager queueManager;
     private SettingsManager settingsManager;
@@ -31,7 +32,7 @@ public final class ElytraDuels extends JavaPlugin {
         arenaManager = new ArenaManager(this);
         gameManager = new GameManager(this);
         queueManager = new QueueManager(this);
-        mySQL = new MySQL(this);
+        customPlayerManager = new CustomPlayerManager(this);
 
         AbstractCommand.registerCommands(this);
 
@@ -49,13 +50,12 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerDropItemListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerItemConsumeListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerItemConsumeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerToggleFlightListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerToggleSneakListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new PrepareItemCraftListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileHitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
@@ -75,6 +75,10 @@ public final class ElytraDuels extends JavaPlugin {
         return arenaManager;
     }
 
+    public CustomPlayerManager getCustomPlayerManager() {
+        return customPlayerManager;
+    }
+
     public GameManager getGameManager() {
         return gameManager;
     }
@@ -83,13 +87,6 @@ public final class ElytraDuels extends JavaPlugin {
         return kitManager;
     }
 
-    /**
-     * Get the MySQL Database.
-     * @return MySQL Database.
-     */
-    public MySQL getMySQL() {
-        return mySQL;
-    }
 
     public PartyManager getPartyManager() {
         return partyManager;

@@ -36,5 +36,7 @@ public class PlayerQuitListener implements Listener {
             party.removePlayer(player);
             party.broadcast("&aParty &8» &f" + player.getName() + " &adisconnected.");
         }
+
+        plugin.getCustomPlayerManager().removePlayer(player);
     }
 }
