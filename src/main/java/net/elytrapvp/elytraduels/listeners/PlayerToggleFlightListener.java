@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.game.GameState;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
@@ -27,6 +28,10 @@ public class PlayerToggleFlightListener implements Listener {
         Game game = plugin.getGameManager().getGame(player);
 
         if(game == null) {
+            return;
+        }
+
+        if(game.getGameState() != GameState.RUNNING) {
             return;
         }
 

@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -50,7 +51,17 @@ public class PlayerToggleSneakListener implements Listener {
                 continue;
             }
 
-            Vector direction = entity.getLocation().toVector().subtract(player.getLocation().toVector()).normalize().setY(0.8);
+            double y = 0.8;
+
+            if(player.getLocation().getY() > entity.getLocation().getY()) {
+                y = -0.8;
+            }
+
+            //Vector direction = entity.getLocation().toVector().subtract(player.getLocation().toVector()).normalize().setY(0.8);
+            //Vector direction = entity.getLocation().toVector().subtract(player.getLocation().toVector()).normalize().multiply(0.5).setY(y);
+            Location location = player.getLocation();
+            location.setY(player.getLocation().getY() - 1.0);
+            Vector direction = entity.getLocation().toVector().subtract(location.toVector()).normalize().multiply(new Vector(1, 1.15, 1));
             entity.setVelocity(direction);
         }
 
