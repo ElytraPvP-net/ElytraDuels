@@ -52,11 +52,11 @@ public class CustomPlayer {
 
                     // Makes sure data exists before grabbing it.
                     if(results.next()) {
-                        wins.put(kit, results.getInt(2));
-                        losses.put(kit, results.getInt(3));
-                        winStreak.put(kit, results.getInt(4));
-                        bestWinStreak.put(kit, results.getInt(5));
-                        elo.put(kit, results.getInt(6));
+                        wins.put(kit, results.getInt(3));
+                        losses.put(kit, results.getInt(4));
+                        winStreak.put(kit, results.getInt(5));
+                        bestWinStreak.put(kit, results.getInt(6));
+                        elo.put(kit, results.getInt(7));
                     }
                     else {
                         // If it doesn't exist, create it.
