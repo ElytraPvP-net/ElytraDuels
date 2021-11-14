@@ -1,6 +1,7 @@
 package net.elytrapvp.elytraduels.game.kit;
 
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -13,19 +14,34 @@ import java.util.Map;
 public class NewKit {
     // Kit metadata
     private final String name;
+    private Material iconMaterial = Material.WOOD_SWORD;
 
     // Maps
     private final Map<Integer, ItemStack> items = new HashMap<>();
     private final List<PotionEffect> potionEffects = new ArrayList<>();
 
     // Settings
-    private GameMode gameMode;
+    private GameMode gameMode = GameMode.ADVENTURE;
     private double maxHealth = 20.0;
     private double rodMultiplier = 1.5;
     private double startingHealth = 20.0;
     private int startingHunger = 20;
     private float startingSaturation = 10;
     private int voidLevel = 51;
+    private boolean arrowPickup;
+    private boolean doDamage;
+    private boolean hunger;
+    private boolean naturalRegen;
+    private boolean rangedDamage;
+    private boolean strongGapple;
+    private boolean takeDamage;
+    private boolean waterKills;
+
+    // Abilities
+    private int doubleJumps = 0;
+    private int repulsors = 0;
+    private int tripleShots = 0;
+
 
     /**
      * Create a kit.
@@ -86,11 +102,27 @@ public class NewKit {
     }
 
     /**
+     * Get the number of double jumps the kit has.
+     * @return Number of double jumps.
+     */
+    public int getDoubleJumps() {
+        return doubleJumps;
+    }
+
+    /**
      * Get the kit's game mode.
      * @return Game mode of the kit.
      */
     public GameMode getGameMode() {
         return gameMode;
+    }
+
+    /**
+     * Get the material for the kit icon.
+     * @return
+     */
+    public Material getIconMaterial() {
+        return iconMaterial;
     }
 
     /**
@@ -115,6 +147,14 @@ public class NewKit {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Get the number of repulsors used in the kit.
+     * @return
+     */
+    public int getRepulsors() {
+        return repulsors;
     }
 
     /**
@@ -150,11 +190,107 @@ public class NewKit {
     }
 
     /**
+     * Get the number of triple shots the kit has.
+     * @return Number of triple shots.
+     */
+    public int getTripleShots() {
+        return tripleShots;
+    }
+
+    /**
      * Get the void level of the kit.
      * @return Void level of the kit.
      */
     public int getVoidLevel() {
         return voidLevel;
+    }
+
+    /**
+     * Get whether the kit has any abilities.
+     * @return Whether or not the kit has abilities.
+     */
+    public boolean hasAbilities() {
+        return doubleJumps > 0 || repulsors > 0 || tripleShots > 0;
+    }
+
+    /**
+     * Get whether the kit has arrow pickup enable.
+     * @return Wehther or not players can pick up arrows.
+     */
+    public boolean hasArrowPickup() {
+        return arrowPickup;
+    }
+
+    /**
+     * Check if players should do damage.
+     * @return If players should do damage.
+     */
+    public boolean hasDoDamage() {
+        return doDamage;
+    }
+
+    /**
+     * Get if the kit should have hunger.
+     * @return Whether or not the kit has hunger.
+     */
+    public boolean hasHunger() {
+        return hunger;
+    }
+
+    /**
+     * Get if the kit will have ranged ranged.
+     * @return Whether or not the kit as ranged damage.
+     */
+    public boolean hasRangedDamage() {
+        return rangedDamage;
+    }
+
+    /**
+     * Get if the kit should have strong golden apples.
+     * @return Whether or not it has strong golden apples.
+     */
+    public boolean hasStrongGapple() {
+        return strongGapple;
+    }
+
+    /**
+     * Get if players should take damage.
+     * @return Whether players should take damage.
+     */
+    public boolean hasTakeDamage() {
+        return takeDamage;
+    }
+
+    /**
+     * Get if the kit should have natural regen.
+     * @return Whether or not the kit has natural regen.
+     */
+    public boolean naturalRegen() {
+        return naturalRegen;
+    }
+
+    /**
+     * Set if players should be able to pickup arrows.
+     * @param arrowPickup Whether or not arrows can be picked up.
+     */
+    public void setArrowPickup(boolean arrowPickup) {
+        this.arrowPickup = arrowPickup;
+    }
+
+    /**
+     * Set whether or not players should do damage to others.
+     * @param doDamage If players should do damage.
+     */
+    public void setDoDamage(boolean doDamage) {
+        this.doDamage = doDamage;
+    }
+
+    /**
+     * Set the number of double jumps
+     * @param doubleJumps
+     */
+    public void setDoubleJumps(int doubleJumps) {
+        this.doubleJumps = doubleJumps;
     }
 
     /**
@@ -166,6 +302,14 @@ public class NewKit {
     }
 
     /**
+     * Set it the kit should have hunger.
+     * @param hunger Whether or not the kit has hunger.
+     */
+    public void setHunger(boolean hunger) {
+        this.hunger = hunger;
+    }
+
+    /**
      * Set the kit's maximum health.
      * @param maxHealth Maximum health of the kit.
      */
@@ -174,11 +318,27 @@ public class NewKit {
     }
 
     /**
+     * Set if the kit should have natural regen.
+     * @param naturalRegen Whether or not the kit has natural regen.
+     */
+    public void setNaturalRegen(boolean naturalRegen) {
+        this.naturalRegen = naturalRegen;
+    }
+
+    /**
      * Set the rod multiplier of the kit.
      * @param rodMultiplier The rod multiplier of the kit.
      */
     public void setRodMultiplier(double rodMultiplier) {
         this.rodMultiplier = rodMultiplier;
+    }
+
+    /**
+     * Set if the kit should have ranged damage.
+     * @param rangedDamage Whether or not the kit has ranged damage.
+     */
+    public void setRangedDamage(boolean rangedDamage) {
+        this.rangedDamage = rangedDamage;
     }
 
     /**
@@ -206,10 +366,43 @@ public class NewKit {
     }
 
     /**
+     * Set it Golden Apples should be stronger.
+     * @param strongGapple Whether or not golden apples are stronger.
+     */
+    public void setStrongGapple(boolean strongGapple) {
+        this.strongGapple = strongGapple;
+    }
+
+    /**
+     * Set if players should take damage.
+     * @param takeDamage Whether players should take damage.
+     */
+    public void setTakeDamage(boolean takeDamage) {
+        this.takeDamage = takeDamage;
+    }
+
+    /**
      * Set the void level of the kit.
      * @param voidLevel Void level of the kit.
      */
     public void setVoidLevel(int voidLevel) {
         this.voidLevel = voidLevel;
+    }
+
+    /**
+     * Set if water should kill players.
+     * @param waterKills Whether or not water kills players.
+     */
+    public void setWaterKills(boolean waterKills) {
+        this.waterKills = waterKills;
+    }
+
+    /**
+     * Get if the kit should kill the player
+     *  when they touch water.
+     * @return Wether or not water kills the player.
+     */
+    public boolean waterKills() {
+        return waterKills;
     }
 }
