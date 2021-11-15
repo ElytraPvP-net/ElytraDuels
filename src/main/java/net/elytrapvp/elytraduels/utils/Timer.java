@@ -57,6 +57,14 @@ public class Timer {
     }
 
     /**
+     * Convert the timer to seconds.
+     * @return Seconds.
+     */
+    public int toSeconds() {
+        return (60 * minutes) + seconds;
+    }
+
+    /**
      * Converts the timer into a String
      * @return String version of timer.
      */
