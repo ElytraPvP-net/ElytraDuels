@@ -208,7 +208,7 @@ public class Game {
 
             int welo = wp.getElo(kit.getName().toLowerCase());
             int lelo = lp.getElo(kit.getName().toLowerCase());
-            int[] newElo = EloUtils.eloRating(welo, lelo, 40, true);
+            int[] newElo = EloUtils.eloRating(welo, lelo, 32, true);
 
             broadcast("&8&m+-----------------------***-----------------------+");
             broadcast(" ");
