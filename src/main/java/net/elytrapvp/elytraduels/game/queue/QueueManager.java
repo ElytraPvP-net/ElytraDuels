@@ -22,12 +22,17 @@ public class QueueManager {
     private final Map<Player, Kit> unrankedQueue = new HashMap<>();
     private final Map<Player, Kit> rankedQueue = new HashMap<>();
     private final Map<Player, Timer> timers = new HashMap<>();
+    private final Map<Kit, Integer> playingKit = new HashMap<>();
 
     private int playing;
 
     public QueueManager(ElytraDuels plugin) {
         this.plugin = plugin;
         playing = 0;
+
+        for(Kit kit : plugin.getKitManager().getKits()) {
+            playingKit.put(kit, 0);
+        }
     }
 
     /**
@@ -77,6 +82,10 @@ public class QueueManager {
         this.playing += playing;
     }
 
+    public void addPlaying(Kit kit, int playing) {
+        this.playingKit.put(kit, this.playingKit.get(kit) + playing);
+    }
+
     /**
      * Get a player in a specific queue.
      * @param kit Kit of the queue.
@@ -101,6 +110,10 @@ public class QueueManager {
      */
     public int getPlaying() {
         return playing;
+    }
+
+    public int getPlaying(Kit kit) {
+        return playingKit.get(kit);
     }
 
     /**
@@ -161,5 +174,9 @@ public class QueueManager {
      */
     public void removePlaying(int playing) {
         this.playing -= playing;
+    }
+
+    public void removePlaying(Kit kit, int playing) {
+        this.playingKit.put(kit, this.playingKit.get(kit) - playing);
     }
 }

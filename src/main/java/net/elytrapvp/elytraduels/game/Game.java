@@ -1,5 +1,8 @@
 package net.elytrapvp.elytraduels.game;
 
+import net.elytrapvp.elytradb.ElytraDB;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
+import net.elytrapvp.elytraduels.utils.EloUtils;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.Timer;
 import net.elytrapvp.elytraduels.ElytraDuels;
@@ -21,6 +24,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -69,7 +74,7 @@ public class Game {
      */
     public void start() {
         players = getAlivePlayers().size();
-        kit.addPlaying(players);
+        plugin.getQueueManager().addPlaying(kit, players);
         plugin.getQueueManager().addPlaying(players);
 
         int spawn = 0;
@@ -111,7 +116,13 @@ public class Game {
                 for(Player opponent : team.getAlivePlayers()) {
                     String opponentName = opponent.getName();
 
-                    ChatUtils.centeredChat(player, opponentName);
+                    if(gameType == GameType.RANKED) {
+                        CustomPlayer o = plugin.getCustomPlayerManager().getPlayer(opponent);
+                        ChatUtils.centeredChat(player, opponentName + " &a(" + o.getElo(kit.getName().toLowerCase()) + ")");
+                    }
+                    else {
+                        ChatUtils.centeredChat(player, opponentName);
+                    }
                     i++;
                 }
             }
@@ -189,27 +200,71 @@ public class Game {
         gameState = GameState.END;
         timer.stop();
 
-        broadcast("&8&m+-----------------------***-----------------------+");
-        broadcast(" ");
-        broadcastCenter("&a&l" + kit.getName() + " Duel &7- &f&l" + timer.toString());
-        broadcast(" ");;
-        if(winner.getPlayers().size() > 1) {
-            broadcastCenter("&aWinners:");
+        if(gameType == GameType.RANKED) {
+            Player w = winner.getPlayers().get(0);
+            CustomPlayer wp = plugin.getCustomPlayerManager().getPlayer(w);
+            Player l = loser.getPlayers().get(0);
+            CustomPlayer lp = plugin.getCustomPlayerManager().getPlayer(l);
+
+            int welo = wp.getElo(kit.getName().toLowerCase());
+            int lelo = lp.getElo(kit.getName().toLowerCase());
+            int[] newElo = EloUtils.eloRating(welo, lelo, 40, true);
+
+            broadcast("&8&m+-----------------------***-----------------------+");
+            broadcast(" ");
+            broadcastCenter("&a&l" + kit.getName() + " Duel &7- &f&l" + timer.toString());
+            broadcast(" ");
+            broadcast("  &aWinner: &f" + w.getName() + " &a(+" + (newElo[0] - welo) + " | " + newElo[0] + ")");
+            broadcast("  &cLoser: &f" + l.getName() + " &c(" + (newElo[1] - lelo) + " | " + newElo[1] + ")");
+            broadcast(" ");
+            broadcast("&8&m+-----------------------***-----------------------+");
+
+            wp.setElo(kit.getName().toLowerCase(), newElo[0]);
+            wp.addWin(kit.getName().toLowerCase());
+            lp.setElo(kit.getName().toLowerCase(), newElo[1]);
+            lp.addLoss(kit.getName().toLowerCase());
+
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                try {
+                    PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("INSERT INTO duels_match_history (kit,map,winner,winnerElo,loser,loserElo,eloChange,length) VALUES (?,?,?,?,?,?,?,?)");
+                    statement.setString(1, kit.getName());
+                    statement.setString(2, arena.getMap().getName());
+                    statement.setString(3, w.getUniqueId().toString());
+                    statement.setInt(4, newElo[0]);
+                    statement.setString(5, l.getUniqueId().toString());
+                    statement.setInt(6, newElo[1]);
+                    statement.setInt(7, newElo[0] - welo);
+                    statement.setInt(8, timer.toSeconds());
+                    statement.executeUpdate();
+                }
+                catch (SQLException exception) {
+                    exception.printStackTrace();
+                }
+            });
         }
         else {
-            broadcastCenter("&aWinner:");
-        }
-
-        for(Player player : winner.getPlayers()) {
-            if(teamManager.getTeam(player).getDeadPlayers().contains(player)) {
-                broadcastCenter("&f" + player.getName() + " &a(&c0%&a)");
+            broadcast("&8&m+-----------------------***-----------------------+");
+            broadcast(" ");
+            broadcastCenter("&a&l" + kit.getName() + " Duel &7- &f&l" + timer.toString());
+            broadcast(" ");
+            if(winner.getPlayers().size() > 1) {
+                broadcastCenter("&aWinners:");
             }
             else {
-                broadcastCenter("&f" + player.getName() + " &a(" + ChatUtils.getFormattedHealthPercent(player) + "&a)");
+                broadcastCenter("&aWinner:");
             }
+
+            for(Player player : winner.getPlayers()) {
+                if(teamManager.getTeam(player).getDeadPlayers().contains(player)) {
+                    broadcastCenter("&f" + player.getName() + " &a(&c0%&a)");
+                }
+                else {
+                    broadcastCenter("&f" + player.getName() + " &a(" + ChatUtils.getFormattedHealthPercent(player) + "&a)");
+                }
+            }
+            broadcast(" ");
+            broadcast("&8&m+-----------------------***-----------------------+");
         }
-        broadcast(" ");
-        broadcast("&8&m+-----------------------***-----------------------+");
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             for(Player player : getPlayers()) {
@@ -240,7 +295,7 @@ public class Game {
                 team.getDeadPlayers().clear();
             }
 
-            kit.removePlaying(players);
+            plugin.getQueueManager().removePlaying(kit, players);
             plugin.getQueueManager().removePlaying(players);
 
             spectators.clear();

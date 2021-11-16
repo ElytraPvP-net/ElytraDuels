@@ -16,7 +16,7 @@ public class DuelGUI extends CustomGUI {
 
         int i = 0;
         for(Kit kit : plugin.getKitManager().getKits()) {
-            int playing = kit.getPlaying();
+            int playing = plugin.getQueueManager().getPlaying(kit);
             int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
 
             int count = playing + queue;
