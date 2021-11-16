@@ -3,93 +3,145 @@ package net.elytrapvp.elytraduels.game.kit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Stores all information about a kit.
  */
-public abstract class Kit {
+public class Kit {
+    // Kit metadata
     private final String name;
-    private int playing;
+    private Material iconMaterial = Material.WOOD_SWORD;
 
-    // Information about abilities.
-    private int doubleJumps;
-    private int repulsors;
-    private int tripleShots;
+    // Maps
+    private final Map<Integer, ItemStack> items = new HashMap<>();
+    private final List<PotionEffect> potionEffects = new ArrayList<>();
 
-    // integer settings.
-    private int voidLevel;
-    private double rodMultiplier;
+    // Settings
+    private GameMode gameMode = GameMode.ADVENTURE;
+    private double maxHealth = 20.0;
+    private double rodMultiplier = 1.5;
+    private double startingHealth = 20.0;
+    private int startingHunger = 20;
+    private float startingSaturation = 10;
+    private int voidLevel = 51;
+    private boolean arrowPickup = false;
+    private boolean doDamage = true;
+    private boolean hunger = false;
+    private boolean naturalRegen = true;
+    private boolean rangedDamage = false;
+    private boolean strongGapple = false;
+    private boolean takeDamage = true;
+    private boolean waterKills = false;
 
-    // boolean settings.
-    private boolean arrowPickup;
-    private boolean doDamage;
-    private boolean hasRanked;
-    private boolean hunger;
-    private boolean naturalRegen;
-    private boolean rangedDamage;
-    private boolean strongGapple;
-    private boolean takeDamage;
-    private boolean waterKills;
+    // Abilities
+    private int doubleJumps = 0;
+    private int repulsors = 0;
+    private int tripleShots = 0;
 
-    // misc
-    private GameMode gameMode;
 
     /**
-     * Creates a new kit.
+     * Create a kit.
      * @param name Name of the kit.
      */
     public Kit(String name) {
         this.name = name;
-        playing = 0;
-
-        doubleJumps = 0;
-        repulsors = 0;
-        tripleShots = 0;
-
-        voidLevel = 16;
-        rodMultiplier = 1.0;
-
-        arrowPickup = false;
-        doDamage = true;
-        hasRanked = false;
-        hunger = false;
-        naturalRegen = true;
-        rangedDamage = false;
-        strongGapple = false;
-        takeDamage = true;
-        waterKills = false;
-
-        gameMode = GameMode.ADVENTURE;
     }
 
     /**
-     * Apply the kit to a player.
-     * @param player Player to apply to.
+     * Add an item to the kit.
+     * @param slot Slot item is in.
+     * @param item Item to add.
      */
-    public abstract void apply(Player player);
-
-    /**
-     * Get the kit icon material.
-     * Used for GUIs.
-     * @return Icon Material.
-     */
-    public abstract Material getIconMaterial();
-
-    /**
-     * Add to the kit's playing counter.
-     * @param playing Amount to add.
-     */
-    public void addPlaying(int playing) {
-        this.playing += playing;
+    public void addItem(int slot, ItemStack item) {
+        items.put(slot, item);
     }
 
     /**
-     * Get the total number of double jumps
-     * that can be used in this kit.
-     * @return Amount of double jumps.
+     * Add a potion effect to the kit.
+     * @param effect Potion effect to add.
+     */
+    public void addPotionEffect(PotionEffect effect) {
+        potionEffects.add(effect);
+    }
+
+    /**
+     * Apply a kit to a player.
+     * @param player Player to apply kit to.
+     */
+    public void apply(Player player) {
+        // Clear inventory.
+        player.getInventory().clear();
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
+
+        // Clear potion effects.
+        player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
+
+        // Give items
+        for(int i : items.keySet()) {
+            player.getInventory().setItem(i, items.get(i));
+        }
+
+        // Set game mode/health/hunger/saturation.
+        player.setGameMode(gameMode);
+        player.setMaxHealth(maxHealth);
+        player.setHealth(startingHealth);
+        player.setFoodLevel(startingHunger);
+        player.setSaturation(startingSaturation);
+
+        // Apply potion effects to the kit.
+        for(PotionEffect effect : potionEffects) {
+            player.addPotionEffect(effect);
+        }
+    }
+
+    /**
+     * Get the number of double jumps the kit has.
+     * @return Number of double jumps.
      */
     public int getDoubleJumps() {
         return doubleJumps;
+    }
+
+    /**
+     * Get the kit's game mode.
+     * @return Game mode of the kit.
+     */
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    /**
+     * Get the material for the kit icon.
+     * @return
+     */
+    public Material getIconMaterial() {
+        return iconMaterial;
+    }
+
+    /**
+     * Get the items in the kit.
+     * @return Items in the kit.
+     */
+    public Map<Integer, ItemStack> getItems() {
+        return items;
+    }
+
+    /**
+     * Get the max health.
+     * @return Max health.
+     */
+    public double getMaxHealth() {
+        return maxHealth;
     }
 
     /**
@@ -101,50 +153,56 @@ public abstract class Kit {
     }
 
     /**
-     * Get if the kit should have natural regen.
-     * @return Whether or not the kit has natural regen.
-     */
-    public boolean naturalRegen() {
-        return naturalRegen;
-    }
-
-    /**
-     * Get the number of people currently using this kit.
-     * @return Number of people using this kit.
-     */
-    public int getPlaying() {
-       return playing;
-    }
-
-    /**
-     * Get the total number of repulsors
-     * that can be used in this kit.
-     * @return Amount of repulsors.
+     * Get the number of repulsors used in the kit.
+     * @return
      */
     public int getRepulsors() {
         return repulsors;
     }
 
     /**
-     * Get the kit's rod multiplier.
-     * @return Rod multiplier.
+     * Get the rod multiplier of the kit.
+     * @return Rod multiplier of the kit.
      */
     public double getRodMultiplier() {
         return rodMultiplier;
     }
 
     /**
-     * Get the total number of triple shots
-     * that can be used in this kit.
-     * @return Amount of triple shots.
+     * Get the starting health.
+     * @return Starting health.
+     */
+    public double getStartingHealth() {
+        return startingHealth;
+    }
+
+    /**
+     * Get the starting hunger.
+     * @return Starting hunger.
+     */
+    public int getStartingHunger() {
+        return startingHunger;
+    }
+
+    /**
+     * Get the starting saturation.
+     * @return Starting saturation.
+     */
+    public float getStartingSaturation() {
+        return startingSaturation;
+    }
+
+    /**
+     * Get the number of triple shots the kit has.
+     * @return Number of triple shots.
      */
     public int getTripleShots() {
         return tripleShots;
     }
 
     /**
-     * Get the Y coordinate value that should kill a player.
-     * @return Void level.
+     * Get the void level of the kit.
+     * @return Void level of the kit.
      */
     public int getVoidLevel() {
         return voidLevel;
@@ -183,14 +241,6 @@ public abstract class Kit {
     }
 
     /**
-     * Get if the kit will be available ranked.
-     * @return Whether or not the kit will have ranked.
-     */
-    public boolean hasRanked() {
-        return hasRanked;
-    }
-
-    /**
      * Get if the kit will have ranged ranged.
      * @return Whether or not the kit as ranged damage.
      */
@@ -215,20 +265,11 @@ public abstract class Kit {
     }
 
     /**
-     * Get if the kit should kill the player
-     *  when they touch water.
-     * @return Wether or not water kills the player.
+     * Get if the kit should have natural regen.
+     * @return Whether or not the kit has natural regen.
      */
-    public boolean waterKills() {
-        return waterKills;
-    }
-
-    /**
-     * Remove players from the kit playing count.
-     * @param playing Number to remove from playing.
-     */
-    public void removePlaying(int playing) {
-        this.playing -= playing;
+    public boolean naturalRegen() {
+        return naturalRegen;
     }
 
     /**
@@ -248,19 +289,19 @@ public abstract class Kit {
     }
 
     /**
-     * Set the amount of double jumps the kit has.
-     * @param doubleJumps Amount of double jumps.
+     * Set the number of double jumps
+     * @param doubleJumps
      */
     public void setDoubleJumps(int doubleJumps) {
         this.doubleJumps = doubleJumps;
     }
 
     /**
-     * Sets if the kit will be available in ranked play.
-     * @param hasRanked Whether or not a ranked variant exists.
+     * Set the kit's game mode.
+     * @param gameMode Game mode of the kit.
      */
-    public void setHasRanked(boolean hasRanked) {
-        this.hasRanked = hasRanked;
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 
     /**
@@ -272,11 +313,35 @@ public abstract class Kit {
     }
 
     /**
+     * Set the icon material of the kit.
+     * @param iconMaterial Icon material
+     */
+    public void setIconMaterial(Material iconMaterial) {
+        this.iconMaterial = iconMaterial;
+    }
+
+    /**
+     * Set the kit's maximum health.
+     * @param maxHealth Maximum health of the kit.
+     */
+    public void setMaxHealth(double maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    /**
      * Set if the kit should have natural regen.
      * @param naturalRegen Whether or not the kit has natural regen.
      */
     public void setNaturalRegen(boolean naturalRegen) {
         this.naturalRegen = naturalRegen;
+    }
+
+    /**
+     * Set the rod multiplier of the kit.
+     * @param rodMultiplier The rod multiplier of the kit.
+     */
+    public void setRodMultiplier(double rodMultiplier) {
+        this.rodMultiplier = rodMultiplier;
     }
 
     /**
@@ -288,19 +353,35 @@ public abstract class Kit {
     }
 
     /**
-     * Set the amount of repulsors the kit has.
-     * @param repulsors Amount of repulsors.
+     * Set the number of repulsors
+     * @param repulsors
      */
     public void setRepulsors(int repulsors) {
         this.repulsors = repulsors;
     }
 
     /**
-     * Get the rod multiplier of the kit.
-     * @param rodMultiplier New rod multiplier.
+     * Set the kit's starting health.
+     * @param startingHealth The starting health of the kit.
      */
-    public void setRodMultiplier(double rodMultiplier) {
-        this.rodMultiplier = rodMultiplier;
+    public void setStartingHealth(double startingHealth) {
+        this.startingHealth = startingHealth;
+    }
+
+    /**
+     * Set the kit's starting hunger.
+     * @param startingHunger Starting hunger of the kit.
+     */
+    public void setStartingHunger(int startingHunger) {
+        this.startingHunger = startingHunger;
+    }
+
+    /**
+     * Set the kit's starting saturation.
+     * @param startingSaturation Set the starting saturation of the kit.
+     */
+    public void setStartingSaturation(float startingSaturation) {
+        this.startingSaturation = startingSaturation;
     }
 
     /**
@@ -320,8 +401,8 @@ public abstract class Kit {
     }
 
     /**
-     * Set the amount of triple shots the kits should have.
-     * @param tripleShots Amount of triple shots.
+     * Set the number of triple shots
+     * @param tripleShots
      */
     public void setTripleShots(int tripleShots) {
         this.tripleShots = tripleShots;
@@ -329,7 +410,7 @@ public abstract class Kit {
 
     /**
      * Set the void level of the kit.
-     * @param voidLevel void level.
+     * @param voidLevel Void level of the kit.
      */
     public void setVoidLevel(int voidLevel) {
         this.voidLevel = voidLevel;
@@ -341,5 +422,14 @@ public abstract class Kit {
      */
     public void setWaterKills(boolean waterKills) {
         this.waterKills = waterKills;
+    }
+
+    /**
+     * Get if the kit should kill the player
+     *  when they touch water.
+     * @return Wether or not water kills the player.
+     */
+    public boolean waterKills() {
+        return waterKills;
     }
 }

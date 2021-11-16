@@ -10,23 +10,50 @@ import java.util.Set;
  */
 public class KitManager {
     private final Set<Kit> kits = new LinkedHashSet<>();
+    private final Set<Kit> rankedKits = new LinkedHashSet<>();
 
     public KitManager() {
-        kits.add(new ArcherKit());
-        kits.add(new BowKit());
-        kits.add(new UHCKit());
-        kits.add(new IronKit());
-        kits.add(new DiamondKit());
-        kits.add(new BowSpleefKit());
-        kits.add(new ClassicKit());
-        kits.add(new NoDebuffKit());
-        kits.add(new OPKit());
-        kits.add(new StratusKit());
-        kits.add(new BuildUHCKit());
-        kits.add(new CactusKit());
-        kits.add(new SGKit());
-        kits.add(new FinalUHCKit());
-        kits.add(new SumoKit());
+        Kit archer = new ArcherKit();
+        Kit bow = new BowKit();
+        Kit uhc = new UHCKit();
+        Kit iron = new IronKit();
+        Kit diamond = new DiamondKit();
+        Kit bowSpleef = new BowSpleefKit();
+        Kit classic = new ClassicKit();
+        Kit noDebuff = new NoDebuffKit();
+        Kit op = new OPKit();
+        Kit stratus = new StratusKit();
+        Kit buildUHC = new BuildUHCKit();
+        Kit cactus = new CactusKit();
+        Kit sg = new SGKit();
+        Kit finalUHC = new FinalUHCKit();
+        Kit sumo = new SumoKit();
+
+        kits.add(archer);
+        kits.add(bow);
+        kits.add(uhc);
+        kits.add(iron);
+        kits.add(diamond);
+        kits.add(bowSpleef);
+        kits.add(classic);
+        kits.add(noDebuff);
+        kits.add(op);
+        kits.add(stratus);
+        kits.add(buildUHC);
+        kits.add(cactus);
+        kits.add(sg);
+        kits.add(finalUHC);
+        kits.add(sumo);
+
+        rankedKits.add(uhc);
+        rankedKits.add(bowSpleef);
+        rankedKits.add(noDebuff);
+        rankedKits.add(op);
+        rankedKits.add(stratus);
+        rankedKits.add(buildUHC);
+        rankedKits.add(cactus);
+        rankedKits.add(sg);
+        rankedKits.add(sumo);
     }
 
     /**
@@ -54,6 +81,6 @@ public class KitManager {
 
 
     public Set<Kit> getRankedKits() {
-        return kits;
+        return rankedKits;
     }
 }

@@ -13,11 +13,7 @@ public class NoDebuffKit extends Kit {
 
     public NoDebuffKit() {
         super("No Debuff");
-    }
-
-    public void apply(Player p) {
-        p.getInventory().clear();
-        p.setHealth(20);
+        setIconMaterial(Material.POTION);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
@@ -55,27 +51,22 @@ public class NoDebuffKit extends Kit {
         healingPot.setLevel(2);
         ItemStack healing = healingPot.toItemStack(1);
 
-        p.getInventory().setHelmet(helmet);
-        p.getInventory().setChestplate(chestplate);
-        p.getInventory().setLeggings(leggings);
-        p.getInventory().setBoots(boots);
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-        p.getInventory().setItem(0, sword);
-        p.getInventory().setItem(1, pearls);
-        p.getInventory().setItem(2, speed);
-        p.getInventory().setItem(3, fireRes);
-        p.getInventory().setItem(17, speed);
-        p.getInventory().setItem(26, speed);
-        p.getInventory().setItem(35, speed);
+        addItem(0, sword);
+        addItem(1, pearls);
+        addItem(2, speed);
+        addItem(3, fireRes);
+        addItem(17, speed);
+        addItem(26, speed);
+        addItem(35, speed);
 
-        for(int i = 0; i < p.getInventory().getContents().length; i++) {
-            if(p.getInventory().getItem(i) == null) {
-                p.getInventory().setItem(i, healing);
-            }
+        int[] healingSlots = {4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35};
+        for(int i : healingSlots) {
+            addItem(i, healing);
         }
-    }
-
-    public Material getIconMaterial() {
-        return Material.POTION;
     }
 }

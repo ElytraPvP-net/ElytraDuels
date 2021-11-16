@@ -16,12 +16,9 @@ public class OPKit extends Kit {
         super("OP");
         setRodMultiplier(1.5);
         setStrongGapple(true);
-    }
+        setIconMaterial(Material.DIAMOND_CHESTPLATE);
 
-    public void apply(Player p) {
-        p.getInventory().clear();
-        p.setHealth(20);
-        p.setGameMode(GameMode.SURVIVAL);
+        setGameMode(GameMode.SURVIVAL);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
@@ -39,11 +36,6 @@ public class OPKit extends Kit {
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
                 .setUnbreakable(true)
                 .build();
-
-        p.getInventory().setHelmet(helmet);
-        p.getInventory().setChestplate(chestplate);
-        p.getInventory().setLeggings(leggings);
-        p.getInventory().setBoots(boots);
 
         ItemStack sword = new ItemBuilder(Material.DIAMOND_SWORD)
                 .addEnchantment(Enchantment.DAMAGE_ALL, 5)
@@ -73,19 +65,20 @@ public class OPKit extends Kit {
         ItemStack fns = new ItemStack(Material.FLINT_AND_STEEL);
         fns.setDurability((short) 60);
 
-        p.getInventory().setItem(0, sword);
-        p.getInventory().setItem(1, rod);
-        p.getInventory().setItem(2, bow);
-        p.getInventory().setItem(3, fns);
-        p.getInventory().setItem(4, goldenApples);
-        p.getInventory().setItem(5, speed);
-        p.getInventory().setItem(6, regen);
-        p.getInventory().setItem(8, arrows);
-        p.getInventory().setItem(9, speed);
-        p.getInventory().setItem(10, regen);
-    }
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-    public Material getIconMaterial() {
-        return Material.DIAMOND_CHESTPLATE;
+        addItem(0, sword);
+        addItem(1, rod);
+        addItem(2, bow);
+        addItem(3, fns);
+        addItem(4, goldenApples);
+        addItem(5, speed);
+        addItem(6, regen);
+        addItem(8, arrows);
+        addItem(9, speed);
+        addItem(10, regen);
     }
 }

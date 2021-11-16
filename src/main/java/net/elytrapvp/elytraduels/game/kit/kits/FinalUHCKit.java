@@ -13,14 +13,8 @@ public class FinalUHCKit extends Kit {
 
     public FinalUHCKit() {
         super("Final UHC");
+        setIconMaterial(Material.DIAMOND_HELMET);
         setNaturalRegen(false);
-    }
-
-    @Override
-    public void apply(Player player) {
-        player.getInventory().clear();
-        player.setHealth(20);
-        player.setGameMode(GameMode.SURVIVAL);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
@@ -62,11 +56,6 @@ public class FinalUHCKit extends Kit {
                 .build();
         spareBoots.setDurability((short) 143);
 
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
-
         ItemStack sword = new ItemBuilder(Material.DIAMOND_SWORD)
                 .addEnchantment(Enchantment.DAMAGE_ALL, 4)
                 .setUnbreakable(true).build();
@@ -100,34 +89,32 @@ public class FinalUHCKit extends Kit {
 
         ItemStack steak = new ItemBuilder(Material.COOKED_BEEF, 64).build();
 
-        player.getInventory().setItem(0, sword);
-        player.getInventory().setItem(1, fishingRod);
-        player.getInventory().setItem(2, lava);
-        player.getInventory().setItem(3, pickaxe);
-        player.getInventory().setItem(4, cobblestone);
-        player.getInventory().setItem(5, gapple);
-        player.getInventory().setItem(6, ghead);
-        player.getInventory().setItem(7, fns);
-        player.getInventory().setItem(8, water);
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-        player.getInventory().setItem(9, spareHelmet);
-        player.getInventory().setItem(10, spareChestplate);
-        player.getInventory().setItem(11, spareLeggings);
-        player.getInventory().setItem(12, spareBoots);
-        player.getInventory().setItem(13, planks);
-        player.getInventory().setItem(20, lava);
-        player.getInventory().setItem(22, planks);
-        player.getInventory().setItem(26, water);
-        player.getInventory().setItem(29, lava);
-        player.getInventory().setItem(30, axe);
-        player.getInventory().setItem(31, cobblestone);
-        player.getInventory().setItem(33, steak);
-        player.getInventory().setItem(35, water);
+        addItem(0, sword);
+        addItem(1, fishingRod);
+        addItem(2, lava);
+        addItem(3, pickaxe);
+        addItem(4, cobblestone);
+        addItem(5, gapple);
+        addItem(6, ghead);
+        addItem(7, fns);
+        addItem(8, water);
+        addItem(9, spareHelmet);
+        addItem(10, spareChestplate);
+        addItem(11, spareLeggings);
+        addItem(12, spareBoots);
+        addItem(13, planks);
+        addItem(20, lava);
+        addItem(22, planks);
+        addItem(26, water);
+        addItem(29, lava);
+        addItem(30, axe);
+        addItem(31, cobblestone);
+        addItem(33, steak);
+        addItem(35, water);
     }
-
-    @Override
-    public Material getIconMaterial() {
-        return Material.DIAMOND_HELMET;
-    }
-
 }

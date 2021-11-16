@@ -22,7 +22,7 @@ public class KitGUI extends CustomGUI {
 
             ItemStack item = new ItemBuilder(kit.getIconMaterial(), 1)
                     .setDisplayName("&a" + kit.getName())
-                    .addLore("&7Playing: " + kit.getPlaying())
+                    .addLore("&7Playing: " + plugin.getQueueManager().getPlaying(kit))
                     .addLore("&7Queuing: " + plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED))
                     .build();
 

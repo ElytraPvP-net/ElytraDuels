@@ -9,15 +9,9 @@ public class SumoKit extends Kit {
     public SumoKit() {
         super("Sumo");
 
+        setIconMaterial(Material.SLIME_BALL);
+
         setDoDamage(false);
         setWaterKills(true);
-    }
-
-    public void apply(Player p) {
-        p.getInventory().clear();
-    }
-
-    public Material getIconMaterial() {
-        return Material.SLIME_BALL;
     }
 }

@@ -12,30 +12,19 @@ import org.bukkit.potion.PotionEffectType;
 public class CactusKit extends Kit {
     public CactusKit() {
         super("Cactus");
+        setIconMaterial(Material.CACTUS);
+        setGameMode(GameMode.SURVIVAL);
+        setMaxHealth(1);
+
+        addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200000, 100, true));
 
         setNaturalRegen(false);
         setVoidLevel(50);
-    }
-
-
-    @Override
-    public void apply(Player player) {
-        player.setGameMode(GameMode.SURVIVAL);
-
-        player.setHealth(1);
-        player.getInventory().clear();
 
         ItemStack cactus = new ItemBuilder(Material.CACTUS, 16).build();
         ItemStack egg = new ItemStack(Material.EGG);
 
-        player.getInventory().setItem(0, cactus);
-        player.getInventory().setItem(1, egg);
-
-        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200000, 100, true));
-    }
-
-    @Override
-    public Material getIconMaterial() {
-        return Material.CACTUS;
+        addItem(0, cactus);
+        addItem(1, egg);
     }
 }

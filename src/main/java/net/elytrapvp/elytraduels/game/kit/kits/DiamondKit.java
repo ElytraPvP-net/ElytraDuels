@@ -11,16 +11,10 @@ public class DiamondKit extends Kit {
 
     public DiamondKit() {
         super("Diamond");
+        setIconMaterial(Material.DIAMOND_SWORD);
 
         setArrowPickup(true);
         setHunger(true);
-    }
-
-    public void apply(Player p) {
-        p.getInventory().clear();
-        p.setHealth(20);
-        p.setFoodLevel(20);
-        p.setSaturation(10);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)
@@ -39,11 +33,6 @@ public class DiamondKit extends Kit {
                 .setUnbreakable(true)
                 .build();
 
-        p.getInventory().setHelmet(helmet);
-        p.getInventory().setChestplate(chestplate);
-        p.getInventory().setLeggings(leggings);
-        p.getInventory().setBoots(boots);
-
         ItemStack sword = new ItemBuilder(Material.DIAMOND_SWORD)
                 .setUnbreakable(true)
                 .build();
@@ -55,13 +44,14 @@ public class DiamondKit extends Kit {
 
         ItemStack steak = new ItemBuilder(Material.COOKED_BEEF, 64).build();
 
-        p.getInventory().setItem(0, sword);
-        p.getInventory().setItem(1, bow);
-        p.getInventory().setItem(8, steak);
-        p.getInventory().setItem(7, arrows);
-    }
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-    public Material getIconMaterial() {
-        return Material.DIAMOND_SWORD;
+        addItem(0, sword);
+        addItem(1, bow);
+        addItem(8, steak);
+        addItem(7, arrows);
     }
 }

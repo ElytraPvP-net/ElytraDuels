@@ -13,15 +13,9 @@ public class ArcherKit extends Kit {
 
     public ArcherKit() {
         super("Archer");
-
+        setIconMaterial(Material.ARROW);
         setRangedDamage(true);
         setNaturalRegen(false);
-    }
-
-    @Override
-    public void apply(Player player) {
-        player.getInventory().clear();
-        player.setHealth(20);
 
         ItemStack helmet = new ItemBuilder(Material.LEATHER_HELMET)
                 .setUnbreakable(true)
@@ -36,11 +30,6 @@ public class ArcherKit extends Kit {
                 .setUnbreakable(true)
                 .build();
 
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
-
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .addEnchantment(Enchantment.ARROW_INFINITE, 1)
                 .addEnchantment(Enchantment.ARROW_KNOCKBACK, 2)
@@ -50,17 +39,16 @@ public class ArcherKit extends Kit {
 
         ItemStack pearl = new ItemBuilder(Material.ENDER_PEARL).build();
 
-        player.getInventory().setItem(0, bow);
-        player.getInventory().setItem(1, pearl);
-        player.getInventory().setItem(35, arrows);
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-        PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 999999, 0);
-        player.addPotionEffect(effect);
-    }
+        addItem(0, bow);
+        addItem(1, pearl);
+        addItem(35, arrows);
 
-    @Override
-    public Material getIconMaterial() {
-        return Material.ARROW;
+        addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999, 0));
     }
 
 }

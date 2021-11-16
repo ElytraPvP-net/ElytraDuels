@@ -12,6 +12,8 @@ public class BowSpleefKit extends Kit {
 
     public BowSpleefKit() {
         super("Bow Spleef");
+        setIconMaterial(Material.TNT);
+        setGameMode(GameMode.ADVENTURE);
 
         setArrowPickup(true);
         setTakeDamage(false);
@@ -20,26 +22,15 @@ public class BowSpleefKit extends Kit {
         setDoubleJumps(10);
         setRepulsors(10);
         setTripleShots(10);
-    }
 
-    @Override
-    public void apply(Player p) {
-        p.getInventory().clear();
-        p.setHealth(20);
-        p.setGameMode(GameMode.ADVENTURE);
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .addEnchantment(Enchantment.ARROW_FIRE, 1)
                 .addEnchantment(Enchantment.ARROW_INFINITE, 1)
                 .setUnbreakable(true)
                 .build();
-        p.getInventory().setItem(0, bow);
+        addItem(0, bow);
 
         ItemStack arrows = new ItemBuilder(Material.ARROW, 1).build();
-        p.getInventory().setItem(35, arrows);
-    }
-
-    @Override
-    public Material getIconMaterial() {
-        return Material.TNT;
+        addItem(35, arrows);
     }
 }

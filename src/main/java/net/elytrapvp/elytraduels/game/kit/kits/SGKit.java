@@ -12,15 +12,11 @@ public class SGKit extends Kit {
 
     public SGKit() {
         super("SG");
+        setIconMaterial(Material.FLINT_AND_STEEL);
+        setGameMode(GameMode.SURVIVAL);
         setHunger(true);
-    }
 
-    public void apply(Player p) {
-        p.getInventory().clear();
-        p.setHealth(20);
-        p.setFoodLevel(20);
-        p.setSaturation(10);
-        p.setGameMode(GameMode.SURVIVAL);
+        setStartingSaturation(10);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .setUnbreakable(true)
@@ -34,11 +30,6 @@ public class SGKit extends Kit {
         ItemStack boots = new ItemBuilder(Material.IRON_BOOTS)
                 .setUnbreakable(true)
                 .build();
-
-        p.getInventory().setHelmet(helmet);
-        p.getInventory().setChestplate(chestplate);
-        p.getInventory().setLeggings(leggings);
-        p.getInventory().setBoots(boots);
 
         ItemStack sword = new ItemBuilder(Material.STONE_SWORD)
                 .addEnchantment(Enchantment.DAMAGE_ALL, 1)
@@ -60,17 +51,18 @@ public class SGKit extends Kit {
 
         ItemStack cobwebs = new ItemBuilder(Material.WEB, 1).build();
 
-        p.getInventory().setItem(0, sword);
-        p.getInventory().setItem(1, rod);
-        p.getInventory().setItem(2, bow);
-        p.getInventory().setItem(4, arrows);
-        p.getInventory().setItem(5, gapple);
-        p.getInventory().setItem(6, steak);
-        p.getInventory().setItem(7, fns);
-        p.getInventory().setItem(8, cobwebs);
-    }
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-    public Material getIconMaterial() {
-        return Material.FLINT_AND_STEEL;
+        addItem(0, sword);
+        addItem(1, rod);
+        addItem(2, bow);
+        addItem(4, arrows);
+        addItem(5, gapple);
+        addItem(6, steak);
+        addItem(7, fns);
+        addItem(8, cobwebs);
     }
 }

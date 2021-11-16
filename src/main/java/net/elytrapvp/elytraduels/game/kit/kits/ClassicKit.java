@@ -11,11 +11,7 @@ public class ClassicKit extends Kit {
 
     public ClassicKit() {
         super("Classic");
-    }
-
-    public void apply(Player p) {
-        p.getInventory().clear();
-        p.setHealth(20);
+        setIconMaterial(Material.FISHING_ROD);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
@@ -43,18 +39,14 @@ public class ClassicKit extends Kit {
                 .build();
         ItemStack arrows = new ItemBuilder(Material.ARROW, 4).build();
 
-        p.getInventory().setHelmet(helmet);
-        p.getInventory().setChestplate(chestplate);
-        p.getInventory().setLeggings(leggings);
-        p.getInventory().setBoots(boots);
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-        p.getInventory().setItem(0, sword);
-        p.getInventory().setItem(1, fishingRod);
-        p.getInventory().setItem(2, bow);
-        p.getInventory().setItem(8, arrows);
-    }
-
-    public Material getIconMaterial() {
-        return Material.FISHING_ROD;
+        addItem(0, sword);
+        addItem(1, fishingRod);
+        addItem(2, bow);
+        addItem(8, arrows);
     }
 }

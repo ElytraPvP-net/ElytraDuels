@@ -13,15 +13,10 @@ public class BuildUHCKit extends Kit {
 
     public BuildUHCKit() {
         super("Build UHC");
+        setGameMode(GameMode.SURVIVAL);
+        setIconMaterial(Material.LAVA_BUCKET);
         setNaturalRegen(false);
         setStrongGapple(true);
-    }
-
-    @Override
-    public void apply(Player player) {
-        player.getInventory().clear();
-        player.setHealth(20);
-        player.setGameMode(GameMode.SURVIVAL);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
@@ -39,11 +34,6 @@ public class BuildUHCKit extends Kit {
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
                 .setUnbreakable(true)
                 .build();
-
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
 
         ItemStack sword = new ItemBuilder(Material.DIAMOND_SWORD)
                 .addEnchantment(Enchantment.DAMAGE_ALL, 3)
@@ -68,24 +58,23 @@ public class BuildUHCKit extends Kit {
 
         ItemStack arrows = new ItemBuilder(Material.ARROW, 24).build();
 
-        player.getInventory().setItem(0, sword);
-        player.getInventory().setItem(1, fishingRod);
-        player.getInventory().setItem(2, bow);
-        player.getInventory().setItem(3, axe);
-        player.getInventory().setItem(4, gapple);
-        player.getInventory().setItem(5, ghead);
-        player.getInventory().setItem(6, lava);
-        player.getInventory().setItem(7, water);
-        player.getInventory().setItem(8, blocks);
-        player.getInventory().setItem(35, arrows);
-        player.getInventory().setItem(34, lava);
-        player.getInventory().setItem(33, water);
-        player.getInventory().setItem(32, blocks);
-    }
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
-    @Override
-    public Material getIconMaterial() {
-        return Material.LAVA_BUCKET;
+        addItem(0, sword);
+        addItem(1, fishingRod);
+        addItem(2, bow);
+        addItem(3, axe);
+        addItem(4, gapple);
+        addItem(5, ghead);
+        addItem(6, lava);
+        addItem(7, water);
+        addItem(8, blocks);
+        addItem(35, arrows);
+        addItem(34, lava);
+        addItem(33, water);
+        addItem(32, blocks);
     }
-
 }

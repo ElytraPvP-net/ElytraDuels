@@ -14,13 +14,8 @@ public class StratusKit extends Kit {
 
     public StratusKit() {
         super("Stratus");
-    }
-
-    @Override
-    public void apply(Player player) {
-        player.getInventory().clear();
-        player.setHealth(20);
-        player.setGameMode(GameMode.SURVIVAL);
+        setIconMaterial(Material.STONE_SWORD);
+        setGameMode(GameMode.SURVIVAL);
 
         ItemStack helmet = new ItemBuilder(Material.CHAINMAIL_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)
@@ -40,11 +35,6 @@ public class StratusKit extends Kit {
                 .setUnbreakable(true)
                 .build();
 
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
-
         ItemStack sword = new ItemBuilder(Material.STONE_SWORD).setUnbreakable(true).build();
         ItemStack bow = new ItemBuilder(Material.BOW).setUnbreakable(true).build();
         ItemStack axe = new ItemBuilder(Material.IRON_AXE).setUnbreakable(true).build();
@@ -52,23 +42,20 @@ public class StratusKit extends Kit {
         ItemStack blocks2 = new ItemBuilder(Material.GLASS, 32).build();
         ItemStack gapple = new ItemBuilder(Material.GOLDEN_APPLE, 1).build();
         ItemStack carrot = new ItemBuilder(Material.GOLDEN_CARROT, 16).build();
-
         ItemStack arrows = new ItemBuilder(Material.ARROW, 12).build();
 
-        player.getInventory().setItem(0, sword);
-        player.getInventory().setItem(1, bow);
-        player.getInventory().setItem(2, axe);
-        player.getInventory().setItem(3, blocks1);
-        player.getInventory().setItem(4, blocks2);
-        player.getInventory().setItem(7, gapple);
-        player.getInventory().setItem(8, carrot);
-        player.getInventory().setItem(35, arrows);
+        addItem(39, helmet);
+        addItem(38, chestplate);
+        addItem(37, leggings);
+        addItem(36, boots);
 
+        addItem(0, sword);
+        addItem(1, bow);
+        addItem(2, axe);
+        addItem(3, blocks1);
+        addItem(4, blocks2);
+        addItem(7, gapple);
+        addItem(8, carrot);
+        addItem(35, arrows);
     }
-
-    @Override
-    public Material getIconMaterial() {
-        return Material.STONE_SWORD;
-    }
-
 }
