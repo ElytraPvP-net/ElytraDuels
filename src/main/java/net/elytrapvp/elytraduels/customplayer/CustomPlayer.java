@@ -104,7 +104,7 @@ public class CustomPlayer {
         setWins(kit, getWins(kit) + 1);
         setWins("global", getWins("global") + 1);
 
-        setWinStreak(kit, getWinStreak("kit") + 1);
+        setWinStreak(kit, getWinStreak(kit) + 1);
         setWinStreak("global", getWinStreak("global") + 1);
 
     }
