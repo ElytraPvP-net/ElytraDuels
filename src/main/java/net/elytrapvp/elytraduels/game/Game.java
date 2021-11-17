@@ -272,6 +272,7 @@ public class Game {
                 player.getInventory().setArmorContents(null);
                 player.setAllowFlight(false);
                 player.setFlying(false);
+                player.setMaxHealth(20.0);
                 player.setHealth(20.0);
                 player.teleport(LocationUtils.getSpawn(plugin));
                 player.spigot().setCollidesWithEntities(true);
@@ -377,6 +378,7 @@ public class Game {
         player.getInventory().setArmorContents(null);
         player.setAllowFlight(true);
         player.setFlying(true);
+        player.setMaxHealth(20.0);
         player.setHealth(20.0);
         player.setFoodLevel(20);
 
@@ -650,6 +652,7 @@ public class Game {
         player.getInventory().setArmorContents(null);
         player.setAllowFlight(false);
         player.setFlying(false);
+        player.setMaxHealth(20.0);
         player.setHealth(20);
         player.setFoodLevel(20);
         player.teleport(LocationUtils.getSpawn(plugin));

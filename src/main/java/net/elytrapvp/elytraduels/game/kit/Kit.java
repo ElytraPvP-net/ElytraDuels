@@ -94,6 +94,11 @@ public class Kit {
         // Set game mode/health/hunger/saturation.
         player.setGameMode(gameMode);
         player.setMaxHealth(maxHealth);
+
+        if(startingHealth > maxHealth) {
+            startingHealth = maxHealth;
+        }
+
         player.setHealth(startingHealth);
         player.setFoodLevel(startingHunger);
         player.setSaturation(startingSaturation);

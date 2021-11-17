@@ -15,6 +15,7 @@ public class CactusKit extends Kit {
         setIconMaterial(Material.CACTUS);
         setGameMode(GameMode.SURVIVAL);
         setMaxHealth(1);
+        setStartingHealth(1);
 
         addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200000, 100, true));
         addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 200000, 0, true));
