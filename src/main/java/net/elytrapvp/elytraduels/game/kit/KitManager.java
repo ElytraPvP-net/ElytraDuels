@@ -14,7 +14,6 @@ public class KitManager {
 
     public KitManager() {
         Kit archer = new ArcherKit();
-        Kit bow = new BowKit();
         Kit uhc = new UHCKit();
         Kit iron = new IronKit();
         Kit diamond = new DiamondKit();
@@ -30,7 +29,6 @@ public class KitManager {
         Kit sumo = new SumoKit();
 
         kits.add(archer);
-        kits.add(bow);
         kits.add(uhc);
         kits.add(iron);
         kits.add(diamond);
