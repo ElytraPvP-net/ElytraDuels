@@ -21,7 +21,7 @@ public class KitManager {
         Kit classic = new ClassicKit();
         Kit noDebuff = new NoDebuffKit();
         Kit op = new OPKit();
-        Kit stratus = new StratusKit();
+        Kit blitz = new BlitzKit();
         Kit buildUHC = new BuildUHCKit();
         Kit cactus = new CactusKit();
         Kit sg = new SGKit();
@@ -36,7 +36,7 @@ public class KitManager {
         kits.add(classic);
         kits.add(noDebuff);
         kits.add(op);
-        kits.add(stratus);
+        kits.add(blitz);
         kits.add(buildUHC);
         kits.add(cactus);
         kits.add(sg);
@@ -47,7 +47,7 @@ public class KitManager {
         rankedKits.add(bowSpleef);
         rankedKits.add(noDebuff);
         rankedKits.add(op);
-        rankedKits.add(stratus);
+        rankedKits.add(blitz);
         rankedKits.add(buildUHC);
         rankedKits.add(cactus);
         rankedKits.add(sg);

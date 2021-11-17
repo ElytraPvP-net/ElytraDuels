@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class StratusKit extends Kit {
+public class BlitzKit extends Kit {
 
-    public StratusKit() {
-        super("Stratus");
+    public BlitzKit() {
+        super("Blitz");
         setIconMaterial(Material.STONE_SWORD);
         setGameMode(GameMode.SURVIVAL);
 
