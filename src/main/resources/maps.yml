@@ -698,7 +698,7 @@ Maps:
             Pitch: 0
             Yaw: 45
   volcano:
-    name: Volcanop
+    name: Volcano
     builders:
       - Elodiez
     kits:
