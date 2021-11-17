@@ -7,12 +7,12 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class UHCKit extends Kit {
+public class BowKit extends Kit {
 
-    public UHCKit() {
-        super("UHC");
+    public BowKit() {
+        super("Bow");
         setNaturalRegen(false);
-        setIconMaterial(Material.GOLDEN_APPLE);
+        setIconMaterial(Material.BOW);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .setUnbreakable(true)

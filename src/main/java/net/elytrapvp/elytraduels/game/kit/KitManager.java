@@ -14,7 +14,7 @@ public class KitManager {
 
     public KitManager() {
         Kit speedArcher = new SpeedArcherKit();
-        Kit uhc = new UHCKit();
+        Kit bow = new BowKit();
         Kit iron = new IronKit();
         Kit diamond = new DiamondKit();
         Kit bowSpleef = new BowSpleefKit();
@@ -29,7 +29,7 @@ public class KitManager {
         Kit sumo = new SumoKit();
 
         kits.add(speedArcher);
-        kits.add(uhc);
+        kits.add(bow);
         kits.add(iron);
         kits.add(diamond);
         kits.add(bowSpleef);
@@ -43,7 +43,7 @@ public class KitManager {
         kits.add(finalUHC);
         kits.add(sumo);
 
-        rankedKits.add(uhc);
+        rankedKits.add(bow);
         rankedKits.add(bowSpleef);
         rankedKits.add(noDebuff);
         rankedKits.add(op);
