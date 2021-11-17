@@ -9,10 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class ArcherKit extends Kit {
+public class SpeedArcherKit extends Kit {
 
-    public ArcherKit() {
-        super("Archer");
+    public SpeedArcherKit() {
+        super("Speed Archer");
         setIconMaterial(Material.ARROW);
         setRangedDamage(true);
         setNaturalRegen(false);

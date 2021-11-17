@@ -13,7 +13,7 @@ public class KitManager {
     private final Set<Kit> rankedKits = new LinkedHashSet<>();
 
     public KitManager() {
-        Kit archer = new ArcherKit();
+        Kit speedArcher = new SpeedArcherKit();
         Kit uhc = new UHCKit();
         Kit iron = new IronKit();
         Kit diamond = new DiamondKit();
@@ -28,7 +28,7 @@ public class KitManager {
         Kit finalUHC = new FinalUHCKit();
         Kit sumo = new SumoKit();
 
-        kits.add(archer);
+        kits.add(speedArcher);
         kits.add(uhc);
         kits.add(iron);
         kits.add(diamond);
