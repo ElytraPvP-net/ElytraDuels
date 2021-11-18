@@ -27,7 +27,7 @@ public class SpectateGUI extends CustomGUI {
             setItem(i, item.build(), (p, a) -> {
                 p.closeInventory();
                 if(game.getGameState() == GameState.WAITING || game.getGameState() == GameState.END) {
-                    ChatUtils.chat(p, "&c&l(&7!&c&l) &cThat match has ended.");
+                    ChatUtils.chat(p, "&cError &8» &cThat match has ended.");
                     return;
                 }
 

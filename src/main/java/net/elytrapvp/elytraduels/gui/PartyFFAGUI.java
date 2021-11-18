@@ -37,7 +37,7 @@ public class PartyFFAGUI extends CustomGUI {
 
                 Party party = plugin.getPartyManager().getParty(p);
                 if(party.getPlayers().size() == 1) {
-                    ChatUtils.chat(p, "&cYou cannot duel yourself!");
+                    ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
                     return;
                 }
 

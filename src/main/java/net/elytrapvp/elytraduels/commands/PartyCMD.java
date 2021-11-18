@@ -66,28 +66,28 @@ public class PartyCMD extends AbstractCommand {
 
             case "invite":
                 if(args.length != 2) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cUsage: /party invite [player]");
+                    ChatUtils.chat(sender, "&cUsage &8» /party invite [player]");
                     return;
                 }
 
                 Player t = Bukkit.getPlayer(args[1]);
                 if(t == null) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThat person is not online.");
+                    ChatUtils.chat(sender, "&cError &8» &cThat person is not online.");
                     return;
                 }
 
                 if(t.equals(p)) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou cannot invite yourself.");
+                    ChatUtils.chat(sender, "&cError &8» &cYou cannot invite yourself.");
                     return;
                 }
 
                 if(plugin.getPartyManager().getParty(t) != null) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThey are already in a party.");
+                    ChatUtils.chat(sender, "&cError &8» &cThey are already in a party.");
                     return;
                 }
 
                 if(plugin.getPartyManager().getParty(p) == null) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are not in a party! /party create.");
+                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
                     return;
                 }
 
@@ -95,14 +95,16 @@ public class PartyCMD extends AbstractCommand {
                 break;
 
             case "disband":
-                ChatUtils.chat(sender, "&a&l(&7!&a&l) &aParty has been disbanded.");
+                Party party0 = plugin.getPartyManager().getParty(p);
+                party0.broadcast("aParty &8» &fParty has been disbanded.");
+
                 plugin.getPartyManager().getParty(p).disband();
                 break;
             case "leave":
                 Party party = plugin.getPartyManager().getParty(p);
 
                 if(party == null) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are not in a party! /party create.");
+                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
                     return;
                 }
 
@@ -114,7 +116,7 @@ public class PartyCMD extends AbstractCommand {
                 Party party1 = plugin.getPartyManager().getParty(p);
 
                 if(party1 == null) {
-                    ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are not in a party! /party create.");
+                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
                     return;
                 }
 

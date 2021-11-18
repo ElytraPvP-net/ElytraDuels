@@ -26,7 +26,7 @@ public class PartyListGUI extends CustomGUI {
             setItem(i, item.build(), (pl, a) -> {
                 if(party.getLeader().equals(pl)) {
                     pl.closeInventory();
-                    ChatUtils.chat(pl, "&c&l(&7!&c&l) &cYou cannot duel yourself.");
+                    ChatUtils.chat(pl, "&cError &8» &cYou cannot duel yourself.");
                     return;
                 }
 

@@ -75,7 +75,7 @@ public class CustomPlayer {
 
             }
             catch (SQLException exception) {
-                ChatUtils.chat(Bukkit.getPlayer(uuid), "&c&l(&7!&c&l) &cSomething went wrong loading your data! Please reconnect or your data could be lost.");
+                ChatUtils.chat(Bukkit.getPlayer(uuid), "&cError &8» &cSomething went wrong loading your data! Please reconnect or your data could be lost.");
                 exception.printStackTrace();
                 for(Kit kit : plugin.getKitManager().getRankedKits()) {
                     elo.put(kit.getName().toLowerCase(), 1000);
