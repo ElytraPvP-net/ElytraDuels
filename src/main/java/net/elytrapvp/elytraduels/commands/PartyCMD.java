@@ -100,11 +100,11 @@ public class PartyCMD extends AbstractCommand {
                 }
 
                 new PartyRequest(plugin, player, t).open(t);
-                party.broadcast("aParty &8» &f" + t.getName() + " &ahas been invited to the party.");
+                party.broadcast("&aParty &8» &f" + t.getName() + " &ahas been invited to the party.");
                 break;
 
             case "disband":
-                party.broadcast("aParty &8» &aParty has been disbanded.");
+                party.broadcast("&aParty &8» &aParty has been disbanded.");
                 plugin.getPartyManager().getParty(player).disband();
                 break;
             case "leave":
@@ -183,7 +183,7 @@ public class PartyCMD extends AbstractCommand {
             denied = true;
             target.closeInventory();
             Party party = plugin.getPartyManager().getParty(sender);
-            party.broadcast("aParty &8» &f" + target.getName() + " &ahas declined the invitation.");
+            party.broadcast("&aParty &8» &f" + target.getName() + " &ahas declined the invitation.");
         }
 
         @Override
