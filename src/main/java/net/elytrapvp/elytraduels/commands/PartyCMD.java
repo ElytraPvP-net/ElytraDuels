@@ -94,6 +94,11 @@ public class PartyCMD extends AbstractCommand {
                     return;
                 }
 
+                if(plugin.getGameManager().getGame(t) != null) {
+                    ChatUtils.chat(sender, "&cError &8» &cThat person is currently in a game.");
+                    return;
+                }
+
                 new PartyRequest(plugin, player, t).open(t);
                 party.broadcast("aParty &8» &f" + t.getName() + " &ahas been invited to the party.");
                 break;
