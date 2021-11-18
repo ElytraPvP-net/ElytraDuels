@@ -20,3 +20,4 @@ commands:
   party:
     usage: /party
     description: party command
+    aliases: [p]
