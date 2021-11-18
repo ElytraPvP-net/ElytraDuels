@@ -211,7 +211,24 @@ public class PlayerInteractListener implements Listener {
             case "FFA Duel":
                 new PartyFFAGUI(plugin).open(player);
                 event.setCancelled(true);
-                break;
+
+
+            case "Spectate Current Game":
+                event.setCancelled(true);
+
+                Party party1 = plugin.getPartyManager().getParty(player);
+                if(party1 == null) {
+                    return;
+                }
+
+                Game game1 = plugin.getGameManager().getGame(party1.getLeader());
+                if(game1 == null) {
+                    ChatUtils.chat(player, "&cError &8» &cYour party is not currently in a game.");
+                    return;
+                }
+
+                game1.addSpectator(player);
+                game1.broadcast("&a" + player.getName() + " is now spectating.");
         }
 
     }

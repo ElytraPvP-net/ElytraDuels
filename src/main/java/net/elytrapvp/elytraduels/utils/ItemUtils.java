@@ -73,6 +73,12 @@ public class ItemUtils {
                     .build();
             player.getInventory().setItem(3, spectate);
         }
+        else {
+            ItemStack spectate = new ItemBuilder(Material.NETHER_STAR)
+                    .setDisplayName("&aSpectate Current Game")
+                    .build();
+            player.getInventory().setItem(0, spectate);
+        }
 
         ItemStack leave = new ItemBuilder(Material.REDSTONE)
                 .setDisplayName("&cLeave Party")
