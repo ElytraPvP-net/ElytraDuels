@@ -38,25 +38,17 @@ public class TeleportFix implements Listener {
         }
 
         // Fix the visibility issue one tick later
-        server.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                // Refresh nearby clients
-                final List<Player> nearby = getPlayersWithin(player, visibleDistance);
+        server.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            // Refresh nearby clients
+            final List<Player> nearby = getPlayersWithin(player, visibleDistance);
 
-                //System.out.println("Applying fix ... " + visibleDistance);
+            //System.out.println("Applying fix ... " + visibleDistance);
 
-                // Hide every player
-                updateEntities(player, nearby, false);
+            // Hide every player
+            updateEntities(player, nearby, false);
 
-                // Then show them again
-                server.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        updateEntities(player, nearby, true);
-                    }
-                }, 1);
-            }
+            // Then show them again
+            server.getScheduler().scheduleSyncDelayedTask(plugin, () -> updateEntities(player, nearby, true), 1);
         }, TELEPORT_FIX_DELAY);
     }
 
