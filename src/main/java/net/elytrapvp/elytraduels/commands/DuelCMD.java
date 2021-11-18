@@ -33,7 +33,7 @@ public class DuelCMD extends AbstractCommand {
      */
     public void execute(CommandSender sender, String[] args) {
         if(args.length < 1) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cUsage: /duel [player] <kit>");
+            ChatUtils.chat(sender, "&cUsage &8» /duel [player] <kit>");
             return;
         }
 
@@ -41,30 +41,30 @@ public class DuelCMD extends AbstractCommand {
         Player t = Bukkit.getPlayerExact(args[0]);
 
         if(t == null) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThat player is not online.");
+            ChatUtils.chat(sender, "&cError &8» &cThat player is not online.");
             return;
         }
 
         if(p.equals(t)) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou cannot duel yourself.");
+            ChatUtils.chat(sender, "&cError &8» &cYou cannot duel yourself.");
             return;
         }
 
         Game game = plugin.getGameManager().getGame(p);
         if(game != null) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cYou are in a match already.");
+            ChatUtils.chat(sender, "&cError &8» &cYou are in a match already.");
             return;
         }
 
         Game game2 = plugin.getGameManager().getGame(t);
         if(game2 != null) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThey are in a match already.");
+            ChatUtils.chat(sender, "&cError &8» &cThey are in a match already.");
             return;
         }
 
         Party targetParty = plugin.getPartyManager().getParty(t);
         if(targetParty != null && targetParty.getMembers().contains(t)) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThat player is in a party.");
+            ChatUtils.chat(sender, "&cError &8» &cThat player is in a party.");
             return;
         }
 
@@ -81,7 +81,7 @@ public class DuelCMD extends AbstractCommand {
 
         Kit k = plugin.getKitManager().getKit(kit);
         if(k == null) {
-            ChatUtils.chat(sender, "&c&l(&7!&c&l) &cThat kit does not exist.");
+            ChatUtils.chat(sender, "&cError &8» &cThat kit does not exist.");
             return;
         }
 
