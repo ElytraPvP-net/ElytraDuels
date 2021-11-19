@@ -9,6 +9,7 @@ import net.elytrapvp.elytraduels.game.queue.QueueManager;
 import net.elytrapvp.elytraduels.listeners.*;
 import net.elytrapvp.elytraduels.party.PartyManager;
 import net.elytrapvp.elytraduels.runnables.AFKTimer;
+import net.elytrapvp.elytraduels.game.LeaderboardManager;
 import net.elytrapvp.elytraduels.utils.gui.GUIListeners;
 import net.elytrapvp.elytraduels.utils.scoreboard.ScoreboardUpdate;
 import org.bukkit.Bukkit;
@@ -22,6 +23,7 @@ public final class ElytraDuels extends JavaPlugin {
     private PartyManager partyManager;
     private QueueManager queueManager;
     private SettingsManager settingsManager;
+    private LeaderboardManager leaderboardManager;
 
     @Override
     public void onEnable() {
@@ -33,6 +35,7 @@ public final class ElytraDuels extends JavaPlugin {
         gameManager = new GameManager(this);
         queueManager = new QueueManager(this);
         customPlayerManager = new CustomPlayerManager(this);
+        leaderboardManager = new LeaderboardManager(this);
 
         AbstractCommand.registerCommands(this);
 
@@ -98,5 +101,9 @@ public final class ElytraDuels extends JavaPlugin {
 
     public SettingsManager getSettingsManager() {
         return settingsManager;
+    }
+
+    public LeaderboardManager getLeaderboardManager() {
+        return leaderboardManager;
     }
 }

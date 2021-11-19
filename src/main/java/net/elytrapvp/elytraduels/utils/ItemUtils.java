@@ -40,6 +40,11 @@ public class ItemUtils {
                 .setDisplayName("&cBack to Lobby")
                 .build();
         player.getInventory().setItem(8, otherModes);
+
+        ItemStack leaderboard = new ItemBuilder(Material.EMERALD)
+                .setDisplayName("&aLeaderboards")
+                .build();
+        player.getInventory().setItem(7, leaderboard);
     }
 
     public static void givePartyItems(PartyManager partyManager, Player player) {

@@ -211,6 +211,7 @@ public class PlayerInteractListener implements Listener {
             case "FFA Duel":
                 new PartyFFAGUI(plugin).open(player);
                 event.setCancelled(true);
+                break;
 
 
             case "Spectate Current Game":
@@ -229,6 +230,12 @@ public class PlayerInteractListener implements Listener {
 
                 game1.addSpectator(player);
                 game1.broadcast("&a" + player.getName() + " is now spectating.");
+                break;
+
+            case "Leaderboards":
+                event.setCancelled(true);
+                new LeaderboardGUI(plugin).open(player);
+                break;
         }
 
     }
