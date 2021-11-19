@@ -191,6 +191,17 @@ public class CustomPlayer {
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
                 statement.executeUpdate();
+
+                if(kit.equals("global")) {
+                    return;
+                }
+
+                int globalEloChange = 0;
+                for(Kit rankedKit : plugin.getKitManager().getRankedKits()) {
+                    globalEloChange += (getElo(rankedKit.getName().toLowerCase()) - 1000);
+                }
+
+                setElo("global", (1000 + (globalEloChange / 3)));
             }
             catch (SQLException exception) {
                 exception.printStackTrace();
