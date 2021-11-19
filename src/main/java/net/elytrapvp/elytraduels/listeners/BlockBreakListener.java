@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.listeners;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -46,6 +47,10 @@ public class BlockBreakListener implements Listener {
 
         if(!game.getBlocks().contains(event.getBlock().getLocation())) {
             event.setCancelled(true);
+            return;
+        }
+
+        if(event.getBlock().getType() == Material.LEAVES) {
             return;
         }
 

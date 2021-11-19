@@ -39,7 +39,7 @@ public class BlitzKit extends Kit {
         ItemStack bow = new ItemBuilder(Material.BOW).setUnbreakable(true).build();
         ItemStack axe = new ItemBuilder(Material.IRON_AXE).setUnbreakable(true).build();
         ItemStack blocks1 = new ItemBuilder(Material.WOOD, 32).build();
-        ItemStack blocks2 = new ItemBuilder(Material.GLASS, 32).build();
+        ItemStack blocks2 = new ItemBuilder(Material.LEAVES, 32).build();
         ItemStack gapple = new ItemBuilder(Material.GOLDEN_APPLE, 1).build();
         ItemStack carrot = new ItemBuilder(Material.GOLDEN_CARROT, 16).build();
         ItemStack arrows = new ItemBuilder(Material.ARROW, 12).build();
