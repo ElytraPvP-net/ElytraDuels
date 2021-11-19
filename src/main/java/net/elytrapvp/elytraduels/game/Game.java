@@ -14,10 +14,7 @@ import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.LocationUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -381,6 +378,7 @@ public class Game {
         player.setMaxHealth(20.0);
         player.setHealth(20.0);
         player.setFoodLevel(20);
+        player.setGameMode(GameMode.ADVENTURE);
 
         // Prevents player from interfering.
         player.spigot().setCollidesWithEntities(false);
