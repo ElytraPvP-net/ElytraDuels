@@ -58,14 +58,13 @@ Maps:
     builders:
       - deep_dark_blue
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
       - op
-      - stratus
+      - blitz
       - build uhc
-      - sg
     arenas:
       '1':
         spawns:
@@ -120,8 +119,7 @@ Maps:
     builders:
       - deep_dark_blue
     kits:
-      - archer
-      - bow
+      - speed archer
       - no debuff
     arenas:
       '1':
@@ -177,8 +175,7 @@ Maps:
     builders:
       - deep_dark_blue
     kits:
-      - archer
-      - bow
+      - speed archer
       - no debuff
     arenas:
       '1':
@@ -456,12 +453,12 @@ Maps:
       - RMicky
       - deep_dark_blue
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
       - op
-      - stratus
+      - blitz
       - build uhc
     arenas:
       '1':
@@ -518,11 +515,11 @@ Maps:
       - RMicky
       - deep_dark_blue
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
-      - stratus
+      - blitz
       - build uhc
     arenas:
       '1':
@@ -579,12 +576,12 @@ Maps:
       - RMicky
       - deep_dark_blue
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
       - op
-      - stratus
+      - blitz
       - build uhc
     arenas:
       '1':
@@ -641,12 +638,12 @@ Maps:
       - RMicky
       - deep_dark_blue
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
       - op
-      - stratus
+      - blitz
       - build uhc
     arenas:
       '1':
@@ -698,16 +695,16 @@ Maps:
             Pitch: 0
             Yaw: 45
   volcano:
-    name: Volcano
+    name: Volcanop
     builders:
       - Elodiez
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
       - op
-      - stratus
+      - blitz
       - build uhc
     arenas:
       '1':
@@ -764,12 +761,12 @@ Maps:
       - RMicky
       - deep_dark_blue
     kits:
-      - uhc
+      - bow
       - iron
       - diamond
       - classic
       - op
-      - stratus
+      - blitz
       - build uhc
     arenas:
       '1':
