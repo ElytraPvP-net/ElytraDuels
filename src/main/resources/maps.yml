@@ -1211,3 +1211,115 @@ Maps:
             Z: 6600.5
             Pitch: 0
             Yaw: 90
+  aquarium:
+    name: Aquarium
+    builders:
+      - deep_dark_blue
+      - RMicky
+    kits:
+      - bow spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1978.5
+            Y: 65.5
+            Z: 7000.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2022.5
+            Y: 65.5
+            Z: 7000.5
+            Pitch: 0
+            Yaw: 90
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2178.5
+            Y: 65.5
+            Z: 7000.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2222.5
+            Y: 65.5
+            Z: 7000.5
+            Pitch: 0
+            Yaw: 90
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2378.5
+            Y: 65.5
+            Z: 7000.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2422.5
+            Y: 65.5
+            Z: 7000.5
+            Pitch: 0
+            Yaw: 90
+  DesertHorizon:
+    name: DesertHorizon
+    builders:
+      - deep_dark_blue
+      - RMicky
+    kits:
+      - sumo
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1994.5
+            Y: 65.5
+            Z: 6800.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2006.5
+            Y: 65.5
+            Z: 6800.5
+            Pitch: 0
+            Yaw: 90
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2194.5
+            Y: 65.5
+            Z: 6800.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2206.5
+            Y: 65.5
+            Z: 6800.5
+            Pitch: 0
+            Yaw: 90
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2394.5
+            Y: 65.5
+            Z: 6800.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2406.5
+            Y: 65.5
+            Z: 6800.5
+            Pitch: 0
+            Yaw: 90
