@@ -52,6 +52,9 @@ public class KitManager {
         rankedKits.add(cactus);
         rankedKits.add(sg);
         rankedKits.add(sumo);
+        rankedKits.add(iron);
+        rankedKits.add(diamond);
+        rankedKits.add(finalUHC);
     }
 
     /**
