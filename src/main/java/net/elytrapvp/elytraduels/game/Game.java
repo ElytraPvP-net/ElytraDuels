@@ -589,6 +589,10 @@ public class Game {
                 }
             }
         }
+
+        for(Player spectator : getSpectators()) {
+            player.showPlayer(spectator);
+        }
     }
 
     /**
