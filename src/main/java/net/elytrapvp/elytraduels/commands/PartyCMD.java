@@ -53,7 +53,7 @@ public class PartyCMD extends AbstractCommand {
                 }
 
                 plugin.getPartyManager().createParty(player);
-                ChatUtils.chat(sender, "&aParty &8» &aParty as been created.");
+                ChatUtils.chat(sender, "&a&lParty &8» &aParty as been created.");
                 ItemUtils.givePartyItems(plugin.getPartyManager(), player);
                 break;
             case "help":
@@ -100,11 +100,11 @@ public class PartyCMD extends AbstractCommand {
                 }
 
                 new PartyRequest(plugin, player, t).open(t);
-                party.broadcast("&aParty &8» &f" + t.getName() + " &ahas been invited to the party.");
+                party.broadcast("&a&lParty &8» &f" + t.getName() + " &ahas been invited to the party.");
                 break;
 
             case "disband":
-                party.broadcast("&aParty &8» &aParty has been disbanded.");
+                party.broadcast("&a&lParty &8» &aParty has been disbanded.");
                 plugin.getPartyManager().getParty(player).disband();
                 break;
             case "leave":
@@ -114,7 +114,7 @@ public class PartyCMD extends AbstractCommand {
                 }
 
                 party.removePlayer(player);
-                party.broadcast("&aParty &8» &f" + player.getName() + " &ahas left the party.");
+                party.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas left the party.");
                 break;
 
             case "chat":
@@ -127,17 +127,17 @@ public class PartyCMD extends AbstractCommand {
                     party.togglePartyChat(player);
 
                     if(party.hasPartyChatToggled(player)) {
-                        ChatUtils.chat(sender, "&aParty &8» &aParty chat enabled.");
+                        ChatUtils.chat(sender, "&a&lParty &8» &aParty chat enabled.");
                     }
                     else {
-                        ChatUtils.chat(sender, "&aParty &8» &aParty chat disabled.");
+                        ChatUtils.chat(sender, "&a&lParty &8» &aParty chat disabled.");
                     }
 
                     return;
                 }
 
                 args[0] = "";
-                party.broadcast("&aParty &8» &f" + player.getName() + "&8: &a" + StringUtils.join(args, " "));
+                party.broadcast("&a&lParty &8» &f" + player.getName() + "&8: &a" + StringUtils.join(args, " "));
 
                 break;
         }
@@ -179,7 +179,7 @@ public class PartyCMD extends AbstractCommand {
         private void accept() {
             Party party = plugin.getPartyManager().getParty(sender);
             party.addPlayer(target);
-            party.broadcast("&aParty &8» &f" + target.getName() + " &ahas joined the party.");
+            party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas joined the party.");
             denied = true;
             target.closeInventory();
         }
@@ -192,7 +192,7 @@ public class PartyCMD extends AbstractCommand {
             denied = true;
             target.closeInventory();
             Party party = plugin.getPartyManager().getParty(sender);
-            party.broadcast("&aParty &8» &f" + target.getName() + " &ahas declined the invitation.");
+            party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas declined the invitation.");
         }
 
         @Override
