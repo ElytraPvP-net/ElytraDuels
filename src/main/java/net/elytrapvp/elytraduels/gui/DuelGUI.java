@@ -7,6 +7,7 @@ import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 public class DuelGUI extends CustomGUI {
@@ -24,6 +25,7 @@ public class DuelGUI extends CustomGUI {
 
             ItemStack item = new ItemBuilder(kit.getIconMaterial(), count)
                     .setDisplayName("&a" + kit.getName())
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
 
             setItem(i, item, (p, a) -> {

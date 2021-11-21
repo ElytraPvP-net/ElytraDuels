@@ -7,6 +7,7 @@ import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -24,6 +25,7 @@ public class KitGUI extends CustomGUI {
                     .setDisplayName("&a" + kit.getName())
                     .addLore("&7Playing: " + plugin.getQueueManager().getPlaying(kit))
                     .addLore("&7Queuing: " + plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED))
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
 
             setItem(iconSlots[i], item, (pl, a) -> {

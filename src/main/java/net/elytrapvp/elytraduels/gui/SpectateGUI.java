@@ -7,6 +7,7 @@ import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 
 public class SpectateGUI extends CustomGUI {
 
@@ -18,7 +19,8 @@ public class SpectateGUI extends CustomGUI {
 
 
             ItemBuilder item = new ItemBuilder(game.getKit().getIconMaterial())
-                    .setDisplayName("&a" + game.getKit().getName() + " &f(" + game.getArena().getMap().getName() + ")");
+                    .setDisplayName("&a" + game.getKit().getName() + " &f(" + game.getArena().getMap().getName() + ")")
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
             for(Player p : game.getAlivePlayers()) {
                 item.addLore("&7  - " + p.getName());

@@ -6,6 +6,7 @@ import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 
 import java.util.Map;
 
@@ -25,7 +26,8 @@ public class LeaderboardGUI extends CustomGUI {
         for(Kit kit : plugin.getKitManager().getRankedKits()) {
 
             ItemBuilder item = new ItemBuilder(kit.getIconMaterial(), 1)
-                    .setDisplayName("&a" + kit.getName());
+                    .setDisplayName("&a" + kit.getName())
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES);
             addLore(item, kit.getName().toLowerCase(), "elo");
 
             setItem(i, item.build());
