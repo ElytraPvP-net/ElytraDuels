@@ -33,7 +33,7 @@ public class DuelCMD extends AbstractCommand {
      */
     public void execute(CommandSender sender, String[] args) {
         if(args.length < 1) {
-            ChatUtils.chat(sender, "&cUsage &8» /duel [player] <kit>");
+            ChatUtils.chat(sender, "&cUsage &8» &c/duel [player] <kit>");
             return;
         }
 
