@@ -82,6 +82,6 @@ public class KitManager {
 
 
     public Set<Kit> getRankedKits() {
-        return rankedKits;
+        return kits;
     }
 }
