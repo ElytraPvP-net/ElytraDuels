@@ -25,3 +25,7 @@ commands:
     usage: /partychat
     description: Party chat command.
     aliases: [pc]
+  matches:
+    usage: /matches
+    description: View match history.
+    aliases: [matchhistory, mh]

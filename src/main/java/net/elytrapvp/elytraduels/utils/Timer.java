@@ -35,6 +35,19 @@ public class Timer {
     }
 
     /**
+     * Create a timer from seconds.
+     * @param plugin Plugin instance.
+     * @param seconds Amount of seconds.
+     */
+    public Timer(ElytraDuels plugin, int seconds) {
+        this.plugin = plugin;
+        task = null;
+
+        this.minutes = seconds / 60;
+        this.seconds = seconds % 60;
+    }
+
+    /**
      * Reset the timer.
      */
     public void reset() {

@@ -38,6 +38,7 @@ public abstract class AbstractCommand implements CommandExecutor {
         new PingCMD();
         new PartyCMD(pl);
         new PartyChatCMD();
+        new MatchesCMD(pl);
     }
 
     /**
