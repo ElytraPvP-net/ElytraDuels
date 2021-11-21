@@ -19,6 +19,7 @@ public class Party {
     private final ElytraDuels plugin;
     private Player leader;
     private final Set<Player> members = new HashSet<>();
+    private final Set<Player> partyChatToggled = new HashSet<>();
 
     /**
      * Create a new party.
@@ -87,6 +88,15 @@ public class Party {
     }
 
     /**
+     * Get if a player has party chat toggled.
+     * @param player Player to check.
+     * @return If they have party chat toggled.
+     */
+    public boolean hasPartyChatToggled(Player player) {
+        return partyChatToggled.contains(player);
+    }
+
+    /**
      * Remove a player from the party.
      * @param p Player to remove.
      */
@@ -110,5 +120,18 @@ public class Party {
      */
     public void setLeader(Player leader) {
         this.leader = leader;
+    }
+
+    /**
+     * Toggle party chat for a player.
+     * @param player Player to toggle party chat for.
+     */
+    public void togglePartyChat(Player player) {
+        if(!partyChatToggled.contains(player)) {
+            partyChatToggled.add(player);
+        }
+        else {
+            partyChatToggled.remove(player);
+        }
     }
 }

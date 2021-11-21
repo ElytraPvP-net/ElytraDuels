@@ -124,6 +124,15 @@ public class PartyCMD extends AbstractCommand {
                 }
 
                 if(args.length < 2) {
+                    party.togglePartyChat(player);
+
+                    if(party.hasPartyChatToggled(player)) {
+                        ChatUtils.chat(sender, "&aParty &8» &aParty chat enabled.");
+                    }
+                    else {
+                        ChatUtils.chat(sender, "&aParty &8» &aParty chat disabled.");
+                    }
+
                     return;
                 }
 
