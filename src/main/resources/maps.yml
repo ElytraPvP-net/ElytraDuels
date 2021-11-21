@@ -1323,3 +1323,171 @@ Maps:
             Z: 6800.5
             Pitch: 0
             Yaw: 90
+  condal1:
+    name: Condal1
+    builders:
+      - Condal
+      - partykid4
+    kits:
+      - bow spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 2000.5
+            Y: 65.5
+            Z: 7217.5
+            Pitch: 0
+            Yaw: 180
+          '2':
+            World: world
+            X: 2000.5
+            Y: 65.5
+            Z: 7183.5
+            Pitch: 0
+            Yaw: 0
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2200.5
+            Y: 65.5
+            Z: 7217.5
+            Pitch: 0
+            Yaw: 180
+          '2':
+            World: world
+            X: 2200.5
+            Y: 65.5
+            Z: 7183.5
+            Pitch: 0
+            Yaw: 0
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2400.5
+            Y: 65.5
+            Z: 7217.5
+            Pitch: 0
+            Yaw: 180
+          '2':
+            World: world
+            X: 2400.5
+            Y: 65.5
+            Z: 7183.5
+            Pitch: 0
+            Yaw: 0
+  condal2:
+    name: Condal2
+    builders:
+      - Condal
+      - RMicky
+    kits:
+      - bow spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 2017.5
+            Y: 66.5
+            Z: 7417.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: world
+            X: 1983.5
+            Y: 66.5
+            Z: 7383.5
+            Pitch: 0
+            Yaw: -45
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2217.5
+            Y: 66.5
+            Z: 7417.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: world
+            X: 2183.5
+            Y: 66.5
+            Z: 7383.5
+            Pitch: 0
+            Yaw: -45
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2417.5
+            Y: 66.5
+            Z: 7317.5
+            Pitch: 0
+            Yaw: 45
+          '2':
+            World: world
+            X: 2383.5
+            Y: 66.5
+            Z: 7383.5
+            Pitch: 0
+            Yaw: -45
+  condal3:
+    name: Condal3
+    builders:
+      - Condal
+      - RMicky
+    kits:
+      - bow spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 2001.0
+            Y: 65.5
+            Z: 7626.0
+            Pitch: 0
+            Yaw: 180
+          '2':
+            World: world
+            X: 2001.0
+            Y: 65.5
+            Z: 7574.0
+            Pitch: 0
+            Yaw: 0
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2201.0
+            Y: 65.5
+            Z: 7626.0
+            Pitch: 0
+            Yaw: 180
+          '2':
+            World: world
+            X: 2201.0
+            Y: 65.5
+            Z: 7574.0
+            Pitch: 0
+            Yaw: 0
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2401.0
+            Y: 65.5
+            Z: 7626.0
+            Pitch: 0
+            Yaw: 180
+          '2':
+            World: world
+            X: 2401.0
+            Y: 65.5
+            Z: 7574.0
+            Pitch: 0
+            Yaw: 0
