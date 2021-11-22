@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -9,8 +10,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class DiamondKit extends Kit {
 
-    public DiamondKit() {
-        super("Diamond");
+    public DiamondKit(ElytraDuels plugin) {
+        super(plugin, "Diamond");
         setIconMaterial(Material.DIAMOND_SWORD);
 
         setArrowPickup(true);

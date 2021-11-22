@@ -238,6 +238,10 @@ public class PlayerInteractListener implements Listener {
                 event.setCancelled(true);
                 new LeaderboardGUI(plugin).open(player);
                 break;
+            case "Settings":
+                event.setCancelled(true);
+                new SettingsGUI(plugin).open(player);
+                break;
         }
 
     }

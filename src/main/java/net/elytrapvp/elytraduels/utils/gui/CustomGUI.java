@@ -4,6 +4,9 @@ import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,7 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Reoresebts a simplified way to create
+ * Represebts a simplified way to create
  * interactive GUIs.
  */
 public abstract class CustomGUI {
@@ -65,6 +68,12 @@ public abstract class CustomGUI {
         return uuid;
     }
 
+    /**
+     * Adds an item to the GUI,
+     * @param slot slot to add item to.
+     * @param item Item to add.
+     * @param action Click Action
+     */
     public void setItem(int slot, ItemStack item, ClickAction action) {
         inventory.setItem(slot, item);
 
@@ -77,14 +86,26 @@ public abstract class CustomGUI {
         setItem(slot, item, null);
     }
 
-    public void open(Player p) {
-        p.openInventory(inventory);
-        openInventories.put(p.getUniqueId(), getUuid());
+    /**
+     * Open the GUI for a player.
+     * @param player Player to open for
+     */
+    public void open(Player player) {
+        player.openInventory(inventory);
+        openInventories.put(player.getUniqueId(), getUuid());
     }
 
     public void onClose(Player p) {}
 
     public interface ClickAction {
         void click(Player player, ClickType type);
+    }
+
+    public void onClick(InventoryClickEvent event) {
+        event.setCancelled(true);
+    }
+
+    public void onDrag(InventoryDragEvent event) {
+        event.setCancelled(true);
     }
 }

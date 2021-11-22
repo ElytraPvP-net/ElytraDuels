@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -9,8 +10,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class ClassicKit extends Kit {
 
-    public ClassicKit() {
-        super("Classic");
+    public ClassicKit(ElytraDuels plugin) {
+        super(plugin, "Classic");
         setIconMaterial(Material.FISHING_ROD);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)

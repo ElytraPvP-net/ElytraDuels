@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -11,8 +12,8 @@ import org.bukkit.potion.PotionType;
 
 public class NoDebuffKit extends Kit {
 
-    public NoDebuffKit() {
-        super("No Debuff");
+    public NoDebuffKit(ElytraDuels plugin) {
+        super(plugin, "No Debuff");
         setIconMaterial(Material.POTION);
         setHunger(true);
 

@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.GameMode;
@@ -10,8 +11,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class CactusKit extends Kit {
-    public CactusKit() {
-        super("Cactus");
+    public CactusKit(ElytraDuels plugin) {
+        super(plugin, "Cactus");
         setIconMaterial(Material.CACTUS);
         setGameMode(GameMode.SURVIVAL);
         setMaxHealth(1);

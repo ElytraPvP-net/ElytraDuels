@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.GameMode;
@@ -12,8 +13,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class BlitzKit extends Kit {
 
-    public BlitzKit() {
-        super("Blitz");
+    public BlitzKit(ElytraDuels plugin) {
+        super(plugin, "Blitz");
         setIconMaterial(Material.STONE_SWORD);
         setGameMode(GameMode.SURVIVAL);
 

@@ -3,8 +3,7 @@ package net.elytrapvp.elytraduels.utils.gui;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
@@ -28,11 +27,14 @@ public class GUIListeners implements Listener {
             return;
         }
 
-        e.setCancelled(true);
+        //e.setCancelled(true);
         CustomGUI gui = CustomGUI.getInventories().get(iU);
+
+        gui.onClick(e);
+
         CustomGUI.ClickAction action = gui.getActions().get(e.getSlot());
 
-        if(action != null) {
+        if(action != null && e.getAction() != InventoryAction.SWAP_WITH_CURSOR) {
             action.click(p, e.getClick());
         }
     }
@@ -49,6 +51,8 @@ public class GUIListeners implements Listener {
             gui.delete();
 
             CustomGUI.getOpenInventories().remove(pU);
+
+            p.setItemOnCursor(null);
         }
     }
 
@@ -62,5 +66,24 @@ public class GUIListeners implements Listener {
         }
 
         CustomGUI.getInventories().remove(e.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onDrag(InventoryDragEvent event) {
+        if(!(event.getWhoClicked() instanceof Player)) {
+            return;
+        }
+
+        Player p = (Player) event.getWhoClicked();
+        UUID pU = p.getUniqueId();
+        UUID iU = CustomGUI.getOpenInventories().get(pU);
+
+        if(iU == null) {
+            return;
+        }
+
+        CustomGUI gui = CustomGUI.getInventories().get(iU);
+
+        gui.onDrag(event);
     }
 }

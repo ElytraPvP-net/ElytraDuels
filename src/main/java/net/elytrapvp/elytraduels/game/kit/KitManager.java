@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.kits.*;
 
 import java.util.LinkedHashSet;
@@ -12,21 +13,21 @@ public class KitManager {
     private final Set<Kit> kits = new LinkedHashSet<>();
     private final Set<Kit> rankedKits = new LinkedHashSet<>();
 
-    public KitManager() {
-        Kit speedArcher = new SpeedArcherKit();
-        Kit bow = new BowKit();
-        Kit iron = new IronKit();
-        Kit diamond = new DiamondKit();
-        Kit bowSpleef = new BowSpleefKit();
-        Kit classic = new ClassicKit();
-        Kit noDebuff = new NoDebuffKit();
-        Kit op = new OPKit();
-        Kit blitz = new BlitzKit();
-        Kit buildUHC = new BuildUHCKit();
-        Kit cactus = new CactusKit();
-        Kit sg = new SGKit();
-        Kit finalUHC = new FinalUHCKit();
-        Kit sumo = new SumoKit();
+    public KitManager(ElytraDuels plugin) {
+        Kit speedArcher = new SpeedArcherKit(plugin);
+        Kit bow = new BowKit(plugin);
+        Kit iron = new IronKit(plugin);
+        Kit diamond = new DiamondKit(plugin);
+        Kit bowSpleef = new BowSpleefKit(plugin);
+        Kit classic = new ClassicKit(plugin);
+        Kit noDebuff = new NoDebuffKit(plugin);
+        Kit op = new OPKit(plugin);
+        Kit blitz = new BlitzKit(plugin);
+        Kit buildUHC = new BuildUHCKit(plugin);
+        Kit cactus = new CactusKit(plugin);
+        Kit sg = new SGKit(plugin);
+        Kit finalUHC = new FinalUHCKit(plugin);
+        Kit sumo = new SumoKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);

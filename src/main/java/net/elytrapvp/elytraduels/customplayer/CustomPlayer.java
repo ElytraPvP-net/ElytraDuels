@@ -23,6 +23,7 @@ public class CustomPlayer {
     private final Map<String, Integer> winStreak = new HashMap<>();
     private final Map<String, Integer> bestWinStreak = new HashMap<>();
     private final Map<String, Integer> elo = new HashMap<>();
+    private final Map<String, Map<Integer, Integer>> kitEditor = new HashMap<>();
 
     /**
      * Creates the CustomPlayer object.
@@ -73,6 +74,17 @@ public class CustomPlayer {
                     }
                 }
 
+                for(Kit kit : plugin.getKitManager().getKits()) {
+                    kitEditor.put(kit.getName() ,new HashMap<>());
+                }
+
+                PreparedStatement statement3 = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_kit_editor WHERE uuid = ?");
+                statement3.setString(1, uuid.toString());
+                ResultSet results3 = statement3.executeQuery();
+
+                while(results3.next()) {
+                    kitEditor.get(results3.getString(2)).put(results3.getInt(3), results3.getInt(4));
+                }
             }
             catch (SQLException exception) {
                 ChatUtils.chat(Bukkit.getPlayer(uuid), "&cError &8» &cSomething went wrong loading your data! Please reconnect or your data could be lost.");
@@ -110,6 +122,22 @@ public class CustomPlayer {
     }
 
     /**
+     * Clear the kit editor of a kit.
+     * @param kit Kit to clear.
+     */
+    private void cleanKitEditor(String kit) {
+        try {
+            PreparedStatement statement3 = ElytraDB.getDatabase().prepareStatement("DELETE FROM duels_kit_editor WHERE uuid = ? AND kit = ?");
+            statement3.setString(1, uuid.toString());
+            statement3.setString(2, kit);
+            statement3.executeUpdate();
+        }
+        catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
      * Get the best win streak of the player.
      * @param kit Kit to get best win streak of.
      * @return The best win streak.
@@ -125,6 +153,10 @@ public class CustomPlayer {
      */
     public int getElo(String kit) {
         return elo.get(kit);
+    }
+
+    public Map<Integer, Integer> getKitEditor(String kit) {
+        return kitEditor.get(kit);
     }
 
     /**
@@ -278,5 +310,33 @@ public class CustomPlayer {
         if(getBestWinStreak(kit) < winStreak) {
             setBestWinStreak(kit, winStreak);
         }
+    }
+
+    /**
+     * Update the kit editor.
+     * @param kit Kit to update.
+     */
+    public void updateKitEditor(String kit) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            cleanKitEditor(kit);
+
+            try {
+                Map<Integer, Integer> map = getKitEditor(kit);
+
+                for(int item : map.keySet()) {
+                    int slot = map.get(item);
+
+                    PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("INSERT INTO duels_kit_editor (uuid,kit,item,slot) VALUES (?,?,?,?)");
+                    statement.setString(1, uuid.toString());
+                    statement.setString(2, kit);
+                    statement.setInt(3, item);
+                    statement.setInt(4, slot);
+                    statement.executeUpdate();
+                }
+            }
+            catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        });
     }
 }

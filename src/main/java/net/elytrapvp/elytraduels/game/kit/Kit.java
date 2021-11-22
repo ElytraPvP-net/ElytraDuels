@@ -1,20 +1,24 @@
 package net.elytrapvp.elytraduels.game.kit;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
+import net.elytrapvp.elytraduels.utils.ItemUtils;
+import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Stores all information about a kit.
  */
 public class Kit {
+    private final ElytraDuels plugin;
+
     // Kit metadata
     private final String name;
     private Material iconMaterial = Material.WOOD_SWORD;
@@ -50,7 +54,8 @@ public class Kit {
      * Create a kit.
      * @param name Name of the kit.
      */
-    public Kit(String name) {
+    public Kit(ElytraDuels plugin, String name) {
+        this.plugin = plugin;
         this.name = name;
     }
 
@@ -60,7 +65,8 @@ public class Kit {
      * @param item Item to add.
      */
     public void addItem(int slot, ItemStack item) {
-        items.put(slot, item);
+        ItemBuilder builder = new ItemBuilder(item.clone()).addLore(ItemUtils.convertToInvisibleString(slot + ""));
+        items.put(slot, builder.build());
     }
 
     /**
@@ -86,9 +92,49 @@ public class Kit {
         // Clear potion effects.
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
 
+        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+
+        Map<Integer, ItemStack> updatedKit = new HashMap<>();
+        Set<Integer> slotsUsed = new HashSet<>();
+
+        for(int slot : customPlayer.getKitEditor(name).keySet()) {
+            slotsUsed.add(slot);
+            updatedKit.put(slot, items.get(customPlayer.getKitEditor(name).get(slot)));
+        }
+
+        for(int slot : items.keySet()) {
+            if(slotsUsed.contains(slot)) {
+                continue;
+            }
+
+            if(slot > 35) {
+                continue;
+            }
+
+            ItemStack item =  items.get(slot);
+
+            if(updatedKit.containsValue(item)) {
+                continue;
+            }
+
+            updatedKit.put(slot, item);
+        }
+
         // Give items
-        for(int i : items.keySet()) {
-            player.getInventory().setItem(i, items.get(i));
+        for(int i : updatedKit.keySet()) {
+            ItemStack item = updatedKit.get(i).clone();
+
+            if(item.getItemMeta() != null) {
+                ItemMeta meta = item.getItemMeta();
+                List<String> lore = new ArrayList<>(meta.getLore());
+                if(lore.size() > 0) {
+                    lore.remove(lore.size() - 1);
+                }
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+            }
+
+            player.getInventory().setItem(i, item);
         }
 
         // Set game mode/health/hunger/saturation.

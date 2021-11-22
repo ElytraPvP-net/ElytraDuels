@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -11,8 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SpeedArcherKit extends Kit {
 
-    public SpeedArcherKit() {
-        super("Speed Archer");
+    public SpeedArcherKit(ElytraDuels plugin) {
+        super(plugin, "Speed Archer");
         setIconMaterial(Material.ARROW);
         setRangedDamage(true);
         setNaturalRegen(false);

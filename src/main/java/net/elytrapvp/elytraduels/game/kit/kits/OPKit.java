@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.GameMode;
@@ -12,8 +13,8 @@ import org.bukkit.potion.PotionType;
 
 public class OPKit extends Kit {
 
-    public OPKit() {
-        super("OP");
+    public OPKit(ElytraDuels plugin) {
+        super(plugin, "OP");
         setRodMultiplier(1.5);
         setStrongGapple(true);
         setIconMaterial(Material.DIAMOND_CHESTPLATE);

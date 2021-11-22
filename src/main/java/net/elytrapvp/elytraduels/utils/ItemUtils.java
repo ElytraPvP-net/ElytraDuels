@@ -4,6 +4,7 @@ import net.elytrapvp.elytraduels.party.Party;
 import net.elytrapvp.elytraduels.party.PartyManager;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import net.elytrapvp.elytraduels.utils.item.SkullBuilder;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -36,8 +37,8 @@ public class ItemUtils {
                 .build();
         player.getInventory().setItem(5, team);
 
-        ItemStack otherModes = new ItemBuilder(Material.BED)
-                .setDisplayName("&cBack to Lobby")
+        ItemStack otherModes = new ItemBuilder(Material.REDSTONE_COMPARATOR)
+                .setDisplayName("&aSettings")
                 .build();
         player.getInventory().setItem(8, otherModes);
 
@@ -89,5 +90,11 @@ public class ItemUtils {
                 .setDisplayName("&cLeave Party")
                 .build();
         player.getInventory().setItem(8, leave);
+    }
+
+    public static String convertToInvisibleString(String s) {
+        String hidden = "";
+        for (char c : s.toCharArray()) hidden += ChatColor.COLOR_CHAR+""+c;
+        return hidden;
     }
 }

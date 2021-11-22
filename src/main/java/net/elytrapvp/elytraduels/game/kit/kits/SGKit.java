@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.GameMode;
@@ -10,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class SGKit extends Kit {
 
-    public SGKit() {
-        super("SG");
+    public SGKit(ElytraDuels plugin) {
+        super(plugin, "SG");
         setIconMaterial(Material.FLINT_AND_STEEL);
         setGameMode(GameMode.SURVIVAL);
         setHunger(true);

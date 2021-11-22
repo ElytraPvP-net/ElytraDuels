@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -8,8 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class IronKit extends Kit {
 
-    public IronKit() {
-        super("Iron");
+    public IronKit(ElytraDuels plugin) {
+        super(plugin, "Iron");
         setIconMaterial(Material.IRON_SWORD);
         setHunger(true);
         setStartingSaturation(20);

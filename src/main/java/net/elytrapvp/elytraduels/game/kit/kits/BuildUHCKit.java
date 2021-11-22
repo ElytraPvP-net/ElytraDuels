@@ -1,5 +1,6 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import net.elytrapvp.elytraduels.utils.item.SkullBuilder;
@@ -11,8 +12,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class BuildUHCKit extends Kit {
 
-    public BuildUHCKit() {
-        super("Build UHC");
+    public BuildUHCKit(ElytraDuels plugin) {
+        super(plugin, "Build UHC");
         setGameMode(GameMode.SURVIVAL);
         setIconMaterial(Material.LAVA_BUCKET);
         setNaturalRegen(false);
