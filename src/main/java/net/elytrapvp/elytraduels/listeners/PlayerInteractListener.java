@@ -52,6 +52,7 @@ public class PlayerInteractListener implements Listener {
         // Checks for the ender pearl cooldown.
         if(event.getItem() != null && event.getItem().getType() == Material.ENDER_PEARL && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if(pearlCooldown.contains(player)) {
+                ChatUtils.chat(player, "&cThat item is currently onl cooldown.");
                 event.setCancelled(true);
                 return;
             }
@@ -107,6 +108,7 @@ public class PlayerInteractListener implements Listener {
         switch (item) {
             case "Golden Head":
                 if(pearlCooldown.contains(player)) {
+                    ChatUtils.chat(player, "&cThat item is currently onl cooldown.");
                     event.setCancelled(true);
                     return;
                 }
