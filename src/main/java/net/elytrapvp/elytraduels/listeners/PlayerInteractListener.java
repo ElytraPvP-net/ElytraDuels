@@ -108,7 +108,7 @@ public class PlayerInteractListener implements Listener {
         switch (item) {
             case "Golden Head":
                 if(pearlCooldown.contains(player)) {
-                    ChatUtils.chat(player, "&cThat item is currently onl cooldown.");
+                    ChatUtils.chat(player, "&cThat item is currently on cooldown.");
                     event.setCancelled(true);
                     return;
                 }
