@@ -160,6 +160,9 @@ public class KitEditorGUI extends CustomGUI {
         }
 
         if(item.getType() == Material.STAINED_GLASS_PANE || item.getType() == Material.SKULL_ITEM) {
+            if(item.getAmount() > 1) {
+                return;
+            }
             event.setCancelled(true);
             return;
         }
