@@ -12,8 +12,6 @@ public class IronKit extends Kit {
     public IronKit(ElytraDuels plugin) {
         super(plugin, "Iron");
         setIconMaterial(Material.IRON_SWORD);
-        setHunger(true);
-        setStartingSaturation(20);
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .setUnbreakable(true)
@@ -35,9 +33,9 @@ public class IronKit extends Kit {
         ItemStack bow = new ItemBuilder(Material.BOW)
                 .setUnbreakable(true)
                 .build();
-        ItemStack arrows = new ItemBuilder(Material.ARROW, 32).build();
+        ItemStack arrows = new ItemBuilder(Material.ARROW, 12).build();
 
-        ItemStack steak = new ItemBuilder(Material.COOKED_BEEF, 64).build();
+        ItemStack gapple = new ItemBuilder(Material.GOLDEN_APPLE, 1).build();
 
         addItem(39, helmet);
         addItem(38, chestplate);
@@ -46,7 +44,7 @@ public class IronKit extends Kit {
 
         addItem(0, sword);
         addItem(1, bow);
-        addItem(8, steak);
-        addItem(7, arrows);
+        addItem(2, gapple);
+        addItem(8, arrows);
     }
 }
