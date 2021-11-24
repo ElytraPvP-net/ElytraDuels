@@ -107,10 +107,6 @@ public class Kit {
                 continue;
             }
 
-            if(slot > 35) {
-                continue;
-            }
-
             ItemStack item =  items.get(slot);
 
             if(updatedKit.containsValue(item)) {
