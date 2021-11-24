@@ -14,7 +14,6 @@ public class DiamondKit extends Kit {
         super(plugin, "Diamond");
         setIconMaterial(Material.DIAMOND_SWORD);
 
-        setArrowPickup(true);
         setHunger(true);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
