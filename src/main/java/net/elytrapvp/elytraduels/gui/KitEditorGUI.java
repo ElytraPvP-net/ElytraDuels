@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -34,6 +35,7 @@ public class KitEditorGUI extends CustomGUI {
         for(Kit kit : plugin.getKitManager().getKits()) {
             setItem(i, new ItemBuilder(kit.getIconMaterial())
                     .setDisplayName("&a&l" + kit.getName())
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .addLore("").addLore("&aClick to edit!").build(),
                     (p, a) -> {
                         p.closeInventory();

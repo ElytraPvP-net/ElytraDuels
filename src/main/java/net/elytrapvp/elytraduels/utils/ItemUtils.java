@@ -7,6 +7,7 @@ import net.elytrapvp.elytraduels.utils.item.SkullBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 public class ItemUtils {
@@ -29,6 +30,7 @@ public class ItemUtils {
 
         ItemStack unranked = new ItemBuilder(Material.STONE_SWORD)
                 .setDisplayName("&aKits")
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                 .build();
         player.getInventory().setItem(3, unranked);
 
@@ -61,16 +63,19 @@ public class ItemUtils {
         if(party.getLeader().equals(player)) {
             ItemStack duel = new ItemBuilder(Material.STONE_SWORD)
                     .setDisplayName("&aDuel another party")
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
             player.getInventory().setItem(0, duel);
 
             ItemStack partyDuel = new ItemBuilder(Material.IRON_SWORD)
                     .setDisplayName("&aDuel Party Members")
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
             player.getInventory().setItem(1, partyDuel);
 
             ItemStack ffa = new ItemBuilder(Material.GOLD_SWORD)
                     .setDisplayName("&aFFA Duel")
+                    .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
             player.getInventory().setItem(2, ffa);
 

@@ -27,7 +27,8 @@ public class LeaderboardGUI extends CustomGUI {
         });
 
         ItemBuilder wins = new ItemBuilder(Material.IRON_SWORD)
-                .setDisplayName("&a&lWins Leaderboards");
+                .setDisplayName("&a&lWins Leaderboards")
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES);
         setItem(22, wins.build(), (p,a) -> {
             new LeaderboardGUI(plugin, "wins").open(p);
         });
