@@ -833,14 +833,14 @@ Maps:
             Y: 67.5
             Z: 5579.5
             Pitch: 0
-            Yaw: 135
+            Yaw: -45
           '2':
             World: world
             X: 2021.5
             Y: 68.5
             Z: 5621.5
             Pitch: 0
-            Yaw: -45
+            Yaw: 135
       '2':
         spawns:
           '1':
@@ -849,14 +849,14 @@ Maps:
             Y: 67.5
             Z: 5579.5
             Pitch: 0
-            Yaw: 135
+            Yaw: -45
           '2':
             World: world
             X: 2221.5
             Y: 68.5
             Z: 5621.5
             Pitch: 0
-            Yaw: -45
+            Yaw: 135
       '3':
         spawns:
           '1':
@@ -865,14 +865,14 @@ Maps:
             Y: 67.5
             Z: 5579.5
             Pitch: 0
-            Yaw: 135
+            Yaw: -45
           '2':
             World: world
             X: 2421.5
             Y: 68.5
             Z: 5621.5
             Pitch: 0
-            Yaw: -45
+            Yaw: 135
   final-desert:
     name: Desert
     builders:
