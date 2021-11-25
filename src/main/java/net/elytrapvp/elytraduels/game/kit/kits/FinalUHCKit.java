@@ -15,6 +15,7 @@ public class FinalUHCKit extends Kit {
     public FinalUHCKit(ElytraDuels plugin) {
         super(plugin, "Final UHC");
         setIconMaterial(Material.DIAMOND_HELMET);
+        setGameMode(GameMode.SURVIVAL);
         setNaturalRegen(false);
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
