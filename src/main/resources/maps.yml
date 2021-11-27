@@ -1323,8 +1323,8 @@ Maps:
             Z: 6800.5
             Pitch: 0
             Yaw: 90
-  condal1:
-    name: Condal1
+  valhalla:
+    name: Valhalla
     builders:
       - Condal
       - partykid4
@@ -1379,8 +1379,8 @@ Maps:
             Z: 7183.5
             Pitch: 0
             Yaw: 0
-  condal2:
-    name: Condal2
+  empire:
+    name: Empire
     builders:
       - Condal
       - RMicky
@@ -1435,8 +1435,8 @@ Maps:
             Z: 7383.5
             Pitch: 0
             Yaw: -45
-  condal3:
-    name: Condal3
+  eclypse:
+    name: Eclypse
     builders:
       - Condal
       - RMicky
