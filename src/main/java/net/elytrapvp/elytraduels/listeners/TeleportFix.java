@@ -26,6 +26,10 @@ public class TeleportFix implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
+        // Prevent players from "respawning" when using ender pearls.
+        if(event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
+            return;
+        }
 
         final Player player = event.getPlayer();
         final int visibleDistance = server.getViewDistance() * 16;
