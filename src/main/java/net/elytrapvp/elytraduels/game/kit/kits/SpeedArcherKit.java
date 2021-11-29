@@ -14,7 +14,7 @@ public class SpeedArcherKit extends Kit {
 
     public SpeedArcherKit(ElytraDuels plugin) {
         super(plugin, "Speed Archer");
-        setIconMaterial(Material.ARROW);
+        setIconMaterial(Material.FEATHER);
         setRangedDamage(true);
         setNaturalRegen(false);
 
