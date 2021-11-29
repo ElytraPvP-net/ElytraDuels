@@ -28,6 +28,7 @@ public class KitManager {
         Kit sg = new SGKit(plugin);
         Kit finalUHC = new FinalUHCKit(plugin);
         Kit sumo = new SumoKit(plugin);
+        Kit archer = new ArcherKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);
@@ -43,7 +44,26 @@ public class KitManager {
         kits.add(sg);
         kits.add(finalUHC);
         kits.add(sumo);
+        kits.add(archer);
 
+        // Season 0 Ranked Kits
+        rankedKits.add(speedArcher);
+        rankedKits.add(bow);
+        rankedKits.add(iron);
+        rankedKits.add(diamond);
+        rankedKits.add(bowSpleef);
+        rankedKits.add(classic);
+        rankedKits.add(noDebuff);
+        rankedKits.add(op);
+        rankedKits.add(blitz);
+        rankedKits.add(buildUHC);
+        rankedKits.add(cactus);
+        rankedKits.add(sg);
+        rankedKits.add(finalUHC);
+        rankedKits.add(sumo);
+
+        // Current Planned Ranked Kits for Season 1. Subject to change.
+        /*
         rankedKits.add(bow);
         rankedKits.add(bowSpleef);
         rankedKits.add(noDebuff);
@@ -56,6 +76,7 @@ public class KitManager {
         rankedKits.add(iron);
         rankedKits.add(diamond);
         rankedKits.add(finalUHC);
+         */
     }
 
     /**
@@ -81,8 +102,11 @@ public class KitManager {
         return kits;
     }
 
-
+    /**
+     * Get all the ranked kits.
+     * @return All ranked kits.
+     */
     public Set<Kit> getRankedKits() {
-        return kits;
+        return rankedKits;
     }
 }
