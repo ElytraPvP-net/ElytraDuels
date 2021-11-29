@@ -6,14 +6,11 @@ import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import net.elytrapvp.elytraduels.utils.item.SkullBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -28,12 +25,29 @@ public class KitEditorGUI extends CustomGUI {
     private String kit = "none";
 
     public KitEditorGUI(ElytraDuels plugin, Player player) {
-        super(27, "Kit Editor");
+        super(54, "Kit Editor");
         this.plugin = plugin;
+
+        int[] fillers = {1,2,3,4,5,6,7,8,45,46,47,48,49,50,51,52,53};
+        for(int i : fillers) {
+            ItemStack filler = new ItemStack(Material.STAINED_GLASS_PANE, 1, DyeColor.GRAY.getData());
+            ItemMeta meta = filler.getItemMeta();
+            meta.setDisplayName(" ");
+            filler.setItemMeta(meta);
+            setItem(i, filler);
+        }
+
+        ItemStack back = new SkullBuilder("edf5c2f893bd3f89ca40703ded3e42dd0fbdba6f6768c8789afdff1fa78bf6")
+                .setDisplayName("&cBack")
+                .build();
+        setItem(0, back, (p, a) -> {
+            p.closeInventory();
+            new SettingsGUI(plugin, p).open(p);
+        });
 
         int i = 0;
         for(Kit kit : plugin.getKitManager().getKits()) {
-            setItem(i, new ItemBuilder(kit.getIconMaterial())
+            setItem(i + 9, new ItemBuilder(kit.getIconMaterial())
                     .setDisplayName("&a&l" + kit.getName())
                     .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .addLore("").addLore("&aClick to edit!").build(),
