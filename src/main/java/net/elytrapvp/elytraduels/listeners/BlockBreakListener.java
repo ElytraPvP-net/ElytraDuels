@@ -50,7 +50,7 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        if(event.getBlock().getType() == Material.LEAVES) {
+        if(event.getBlock().getType() == Material.LEAVES || event.getBlock().getType() == Material.WOOL) {
             return;
         }
 
