@@ -16,6 +16,7 @@ public class SGKit extends Kit {
         setIconMaterial(Material.FLINT_AND_STEEL);
         setGameMode(GameMode.SURVIVAL);
         setHunger(true);
+        setKnockback("rod");
 
         setStartingSaturation(10);
 

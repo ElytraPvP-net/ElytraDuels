@@ -17,6 +17,7 @@ public class FinalUHCKit extends Kit {
         setIconMaterial(Material.DIAMOND_HELMET);
         setGameMode(GameMode.SURVIVAL);
         setNaturalRegen(false);
+        setKnockback("rod");
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)

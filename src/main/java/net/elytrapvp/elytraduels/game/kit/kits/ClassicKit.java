@@ -13,6 +13,7 @@ public class ClassicKit extends Kit {
     public ClassicKit(ElytraDuels plugin) {
         super(plugin, "Classic");
         setIconMaterial(Material.FISHING_ROD);
+        setKnockback("rod");
 
         ItemStack helmet = new ItemBuilder(Material.IRON_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
