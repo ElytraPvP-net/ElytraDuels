@@ -18,6 +18,7 @@ public class BuildUHCKit extends Kit {
         setIconMaterial(Material.LAVA_BUCKET);
         setNaturalRegen(false);
         setStrongGapple(true);
+        setKnockback("uhc");
 
         ItemStack helmet = new ItemBuilder(Material.DIAMOND_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)

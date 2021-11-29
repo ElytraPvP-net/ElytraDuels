@@ -6,9 +6,11 @@ import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import net.elytrapvp.elytraduels.utils.item.SkullBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import pt.foxspigot.jar.knockback.KnockbackModule;
 
 public class ItemUtils {
     public static void giveLobbyItems(Player player) {
@@ -22,6 +24,9 @@ public class ItemUtils {
         player.getInventory().setChestplate(null);
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
+
+        // Reset knockback
+        ((CraftPlayer) player).getHandle().setKnockback(KnockbackModule.getByName("default"));
 
         ItemStack spectate = new ItemBuilder(Material.NETHER_STAR)
                 .setDisplayName("&aSpectate")
