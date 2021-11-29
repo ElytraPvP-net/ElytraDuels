@@ -21,6 +21,7 @@ public class PearlKit extends Kit {
         setDoDamage(false);
         setIconMaterial(Material.ENDER_PEARL);
         setGameMode(GameMode.SURVIVAL);
+        setVoidLevel(0);
 
         ItemStack helmet = new ItemBuilder(Material.LEATHER_HELMET)
                 .setUnbreakable(true)
