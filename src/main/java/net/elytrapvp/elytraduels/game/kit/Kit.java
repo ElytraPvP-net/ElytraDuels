@@ -10,6 +10,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -332,6 +333,12 @@ public class Kit {
     public boolean naturalRegen() {
         return naturalRegen;
     }
+
+    /**
+     * Called when a block is placed in game.
+     * @param event BlockPlaceEvent
+     */
+    public void onBlockPlace(BlockPlaceEvent event) {}
 
     /**
      * Set if players should be able to pickup arrows.

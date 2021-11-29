@@ -30,6 +30,7 @@ public class BlockPlaceListener implements Listener {
             return;
         }
 
+        game.getKit().onBlockPlace(event);
         game.addBlock(event.getBlock().getLocation(), Material.AIR);
     }
 }
