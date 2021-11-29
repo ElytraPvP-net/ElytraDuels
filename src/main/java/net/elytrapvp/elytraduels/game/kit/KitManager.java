@@ -29,6 +29,7 @@ public class KitManager {
         Kit finalUHC = new FinalUHCKit(plugin);
         Kit sumo = new SumoKit(plugin);
         Kit archer = new ArcherKit(plugin);
+        Kit peal = new PearlKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);
@@ -45,6 +46,7 @@ public class KitManager {
         kits.add(finalUHC);
         kits.add(sumo);
         kits.add(archer);
+        kits.add(peal);
 
         // Season 0 Ranked Kits
         rankedKits.add(speedArcher);
