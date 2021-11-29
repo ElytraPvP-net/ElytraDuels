@@ -17,6 +17,7 @@ public class BlitzKit extends Kit {
         super(plugin, "Blitz");
         setIconMaterial(Material.STONE_SWORD);
         setGameMode(GameMode.SURVIVAL);
+        setKnockback("nospeed");
 
         ItemStack helmet = new ItemBuilder(Material.CHAINMAIL_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1)
