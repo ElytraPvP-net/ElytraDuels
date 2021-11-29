@@ -240,7 +240,7 @@ public class PlayerInteractListener implements Listener {
                 break;
             case "Settings":
                 event.setCancelled(true);
-                new SettingsGUI(plugin).open(player);
+                new SettingsGUI(plugin, player).open(player);
                 break;
         }
 
