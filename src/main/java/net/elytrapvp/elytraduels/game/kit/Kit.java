@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.game.kit;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
+import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
@@ -336,9 +337,10 @@ public class Kit {
 
     /**
      * Called when a block is placed in game.
+     * @param game Current Game
      * @param event BlockPlaceEvent
      */
-    public void onBlockPlace(BlockPlaceEvent event) {}
+    public void onBlockPlace(Game game, BlockPlaceEvent event) {}
 
     /**
      * Set if players should be able to pickup arrows.

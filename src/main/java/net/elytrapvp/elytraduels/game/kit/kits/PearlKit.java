@@ -1,6 +1,7 @@
 package net.elytrapvp.elytraduels.game.kit.kits;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -54,7 +55,7 @@ public class PearlKit extends Kit {
     }
 
     @Override
-    public void onBlockPlace(BlockPlaceEvent event) {
+    public void onBlockPlace(Game game, BlockPlaceEvent event) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getBlock().setType(Material.AIR), 100);
     }
 }
