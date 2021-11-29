@@ -121,6 +121,7 @@ Maps:
     kits:
       - speed archer
       - no debuff
+      - archer
     arenas:
       '1':
         spawns:
@@ -177,6 +178,7 @@ Maps:
     kits:
       - speed archer
       - no debuff
+      - archer
     arenas:
       '1':
         spawns:
