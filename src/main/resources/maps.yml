@@ -1500,6 +1500,12 @@ Maps:
       - partykid4
     kits:
       - pearl
+      - block sumo
+    center:
+      World: world
+      X: 2000.5
+      Y: 63.5
+      Z: 7800.5
     arenas:
       '1':
         spawns:
@@ -1547,5 +1553,5 @@ Maps:
             X: 2410.5
             Y: 66.5
             Z: 7800.5
-            Pitch: 90
-            Yaw: 0
+            Pitch: 0
+            Yaw: 90
