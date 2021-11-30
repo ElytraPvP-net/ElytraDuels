@@ -65,6 +65,7 @@ public class PlayerMoveListener implements Listener {
 
             game.playerKilled(player);
             player.teleport(game.getArena().getSpawns().get(0));
+            player.setAllowFlight(true);
             player.setFlying(true);
         }
     }
