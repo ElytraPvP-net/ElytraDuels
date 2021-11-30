@@ -1522,8 +1522,8 @@ Maps:
             X: 2010.5
             Y: 66.5
             Z: 7800.5
-            Pitch: 90
-            Yaw: 0
+            Pitch: 0
+            Yaw: 90
       '2':
         spawns:
           '1':
@@ -1538,8 +1538,8 @@ Maps:
             X: 2210.5
             Y: 66.5
             Z: 7800.5
-            Pitch: 90
-            Yaw: 0
+            Pitch: 0
+            Yaw: 90
       '3':
         spawns:
           '1':
