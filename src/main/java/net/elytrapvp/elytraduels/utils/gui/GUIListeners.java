@@ -19,12 +19,6 @@ public class GUIListeners implements Listener {
             return;
         }
 
-        // Prevent number keys from working.
-        if(e.getClick() == ClickType.NUMBER_KEY) {
-            e.setCancelled(true);
-            return;
-        }
-
         Player p = (Player) e.getWhoClicked();
         UUID pU = p.getUniqueId();
         UUID iU = CustomGUI.getOpenInventories().get(pU);
@@ -39,6 +33,12 @@ public class GUIListeners implements Listener {
         gui.onClick(e);
 
         CustomGUI.ClickAction action = gui.getActions().get(e.getSlot());
+
+        // Prevent number keys from working.
+        if(e.getClick() == ClickType.NUMBER_KEY) {
+            e.setCancelled(true);
+            return;
+        }
 
         if(action != null && e.getAction() != InventoryAction.SWAP_WITH_CURSOR && e.getAction() != InventoryAction.HOTBAR_SWAP && e.getAction() != InventoryAction.HOTBAR_MOVE_AND_READD) {
             action.click(p, e.getClick());
