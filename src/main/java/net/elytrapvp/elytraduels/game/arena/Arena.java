@@ -4,6 +4,7 @@ import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.arena.map.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class Arena {
     private final Map map;
     private final List<Location> spawns = new ArrayList<>();
+    private Location center;
 
     /**
      * Creates an arena object.
@@ -42,6 +44,26 @@ public class Arena {
 
             spawns.add(new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch));
         }
+
+        ConfigurationSection section2 = maps.getConfigurationSection(path + "center");
+        if(section2 == null) {
+            center = spawns.get(0);
+        }
+        else {
+            String world = maps.getString(path + "center" + ".World");
+            double x = maps.getDouble(path + "center" + ".X");
+            double y = maps.getDouble(path + "center" + ".Y");
+            double z = maps.getDouble(path + "center" + ".Z");
+            center = new Location(Bukkit.getWorld(world), x, y ,z);
+        }
+    }
+
+    /**
+     * Get the center of a map.
+     * @return Center location of the map.
+     */
+    public Location getCenter() {
+        return center;
     }
 
     /**

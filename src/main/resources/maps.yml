@@ -1502,13 +1502,13 @@ Maps:
       - pearl
       - block sumo
       - bow fight
-    center:
-      World: world
-      X: 2000.5
-      Y: 63.5
-      Z: 7800.5
     arenas:
       '1':
+        center:
+          World: world
+          X: 2000.5
+          Y: 63.5
+          Z: 7800.5
         spawns:
           '1':
             World: world
@@ -1525,6 +1525,11 @@ Maps:
             Pitch: 0
             Yaw: 90
       '2':
+        center:
+          World: world
+          X: 2200.5
+          Y: 63.5
+          Z: 7800.5
         spawns:
           '1':
             World: world
@@ -1541,6 +1546,11 @@ Maps:
             Pitch: 0
             Yaw: 90
       '3':
+        center:
+          World: world
+          X: 2400.5
+          Y: 63.5
+          Z: 7800.5
         spawns:
           '1':
             World: world
