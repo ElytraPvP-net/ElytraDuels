@@ -13,6 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PartyCMD extends AbstractCommand {
     private final ElytraDuels plugin;
 
@@ -64,6 +67,7 @@ public class PartyCMD extends AbstractCommand {
                 ChatUtils.chat(sender, "&a  /party disband");
                 ChatUtils.chat(sender, "&a  /party invite [player]");
                 ChatUtils.chat(sender, "&a  /party leave");
+                ChatUtils.chat(sender, "&a  /party list");
                 ChatUtils.chat(sender, "&a&m---------------------------------------------------");
                 break;
 
@@ -139,6 +143,25 @@ public class PartyCMD extends AbstractCommand {
                 args[0] = "";
                 party.broadcast("&a&lParty &8» &f" + player.getName() + "&8: &a" + StringUtils.join(args, " "));
 
+                break;
+            case "list":
+                if(party == null) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
+                    return;
+                }
+
+                List<String> members = new ArrayList<>();
+                for(Player member : party.getMembers()) {
+                    members.add(member.getName());
+                }
+
+                ChatUtils.chat(sender, "&a&m---------------------------------------------------");
+                ChatUtils.centeredChat(sender, "&a&lParty Members");
+                ChatUtils.chat(sender, "");
+                ChatUtils.chat(sender, "&aLeader &7» &f" + party.getLeader().getName());
+                ChatUtils.chat(sender, "&aMembers &7[" + members.size() + "] » &f" + StringUtils.join(members, ", "));
+                ChatUtils.chat(sender, "");
+                ChatUtils.chat(sender, "&a&m---------------------------------------------------");
                 break;
         }
     }
