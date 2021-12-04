@@ -105,13 +105,24 @@ public class PartyCMD extends AbstractCommand {
                     return;
                 }
 
+                if(party.getInvites().contains(t)) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou already have a pending invite to that person.");
+                    return;
+                }
+
                 CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(t);
                 if(!customPlayer.getPartyInvites()) {
                     ChatUtils.chat(sender, "&cError &8» &cYou cannot invite that player to a party.");
                     return;
                 }
 
-                new PartyRequest(plugin, player, t).open(t);
+                //new PartyRequest(plugin, player, t).open(t);
+                party.addInvite(t);
+                ChatUtils.chat(t, "&a&m---------------------------------------------------");
+                ChatUtils.chat(t, "&aYou have been invited to join &f" + player.getName() + "&a's party!");
+                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tellraw " + t.getName() +
+                        " [{\"text\":\"[Accept]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party accept "  + player.getName() + "\"}},{\"text\":\" / \",\"color\":\"gray\"},{\"text\":\"[Decline]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party decline " +  player.getName() + "\"}}]");
+                ChatUtils.chat(t, "&a&m---------------------------------------------------");
                 party.broadcast("&a&lParty &8» &f" + t.getName() + " &ahas been invited to the party.");
                 break;
 
@@ -196,6 +207,59 @@ public class PartyCMD extends AbstractCommand {
                 party.setLeader(target);
                 party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas been promoted to party leader.");
 
+                break;
+            case "accept":
+                if(args.length == 1) {
+                    ChatUtils.chat(sender, "&cUsage &8» &c/party accept [player]");
+                    return;
+                }
+
+                Player ta = Bukkit.getPlayer(args[1]);
+                if(ta == null) {
+                    ChatUtils.chat(sender, "&cError &8» &cThat player is not online");
+                    return;
+                }
+
+                Party party1 = plugin.getPartyManager().getParty(ta);
+                if(party1 == null) {
+                    ChatUtils.chat(sender, "&cError &8» &cThat player is not in a party");
+                    return;
+                }
+
+                if(!party1.getInvites().contains(player)) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou do not have an invite to that party.");
+                    return;
+                }
+
+                party1.addPlayer(player);
+                party1.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas joined the party.");
+                break;
+            case "decline":
+                if(args.length == 1) {
+                    ChatUtils.chat(sender, "&cUsage &8» &c/party decline [player]");
+                    return;
+                }
+
+                Player tar = Bukkit.getPlayer(args[1]);
+                if(tar == null) {
+                    ChatUtils.chat(sender, "&cError &8» &cThat player is not online");
+                    return;
+                }
+
+                Party party2 = plugin.getPartyManager().getParty(tar);
+                if(party2 == null) {
+                    ChatUtils.chat(sender, "&cError &8» &cThat player is not in a party");
+                    return;
+                }
+
+                if(!party2.getInvites().contains(player)) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou do not have an invite to that party.");
+                    return;
+                }
+
+                party2.getInvites().remove(player);
+                party2.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas declined the invite.");
+                ChatUtils.chat(sender, "&cYou have declined the invite.");
                 break;
         }
     }

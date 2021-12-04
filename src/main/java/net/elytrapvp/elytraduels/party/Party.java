@@ -4,6 +4,7 @@ import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Party {
     private Player leader;
     private final Set<Player> members = new HashSet<>();
     private final Set<Player> partyChatToggled = new HashSet<>();
+    private final Set<Player> invites = new HashSet<>();
 
     /**
      * Create a new party.
@@ -32,12 +34,25 @@ public class Party {
     }
 
     /**
+     * Get a player to the invite list.
+     * @param player Player to add.
+     */
+    public void addInvite(Player player) {
+        invites.add(player);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+           invites.remove(player);
+        }, 1200);
+    }
+
+    /**
      * Add a player to the party.
      * @param player Player to add.
      */
     public void addPlayer(Player player) {
         members.add(player);
         ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+        invites.remove(player);
     }
 
     /**
@@ -59,6 +74,14 @@ public class Party {
         }
 
         plugin.getPartyManager().disbandParty(this);
+    }
+
+    /**
+     * Get all current invites.
+     * @return All current invites.
+     */
+    public Set<Player> getInvites() {
+        return invites;
     }
 
     /**
