@@ -116,7 +116,6 @@ public class PartyCMD extends AbstractCommand {
                     return;
                 }
 
-                //new PartyRequest(plugin, player, t).open(t);
                 party.addInvite(t);
                 ChatUtils.chat(t, "&a&m---------------------------------------------------");
                 ChatUtils.chat(t, "&aYou have been invited to join &f" + player.getName() + "&a's party!");
@@ -261,64 +260,6 @@ public class PartyCMD extends AbstractCommand {
                 party2.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas declined the invite.");
                 ChatUtils.chat(sender, "&cYou have declined the invite.");
                 break;
-        }
-    }
-
-    private class PartyRequest extends CustomGUI {
-        private final ElytraDuels plugin;
-        private final Player sender;
-        private final Player target;
-        private boolean denied;
-
-
-        public PartyRequest(ElytraDuels plugin, Player sender, Player target) {
-            super(9, "Party Request - " + sender.getName());
-            this.plugin = plugin;
-            denied = false;
-            this.sender = sender;
-            this.target = target;
-
-            ItemStack accept = new ItemBuilder(Material.EMERALD_BLOCK)
-                    .setDisplayName("&aAccept")
-                    .build();
-            int[] acceptSlots = {0,1,2,3};
-
-            for(int i : acceptSlots) {
-                setItem(i, accept, (p, a) -> accept());
-            }
-
-            ItemStack deny = new ItemBuilder(Material.REDSTONE_BLOCK)
-                    .setDisplayName("&cDecline")
-                    .build();
-            int[] denySlots = {5,6,7,8};
-
-            for(int i : denySlots) {
-                setItem(i, deny, (p, a) -> deny());
-            }
-        }
-
-        private void accept() {
-            Party party = plugin.getPartyManager().getParty(sender);
-            party.addPlayer(target);
-            party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas joined the party.");
-            denied = true;
-            target.closeInventory();
-        }
-
-        private void deny() {
-            if(denied) {
-                return;
-            }
-
-            denied = true;
-            target.closeInventory();
-            Party party = plugin.getPartyManager().getParty(sender);
-            party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas declined the invitation.");
-        }
-
-        @Override
-        public void onClose(Player p) {
-            deny();
         }
     }
 }
