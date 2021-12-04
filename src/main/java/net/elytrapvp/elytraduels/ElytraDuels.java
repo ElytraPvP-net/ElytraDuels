@@ -66,8 +66,6 @@ public final class ElytraDuels extends JavaPlugin {
 
         new ScoreboardUpdate().runTaskTimer(this, 20L, 20L);
         new AFKTimer(this).runTaskTimer(this, 5 * 20, 5 * 20);
-
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @Override

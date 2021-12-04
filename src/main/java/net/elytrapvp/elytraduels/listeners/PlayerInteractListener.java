@@ -165,16 +165,6 @@ public class PlayerInteractListener implements Listener {
                 event.setCancelled(true);
                 break;
 
-            case "Back to Lobby":
-                event.setCancelled(true);
-
-                ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF("lobby");
-
-                player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-                break;
-
             case "Create a party":
                 event.setCancelled(true);
                 plugin.getPartyManager().createParty(player);
