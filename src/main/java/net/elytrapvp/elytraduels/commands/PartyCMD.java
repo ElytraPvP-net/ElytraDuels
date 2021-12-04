@@ -68,6 +68,7 @@ public class PartyCMD extends AbstractCommand {
                 ChatUtils.chat(sender, "&a  /party invite [player]");
                 ChatUtils.chat(sender, "&a  /party leave");
                 ChatUtils.chat(sender, "&a  /party list");
+                ChatUtils.chat(sender, "&a  /party promote");
                 ChatUtils.chat(sender, "&a&m---------------------------------------------------");
                 break;
 
@@ -162,6 +163,32 @@ public class PartyCMD extends AbstractCommand {
                 ChatUtils.chat(sender, "&aMembers &7[" + members.size() + "] » &f" + StringUtils.join(members, ", "));
                 ChatUtils.chat(sender, "");
                 ChatUtils.chat(sender, "&a&m---------------------------------------------------");
+                break;
+            case "promote":
+                if(party == null) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
+                    return;
+                }
+
+                if(args.length == 1) {
+                    ChatUtils.chat(sender, "&cUsage &8» &c/party promote [player]");
+                    return;
+                }
+
+                Player target = Bukkit.getPlayer(args[1]);
+                if(target == null || !party.getPlayers().contains(target)) {
+                    ChatUtils.chat(sender, "&cError &8» &cThat player is not in your party!");
+                    return;
+                }
+
+                if(target.equals(player)) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou are already the party leader!");
+                    return;
+                }
+
+                party.setLeader(target);
+                party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas been promoted to party leader.");
+
                 break;
         }
     }

@@ -119,7 +119,9 @@ public class Party {
      * @param leader New party leader.
      */
     public void setLeader(Player leader) {
+        members.add(getLeader());
         this.leader = leader;
+        members.remove(leader);
     }
 
     /**
