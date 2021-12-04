@@ -8,6 +8,7 @@ import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -18,10 +19,9 @@ public class PlayerJoinListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
         new LobbyScoreboard(plugin, player);
         player.teleport(LocationUtils.getSpawn(plugin));
         player.setGameMode(GameMode.ADVENTURE);
