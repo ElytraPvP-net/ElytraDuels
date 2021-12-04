@@ -39,6 +39,93 @@ public class DuelCMD extends AbstractCommand {
         }
 
         Player p = (Player) sender;
+
+        if(args[0].equalsIgnoreCase("accept")) {
+            Player opponent = Bukkit.getPlayer(args[1]);
+            if(opponent == null) {
+                ChatUtils.chat(sender, "&cError &8» &cThat player is not online.");
+                return;
+            }
+
+            if(!plugin.getDuelManager().getDuelRequests().containsKey(opponent) || !plugin.getDuelManager().getDuelRequests().get(opponent).equals(p)) {
+                ChatUtils.chat(sender, "&cError &8» &cThat person has not sent a duel request.");
+                return;
+            }
+
+            Game game = plugin.getGameManager().getGame(p);
+            if(game != null) {
+                ChatUtils.chat(sender, "&cError &8» &cYou are in a match already.");
+                return;
+            }
+
+            Game game2 = plugin.getGameManager().getGame(opponent);
+            if(game2 != null) {
+                ChatUtils.chat(sender, "&cError &8» &cThey are in a match already.");
+                return;
+            }
+
+            Party targetParty = plugin.getPartyManager().getParty(opponent);
+            if(targetParty != null && targetParty.getMembers().contains(opponent)) {
+                ChatUtils.chat(sender, "&cError &8» &cThat player is in a party.");
+                return;
+            }
+
+            CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(opponent);
+            if(!customPlayer.getDuelRequests()) {
+                ChatUtils.chat(sender, "&cError &8» &cYou cannot request to duel that player.");
+                return;
+            }
+
+            ChatUtils.chat(sender, "&aDuel request has been accepted.");
+
+            Party senderParty = plugin.getPartyManager().getParty(p);
+
+            Kit kit = plugin.getDuelManager().getDuelKit(p);
+            Game game3 = plugin.getGameManager().createGame(kit, GameType.UNRANKED);
+
+            if(senderParty == null) {
+                game3.addPlayer(p);
+            }
+            else {
+                game3.addPlayers(senderParty.getPlayers());
+            }
+
+            Party targetParty2 = plugin.getPartyManager().getParty(opponent);
+            if(targetParty == null) {
+                game3.addPlayer(opponent);
+            }
+            else {
+                game3.addPlayers(targetParty.getPlayers());
+            }
+
+            // Remove players from queue.
+            plugin.getQueueManager().removePlayer(opponent);
+
+            game3.start();
+            return;
+        }
+        else if(args[0].equalsIgnoreCase("decline")) {
+            Player opponent = Bukkit.getPlayer(args[1]);
+            if(opponent == null) {
+                ChatUtils.chat(sender, "&cError &8» &cThat player is not online.");
+                return;
+            }
+
+            if(!plugin.getDuelManager().getDuelRequests().containsKey(opponent) || !plugin.getDuelManager().getDuelRequests().get(opponent).equals(p)) {
+                ChatUtils.chat(sender, "&cError &8» &cThat person has not sent a duel request.");
+                return;
+            }
+
+            for(Player pl : plugin.getDuelManager().getDuelRequests().keySet()) {
+                if(plugin.getDuelManager().getDuelRequests().get(pl).equals(p)) {
+                    plugin.getDuelManager().getDuelRequests().remove(p);
+                    ChatUtils.chat(pl, "&c&l(&c!&c&l) &f" + p.getName() + " &cdeclined your duel request.");
+                    ChatUtils.chat(p, "&aYou have declined &f" + pl.getName() + "&a's duel request.");
+                }
+            }
+            return;
+        }
+
         Player t = Bukkit.getPlayerExact(args[0]);
 
         if(t == null) {
@@ -92,8 +179,14 @@ public class DuelCMD extends AbstractCommand {
             return;
         }
 
+        plugin.getDuelManager().addDuelRequest(p, t, k);
         ChatUtils.chat(p, "&a&l(&7!&a&l) &aDuel request sent.");
-        new DuelRequest(p, t, k).open(t);
+        ChatUtils.chat(t, "&a&m---------------------------------------------------");
+        ChatUtils.chat(t, "&f" + t.getName() + " &awants to duel you in &f" + k.getName() + "&a!");
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tellraw " + t.getName() +
+                " [{\"text\":\"[Accept]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/duel accept "  + p.getName() + "\"}},{\"text\":\" / \",\"color\":\"gray\"},{\"text\":\"[Decline]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/duel decline " +  p.getName() + "\"}}]");
+        ChatUtils.chat(t, "&a&m---------------------------------------------------");
+        //new DuelRequest(p, t, k).open(t);
     }
 
     private class DuelRequest extends CustomGUI {

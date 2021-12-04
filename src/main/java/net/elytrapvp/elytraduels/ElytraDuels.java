@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels;
 
 import net.elytrapvp.elytraduels.commands.AbstractCommand;
 import net.elytrapvp.elytraduels.customplayer.CustomPlayerManager;
+import net.elytrapvp.elytraduels.game.DuelManager;
 import net.elytrapvp.elytraduels.game.GameManager;
 import net.elytrapvp.elytraduels.game.arena.ArenaManager;
 import net.elytrapvp.elytraduels.game.kit.KitManager;
@@ -24,6 +25,7 @@ public final class ElytraDuels extends JavaPlugin {
     private QueueManager queueManager;
     private SettingsManager settingsManager;
     private LeaderboardManager leaderboardManager;
+    private DuelManager duelManager;
 
     @Override
     public void onEnable() {
@@ -36,6 +38,7 @@ public final class ElytraDuels extends JavaPlugin {
         queueManager = new QueueManager(this);
         customPlayerManager = new CustomPlayerManager(this);
         leaderboardManager = new LeaderboardManager(this);
+        duelManager = new DuelManager(this);
 
         AbstractCommand.registerCommands(this);
 
@@ -104,5 +107,9 @@ public final class ElytraDuels extends JavaPlugin {
 
     public LeaderboardManager getLeaderboardManager() {
         return leaderboardManager;
+    }
+
+    public DuelManager getDuelManager() {
+        return duelManager;
     }
 }
