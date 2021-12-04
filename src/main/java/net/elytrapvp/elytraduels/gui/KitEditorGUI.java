@@ -24,7 +24,7 @@ public class KitEditorGUI extends CustomGUI {
     private final ElytraDuels plugin;
     private String kit = "none";
 
-    public KitEditorGUI(ElytraDuels plugin, Player player) {
+    public KitEditorGUI(ElytraDuels plugin) {
         super(54, "Kit Editor");
         this.plugin = plugin;
 
@@ -70,7 +70,7 @@ public class KitEditorGUI extends CustomGUI {
                 .build();
         setItem(0, back, (p, a) -> {
             p.closeInventory();
-            new KitEditorGUI(plugin, p).open(p);
+            new KitEditorGUI(plugin).open(p);
         });
 
         ItemStack save = new SkullBuilder("4312ca4632def5ffaf2eb0d9d7cc7b55a50c4e3920d90372aab140781f5dfbc4")

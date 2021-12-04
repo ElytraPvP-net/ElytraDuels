@@ -23,7 +23,7 @@ public class SettingsGUI extends CustomGUI {
             setItem(i, filler);
         }
 
-        setItem(40, new ItemBuilder(Material.ANVIL).setDisplayName("&a&lKit Editor").build(), (p, a) -> new KitEditorGUI(plugin, p).open(p));
+        setItem(40, new ItemBuilder(Material.ANVIL).setDisplayName("&a&lKit Editor").build(), (p, a) -> new KitEditorGUI(plugin).open(p));
     }
 
 }
