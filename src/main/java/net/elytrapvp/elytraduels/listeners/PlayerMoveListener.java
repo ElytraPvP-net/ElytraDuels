@@ -59,6 +59,7 @@ public class PlayerMoveListener implements Listener {
 
             if(game.getSpectators().contains(player)) {
                 player.teleport(game.getArena().getSpawns().get(0));
+                player.setAllowFlight(true);
                 player.setFlying(true);
                 return;
             }

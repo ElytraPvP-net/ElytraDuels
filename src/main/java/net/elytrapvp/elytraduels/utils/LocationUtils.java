@@ -3,7 +3,6 @@ package net.elytrapvp.elytraduels.utils;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.TNTPrimed;
 
 public class LocationUtils {
     /**

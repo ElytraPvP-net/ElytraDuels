@@ -57,8 +57,6 @@ public class PlayerToggleSneakListener implements Listener {
                 y = -0.8;
             }
 
-            //Vector direction = entity.getLocation().toVector().subtract(player.getLocation().toVector()).normalize().setY(0.8);
-            //Vector direction = entity.getLocation().toVector().subtract(player.getLocation().toVector()).normalize().multiply(0.5).setY(y);
             Location location = player.getLocation();
             location.setY(player.getLocation().getY() - 2);
             Vector direction = entity.getLocation().toVector().subtract(location.toVector()).normalize().multiply(new Vector(0.9, 1.10, 0.9));

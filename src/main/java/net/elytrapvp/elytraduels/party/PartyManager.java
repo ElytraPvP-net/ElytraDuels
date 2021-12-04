@@ -1,13 +1,10 @@
 package net.elytrapvp.elytraduels.party;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
-import net.elytrapvp.elytraduels.utils.ItemUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Manages all existing party.

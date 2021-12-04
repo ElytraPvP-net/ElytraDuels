@@ -4,7 +4,6 @@ import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.arena.map.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 

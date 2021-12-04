@@ -2,7 +2,6 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -35,33 +34,6 @@ public class EntityExplodeListener implements Listener {
         if(!tnt.getSource().isValid()) {
             return;
         }
-
-        /*
-        if((tnt.getSource() instanceof Arrow)) {
-            return;
-        }
-
-        Arrow arrow = (Arrow) tnt.getSource();
-
-        if(arrow.getShooter() == null) {
-            return;
-        }
-
-        if((arrow.getShooter() instanceof Player)) {
-            return;
-        }
-
-        Player shooter = (Player) arrow.getShooter();
-
-        if(gameManager.getGame(shooter) == null) {
-            return;
-        }
-
-        Game game = gameManager.getGame(shooter);
-
-        game.addBlock(tnt.getSourceLoc(), Material.TNT);
-
-         */
 
         if(!(tnt.getSource() instanceof Player)) {
             return;

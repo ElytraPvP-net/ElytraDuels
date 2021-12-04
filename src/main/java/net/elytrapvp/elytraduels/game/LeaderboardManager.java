@@ -2,7 +2,6 @@ package net.elytrapvp.elytraduels.game;
 
 import net.elytrapvp.elytradb.ElytraDB;
 import net.elytrapvp.elytraduels.ElytraDuels;
-import net.elytrapvp.elytraduels.game.kit.Kit;
 import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
