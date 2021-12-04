@@ -25,6 +25,11 @@ public class CustomPlayer {
     private final Map<String, Integer> elo = new HashMap<>();
     private final Map<String, Map<Integer, Integer>> kitEditor = new HashMap<>();
 
+    // Settings
+    private boolean showScoreboard;
+    private boolean partyInvites;
+    private boolean duelRequests;
+
     /**
      * Creates the CustomPlayer object.
      * @param plugin Plugin instance.
@@ -84,6 +89,24 @@ public class CustomPlayer {
 
                 while(results3.next()) {
                     kitEditor.get(results3.getString(2)).put(results3.getInt(3), results3.getInt(4));
+                }
+
+                PreparedStatement statement4 = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_settings WHERE uuid = ?");
+                statement4.setString(1, uuid.toString());
+                ResultSet results4 = statement4.executeQuery();
+                if(results4.next()) {
+                    showScoreboard = results4.getBoolean(2);
+                    partyInvites = results4.getBoolean(3);
+                    duelRequests = results4.getBoolean(4);
+                }
+                else {
+                    PreparedStatement statement5 = ElytraDB.getDatabase().prepareStatement("INSERT INTO duels_settings (uuid) VALUES (?)");
+                    statement5.setString(1, uuid.toString());
+                    statement5.executeUpdate();
+
+                    showScoreboard = true;
+                    partyInvites = true;
+                    duelRequests = true;
                 }
             }
             catch (SQLException exception) {
@@ -147,6 +170,14 @@ public class CustomPlayer {
     }
 
     /**
+     * Get if duel requests should be sent.
+     * @return if duel requests should be sent.
+     */
+    public boolean getDuelRequests() {
+        return duelRequests;
+    }
+
+    /**
      * Get the ELO of the player.
      * @param kit Kit to get ELO of.
      * @return The ELO.
@@ -166,6 +197,22 @@ public class CustomPlayer {
      */
     public int getLosses(String kit) {
         return losses.get(kit);
+    }
+
+    /**
+     * Get if party invites should be sent.
+     * @return if party invites should be sent.
+     */
+    public boolean getPartyInvites() {
+        return partyInvites;
+    }
+
+    /**
+     * Get if the scoreboard should be shown.
+     * @return if the scoreboard should be shown.
+     */
+    public boolean getShowScoreboard() {
+        return showScoreboard;
     }
 
     /**
@@ -200,6 +247,26 @@ public class CustomPlayer {
                 statement.setInt(1, bestWinStreak);
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
+                statement.executeUpdate();
+            }
+            catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Set if duels requests should be sent.
+     * @param duelRequests Whether or not duel requests should be sent.
+     */
+    public void setDuelRequests(boolean duelRequests) {
+        this.duelRequests = duelRequests;
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("UPDATE duels_settings SET duelRequests = ? WHERE uuid = ?");
+                statement.setBoolean(1, duelRequests);
+                statement.setString(2, uuid.toString());
                 statement.executeUpdate();
             }
             catch (SQLException exception) {
@@ -255,6 +322,46 @@ public class CustomPlayer {
                 statement.setInt(1, losses);
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
+                statement.executeUpdate();
+            }
+            catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Set if party invites can be sent.
+     * @param partyInvites Whether or not party invites can be sent.
+     */
+    public void setPartyInvites(boolean partyInvites) {
+        this.partyInvites = partyInvites;
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("UPDATE duels_settings SET partyInvites = ? WHERE uuid = ?");
+                statement.setBoolean(1, partyInvites);
+                statement.setString(2, uuid.toString());
+                statement.executeUpdate();
+            }
+            catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Set if the scoreboard should be shown.
+     * @param showScoreboard Whether or not the scoreboard should be shown.
+     */
+    public void setShowScoreboard(boolean showScoreboard) {
+        this.showScoreboard = showScoreboard;
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("UPDATE duels_settings SET showScoreboard = ? WHERE uuid = ?");
+                statement.setBoolean(1, showScoreboard);
+                statement.setString(2, uuid.toString());
                 statement.executeUpdate();
             }
             catch (SQLException exception) {

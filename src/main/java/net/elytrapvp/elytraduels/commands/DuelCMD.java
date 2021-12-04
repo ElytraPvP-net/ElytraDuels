@@ -1,6 +1,7 @@
 package net.elytrapvp.elytraduels.commands;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameType;
 import net.elytrapvp.elytraduels.game.kit.Kit;
@@ -65,6 +66,12 @@ public class DuelCMD extends AbstractCommand {
         Party targetParty = plugin.getPartyManager().getParty(t);
         if(targetParty != null && targetParty.getMembers().contains(t)) {
             ChatUtils.chat(sender, "&cError &8» &cThat player is in a party.");
+            return;
+        }
+
+        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(t);
+        if(!customPlayer.getDuelRequests()) {
+            ChatUtils.chat(sender, "&cError &8» &cYou cannot request to duel that player.");
             return;
         }
 

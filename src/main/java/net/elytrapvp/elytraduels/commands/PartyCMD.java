@@ -1,6 +1,7 @@
 package net.elytrapvp.elytraduels.commands;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.party.Party;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
@@ -101,6 +102,12 @@ public class PartyCMD extends AbstractCommand {
 
                 if(plugin.getGameManager().getGame(t) != null) {
                     ChatUtils.chat(sender, "&cError &8» &cThat person is currently in a game.");
+                    return;
+                }
+
+                CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(t);
+                if(!customPlayer.getPartyInvites()) {
+                    ChatUtils.chat(sender, "&cError &8» &cYou cannot invite that player to a party.");
                     return;
                 }
 
