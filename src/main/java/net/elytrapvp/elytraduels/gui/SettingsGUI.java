@@ -58,7 +58,7 @@ public class SettingsGUI extends CustomGUI {
         });
 
         ItemBuilder duelRequests = new ItemBuilder(Material.IRON_SWORD).setDisplayName("&a&lDuel Requests").addFlag(ItemFlag.HIDE_ATTRIBUTES);
-        if(customPlayer.getShowScoreboard()) {
+        if(customPlayer.getDuelRequests()) {
             duelRequests.addLore("&aEnabled");
         }
         else {
