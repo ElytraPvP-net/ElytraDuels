@@ -71,8 +71,8 @@ public class GameScoreboard extends CustomScoreboard {
                         if(spaces < 0) {
                             spaces = 0;
                         }
-
-                        helper.setSlot(i, "  &f" + opponentName + StringUtils.repeat(' ', spaces) + ChatUtils.getFormattedHealthPercent(opponent));
+                        helper.setSlot(i, "  " + ChatUtils.getFormattedHealthPercent(opponent) + " &f" + opponentName);
+                        //helper.setSlot(i, "  &f" + opponentName + StringUtils.repeat(' ', spaces) + ChatUtils.getFormattedHealthPercent(opponent));
                         i++;
                     }
                 }
