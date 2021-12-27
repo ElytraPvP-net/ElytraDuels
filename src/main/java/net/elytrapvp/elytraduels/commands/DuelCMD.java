@@ -182,7 +182,7 @@ public class DuelCMD extends AbstractCommand {
         plugin.getDuelManager().addDuelRequest(p, t, k);
         ChatUtils.chat(p, "&a&l(&7!&a&l) &aDuel request sent.");
         ChatUtils.chat(t, "&a&m---------------------------------------------------");
-        ChatUtils.chat(t, "&f" + t.getName() + " &awants to duel you in &f" + k.getName() + "&a!");
+        ChatUtils.chat(t, "&f" + p.getName() + " &awants to duel you in &f" + k.getName() + "&a!");
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tellraw " + t.getName() +
                 " [{\"text\":\"[Accept]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/duel accept "  + p.getName() + "\"}},{\"text\":\" / \",\"color\":\"gray\"},{\"text\":\"[Decline]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/duel decline " +  p.getName() + "\"}}]");
         ChatUtils.chat(t, "&a&m---------------------------------------------------");
