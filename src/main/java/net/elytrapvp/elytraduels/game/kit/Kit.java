@@ -43,6 +43,7 @@ public class Kit {
     private boolean doDamage = true;
     private boolean hunger = false;
     private boolean naturalRegen = true;
+    private boolean pearlCooldown = true;
     private boolean rangedDamage = false;
     private boolean strongGapple = false;
     private boolean takeDamage = true;
@@ -302,6 +303,14 @@ public class Kit {
     }
 
     /**
+     * Get if the kit should have pearl cooldown.
+     * @return Whether the kit has pearl cooldown.
+     */
+    public boolean hasPearlCooldown() {
+        return pearlCooldown;
+    }
+
+    /**
      * Get if the kit will have ranged ranged.
      * @return Whether or not the kit as ranged damage.
      */
@@ -426,6 +435,14 @@ public class Kit {
      */
     public void setRepulsors(int repulsors) {
         this.repulsors = repulsors;
+    }
+
+    /**
+     * Set if the kit should have pearl cooldown.
+     * @param pearlCooldown If the kit has pearl cooldown.
+     */
+    public void setPearlCooldown(boolean pearlCooldown) {
+        this.pearlCooldown = pearlCooldown;
     }
 
     /**

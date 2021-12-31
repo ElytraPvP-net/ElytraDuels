@@ -57,8 +57,10 @@ public class PlayerInteractListener implements Listener {
                 return;
             }
 
-            pearlCooldown.add(player);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 200);
+            if(game.getKit().hasPearlCooldown()) {
+                pearlCooldown.add(player);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> pearlCooldown.remove(player), 200);
+            }
         }
 
         if(game != null) {
