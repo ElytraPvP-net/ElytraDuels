@@ -32,12 +32,22 @@ public class RankedGUI extends CustomGUI {
                 playing = 1;
             }
 
+            String elo;
+
+            try {
+                elo = customPlayer.getElo(kit.getName().toLowerCase()) + "";
+            }
+            catch (NullPointerException e) {
+                elo = "Loading";
+            }
+
+
             ItemBuilder item = new ItemBuilder(kit.getIconMaterial(), playing)
                     .setDisplayName("&a&l" + kit.getName())
                     .addLore("&aPlaying: &f" + plugin.getQueueManager().getPlaying(kit))
                     .addLore("&aQueuing: &f" + plugin.getQueueManager().getQueueing(kit, GameType.RANKED))
                     .addLore("")
-                    .addLore("&aYour Elo: &f" + customPlayer.getElo(kit.getName().toLowerCase()))
+                    .addLore("&aYour Elo: &f" + elo)
                     .addLore("")
                     .addLore("&aLeaderboard:");
 
