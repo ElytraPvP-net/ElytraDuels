@@ -11,10 +11,7 @@ import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +20,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -233,6 +231,52 @@ public class PlayerInteractListener implements Listener {
             case "Settings":
                 event.setCancelled(true);
                 new SettingsGUI(plugin, player).open(player);
+                break;
+            case "Double Jump":
+                if(game == null) {
+                    return;
+                }
+
+                if(game.getGameState() != GameState.RUNNING) {
+                    return;
+                }
+
+                // Exit if game does not have double jumps.
+                if(game.getKit().getDoubleJumps() == 0) {
+                    return;
+                }
+
+                // Spectators can't double jump
+                if(game.getSpectators().contains(player)) {
+                    return;
+                }
+
+                // Prevents players from double jumping too often.
+                if(PlayerToggleFlightListener.getDelay().contains(player)) {
+                    return;
+                }
+
+                // Prevents players from "flying" when having no double jumps left.
+                if(game.getDoubleJumps(player) == 0) {
+                    event.setCancelled(true);
+                    player.setFlying(false);
+                    player.setAllowFlight(false);
+                    return;
+                }
+
+                PlayerToggleFlightListener.getDelay().add(player);
+                player.setAllowFlight(false);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    PlayerToggleFlightListener.getDelay().remove(player);
+                    player.setAllowFlight(true);
+                }, 15);
+                game.removeDoubleJump(player);
+                player.setFlying(false);
+
+                Vector vector = player.getLocation().getDirection().normalize().multiply(0.5).add(new Vector(0, 0.8, 0));
+                player.setVelocity(vector);
+
+                player.getLocation().getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_LARGE,0, 20);
                 break;
         }
 

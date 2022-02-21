@@ -30,6 +30,11 @@ public class BowSpleefKit extends Kit {
                 .build();
         addItem(0, bow);
 
+        ItemStack feather = new ItemBuilder(Material.FEATHER)
+                .setDisplayName("&aDouble Jump")
+                .build();
+        addItem(1, feather);
+
         ItemStack arrows = new ItemBuilder(Material.ARROW, 1).build();
         addItem(35, arrows);
     }

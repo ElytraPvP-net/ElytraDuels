@@ -11,12 +11,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class PlayerToggleFlightListener implements Listener {
     private final ElytraDuels plugin;
-    private final Set<Player> delay = new HashSet<>();
+    private static final Set<Player> delay = new HashSet<>();
 
     public PlayerToggleFlightListener(ElytraDuels plugin) {
         this.plugin = plugin;
@@ -72,5 +73,9 @@ public class PlayerToggleFlightListener implements Listener {
 
         player.getLocation().getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_LARGE,0, 20);
         event.setCancelled(true);
+    }
+
+    public static Set<Player> getDelay() {
+        return delay;
     }
 }
