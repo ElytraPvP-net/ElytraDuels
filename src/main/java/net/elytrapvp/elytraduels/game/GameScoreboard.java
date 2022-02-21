@@ -38,10 +38,10 @@ public class GameScoreboard extends CustomScoreboard {
             helper.setSlot(9, "  &f" + game.getKit().getName());
             helper.setSlot(8, " ");
             helper.setSlot(7, "&aAbilities");
-            helper.setSlot(6, "  &aDouble Jump: &f" + game.getDoubleJumps(player));
-            helper.setSlot(5, "  &aTriple Shot: &f" + game.getTripleShots(player));
+            helper.setSlot(6, "  &aDouble Jump: &f" + game.getDoubleJumps(player) + "/" + game.getKit().getDoubleJumps());
+            helper.setSlot(5, "  &aTriple Shot: &f" + game.getTripleShots(player) + "/" + game.getKit().getTripleShots());
             //helper.setSlot(4, "  &aRepulsor: &f" + game.getRepulsors(player));
-            helper.setSlot(4, "  &aRepulsor: &c0" + game.getRepulsors(player));
+            helper.setSlot(4, "  &aRepulsor: &c0&f/&c0");
             helper.setSlot(3, "");
             helper.setSlot(2, "&7&m------------------");
             helper.setSlot(1, "&aplay.elytrapvp.net");
