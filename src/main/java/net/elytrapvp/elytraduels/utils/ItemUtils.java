@@ -99,7 +99,12 @@ public class ItemUtils {
         ItemStack leave = new ItemBuilder(Material.REDSTONE)
                 .setDisplayName("&cLeave Party")
                 .build();
-        player.getInventory().setItem(8, leave);
+        player.getInventory().setItem(7, leave);
+
+        ItemStack otherModes = new ItemBuilder(Material.REDSTONE_COMPARATOR)
+                .setDisplayName("&aSettings")
+                .build();
+        player.getInventory().setItem(8, otherModes);
     }
 
     public static String convertToInvisibleString(String s) {
