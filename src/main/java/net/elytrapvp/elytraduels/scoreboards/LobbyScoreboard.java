@@ -27,7 +27,7 @@ public class LobbyScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(p);
         }
 
-        helper.setTitle("&a&lDuels &b(Season 0)");
+        helper.setTitle("&a&lDuels &b(Season 1)");
         helper.setSlot(6, "&7&m------------------");
         helper.setSlot(5, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
         helper.setSlot(4, "&aPlaying: &f" + plugin.getQueueManager().getPlaying());

@@ -28,7 +28,7 @@ public class GameScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(player);
         }
 
-        helper.setTitle("&a&lDuels &b(Season 0)");
+        helper.setTitle("&a&lDuels &b(Season 1)");
 
         if(game.getKit().hasAbilities()) {
             helper.setSlot(13, "&7&m------------------");
