@@ -72,6 +72,12 @@ public class PlayerToggleFlightListener implements Listener {
         player.setVelocity(vector);
 
         player.getLocation().getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_LARGE,0, 20);
+
+        if(game.getDoubleJumps(player) == 0) {
+            player.setFlying(false);
+            player.setAllowFlight(false);
+        }
+
         event.setCancelled(true);
     }
 
