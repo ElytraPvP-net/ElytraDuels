@@ -70,7 +70,7 @@ public class PlayerInteractListener implements Listener {
                                 if (event.getItem().getType() == Material.BOW) {
                                     if (game.getTripleShots(player) > 0) {
                                         Arrow arrow = player.launchProjectile(Arrow.class);
-                                        arrow.setVelocity(player.getLocation().getDirection().multiply(1.8));
+                                        arrow.setVelocity(player.getLocation().getDirection().multiply(1.9));
                                         arrow.setFireTicks(100);
 
                                         Arrow arrow2 = player.launchProjectile(Arrow.class);
