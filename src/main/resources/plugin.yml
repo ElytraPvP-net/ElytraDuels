@@ -29,3 +29,6 @@ commands:
     usage: /matches
     description: View match history.
     aliases: [matchhistory, mh]
+  settings:
+    usage: /settings
+    description: Open the settings menu
