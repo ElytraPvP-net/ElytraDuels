@@ -18,7 +18,7 @@ public class CactusKit extends Kit {
         setStartingHealth(1);
 
         addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200000, 100, true));
-        addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 200000, 0, true));
+        //addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 200000, 0, true));
 
         setNaturalRegen(false);
         setVoidLevel(50);
