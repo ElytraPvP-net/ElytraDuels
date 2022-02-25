@@ -53,20 +53,20 @@ public class KitManager {
         kits.add(bowFight);
 
         // Season 0 Ranked Kits
-        rankedKits.add(speedArcher);
+        //rankedKits.add(speedArcher);
         rankedKits.add(bow);
-        rankedKits.add(iron);
-        rankedKits.add(diamond);
+        //rankedKits.add(iron);
+        //rankedKits.add(diamond);
         rankedKits.add(bowSpleef);
-        rankedKits.add(classic);
-        rankedKits.add(noDebuff);
-        rankedKits.add(op);
+        //rankedKits.add(classic);
+        //rankedKits.add(noDebuff);
+        //rankedKits.add(op);
         rankedKits.add(blitz);
-        rankedKits.add(buildUHC);
+        //rankedKits.add(buildUHC);
         rankedKits.add(cactus);
-        rankedKits.add(sg);
-        rankedKits.add(finalUHC);
-        rankedKits.add(sumo);
+        //rankedKits.add(sg);
+        //rankedKits.add(finalUHC);
+        //rankedKits.add(sumo);
 
         // Current Planned Ranked Kits for Season 1. Subject to change.
         /*
