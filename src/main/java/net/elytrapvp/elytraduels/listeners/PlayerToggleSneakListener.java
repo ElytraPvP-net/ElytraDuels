@@ -21,7 +21,7 @@ public class PlayerToggleSneakListener implements Listener {
     @EventHandler
     public void onEvent(PlayerToggleSneakEvent event) {
         // Prevents the code from running twice.
-        if(event.isSneaking()) {
+        if(!event.isSneaking()) {
             return;
         }
 
