@@ -32,6 +32,7 @@ public class KitManager {
         Kit peal = new PearlKit(plugin);
         Kit blockSumo = new BlockSumoKit(plugin);
         Kit bowFight = new BowFightKit(plugin);
+        Kit shortBow = new ShortBowKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);
@@ -50,7 +51,8 @@ public class KitManager {
         kits.add(archer);
         kits.add(peal);
         kits.add(blockSumo);
-        kits.add(bowFight);
+        //kits.add(bowFight);
+        kits.add(shortBow);
 
         // Season 0 Ranked Kits
         //rankedKits.add(speedArcher);

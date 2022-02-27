@@ -1382,7 +1382,7 @@ Maps:
             Pitch: 0
             Yaw: 0
   empire:
-    name: Empire
+    name: eclypse
     builders:
       - Condal
       - RMicky
@@ -1566,3 +1566,58 @@ Maps:
             Z: 7800.5
             Pitch: 0
             Yaw: 90
+  mudpit:
+    name: Mudpit
+    builders:
+      - partykid4
+    kits:
+      - short bow
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1993.5
+            Y: 66.5
+            Z: 7993.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2007.5
+            Y: 66.5
+            Z: 8007.5
+            Pitch: 0
+            Yaw: 135
+      '2':
+        spawns:
+          '1':
+            World: world
+            X: 2193.5
+            Y: 66.5
+            Z: 7993.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2207.5
+            Y: 66.5
+            Z: 8007.5
+            Pitch: 0
+            Yaw: 135
+      '3':
+        spawns:
+          '1':
+            World: world
+            X: 2393.5
+            Y: 66.5
+            Z: 7993.5
+            Pitch: 0
+            Yaw: -45
+          '2':
+            World: world
+            X: 2407.5
+            Y: 66.5
+            Z: 8007.5
+            Pitch: 0
+            Yaw: 135
