@@ -139,6 +139,11 @@ public class Game {
             int counter = 4;
             public void run() {
                 counter--;
+
+                if(gameState == GameState.END) {
+                    cancel();
+                }
+
                 if(counter  != 0) {
                     broadcast("&aStarting in " + counter + "...");
                     for (Player p : getPlayers()) {
@@ -148,7 +153,9 @@ public class Game {
                 else {
                     for(Player p : getPlayers()) {
                         p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 2);
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> running(), 1);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            running();
+                        }, 1);
                         cancel();
                     }
                 }
