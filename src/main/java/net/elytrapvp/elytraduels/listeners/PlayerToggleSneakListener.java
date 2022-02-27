@@ -54,7 +54,7 @@ public class PlayerToggleSneakListener implements Listener {
             Location location = player.getLocation();
             location.setY(player.getLocation().getY() - 2.5);
             Vector direction = entity.getLocation().toVector().subtract(location.toVector()).normalize().multiply(new Vector(0.9, 1.10, 0.9));
-            entity.setVelocity(direction);
+            entity.setVelocity(entity.getVelocity().add(direction));
         }
 
         game.removeRepulsor(player);
