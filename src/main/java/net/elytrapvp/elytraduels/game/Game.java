@@ -178,6 +178,12 @@ public class Game {
         int spawn = 0;
         for(Team team : teamManager.getTeams()) {
             for(Player p : team.getPlayers()) {
+
+                // Reset spawn point if not enough spawns
+                if(spawn > arena.getSpawns().size() - 1) {
+                    spawn = 0;
+                }
+
                 p.closeInventory();
                 p.teleport(arena.getSpawns().get(spawn));
                 new GameScoreboard(p, this);
