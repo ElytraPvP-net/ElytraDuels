@@ -38,7 +38,7 @@ public class ShortBowKit extends Kit {
         addItem(37, leggings);
         addItem(36, boots);
 
-        addItem(1, bow);
+        addItem(0, bow);
         addItem(35, arrows);
     }
 }
