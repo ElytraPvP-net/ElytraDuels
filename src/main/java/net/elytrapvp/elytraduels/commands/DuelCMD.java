@@ -70,12 +70,6 @@ public class DuelCMD extends AbstractCommand {
                 return;
             }
 
-            CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(opponent);
-            if(!customPlayer.getDuelRequests()) {
-                ChatUtils.chat(sender, "&cError &8» &cYou cannot request to duel that player.");
-                return;
-            }
-
             ChatUtils.chat(sender, "&aDuel request has been accepted.");
 
             Party senderParty = plugin.getPartyManager().getParty(p);
