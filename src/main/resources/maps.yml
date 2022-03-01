@@ -1621,3 +1621,26 @@ Maps:
             Z: 8007.5
             Pitch: 0
             Yaw: 135
+  prison:
+    name: Prison
+    builders:
+      - cizuh
+    kits:
+      - bow spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1983.5
+            Y: 66.5
+            Z: 8200.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2017.5
+            Y: 66.5
+            Z: 8200.5
+            Pitch: 0
+            Yaw: 90
