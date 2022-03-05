@@ -60,9 +60,9 @@ public class KitManager {
         //rankedKits.add(iron);
         //rankedKits.add(diamond);
         rankedKits.add(bowSpleef);
-        //rankedKits.add(classic);
+        rankedKits.add(classic);
         //rankedKits.add(noDebuff);
-        //rankedKits.add(op);
+        rankedKits.add(op);
         rankedKits.add(blitz);
         //rankedKits.add(buildUHC);
         rankedKits.add(cactus);
