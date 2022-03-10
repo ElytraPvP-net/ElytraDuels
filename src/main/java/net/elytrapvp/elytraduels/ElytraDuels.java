@@ -11,6 +11,7 @@ import net.elytrapvp.elytraduels.listeners.*;
 import net.elytrapvp.elytraduels.party.PartyManager;
 import net.elytrapvp.elytraduels.runnables.AFKTimer;
 import net.elytrapvp.elytraduels.game.LeaderboardManager;
+import net.elytrapvp.elytraduels.runnables.HealingRunnable;
 import net.elytrapvp.elytraduels.utils.gui.GUIListeners;
 import net.elytrapvp.elytraduels.utils.scoreboard.ScoreboardUpdate;
 import org.bukkit.Bukkit;
@@ -48,7 +49,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityExplodeListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new EntityRegainhealthListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new EntityRegainhealthListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
@@ -69,6 +70,9 @@ public final class ElytraDuels extends JavaPlugin {
 
         new ScoreboardUpdate(this).runTaskTimer(this, 20L, 20L);
         new AFKTimer(this).runTaskTimer(this, 5 * 20, 5 * 20);
+
+        // Change pace of healing.
+        new HealingRunnable(this).runTaskTimer(this, 20*8, 20*8);
     }
 
     @Override
