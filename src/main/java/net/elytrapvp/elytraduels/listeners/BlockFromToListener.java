@@ -8,6 +8,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class BlockFromToListener implements Listener {
     private final ElytraDuels plugin;
@@ -18,26 +19,6 @@ public class BlockFromToListener implements Listener {
 
     @EventHandler
     public void onEvent(BlockFromToEvent event) {
-        if(event.getToBlock().getType() == Material.STATIONARY_LAVA || event.getToBlock().getType() == Material.OBSIDIAN) {
-            //Bukkit.getScheduler().runTaskLater(plugin, () -> event.getBlock().setType(Material.AIR), 200);
-        }
-
-        /*
-        if(!event.getToBlock().isLiquid() && event.getToBlock().getType() != Material.AIR) {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> event.getToBlock().setType(Material.AIR), 200);
-            return;
-        }
-
-         */
-
-        /*
-        if(event.getToBlock().getType() == Material.COBBLESTONE || event.getToBlock().getType() == Material.STONE) {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> event.getToBlock().setType(Material.AIR), 200);
-            return;
-        }
-
-         */
-
 
         Material type = event.getBlock().getType();
         if (type == Material.WATER || type == Material.STATIONARY_WATER || type == Material.LAVA || type == Material.STATIONARY_LAVA){
@@ -66,9 +47,21 @@ public class BlockFromToListener implements Listener {
         for (BlockFace face : faces) {
             Block r = b.getRelative(face, 1);
             if (r.getType() == mirrorID1 || r.getType() == mirrorID2) {
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    r.setType(Material.AIR);
-                }, 200);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> r.setType(Material.AIR), 200);
+
+                for(BlockFace face2 : BlockFace.values()) {
+                    Block s = r.getRelative(face2, 1);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            if (s.getType() == Material.COBBLESTONE) {
+                                // TODO: Check for both water and lava, and if found replace as lava.
+                                s.setType(Material.AIR);
+                            }
+                        }
+                    }.runTaskLater(plugin, 200);
+                }
                 return true;
             }
         }
