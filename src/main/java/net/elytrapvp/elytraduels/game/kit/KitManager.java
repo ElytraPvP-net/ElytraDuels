@@ -64,7 +64,7 @@ public class KitManager {
         //rankedKits.add(noDebuff);
         rankedKits.add(op);
         rankedKits.add(blitz);
-        //rankedKits.add(buildUHC);
+        rankedKits.add(buildUHC);
         rankedKits.add(cactus);
         //rankedKits.add(sg);
         //rankedKits.add(finalUHC);
