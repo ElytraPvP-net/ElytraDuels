@@ -32,3 +32,6 @@ commands:
   settings:
     usage: /settings
     description: Open the settings menu
+  resetelo:
+    usage: /resetelo
+    description: Reset the stats of a banned player.
