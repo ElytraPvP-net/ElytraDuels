@@ -5,3 +5,12 @@ Spawn:
   Z: 249.5
   Pitch: 0
   Yaw: 90
+
+# Connects to the MySQL Database
+MySQL:
+  host: localhost
+  port: 3306
+  database: database
+  username: username
+  password: password
+  useSSL: true

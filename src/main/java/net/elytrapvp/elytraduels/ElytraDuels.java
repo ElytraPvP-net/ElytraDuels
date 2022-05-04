@@ -27,11 +27,16 @@ public final class ElytraDuels extends JavaPlugin {
     private SettingsManager settingsManager;
     private LeaderboardManager leaderboardManager;
     private DuelManager duelManager;
+    private MySQL mySQL;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         settingsManager = new SettingsManager(this);
+
+        mySQL = new MySQL(this);
+        mySQL.openConnection();
+
         kitManager = new KitManager(this);
         partyManager = new PartyManager(this);
         arenaManager = new ArenaManager(this);
@@ -115,5 +120,9 @@ public final class ElytraDuels extends JavaPlugin {
 
     public DuelManager getDuelManager() {
         return duelManager;
+    }
+
+    public MySQL getMySQL() {
+        return mySQL;
     }
 }

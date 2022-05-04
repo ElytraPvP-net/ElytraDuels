@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.game;
 
-import net.elytrapvp.elytradb.ElytraDB;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import org.bukkit.Bukkit;
 
@@ -41,13 +40,13 @@ public class LeaderboardManager {
                 types.put(type, data);
 
                 try {
-                    PreparedStatement statement1 = ElytraDB.getDatabase().prepareStatement("SELECT * from duels_statistics WHERE kit = ? ORDER BY " + type + " DESC LIMIT 10");
+                    PreparedStatement statement1 = plugin.getMySQL().getConnection().prepareStatement("SELECT * from duels_statistics WHERE kit = ? ORDER BY " + type + " DESC LIMIT 10");
                     statement1.setString(1, kit);
                     //statement1.setString(2, type);
                     ResultSet results = statement1.executeQuery();
 
                     while(results.next()) {
-                        PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("SELECT * from player_info WHERE uuid = ? LIMIT 1");
+                        PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("SELECT * from player_info WHERE uuid = ? LIMIT 1");
                         statement2.setString(1, results.getString(1));
                         ResultSet results2 = statement2.executeQuery();
 

@@ -38,5 +38,6 @@ public class PlayerQuitListener implements Listener {
         }
 
         plugin.getCustomPlayerManager().removePlayer(player);
+        plugin.getDuelManager().getDuelRequests().remove(player);
     }
 }

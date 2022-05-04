@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.game;
 
-import net.elytrapvp.elytradb.ElytraDB;
 import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.utils.EloUtils;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
@@ -236,7 +235,7 @@ public class Game {
 
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                 try {
-                    PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("INSERT INTO duels_match_history (kit,map,winner,winnerElo,loser,loserElo,eloChange,length) VALUES (?,?,?,?,?,?,?,?)");
+                    PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("INSERT INTO duels_match_history (kit,map,winner,winnerElo,loser,loserElo,eloChange,length) VALUES (?,?,?,?,?,?,?,?)");
                     statement.setString(1, kit.getName());
                     statement.setString(2, arena.getMap().getName());
                     statement.setString(3, w.getUniqueId().toString());

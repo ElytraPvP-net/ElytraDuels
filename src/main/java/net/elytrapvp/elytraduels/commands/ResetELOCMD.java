@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.commands;
 
-import net.elytrapvp.elytradb.ElytraDB;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
@@ -31,7 +30,7 @@ public class ResetELOCMD extends AbstractCommand {
 
             try {
                 // -------------------------------------- Get player to reset
-                PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("SELECT * FROM player_info WHERE username = ?");
+                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE username = ?");
                 statement.setString(1, args[0]);
                 ResultSet results = statement.executeQuery();
 
@@ -44,7 +43,7 @@ public class ResetELOCMD extends AbstractCommand {
                 }
 
                 // -------------------------------------- Loop through all the matches they won.
-                PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_match_history WHERE winner = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_match_history WHERE winner = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 statement2.setString(1, target);
                 ResultSet results2 = statement2.executeQuery();
 
@@ -75,7 +74,7 @@ public class ResetELOCMD extends AbstractCommand {
                 }
 
                 // -------------------------------------- Loop through all the matches they lost.
-                PreparedStatement statement3 = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_match_history WHERE loser = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement3 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_match_history WHERE loser = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 statement3.setString(1, target);
                 ResultSet results3 = statement3.executeQuery();
 
@@ -125,7 +124,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     private void updateElo(String uuid, String kit, int eloChange) {
         try {
-            PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_statistics WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_statistics WHERE uuid = ? AND kit = ?");
             statement.setString(1, uuid);
             statement.setString(2, kit);
             ResultSet results = statement.executeQuery();
@@ -133,7 +132,7 @@ public class ResetELOCMD extends AbstractCommand {
             if(results.next()) {
                 int elo = results.getInt(7);
 
-                PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET elo = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET elo = ? WHERE uuid = ? AND kit = ?");
                 statement2.setInt(1, elo + eloChange);
                 statement2.setString(2, uuid);
                 statement2.setString(3, kit);
@@ -147,7 +146,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     private void removeLoss(String uuid, String kit) {
         try {
-            PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_statistics WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_statistics WHERE uuid = ? AND kit = ?");
             statement.setString(1, uuid);
             statement.setString(2, kit);
             ResultSet results = statement.executeQuery();
@@ -155,7 +154,7 @@ public class ResetELOCMD extends AbstractCommand {
             if(results.next()) {
                 int losses = results.getInt(4);
 
-                PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET losses = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET losses = ? WHERE uuid = ? AND kit = ?");
                 statement2.setInt(1, losses - 1);
                 statement2.setString(2, uuid);
                 statement2.setString(3, kit);
@@ -169,7 +168,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     private void removeWin(String uuid, String kit) {
         try {
-            PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_statistics WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_statistics WHERE uuid = ? AND kit = ?");
             statement.setString(1, uuid);
             statement.setString(2, kit);
             ResultSet results = statement.executeQuery();
@@ -177,7 +176,7 @@ public class ResetELOCMD extends AbstractCommand {
             if(results.next()) {
                 int wins = results.getInt(3);
 
-                PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET wins = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET wins = ? WHERE uuid = ? AND kit = ?");
                 statement2.setInt(1, wins - 1);
                 statement2.setString(2, uuid);
                 statement2.setString(3, kit);
@@ -191,7 +190,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     public void resetWinStreak(String uuid, String kit) {
         try {
-            PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET winStreak = ?,bestWinStreak = ? WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET winStreak = ?,bestWinStreak = ? WHERE uuid = ? AND kit = ?");
             statement2.setInt(1, 0);
             statement2.setInt(2, 0);
             statement2.setString(3, uuid);
@@ -205,7 +204,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     public void notifyVictim(String uuid) {
         try {
-            PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("INSERT IGNORE INTO duels_notifications (uuid) VALUES (?)");
+            PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("INSERT IGNORE INTO duels_notifications (uuid) VALUES (?)");
             statement.setString(1, uuid);
             statement.executeUpdate();
         }
@@ -216,7 +215,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     public void resetElo(String uuid, String kit) {
         try {
-            PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET elo = ? WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET elo = ? WHERE uuid = ? AND kit = ?");
             statement2.setInt(1, 1000);
             statement2.setString(2, uuid);
             statement2.setString(3, kit);
@@ -229,7 +228,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     public void resetWins(String uuid, String kit) {
         try {
-            PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET wins = ? WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET wins = ? WHERE uuid = ? AND kit = ?");
             statement2.setInt(1, 0);
             statement2.setString(2, uuid);
             statement2.setString(3, kit);
@@ -242,7 +241,7 @@ public class ResetELOCMD extends AbstractCommand {
 
     public void resetLosses(String uuid, String kit) {
         try {
-            PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("UPDATE duels_statistics SET losses = ? WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET losses = ? WHERE uuid = ? AND kit = ?");
             statement2.setInt(1, 0);
             statement2.setString(2, uuid);
             statement2.setString(3, kit);

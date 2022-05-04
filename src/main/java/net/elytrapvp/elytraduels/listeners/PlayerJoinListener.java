@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.listeners;
 
-import net.elytrapvp.elytradb.ElytraDB;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
@@ -39,7 +38,7 @@ public class PlayerJoinListener implements Listener {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, ()-> {
             try {
-                PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_notifications WHERE uuid = ? LIMIT 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_notifications WHERE uuid = ? LIMIT 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 statement.setString(1, player.getUniqueId().toString());
                 ResultSet results = statement.executeQuery();
 

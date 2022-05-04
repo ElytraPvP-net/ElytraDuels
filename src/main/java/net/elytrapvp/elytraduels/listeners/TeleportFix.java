@@ -12,6 +12,9 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class TeleportFix implements Listener {
     private final Server server;
     private final ElytraDuels plugin;
@@ -44,8 +47,6 @@ public class TeleportFix implements Listener {
         server.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             // Refresh nearby clients
             final List<Player> nearby = getPlayersWithin(player, visibleDistance);
-
-            //System.out.println("Applying fix ... " + visibleDistance);
 
             // Hide every player
             updateEntities(player, nearby, false);

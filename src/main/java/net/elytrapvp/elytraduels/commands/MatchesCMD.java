@@ -1,6 +1,5 @@
 package net.elytrapvp.elytraduels.commands;
 
-import net.elytrapvp.elytradb.ElytraDB;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.utils.Timer;
@@ -34,7 +33,7 @@ public class MatchesCMD extends AbstractCommand {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = ElytraDB.getDatabase().prepareStatement("SELECT * FROM player_info WHERE username = ?");
+                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE username = ?");
                 statement.setString(1, args[0]);
                 ResultSet results = statement.executeQuery();
 
@@ -60,7 +59,7 @@ public class MatchesCMD extends AbstractCommand {
             super(54, "Matches");
 
             try {
-                PreparedStatement statement2 = ElytraDB.getDatabase().prepareStatement("SELECT * FROM duels_match_history WHERE winner = ? OR loser = ? ORDER BY time DESC");
+                PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_match_history WHERE winner = ? OR loser = ? ORDER BY time DESC");
                 statement2.setString(1, uuid);
                 statement2.setString(2, uuid);
                 ResultSet results2 = statement2.executeQuery();
@@ -81,7 +80,7 @@ public class MatchesCMD extends AbstractCommand {
                         winner = false;
                     }
 
-                    PreparedStatement statement3 = ElytraDB.getDatabase().prepareStatement("SELECT * FROM player_info WHERE uuid = ? LIMIT 1");
+                    PreparedStatement statement3 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE uuid = ? LIMIT 1");
                     statement3.setString(1, opponent);
                     ResultSet results3 = statement3.executeQuery();
 
