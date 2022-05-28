@@ -14,6 +14,7 @@ import pt.foxspigot.jar.knockback.KnockbackModule;
 
 public class ItemUtils {
     public static void giveLobbyItems(Player player) {
+        player.closeInventory();
         player.getInventory().clear();
 
         player.setMaxHealth(20.0);
@@ -63,6 +64,7 @@ public class ItemUtils {
             return;
         }
 
+        player.closeInventory();
         player.getInventory().clear();
 
         if(party.getLeader().equals(player)) {

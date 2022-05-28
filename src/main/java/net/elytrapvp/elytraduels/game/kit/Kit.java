@@ -88,6 +88,7 @@ public class Kit {
      */
     public void apply(Player player) {
         // Clear inventory.
+        player.closeInventory();
         player.getInventory().clear();
         player.getInventory().setHelmet(null);
         player.getInventory().setChestplate(null);
