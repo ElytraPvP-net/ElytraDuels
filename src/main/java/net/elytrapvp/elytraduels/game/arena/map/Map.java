@@ -14,13 +14,11 @@ import java.util.Set;
  * Stores all information about a specific map.
  *  This include:
  *    - name
- *    - builders
  *    - kits that can be used on it
  */
 public class Map {
     private final String id;
     private final String name;
-    private final List<String> builders;
     private final Set<Kit> kits = new HashSet<>();
 
     /**
@@ -36,7 +34,6 @@ public class Map {
         String path = "Maps." + id + ".";
 
         name = maps.getString(path + "name");
-        builders = maps.getStringList(path + "builders");
 
         for(String kit : maps.getStringList(path + "kits")) {
             kits.add(plugin.getKitManager().getKit(kit));
@@ -46,14 +43,6 @@ public class Map {
         for(String arena : section.getKeys(false)) {
             plugin.getArenaManager().addArena(new Arena(plugin, this, arena));
         }
-    }
-
-    /**
-     * Get a list of who built the map.
-     * @return All builders.
-     */
-    public List<String> getBuilders() {
-        return builders;
     }
 
     /**
