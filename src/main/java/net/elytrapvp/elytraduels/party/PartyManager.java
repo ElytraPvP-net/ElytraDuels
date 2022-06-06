@@ -13,6 +13,10 @@ public class PartyManager {
     private final ElytraDuels plugin;
     private final List<Party> parties = new ArrayList<>();
 
+    /**
+     * Creates the party manager.
+     * @param plugin Instance of the plugin.
+     */
     public PartyManager(ElytraDuels plugin) {
         this.plugin = plugin;
     }
@@ -44,7 +48,7 @@ public class PartyManager {
      */
     public Party getParty(Player player) {
         for(Party party : getParties()) {
-            if(party.getPlayers().contains(player)) {
+            if(party.getMembers().contains(player)) {
                 return party;
             }
         }

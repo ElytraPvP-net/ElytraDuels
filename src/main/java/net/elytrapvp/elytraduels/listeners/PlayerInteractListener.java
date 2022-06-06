@@ -167,27 +167,12 @@ public class PlayerInteractListener implements Listener {
 
             case "Create a party":
                 event.setCancelled(true);
-                plugin.getPartyManager().createParty(player);
-                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                player.chat("/party create");
                 break;
 
             case "Leave Party":
                 event.setCancelled(true);
-
-                Party party = plugin.getPartyManager().getParty(player);
-                if(party == null) {
-                    return;
-                }
-
-                if(party.getLeader().equals(player)) {
-                    party.disband();
-                }
-                else {
-                    party.removePlayer(player);
-                }
-
-                ItemUtils.giveLobbyItems(player);
-
+                player.chat("/party leave");
                 break;
 
             case "Duel another party":

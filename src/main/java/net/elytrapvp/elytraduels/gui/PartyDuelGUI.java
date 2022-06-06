@@ -38,14 +38,14 @@ public class PartyDuelGUI extends CustomGUI {
                 p.closeInventory();
 
                 Party party = plugin.getPartyManager().getParty(p);
-                if(party.getPlayers().size() == 1) {
+                if(party.getMembers().size() == 1) {
                     ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
                     return;
                 }
 
                 Game game = plugin.getGameManager().createGame(kit, GameType.UNRANKED);
 
-                List<Player> players = new ArrayList<>(party.getPlayers());
+                List<Player> players = new ArrayList<>(party.getMembers());
                 Collections.shuffle(players);
 
                 List<Player> team1 = new ArrayList<>();

@@ -3,20 +3,20 @@ package net.elytrapvp.elytraduels.commands;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.party.Party;
+import net.elytrapvp.elytraduels.party.PartyRank;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
-import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
-import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class runs the /party command, which controls everything about parties.
+ */
 public class PartyCMD extends AbstractCommand {
     private final ElytraDuels plugin;
 
@@ -28,238 +28,434 @@ public class PartyCMD extends AbstractCommand {
         this.plugin = plugin;
     }
 
+    /**
+     * Executes the command.
+     * @param sender The Command Sender.
+     * @param args Arguments of the command.
+     */
     public void execute(CommandSender sender, String[] args) {
+        Player player = (Player) sender;
+
         if(args.length == 0) {
-            ChatUtils.chat(sender, "&a&m---------------------------------------------------");
-            ChatUtils.centeredChat(sender, "&a&lParty Commands");
-            ChatUtils.chat(sender, "&a  /party chat");
-            ChatUtils.chat(sender, "&a  /party create");
-            ChatUtils.chat(sender, "&a  /party disband");
-            ChatUtils.chat(sender, "&a  /party invite [player]");
-            ChatUtils.chat(sender, "&a  /party leave");
-            ChatUtils.chat(sender, "&a&m---------------------------------------------------");
+            helpCMD(player);
             return;
         }
 
-        Player player = (Player) sender;
-        Party party = plugin.getPartyManager().getParty(player);
-
         switch(args[0]) {
             case "create":
-                if(plugin.getPartyManager().getParty(player) != null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are already in a party.");
-                    return;
-                }
-
-                if(plugin.getGameManager().getGame(player) != null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are already in a game.");
-                    return;
-                }
-
-                plugin.getPartyManager().createParty(player);
-                ChatUtils.chat(sender, "&a&lParty &8» &aParty as been created.");
-                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                createCMD(player);
+                break;
+            case "disband":
+                disbandCMD(player);
+                break;
+            case "invite":
+                inviteCMD(player, args);
                 break;
             case "help":
-                ChatUtils.chat(sender, "&a&m---------------------------------------------------");
-                ChatUtils.centeredChat(sender, "&a&lParty Commands");
-                ChatUtils.chat(sender, "&a  /party chat");
-                ChatUtils.chat(sender, "&a  /party create");
-                ChatUtils.chat(sender, "&a  /party disband");
-                ChatUtils.chat(sender, "&a  /party invite [player]");
-                ChatUtils.chat(sender, "&a  /party leave");
-                ChatUtils.chat(sender, "&a  /party list");
-                ChatUtils.chat(sender, "&a  /party promote");
-                ChatUtils.chat(sender, "&a&m---------------------------------------------------");
-                break;
-
-            case "invite":
-                if(args.length != 2) {
-                    ChatUtils.chat(sender, "&cUsage &8» /party invite [player]");
-                    return;
-                }
-
-                Player t = Bukkit.getPlayer(args[1]);
-                if(t == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat person is not online.");
-                    return;
-                }
-
-                if(t.equals(player)) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou cannot invite yourself.");
-                    return;
-                }
-
-                if(plugin.getPartyManager().getParty(t) != null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThey are already in a party.");
-                    return;
-                }
-
-                if(plugin.getPartyManager().getParty(player) == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
-                    return;
-                }
-
-                if(plugin.getGameManager().getGame(t) != null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat person is currently in a game.");
-                    return;
-                }
-
-                if(party.getInvites().contains(t)) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou already have a pending invite to that person.");
-                    return;
-                }
-
-                CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(t);
-                if(!customPlayer.getPartyInvites()) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou cannot invite that player to a party.");
-                    return;
-                }
-
-                party.addInvite(t);
-                ChatUtils.chat(t, "&a&m---------------------------------------------------");
-                ChatUtils.chat(t, "&aYou have been invited to join &f" + player.getName() + "&a's party!");
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tellraw " + t.getName() +
-                        " [{\"text\":\"[Accept]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party accept "  + player.getName() + "\"}},{\"text\":\" / \",\"color\":\"gray\"},{\"text\":\"[Decline]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party decline " +  player.getName() + "\"}}]");
-                ChatUtils.chat(t, "&a&m---------------------------------------------------");
-                party.broadcast("&a&lParty &8» &f" + t.getName() + " &ahas been invited to the party.");
-                break;
-
-            case "disband":
-                party.broadcast("&a&lParty &8» &aParty has been disbanded.");
-                plugin.getPartyManager().getParty(player).disband();
+                helpCMD(player);
                 break;
             case "leave":
-                if(party == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
-                    return;
-                }
-
-                party.removePlayer(player);
-                party.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas left the party.");
+                leaveCMD(player);
                 break;
-
             case "chat":
-                if(party == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
-                    return;
-                }
-
-                if(args.length < 2) {
-                    party.togglePartyChat(player);
-
-                    if(party.hasPartyChatToggled(player)) {
-                        ChatUtils.chat(sender, "&a&lParty &8» &aParty chat enabled.");
-                    }
-                    else {
-                        ChatUtils.chat(sender, "&a&lParty &8» &aParty chat disabled.");
-                    }
-
-                    return;
-                }
-
-                args[0] = "";
-                party.broadcast("&a&lParty &8» &f" + player.getName() + "&8: &a" + StringUtils.join(args, " "));
-
+                chatCMD(player, args);
                 break;
             case "list":
-                if(party == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
-                    return;
-                }
-
-                List<String> members = new ArrayList<>();
-                for(Player member : party.getMembers()) {
-                    members.add(member.getName());
-                }
-
-                ChatUtils.chat(sender, "&a&m---------------------------------------------------");
-                ChatUtils.centeredChat(sender, "&a&lParty Members");
-                ChatUtils.chat(sender, "");
-                ChatUtils.chat(sender, "&aLeader &7» &f" + party.getLeader().getName());
-                ChatUtils.chat(sender, "&aMembers &7[" + members.size() + "] » &f" + StringUtils.join(members, ", "));
-                ChatUtils.chat(sender, "");
-                ChatUtils.chat(sender, "&a&m---------------------------------------------------");
+                listCMD(player);
                 break;
             case "promote":
-                if(party == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are not in a party! /party create.");
-                    return;
-                }
-
-                if(args.length == 1) {
-                    ChatUtils.chat(sender, "&cUsage &8» &c/party promote [player]");
-                    return;
-                }
-
-                Player target = Bukkit.getPlayer(args[1]);
-                if(target == null || !party.getPlayers().contains(target)) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat player is not in your party!");
-                    return;
-                }
-
-                if(target.equals(player)) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou are already the party leader!");
-                    return;
-                }
-
-                party.setLeader(target);
-                party.broadcast("&a&lParty &8» &f" + target.getName() + " &ahas been promoted to party leader.");
-
+                promoteCMD(player, args);
                 break;
             case "accept":
-                if(args.length == 1) {
-                    ChatUtils.chat(sender, "&cUsage &8» &c/party accept [player]");
-                    return;
-                }
-
-                Player ta = Bukkit.getPlayer(args[1]);
-                if(ta == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat player is not online");
-                    return;
-                }
-
-                Party party1 = plugin.getPartyManager().getParty(ta);
-                if(party1 == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat player is not in a party");
-                    return;
-                }
-
-                if(!party1.getInvites().contains(player)) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou do not have an invite to that party.");
-                    return;
-                }
-
-                party1.addPlayer(player);
-                party1.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas joined the party.");
+                acceptCMD(player, args);
                 break;
             case "decline":
-                if(args.length == 1) {
-                    ChatUtils.chat(sender, "&cUsage &8» &c/party decline [player]");
-                    return;
-                }
-
-                Player tar = Bukkit.getPlayer(args[1]);
-                if(tar == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat player is not online");
-                    return;
-                }
-
-                Party party2 = plugin.getPartyManager().getParty(tar);
-                if(party2 == null) {
-                    ChatUtils.chat(sender, "&cError &8» &cThat player is not in a party");
-                    return;
-                }
-
-                if(!party2.getInvites().contains(player)) {
-                    ChatUtils.chat(sender, "&cError &8» &cYou do not have an invite to that party.");
-                    return;
-                }
-
-                party2.getInvites().remove(player);
-                party2.broadcast("&a&lParty &8» &f" + player.getName() + " &ahas declined the invite.");
-                ChatUtils.chat(sender, "&cYou have declined the invite.");
+                declineCMD(player, args);
                 break;
+        }
+    }
+
+    /**
+     * Runs the /party chat command.
+     * @param player Player running the command.
+     * @param args Command arguments.
+     */
+    private void chatCMD(Player player, String[] args) {
+        // Makes sure the player is in a party.
+        if(plugin.getPartyManager().getParty(player) == null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
+            return;
+        }
+
+        // Gets the player's party.
+        Party party = plugin.getPartyManager().getParty(player);
+
+        // Checks if the player is just toggling party chat.
+        if(args.length < 2) {
+            party.togglePartyChat(player);
+
+            if(party.hasPartyChatToggled(player)) {
+                ChatUtils.chat(player, "&a&lParty &8» &aParty chat enabled.");
+            }
+            else {
+                ChatUtils.chat(player, "&a&lParty &8» &aParty chat disabled.");
+            }
+
+            return;
+        }
+
+        // Sends the chat message to the party.
+        args[0] = "";
+        party.sendMessage("&a&lParty &8» &f" + player.getName() + "&8: &a" + StringUtils.join(args, " "));
+    }
+
+    /**
+     * Runs the /party accept command.
+     * @param player Player who ran the command.
+     * @param args Command arguments.
+     */
+    private void acceptCMD(Player player, String[] args) {
+        // Makes sure the player is using the command correctly.
+        if(args.length == 1) {
+            ChatUtils.chat(player, "&cUsage &8» &c/party accept [player]");
+            return;
+        }
+
+        // Gets the target player.
+        Player target = Bukkit.getPlayer(args[1]);
+
+        // Makes sure the target player is online.
+        if(target == null) {
+            ChatUtils.chat(player, "&cError &8» &cThat player is not online");
+            return;
+        }
+
+        // Get's the target party.
+        Party party = plugin.getPartyManager().getParty(target);
+
+        // Makes sure the player is in a party.
+        if(party == null) {
+            ChatUtils.chat(player, "&cError &8» &cThat player is not in a party");
+            return;
+        }
+
+        // Makes sure the player is not playing a game at the moment.
+        if(plugin.getGameManager().getGame(player) != null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are already in a game.");
+            return;
+        }
+
+        // Makes sure the player has an invitation to the party.
+        if(!party.getInvites().contains(player)) {
+            ChatUtils.chat(player, "&cError &8» &cYou do not have an invite to that party.");
+            return;
+        }
+
+        party.addPlayer(player);
+        party.sendMessage("&a&lParty &8» &f" + player.getName() + " &ahas joined the party.");
+        ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+    }
+
+    /**
+     * Runs the /party create command.
+     * @param player Player who ran the command.
+     */
+    private void createCMD(Player player) {
+        // Makes sure the player is not already in a party.
+        if(plugin.getPartyManager().getParty(player) != null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are already in a party.");
+            return;
+        }
+
+        // Makes sure the player is not playing a game at the moment.
+        if(plugin.getGameManager().getGame(player) != null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are already in a game.");
+            return;
+        }
+
+        // Creates the party.
+        plugin.getPartyManager().createParty(player);
+        ChatUtils.chat(player, "&a&lParty &8» &aParty as been created.");
+        ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+    }
+
+    /**
+     * Runs the /party decline command.
+     * @param player Player running the command.
+     * @param args Command arguments.
+     */
+    private void declineCMD(Player player, String[] args) {
+        // Makes sure the player is using the command correctly.
+        if(args.length == 1) {
+            ChatUtils.chat(player, "&cUsage &8» &c/party decline [player]");
+            return;
+        }
+
+        // Gets the target player.
+        Player target = Bukkit.getPlayer(args[1]);
+
+        // Makes sure the target player is online.
+        if(target == null) {
+            ChatUtils.chat(player, "&cError &8» &cThat player is not online");
+            return;
+        }
+
+        // Gets the target player's party.
+        Party party = plugin.getPartyManager().getParty(target);
+
+        // Makes sure the party exists.
+        if(party == null) {
+            ChatUtils.chat(player, "&cError &8» &cThat player is not in a party");
+            return;
+        }
+
+        // Makes sure the player has an invite to the party.
+        if(!party.getInvites().contains(player)) {
+            ChatUtils.chat(player, "&cError &8» &cYou do not have an invite to that party.");
+            return;
+        }
+
+        // Declines the invite.
+        party.removeInvite(player);
+        party.sendMessage("&a&lParty &8» &f" + player.getName() + " &ahas declined the invite.");
+        ChatUtils.chat(player, "&a&lParty &8» &aYou have declined the invite.");
+    }
+
+    /**
+     * Runs the /party disband command.
+     * @param player Player who ran the command.
+     */
+    private void disbandCMD(Player player) {
+        // Makes sure the player is in a party.
+        if(plugin.getPartyManager().getParty(player) == null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
+            return;
+        }
+
+        // Gets the player's party.
+        Party party = plugin.getPartyManager().getParty(player);
+
+        // Makes sure the player has permission to disband the party.
+        if(party.getRank(player) != PartyRank.LEADER) {
+            ChatUtils.chat(player, "&cError &8» &cOnly the party leader can disband the party!");
+            return;
+        }
+
+        // Disbands the party.
+        party.sendMessage("&a&lParty &8» &aParty has been disbanded.");
+        plugin.getPartyManager().disbandParty(party);
+    }
+
+    /**
+     * Runs the /party help command.
+     * @param player Player who ran the command.
+     */
+    private void helpCMD(Player player) {
+        ChatUtils.chat(player, "&8&m+-----------------------***-----------------------+");
+        ChatUtils.centeredChat(player, "&a&lParty Commands");
+        ChatUtils.chat(player, "&a  /party chat");
+        ChatUtils.chat(player, "&a  /party create");
+        ChatUtils.chat(player, "&a  /party disband");
+        ChatUtils.chat(player, "&a  /party invite [player]");
+        ChatUtils.chat(player, "&a  /party leave");
+        ChatUtils.chat(player, "&a  /party list");
+        ChatUtils.chat(player, "&a  /party promote");
+        ChatUtils.chat(player, "&8&m+-----------------------***-----------------------+");
+    }
+
+    /**
+     * Runs the /player invite command.
+     * @param player Player who ran the command.
+     * @param args Command arguments.
+     */
+    private void inviteCMD(Player player, String[] args) {
+        // Makes sure the player has enterted a username to invite.
+        if(args.length != 2) {
+            ChatUtils.chat(player, "&c&lUsage &8» &c/party invite [player]");
+            return;
+        }
+
+        // Makes sure the target is online.
+        Player target = Bukkit.getPlayer(args[1]);
+        if(target == null) {
+            ChatUtils.chat(player, "&cError &8» &cThat person is not online.");
+            return;
+        }
+
+        // Makes sure they are not already in a party.
+        if(plugin.getPartyManager().getParty(target) != null) {
+            ChatUtils.chat(player, "&cError &8» &cThey are already in a party.");
+            return;
+        }
+
+        // Makes sure the player is not trying to invite themselves.
+        if(target.equals(player)) {
+            ChatUtils.chat(player, "&cError &8» &cYou cannot invite yourself.");
+            return;
+        }
+
+        // Checks if the player can receive party invites.
+        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(target);
+        if(!customPlayer.getPartyInvites()) {
+            ChatUtils.chat(player, "&cError &8» &cYou cannot invite that player to a party.");
+            return;
+        }
+
+        // Makes sure the player is not in a game.
+        if(plugin.getGameManager().getGame(player) != null) {
+            ChatUtils.chat(player, "&cError &8» &cThat person is currently in a game.");
+            return;
+        }
+
+        // Makes sure the player is in a party.
+        if(plugin.getPartyManager().getParty(player) == null) {
+            player.chat("/party create");
+        }
+
+        // Gets the player's party,
+        Party party = plugin.getPartyManager().getParty(player);
+
+        // Makes sure the player has permission to invite someone to the party.
+        if(!(party.getRank(player) == PartyRank.LEADER || party.getRank(player) == PartyRank.MODERATOR)) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not allowed to invite people to the party.");
+            return;
+        }
+
+        // Makes sure the player wasn't already invited.
+        if(party.getInvites().contains(target)) {
+            ChatUtils.chat(player, "&cError &8» &cYou already have a pending invite to that person.");
+            return;
+        }
+
+        party.invitePlayer(target);
+
+        ChatUtils.chat(target, "&8&m+-----------------------***-----------------------+");
+        ChatUtils.chat(target, "&aYou have been invited to join &f" + player.getName() + "&a's party!");
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tellraw " + target.getName() +
+                " [{\"text\":\"[Accept]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party accept "  + player.getName() + "\"}},{\"text\":\" / \",\"color\":\"gray\"},{\"text\":\"[Decline]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party decline " +  player.getName() + "\"}}]");
+        ChatUtils.chat(target, "&8&m+-----------------------***-----------------------+");
+        party.sendMessage("&a&lParty &8» &f" + target.getName() + " &ahas been invited to the party.");
+    }
+
+    /**
+     * Runs the /party leave command.
+     * @param player Player who ran the command.
+     */
+    private void leaveCMD(Player player) {
+        // Makes sure the player is in a party.
+        if(plugin.getPartyManager().getParty(player) == null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
+            return;
+        }
+
+        // Gets the player's party.
+        Party party = plugin.getPartyManager().getParty(player);
+
+        // Removes the player
+        party.removePlayer(player);
+        party.sendMessage("&a&lParty &8» &f" + player.getName() + " &ahas left the party.");
+        ChatUtils.chat(player, "&a&lParty &8» &aYou have left the party.");
+        ItemUtils.giveLobbyItems(player);
+    }
+
+    /**
+     * Runs the /party list command.
+     * @param player Player who ran the command.
+     */
+    private void listCMD(Player player) {
+        // Makes sure the player is in a party.
+        if(plugin.getPartyManager().getParty(player) == null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
+            return;
+        }
+
+        // Gets the player's party.
+        Party party = plugin.getPartyManager().getParty(player);
+
+        // Gets all the party members and their roles.
+        String leader = "";
+        List<String> moderators = new ArrayList<>();
+        List<String> members = new ArrayList<>();
+        for(Player member : party.getMembers()) {
+            switch (party.getRank(member)) {
+                case LEADER:
+                    leader = member.getName();
+                    break;
+                case MODERATOR:
+                    moderators.add(member.getName());
+                    break;
+                case MEMBER:
+                    members.add(member.getName());
+                    break;
+            }
+        }
+
+        // Displays the list
+        ChatUtils.chat(player, "&8&m+-----------------------***-----------------------+");
+        ChatUtils.centeredChat(player, "&a&lParty Members");
+        ChatUtils.chat(player, "");
+        ChatUtils.chat(player, "&aLeader &7» &f" + leader);
+
+        // Only show moderators if there are any.
+        if(moderators.size() > 0) {
+            ChatUtils.chat(player, "&aModerators &7[" + moderators.size() + "] » &f" + org.apache.commons.lang.StringUtils.join(moderators, ", "));
+        }
+
+        ChatUtils.chat(player, "&aMembers &7[" + members.size() + "] » &f" + StringUtils.join(members, ", "));
+        ChatUtils.chat(player, "");
+        ChatUtils.chat(player, "&8&m+-----------------------***-----------------------+");
+    }
+
+    /**
+     * Runs the /party promote command.
+     * @param player Player to promote.
+     */
+    private void promoteCMD(Player player, String[] args) {
+        // Makes sure the player is in a party.
+        if(plugin.getPartyManager().getParty(player) == null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
+            return;
+        }
+
+        // Makes sure the player is using the command correctly.
+        if(args.length == 1) {
+            ChatUtils.chat(player, "&cUsage &8» &c/party promote [player]");
+            return;
+        }
+
+        // Gets the player's party.
+        Party party = plugin.getPartyManager().getParty(player);
+
+        // Makes sure they have permission.
+        if(party.getRank(player) != PartyRank.LEADER) {
+            ChatUtils.chat(player, "&cError &8» &cOnly the party leader can promote members!");
+            return;
+        }
+
+        // Get the player who the player is trying to promote.
+        Player target = Bukkit.getPlayer(args[1]);
+
+        // Makes sure the target is in the party.
+        if(target == null || !party.getMembers().contains(target)) {
+            ChatUtils.chat(player, "&cError &8» &cThat player is not in your party!");
+            return;
+        }
+
+        // Makes sure the player isn't trying to promote themselves.
+        if(target.equals(player)) {
+            ChatUtils.chat(player, "&cError &8» &cYou are already the party leader!");
+            return;
+        }
+
+        // Promotes the player.
+        if(party.getRank(target) == PartyRank.MEMBER) {
+            party.setRank(target, PartyRank.MODERATOR);
+            party.sendMessage("&a&lParty &8» &f" + target.getName() + " &ahas been promoted to moderator.");
+        }
+        else {
+            party.setRank(player, PartyRank.MODERATOR);
+            party.setRank(target, PartyRank.LEADER);
+            party.sendMessage("&a&lParty &8» &f" + target.getName() + " &ahas been promoted to party leader.");
         }
     }
 }

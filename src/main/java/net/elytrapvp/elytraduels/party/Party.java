@@ -7,42 +7,25 @@ import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
- * Represents a group of players
- * outside of a Game.
+ * Represents a group of players outside the game.
  */
 public class Party {
     private final ElytraDuels plugin;
-    private Player leader;
-    private final Set<Player> members = new HashSet<>();
-    private final Set<Player> partyChatToggled = new HashSet<>();
-    private final Set<Player> invites = new HashSet<>();
+    private final Map<UUID, PartyRank> members = new HashMap<>();
+    private final Set<UUID> partyChatToggled = new HashSet<>();
+    private final Map<UUID, String> invites = new HashMap<>();
 
     /**
-     * Create a new party.
-     * @param plugin Plugin instance.
+     * Creates the party object.
+     * @param plugin Instance of the main plugin.
      * @param leader Leader of the party.
      */
     public Party(ElytraDuels plugin, Player leader) {
         this.plugin = plugin;
-        this.leader = leader;
-    }
-
-    /**
-     * Get a player to the invite list.
-     * @param player Player to add.
-     */
-    public void addInvite(Player player) {
-        invites.add(player);
-
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-           invites.remove(player);
-        }, 1200);
+        members.put(leader.getUniqueId(), PartyRank.LEADER);
     }
 
     /**
@@ -50,17 +33,17 @@ public class Party {
      * @param player Player to add.
      */
     public void addPlayer(Player player) {
-        members.add(player);
-        ItemUtils.givePartyItems(plugin.getPartyManager(), player);
-        invites.remove(player);
+        members.put(player.getUniqueId(), PartyRank.MEMBER);
+        invites.remove(player.getUniqueId());
     }
 
     /**
      * Broadcast a message to all party members.
      * @param message Message to broadcast.
      */
+    @Deprecated
     public void broadcast(String message) {
-        for(Player player : getPlayers()) {
+        for(Player player : getMembers()) {
             ChatUtils.chat(player, message);
         }
     }
@@ -68,46 +51,94 @@ public class Party {
     /**
      * Disband the party.
      */
+    @Deprecated
     public void disband() {
-        for(Player player : getPlayers()) {
+        for(Player player : getMembers()) {
             ItemUtils.giveLobbyItems(player);
         }
 
         plugin.getPartyManager().disbandParty(this);
     }
 
+
+    /**
+     * Invites a player to the party.
+     * @param player Player being invited to the party.
+     */
+    public void invitePlayer(Player player) {
+        invites.put(player.getUniqueId(), player.getName());
+
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            if(!invites.keySet().contains(player.getUniqueId())) {
+                return;
+            }
+
+            sendMessage("&a&lParty &8» &f" + invites.get(player.getUniqueId()) + "&a's invite has expired.");
+            invites.remove(player.getUniqueId());
+        }, 20*60);
+    }
+
     /**
      * Get all current invites.
      * @return All current invites.
      */
-    public Set<Player> getInvites() {
-        return invites;
+    public Collection<Player> getInvites() {
+        Collection<Player> partyInvites = new ArrayList<>();
+
+        invites.keySet().forEach(uuid -> {
+            if(Bukkit.getPlayer(uuid) != null) {
+                partyInvites.add(Bukkit.getPlayer(uuid));
+            }
+        });
+
+        return partyInvites;
     }
 
     /**
-     * Get the current leader of the party.
-     * @return Current party leader.
+     * Gets the leader of the party.
+     * @return Party leader.
      */
     public Player getLeader() {
-        return leader;
+        // Loops through all party members.
+        for(Player player : getMembers()) {
+            // Checks if they are party leader.
+            if(getRank(player) == PartyRank.LEADER) {
+                return player;
+            }
+        }
+
+        // If no party leader found, returns null.
+        return null;
     }
 
     /**
-     * Get all party members.
-     * @return Members of the party.
+     * Get all members in the party.
+     * @return List of all party members.
      */
-    public Set<Player> getMembers() {
-        return members;
+    public List<Player> getMembers() {
+        List<Player> partyMembers = new ArrayList<>();
+
+        members.keySet().forEach(uuid -> {
+            if(Bukkit.getPlayer(uuid) != null) {
+                partyMembers.add(Bukkit.getPlayer(uuid));
+            }
+        });
+
+        return partyMembers;
     }
 
     /**
-     * Get all players in the party.
-     * @return All players.
+     * Get the rank of a player in the party.
+     * Returns null if they are not in the party.
+     * @param player Player to get rank of.
+     * @return PartyRank of the player.
      */
-    public List<Player> getPlayers() {
-        List<Player> players = new ArrayList<>(getMembers());
-        players.add(getLeader());
-        return players;
+    public PartyRank getRank(Player player) {
+        if(members.containsKey(player.getUniqueId())) {
+            return members.get(player.getUniqueId());
+        }
+
+        return null;
     }
 
     /**
@@ -116,35 +147,47 @@ public class Party {
      * @return If they have party chat toggled.
      */
     public boolean hasPartyChatToggled(Player player) {
-        return partyChatToggled.contains(player);
+        return partyChatToggled.contains(player.getUniqueId());
     }
 
     /**
-     * Remove a player from the party.
-     * @param p Player to remove.
+     * Removes the invite to a player.
+     * @param player Player to remove invite to.
      */
-    public void removePlayer(Player p) {
-        if(leader.equals(p)) {
-            disband();
+    public void removeInvite(Player player) {
+        invites.remove(player.getUniqueId());
+    }
+
+    /**
+     * Removes a player from the party.
+     * @param player Player to remove.
+     */
+    public void removePlayer(Player player) {
+        if(getRank(player) == PartyRank.LEADER) {
+            plugin.getPartyManager().disbandParty(this);
             return;
         }
 
-        Game game = plugin.getGameManager().getGame(p);
-        if(game == null) {
-            ItemUtils.giveLobbyItems(p);
-        }
-
-        members.remove(p);
+        members.remove(player.getUniqueId());
     }
 
     /**
-     * Change the leader of the party.
-     * @param leader New party leader.
+     * Sends a chat message to all party members
+     * @param message Message to send to party members.
      */
-    public void setLeader(Player leader) {
-        members.add(getLeader());
-        this.leader = leader;
-        members.remove(leader);
+    public void sendMessage(String message) {
+        for(Player player : getMembers()) {
+            ChatUtils.chat(player, message);
+        }
+    }
+
+    /**
+     * Chance a player's rank in the party.
+     * @param player Player to change the rank of.
+     * @param rank Rank to set the player to.
+     */
+    public void setRank(Player player, PartyRank rank) {
+        members.put(player.getUniqueId(), rank);
     }
 
     /**
@@ -152,11 +195,11 @@ public class Party {
      * @param player Player to toggle party chat for.
      */
     public void togglePartyChat(Player player) {
-        if(!partyChatToggled.contains(player)) {
-            partyChatToggled.add(player);
+        if(!partyChatToggled.contains(player.getUniqueId())) {
+            partyChatToggled.add(player.getUniqueId());
         }
         else {
-            partyChatToggled.remove(player);
+            partyChatToggled.remove(player.getUniqueId());
         }
     }
 }

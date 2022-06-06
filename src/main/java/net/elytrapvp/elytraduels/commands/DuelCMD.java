@@ -81,7 +81,7 @@ public class DuelCMD extends AbstractCommand {
                 game3.addPlayer(p);
             }
             else {
-                game3.addPlayers(senderParty.getPlayers());
+                game3.addPlayers(senderParty.getMembers());
             }
 
             Party targetParty2 = plugin.getPartyManager().getParty(opponent);
@@ -89,7 +89,7 @@ public class DuelCMD extends AbstractCommand {
                 game3.addPlayer(opponent);
             }
             else {
-                game3.addPlayers(targetParty.getPlayers());
+                game3.addPlayers(targetParty.getMembers());
             }
 
             // Remove players from queue.
