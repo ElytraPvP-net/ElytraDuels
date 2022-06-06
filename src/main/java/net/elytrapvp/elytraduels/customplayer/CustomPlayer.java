@@ -21,7 +21,6 @@ public class CustomPlayer {
     private final Map<String, Integer> losses = new HashMap<>();
     private final Map<String, Integer> winStreak = new HashMap<>();
     private final Map<String, Integer> bestWinStreak = new HashMap<>();
-    private final Map<String, Integer> elo = new HashMap<>();
     private final Map<String, Map<Integer, Integer>> kitEditor = new HashMap<>();
 
     // Settings
@@ -42,7 +41,7 @@ public class CustomPlayer {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             // Create a list of all kits to add.
             List<String> kits = new ArrayList<>();
-            for(Kit kit : plugin.getKitManager().getRankedKits()) {
+            for(Kit kit : plugin.getKitManager().getKits()) {
                 kits.add(kit.getName().toLowerCase());
             }
             kits.add("global");
@@ -61,7 +60,6 @@ public class CustomPlayer {
                         losses.put(kit, results.getInt(4));
                         winStreak.put(kit, results.getInt(5));
                         bestWinStreak.put(kit, results.getInt(6));
-                        elo.put(kit, results.getInt(7));
                     }
                     else {
                         // If it doesn't exist, create it.
@@ -74,7 +72,6 @@ public class CustomPlayer {
                         losses.put(kit, 0);
                         winStreak.put(kit, 0);
                         bestWinStreak.put(kit, 0);
-                        elo.put(kit, 1000);
                     }
                 }
 
@@ -111,9 +108,6 @@ public class CustomPlayer {
             catch (SQLException exception) {
                 ChatUtils.chat(Bukkit.getPlayer(uuid), "&cError &8» &cSomething went wrong loading your data! Please reconnect or your data could be lost.");
                 exception.printStackTrace();
-                for(Kit kit : plugin.getKitManager().getRankedKits()) {
-                    elo.put(kit.getName().toLowerCase(), 1000);
-                }
             }
         });
     }
@@ -174,15 +168,6 @@ public class CustomPlayer {
      */
     public boolean getDuelRequests() {
         return duelRequests;
-    }
-
-    /**
-     * Get the ELO of the player.
-     * @param kit Kit to get ELO of.
-     * @return The ELO.
-     */
-    public int getElo(String kit) {
-        return elo.get(kit);
     }
 
     public Map<Integer, Integer> getKitEditor(String kit) {
@@ -267,39 +252,6 @@ public class CustomPlayer {
                 statement.setBoolean(1, duelRequests);
                 statement.setString(2, uuid.toString());
                 statement.executeUpdate();
-            }
-            catch (SQLException exception) {
-                exception.printStackTrace();
-            }
-        });
-    }
-
-    /**
-     * Set the ELO of the player.
-     * @param kit Kit to set ELO in.
-     * @param elo What the ELO should be set to.
-     */
-    public void setElo(String kit, int elo) {
-        this.elo.put(kit, elo);
-
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET elo = ? WHERE uuid = ? AND kit = ?");
-                statement.setInt(1, elo);
-                statement.setString(2, uuid.toString());
-                statement.setString(3, kit);
-                statement.executeUpdate();
-
-                if(kit.equals("global")) {
-                    return;
-                }
-
-                int globalEloChange = 0;
-                for(Kit rankedKit : plugin.getKitManager().getRankedKits()) {
-                    globalEloChange += (getElo(rankedKit.getName().toLowerCase()) - 1000);
-                }
-
-                setElo("global", (1000 + (globalEloChange / 3)));
             }
             catch (SQLException exception) {
                 exception.printStackTrace();

@@ -35,7 +35,7 @@ public class QueueScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(p);
         }
 
-        helper.setTitle("&a&lDuels &b(Season 1)");
+        helper.setTitle("&a&lDuels");
         helper.setSlot(12, "&7&m------------------");
         helper.setSlot(11, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
         helper.setSlot(10, "&aPlaying: &f" + plugin.getQueueManager().getPlaying());

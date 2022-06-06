@@ -141,7 +141,7 @@ public class PlayerInteractListener implements Listener {
 
                 break;
             case "Kits":
-                new RankedGUI(plugin, player).open(player);
+                new KitGUI(plugin).open(player);
                 event.setCancelled(true);
                 break;
 

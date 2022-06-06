@@ -11,7 +11,6 @@ import java.util.Set;
  */
 public class KitManager {
     private final Set<Kit> kits = new LinkedHashSet<>();
-    private final Set<Kit> rankedKits = new LinkedHashSet<>();
 
     public KitManager(ElytraDuels plugin) {
         Kit speedArcher = new SpeedArcherKit(plugin);
@@ -49,42 +48,10 @@ public class KitManager {
         kits.add(finalUHC);
         kits.add(sumo);
         kits.add(archer);
-        kits.add(peal);
-        kits.add(blockSumo);
+        //kits.add(peal);
+        //kits.add(blockSumo);
         //kits.add(bowFight);
         kits.add(shortBow);
-
-        // Season 0 Ranked Kits
-        //rankedKits.add(speedArcher);
-        rankedKits.add(bow);
-        //rankedKits.add(iron);
-        //rankedKits.add(diamond);
-        rankedKits.add(bowSpleef);
-        rankedKits.add(classic);
-        //rankedKits.add(noDebuff);
-        rankedKits.add(op);
-        rankedKits.add(blitz);
-        rankedKits.add(buildUHC);
-        rankedKits.add(cactus);
-        //rankedKits.add(sg);
-        //rankedKits.add(finalUHC);
-        //rankedKits.add(sumo);
-
-        // Current Planned Ranked Kits for Season 1. Subject to change.
-        /*
-        rankedKits.add(bow);
-        rankedKits.add(bowSpleef);
-        rankedKits.add(noDebuff);
-        rankedKits.add(op);
-        rankedKits.add(blitz);
-        rankedKits.add(buildUHC);
-        rankedKits.add(cactus);
-        rankedKits.add(sg);
-        rankedKits.add(sumo);
-        rankedKits.add(iron);
-        rankedKits.add(diamond);
-        rankedKits.add(finalUHC);
-         */
     }
 
     /**
@@ -108,13 +75,5 @@ public class KitManager {
      */
     public Set<Kit> getKits() {
         return kits;
-    }
-
-    /**
-     * Get all the ranked kits.
-     * @return All ranked kits.
-     */
-    public Set<Kit> getRankedKits() {
-        return rankedKits;
     }
 }

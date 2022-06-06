@@ -4,7 +4,6 @@ import net.elytrapvp.elytraduels.game.team.Team;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.scoreboard.CustomScoreboard;
 import net.elytrapvp.elytraduels.utils.scoreboard.ScoreHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class GameScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(player);
         }
 
-        helper.setTitle("&a&lDuels &b(Season 1)");
+        helper.setTitle("&a&lDuels");
 
         if(game.getKit().hasAbilities()) {
             helper.setSlot(13, "&7&m------------------");
