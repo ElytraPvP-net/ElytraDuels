@@ -78,6 +78,9 @@ public final class ElytraDuels extends JavaPlugin {
 
         // Change pace of healing.
         new HealingRunnable(this).runTaskTimer(this, 20*8, 20*8);
+
+        // Registers placeholders.
+        new Placeholders(this).register();
     }
 
     @Override
