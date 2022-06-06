@@ -86,7 +86,7 @@ public class Kit {
      * Apply a kit to a player.
      * @param player Player to apply kit to.
      */
-    public void apply(Player player) {
+    public void apply(Player player, Game game) {
         // Clear inventory.
         player.closeInventory();
         player.getInventory().clear();
@@ -136,7 +136,15 @@ public class Kit {
                 item.setItemMeta(meta);
             }
 
-            player.getInventory().setItem(i, item);
+            // Dyes the item if it can be dyed.
+            ItemBuilder builder = new ItemBuilder(item)
+                    .dye(game.getTeam(player).getTeamColor().getLeatherColor());
+
+            if(item.getType() == Material.WOOL) {
+                builder.dye(game.getTeam(player).getTeamColor().getWoolColor());
+            }
+
+            player.getInventory().setItem(i, builder.build());
         }
 
         // Set game mode/health/hunger/saturation.

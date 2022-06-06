@@ -77,7 +77,7 @@ public class Game {
 
             for(Player p : team.getPlayers()) {
                 p.teleport(arena.getSpawns().get(spawn));
-                kit.apply(p);
+                kit.apply(p, this);
                 new GameScoreboard(p, this);
             }
             spawn++;

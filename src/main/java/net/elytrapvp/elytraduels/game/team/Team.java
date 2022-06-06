@@ -14,14 +14,16 @@ public class Team {
     private final List<Player> players;
     private final Set<Player> alivePlayers;
     private final Set<Player> deadPlayers = new HashSet<>();
+    private final TeamColor teamColor;
 
     /**
      * Creates a new team with specific players.
      * @param players Players to add to the team.
      */
-    public Team(List<Player> players) {
+    public Team(List<Player> players, TeamColor teamColor) {
         this.players = players;
         this.alivePlayers = new HashSet<>(players);
+        this.teamColor = teamColor;
     }
 
     /**
@@ -38,6 +40,14 @@ public class Team {
      */
     public Set<Player> getDeadPlayers() {
         return deadPlayers;
+    }
+
+    /**
+     * Gets the color of the team.
+     * @return TeamColor the team is assigned.
+     */
+    public TeamColor getTeamColor() {
+        return teamColor;
     }
 
     /**

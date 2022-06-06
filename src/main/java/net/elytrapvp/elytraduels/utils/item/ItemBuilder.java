@@ -1,11 +1,16 @@
 package net.elytrapvp.elytraduels.utils.item;
 
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
+import org.bukkit.Color;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.material.MaterialData;
+import org.bukkit.material.Wool;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,6 +122,33 @@ public class ItemBuilder {
     public ItemStack build() {
         item.setItemMeta(meta);
         return item;
+    }
+
+    /**
+     * Dye a piece of leather armor.
+     * @param color Color to dye the armor.
+     * @return ItemBuilder.
+     */
+    public ItemBuilder dye(Color color) {
+        if(!(meta instanceof LeatherArmorMeta)) {
+            return this;
+        }
+
+        ((LeatherArmorMeta) meta).setColor(color);
+
+        return this;
+    }
+
+    /**
+     * Dyes a piece of wool.
+     * @param color Color of the wool.
+     * @return Item Builder.
+     */
+    public ItemBuilder dye(DyeColor color) {
+        Wool wool = new Wool(color);
+        item.setData(wool);
+
+        return this;
     }
 
     /**
