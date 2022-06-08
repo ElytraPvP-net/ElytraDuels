@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.runnables;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameState;
+import net.elytrapvp.elytraduels.game.GameType;
 import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.LocationUtils;
@@ -41,6 +42,10 @@ public class AFKTimer extends BukkitRunnable {
             }
 
             if(game.getGameState() != GameState.RUNNING) {
+                return;
+            }
+
+            if(game.getGameType() != GameType.UNRANKED) {
                 return;
             }
 

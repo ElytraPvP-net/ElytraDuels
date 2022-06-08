@@ -75,7 +75,7 @@ public class DuelCMD extends AbstractCommand {
             Party senderParty = plugin.getPartyManager().getParty(p);
 
             Kit kit = plugin.getDuelManager().getDuelKit(p);
-            Game game3 = plugin.getGameManager().createGame(kit, GameType.UNRANKED);
+            Game game3 = plugin.getGameManager().createGame(kit, GameType.DUEL);
 
             if(senderParty == null) {
                 game3.addPlayer(p);
