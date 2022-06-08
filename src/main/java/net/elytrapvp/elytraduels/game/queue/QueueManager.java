@@ -33,6 +33,10 @@ public class QueueManager {
         for(Kit kit : plugin.getKitManager().getKits()) {
             playingKit.put(kit, 0);
         }
+
+        for(Kit kit : plugin.getKitManager().getDisabledKits()) {
+            playingKit.put(kit, 0);
+        }
     }
 
     /**

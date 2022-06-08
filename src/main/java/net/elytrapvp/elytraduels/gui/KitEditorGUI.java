@@ -24,7 +24,7 @@ public class KitEditorGUI extends CustomGUI {
     private final ElytraDuels plugin;
     private String kit = "none";
 
-    public KitEditorGUI(ElytraDuels plugin) {
+    public KitEditorGUI(ElytraDuels plugin, Player player) {
         super(54, "Kit Editor");
         this.plugin = plugin;
 
@@ -57,6 +57,20 @@ public class KitEditorGUI extends CustomGUI {
                     });
             i++;
         }
+
+        if(player.hasPermission("duels.disabled")) {
+            for(Kit kit : plugin.getKitManager().getDisabledKits()) {
+                setItem(i + 9, new ItemBuilder(kit.getIconMaterial())
+                                .setDisplayName("&a&l" + kit.getName())
+                                .addFlag(ItemFlag.HIDE_ATTRIBUTES)
+                                .addLore("").addLore("&aClick to edit!").build(),
+                        (p, a) -> {
+                            p.closeInventory();
+                            new KitEditorGUI(plugin, p, kit.getName()).open(p);
+                        });
+                i++;
+            }
+        }
     }
 
     public KitEditorGUI(ElytraDuels plugin, Player player, String kit) {
@@ -70,7 +84,7 @@ public class KitEditorGUI extends CustomGUI {
                 .build();
         setItem(0, back, (p, a) -> {
             p.closeInventory();
-            new KitEditorGUI(plugin).open(p);
+            new KitEditorGUI(plugin, p).open(p);
         });
 
         ItemStack save = new SkullBuilder("4312ca4632def5ffaf2eb0d9d7cc7b55a50c4e3920d90372aab140781f5dfbc4")

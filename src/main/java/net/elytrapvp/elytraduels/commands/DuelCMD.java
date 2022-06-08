@@ -157,7 +157,7 @@ public class DuelCMD extends AbstractCommand {
         }
 
         if(args.length < 2) {
-            new DuelGUI(plugin, t).open(p);
+            new DuelGUI(plugin, p, t).open(p);
             return;
         }
 

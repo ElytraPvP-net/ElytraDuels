@@ -30,7 +30,7 @@ public class PartyListGUI extends CustomGUI {
                     return;
                 }
 
-                new DuelGUI(plugin, party.getLeader()).open(player);
+                new DuelGUI(plugin, player, party.getLeader()).open(player);
             });
         }
     }

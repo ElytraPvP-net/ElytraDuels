@@ -181,12 +181,12 @@ public class PlayerInteractListener implements Listener {
                 break;
 
             case "Duel Party Members":
-                new PartyDuelGUI(plugin).open(player);
+                new PartyDuelGUI(plugin, player).open(player);
                 event.setCancelled(true);
                 break;
 
             case "FFA Duel":
-                new PartyFFAGUI(plugin).open(player);
+                new PartyFFAGUI(plugin, player).open(player);
                 event.setCancelled(true);
                 break;
 

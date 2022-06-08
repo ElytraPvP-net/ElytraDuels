@@ -18,8 +18,8 @@ import java.util.List;
 
 public class PartyDuelGUI extends CustomGUI {
 
-    public PartyDuelGUI(ElytraDuels plugin) {
-        super(18, "Party Duel");
+    public PartyDuelGUI(ElytraDuels plugin, Player opener) {
+        super(36, "Party Duel");
 
         int i = 0;
         for(Kit kit : plugin.getKitManager().getKits()) {
@@ -43,7 +43,7 @@ public class PartyDuelGUI extends CustomGUI {
                     return;
                 }
 
-                Game game = plugin.getGameManager().createGame(kit, GameType.UNRANKED);
+                Game game = plugin.getGameManager().createGame(kit, GameType.DUEL);
 
                 List<Player> players = new ArrayList<>(party.getMembers());
                 Collections.shuffle(players);
@@ -68,6 +68,56 @@ public class PartyDuelGUI extends CustomGUI {
                 game.start();
             });
             i++;
+        }
+
+        if(opener.hasPermission("duels.disabled")) {
+            for(Kit kit : plugin.getKitManager().getDisabledKits()) {
+                int playing = plugin.getQueueManager().getPlaying(kit);
+                int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+
+                int count = playing + queue;
+                if(count == 0) count = 1;
+
+                ItemStack item = new ItemBuilder(kit.getIconMaterial(), count)
+                        .setDisplayName("&a" + kit.getName())
+                        .addFlag(ItemFlag.HIDE_ATTRIBUTES)
+                        .build();
+
+                setItem(i, item, (p, a) -> {
+                    p.closeInventory();
+
+                    Party party = plugin.getPartyManager().getParty(p);
+                    if(party.getMembers().size() == 1) {
+                        ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
+                        return;
+                    }
+
+                    Game game = plugin.getGameManager().createGame(kit, GameType.DUEL);
+
+                    List<Player> players = new ArrayList<>(party.getMembers());
+                    Collections.shuffle(players);
+
+                    List<Player> team1 = new ArrayList<>();
+                    List<Player> team2 = new ArrayList<>();
+
+                    int team = 1;
+                    for(Player player : players) {
+                        if(team == 1) {
+                            team1.add(player);
+                            team = 2;
+                        }
+                        else {
+                            team2.add(player);
+                            team = 1;
+                        }
+                    }
+
+                    game.addPlayers(team1);
+                    game.addPlayers(team2);
+                    game.start();
+                });
+                i++;
+            }
         }
     }
 

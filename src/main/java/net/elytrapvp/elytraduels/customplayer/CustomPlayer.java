@@ -44,6 +44,10 @@ public class CustomPlayer {
             for(Kit kit : plugin.getKitManager().getKits()) {
                 kits.add(kit.getName().toLowerCase());
             }
+            for(Kit kit : plugin.getKitManager().getDisabledKits()) {
+                kits.add(kit.getName().toLowerCase());
+            }
+
             kits.add("global");
 
             try {
@@ -76,6 +80,10 @@ public class CustomPlayer {
                 }
 
                 for(Kit kit : plugin.getKitManager().getKits()) {
+                    kitEditor.put(kit.getName() ,new HashMap<>());
+                }
+
+                for(Kit kit : plugin.getKitManager().getDisabledKits()) {
                     kitEditor.put(kit.getName() ,new HashMap<>());
                 }
 

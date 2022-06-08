@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class KitManager {
     private final Set<Kit> kits = new LinkedHashSet<>();
+    private final Set<Kit> disabledKits = new LinkedHashSet<>();
 
     public KitManager(ElytraDuels plugin) {
         Kit speedArcher = new SpeedArcherKit(plugin);
@@ -46,12 +47,17 @@ public class KitManager {
         kits.add(cactus);
         kits.add(sg);
         kits.add(finalUHC);
-        kits.add(sumo);
+        //kits.add(sumo);
         kits.add(archer);
         //kits.add(peal);
         //kits.add(blockSumo);
         //kits.add(bowFight);
         kits.add(shortBow);
+
+        disabledKits.add(sumo);
+        disabledKits.add(peal);
+        disabledKits.add(blockSumo);
+        disabledKits.add(bowFight);
     }
 
     /**
@@ -66,6 +72,12 @@ public class KitManager {
             }
         }
 
+        for(Kit kit : getDisabledKits()) {
+            if(kit.getName().equalsIgnoreCase(str)) {
+                return kit;
+            }
+        }
+
         return null;
     }
 
@@ -75,5 +87,13 @@ public class KitManager {
      */
     public Set<Kit> getKits() {
         return kits;
+    }
+
+    /**
+     * Get all disabled kits.
+     * @return All disabled kits.
+     */
+    public Set<Kit> getDisabledKits() {
+        return disabledKits;
     }
 }
