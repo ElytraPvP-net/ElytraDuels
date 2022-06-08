@@ -46,7 +46,7 @@ public class BowFightKit extends Kit {
                 .build();
         ItemStack arrows = new ItemBuilder(Material.ARROW, 1).build();
 
-        ItemStack wool = new ItemBuilder(Material.WOOL, 16).build();
+        ItemStack wool = new ItemBuilder(Material.WOOL, 32).build();
 
         addItem(39, helmet);
         addItem(38, chestplate);
