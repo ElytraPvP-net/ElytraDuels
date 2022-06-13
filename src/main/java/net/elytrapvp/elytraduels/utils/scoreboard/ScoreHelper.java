@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public class ScoreHelper {
 
-    private static HashMap<UUID, ScoreHelper> players = new HashMap<>();
+    private static final HashMap<UUID, ScoreHelper> players = new HashMap<>();
 
     public static boolean hasScore(Player player) {
         return players.containsKey(player.getUniqueId());
@@ -38,8 +38,8 @@ public class ScoreHelper {
         return players.remove(player.getUniqueId());
     }
 
-    private Scoreboard scoreboard;
-    private Objective sidebar;
+    private final Scoreboard scoreboard;
+    private final Objective sidebar;
 
     private ScoreHelper(Player player) {
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();

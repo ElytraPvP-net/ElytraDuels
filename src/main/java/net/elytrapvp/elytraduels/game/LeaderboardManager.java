@@ -42,7 +42,6 @@ public class LeaderboardManager {
                 try {
                     PreparedStatement statement1 = plugin.getMySQL().getConnection().prepareStatement("SELECT * from duels_statistics WHERE kit = ? ORDER BY " + type + " DESC LIMIT 10");
                     statement1.setString(1, kit);
-                    //statement1.setString(2, type);
                     ResultSet results = statement1.executeQuery();
 
                     while(results.next()) {

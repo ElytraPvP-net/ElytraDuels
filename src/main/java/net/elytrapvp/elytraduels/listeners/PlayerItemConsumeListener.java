@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class PlayerItemConsumeListener implements Listener {
-    private ElytraDuels plugin;
+    private final ElytraDuels plugin;
 
     public PlayerItemConsumeListener(ElytraDuels plugin) {
         this.plugin = plugin;

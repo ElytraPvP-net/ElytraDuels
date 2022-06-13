@@ -249,7 +249,7 @@ public class CustomPlayer {
 
     /**
      * Set if duels requests should be sent.
-     * @param duelRequests Whether or not duel requests should be sent.
+     * @param duelRequests Whether duel requests should be sent.
      */
     public void setDuelRequests(boolean duelRequests) {
         this.duelRequests = duelRequests;
@@ -291,7 +291,7 @@ public class CustomPlayer {
 
     /**
      * Set if party invites can be sent.
-     * @param partyInvites Whether or not party invites can be sent.
+     * @param partyInvites Whether party invites can be sent.
      */
     public void setPartyInvites(boolean partyInvites) {
         this.partyInvites = partyInvites;
@@ -311,7 +311,7 @@ public class CustomPlayer {
 
     /**
      * Set if the scoreboard should be shown.
-     * @param showScoreboard Whether or not the scoreboard should be shown.
+     * @param showScoreboard Whether the scoreboard should be shown.
      */
     public void setShowScoreboard(boolean showScoreboard) {
         this.showScoreboard = showScoreboard;

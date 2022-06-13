@@ -185,7 +185,7 @@ public class Kit {
 
     /**
      * Get the material for the kit icon.
-     * @return
+     * @return The material of the kit's icon.
      */
     public Material getIconMaterial() {
         return iconMaterial;
@@ -225,7 +225,7 @@ public class Kit {
 
     /**
      * Get the number of repulsors used in the kit.
-     * @return
+     * @return Amount of repulsors the players should start with.
      */
     public int getRepulsors() {
         return repulsors;
@@ -281,7 +281,7 @@ public class Kit {
 
     /**
      * Get whether the kit has any abilities.
-     * @return Whether or not the kit has abilities.
+     * @return Whether the kit has abilities.
      */
     public boolean hasAbilities() {
         return doubleJumps > 0 || repulsors > 0 || tripleShots > 0;
@@ -289,7 +289,7 @@ public class Kit {
 
     /**
      * Get whether the kit has arrow pickup enable.
-     * @return Wehther or not players can pick up arrows.
+     * @return Whether players can pick up arrows.
      */
     public boolean hasArrowPickup() {
         return arrowPickup;
@@ -305,7 +305,7 @@ public class Kit {
 
     /**
      * Get if the kit should have hunger.
-     * @return Whether or not the kit has hunger.
+     * @return Whether the kit has hunger.
      */
     public boolean hasHunger() {
         return hunger;
@@ -320,8 +320,8 @@ public class Kit {
     }
 
     /**
-     * Get if the kit will have ranged ranged.
-     * @return Whether or not the kit as ranged damage.
+     * Get if the kit will have ranged damage.
+     * @return Whether the kit as ranged damage.
      */
     public boolean hasRangedDamage() {
         return rangedDamage;
@@ -329,7 +329,7 @@ public class Kit {
 
     /**
      * Get if the kit should have strong golden apples.
-     * @return Whether or not it has strong golden apples.
+     * @return Whether it has strong golden apples.
      */
     public boolean hasStrongGapple() {
         return strongGapple;
@@ -345,7 +345,7 @@ public class Kit {
 
     /**
      * Get if the kit should have natural regen.
-     * @return Whether or not the kit has natural regen.
+     * @return Whether the kit has natural regen.
      */
     public boolean naturalRegen() {
         return naturalRegen;
@@ -359,15 +359,15 @@ public class Kit {
     public void onBlockPlace(Game game, BlockPlaceEvent event) {}
 
     /**
-     * Set if players should be able to pickup arrows.
-     * @param arrowPickup Whether or not arrows can be picked up.
+     * Set if players should be able to pick up arrows.
+     * @param arrowPickup Whether arrows can be picked up.
      */
     public void setArrowPickup(boolean arrowPickup) {
         this.arrowPickup = arrowPickup;
     }
 
     /**
-     * Set whether or not players should do damage to others.
+     * Set whether players should do damage to others.
      * @param doDamage If players should do damage.
      */
     public void setDoDamage(boolean doDamage) {
@@ -376,7 +376,7 @@ public class Kit {
 
     /**
      * Set the number of double jumps
-     * @param doubleJumps
+     * @param doubleJumps Number of double jumps the kit has.
      */
     public void setDoubleJumps(int doubleJumps) {
         this.doubleJumps = doubleJumps;
@@ -392,7 +392,7 @@ public class Kit {
 
     /**
      * Set it the kit should have hunger.
-     * @param hunger Whether or not the kit has hunger.
+     * @param hunger Whether the kit has hunger.
      */
     public void setHunger(boolean hunger) {
         this.hunger = hunger;
@@ -416,7 +416,7 @@ public class Kit {
 
     /**
      * Set if the kit should have natural regen.
-     * @param naturalRegen Whether or not the kit has natural regen.
+     * @param naturalRegen Whether the kit has natural regen.
      */
     public void setNaturalRegen(boolean naturalRegen) {
         this.naturalRegen = naturalRegen;
@@ -432,7 +432,7 @@ public class Kit {
 
     /**
      * Set if the kit should have ranged damage.
-     * @param rangedDamage Whether or not the kit has ranged damage.
+     * @param rangedDamage Whether the kit has ranged damage.
      */
     public void setRangedDamage(boolean rangedDamage) {
         this.rangedDamage = rangedDamage;
@@ -440,7 +440,7 @@ public class Kit {
 
     /**
      * Set the number of repulsors
-     * @param repulsors
+     * @param repulsors Number of repulsors the kit has.
      */
     public void setRepulsors(int repulsors) {
         this.repulsors = repulsors;
@@ -496,7 +496,7 @@ public class Kit {
 
     /**
      * Set the number of triple shots
-     * @param tripleShots
+     * @param tripleShots Number of triple shots used in the kit.
      */
     public void setTripleShots(int tripleShots) {
         this.tripleShots = tripleShots;
@@ -512,7 +512,7 @@ public class Kit {
 
     /**
      * Set if water should kill players.
-     * @param waterKills Whether or not water kills players.
+     * @param waterKills Whether water kills players.
      */
     public void setWaterKills(boolean waterKills) {
         this.waterKills = waterKills;
@@ -521,7 +521,7 @@ public class Kit {
     /**
      * Get if the kit should kill the player
      *  when they touch water.
-     * @return Wether or not water kills the player.
+     * @return Whether water kills the player.
      */
     public boolean waterKills() {
         return waterKills;

@@ -28,6 +28,6 @@ public class PlayerChatListener implements Listener {
         }
 
         event.setCancelled(true);
-        party.broadcast("&a&lParty &8» &f" + player.getName() + "&8: &a" + event.getMessage());
+        party.sendMessage("&a&lParty &8» &f" + player.getName() + "&8: &a" + event.getMessage());
     }
 }

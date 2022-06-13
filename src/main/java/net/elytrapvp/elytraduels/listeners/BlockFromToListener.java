@@ -41,7 +41,7 @@ public class BlockFromToListener implements Listener {
             BlockFace.WEST
     };
 
-    public boolean generatesCobble(Material type, Block b) {
+    public void generatesCobble(Material type, Block b) {
         Material mirrorID1 = (type == Material.WATER || type == Material.STATIONARY_WATER ? Material.LAVA : Material.WATER);
         Material mirrorID2 = (type == Material.WATER || type == Material.STATIONARY_WATER ? Material.STATIONARY_LAVA : Material.STATIONARY_WATER);
         for (BlockFace face : faces) {
@@ -62,9 +62,7 @@ public class BlockFromToListener implements Listener {
                         }
                     }.runTaskLater(plugin, 200);
                 }
-                return true;
             }
         }
-        return false;
     }
 }

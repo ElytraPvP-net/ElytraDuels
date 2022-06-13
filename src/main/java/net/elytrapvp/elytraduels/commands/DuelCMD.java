@@ -8,16 +8,12 @@ import net.elytrapvp.elytraduels.game.kit.Kit;
 import net.elytrapvp.elytraduels.gui.DuelGUI;
 import net.elytrapvp.elytraduels.party.Party;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
-import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
-import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class DuelCMD extends AbstractCommand {
-    private ElytraDuels plugin;
+    private final ElytraDuels plugin;
 
     /**
      * Registers the command.

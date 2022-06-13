@@ -1,7 +1,5 @@
 package net.elytrapvp.elytraduels.listeners;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameState;

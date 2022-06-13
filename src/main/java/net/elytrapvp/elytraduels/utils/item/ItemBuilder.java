@@ -170,7 +170,7 @@ public class ItemBuilder {
 
     /**
      * Set the lore of an item.
-     * @param lore
+     * @param lore lore to set the item to.
      * @return ItemBuilder
      */
     public ItemBuilder setLore(String... lore) {
@@ -190,7 +190,7 @@ public class ItemBuilder {
 
     /**
      * Set if the item should be unbreakbale.
-     * @param unbreakable Whether or not it should be unbreakable.
+     * @param unbreakable Whether it should be unbreakable.
      * @return ItemBuilder.
      */
     public ItemBuilder setUnbreakable(boolean unbreakable) {

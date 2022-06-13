@@ -19,8 +19,8 @@ import java.util.UUID;
 
 public class AFKTimer extends BukkitRunnable {
     private final ElytraDuels plugin;
-    public static Map<UUID, Integer> counter = new HashMap<>();
-    private Map<UUID, Location> locations = new HashMap<>();
+    public static final Map<UUID, Integer> counter = new HashMap<>();
+    private final Map<UUID, Location> locations = new HashMap<>();
 
     public AFKTimer(ElytraDuels plugin) {
         this.plugin = plugin;

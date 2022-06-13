@@ -7,7 +7,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -47,7 +46,7 @@ public class Map {
 
     /**
      * Get the id of the map.
-     * @return Id of the map.
+     * @return ID of the map.
      */
     public String getId() {
         return id;

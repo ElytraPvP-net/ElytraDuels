@@ -55,7 +55,7 @@ public class EntityDamageListener implements Listener {
             return;
         }
 
-        // Kill player if they wont survive.
+        // Kill player if they won't survive.
         if(event.getFinalDamage() >= player.getHealth()) {
             event.setCancelled(true);
             Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player), 1);

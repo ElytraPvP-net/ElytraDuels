@@ -44,7 +44,6 @@ public class MatchesCMD extends AbstractCommand {
                 }
                 else {
                     ChatUtils.chat(sender, "&cError &8» &cThat player has not played.");
-                    return;
                 }
             }
             catch (SQLException exception) {

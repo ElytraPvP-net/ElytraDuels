@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class CustomPlayerManager {
     private final ElytraDuels plugin;
-    private Map<UUID, CustomPlayer> players = new HashMap<>();
+    private final Map<UUID, CustomPlayer> players = new HashMap<>();
 
     public CustomPlayerManager(ElytraDuels plugin) {
         this.plugin = plugin;

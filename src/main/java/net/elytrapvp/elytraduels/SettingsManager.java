@@ -11,16 +11,12 @@ import java.io.IOException;
  * files. Stores spawn and arena locations.
  */
 public class SettingsManager {
-    private final ElytraDuels plugin;
-
     private FileConfiguration config;
     private File configFile;
     private FileConfiguration maps;
     private File mapsFile;
 
     public SettingsManager(ElytraDuels plugin) {
-        this.plugin = plugin;
-
         config = plugin.getConfig();
         config.options().copyDefaults(true);
         configFile = new File(plugin.getDataFolder(), "config.yml");

@@ -57,9 +57,7 @@ public class PlayerBucketEmptyListener implements Listener {
                     continue;
                 }
 
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    r.setType(Material.AIR);
-                }, 200);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> r.setType(Material.AIR), 200);
 
                 for(BlockFace face2 : BlockFace.values()) {
                     Block s = r.getRelative(face2, 1);

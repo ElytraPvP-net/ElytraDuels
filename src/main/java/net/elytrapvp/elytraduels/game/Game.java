@@ -141,9 +141,7 @@ public class Game {
                 else {
                     for(Player p : getPlayers()) {
                         p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 2);
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            running();
-                        }, 1);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> running(), 1);
                         cancel();
                     }
                 }

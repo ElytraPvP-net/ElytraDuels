@@ -47,11 +47,7 @@ public class KitManager {
         kits.add(cactus);
         kits.add(sg);
         kits.add(finalUHC);
-        //kits.add(sumo);
         kits.add(archer);
-        //kits.add(peal);
-        //kits.add(blockSumo);
-        //kits.add(bowFight);
         kits.add(shortBow);
 
         disabledKits.add(sumo);

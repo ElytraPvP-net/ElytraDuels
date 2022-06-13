@@ -23,15 +23,11 @@ public class LeaderboardGUI extends CustomGUI {
         ItemBuilder wins = new ItemBuilder(Material.IRON_SWORD)
                 .setDisplayName("&a&lWins Leaderboards")
                 .addFlag(ItemFlag.HIDE_ATTRIBUTES);
-        setItem(21, wins.build(), (p,a) -> {
-            new LeaderboardGUI(plugin, "wins").open(p);
-        });
+        setItem(21, wins.build(), (p,a) -> new LeaderboardGUI(plugin, "wins").open(p));
 
         ItemBuilder winstreak = new ItemBuilder(Material.PAPER)
                 .setDisplayName("&a&lWin Streak Leaderboards");
-        setItem(23, winstreak.build(), (p,a) -> {
-            new LeaderboardGUI(plugin, "bestWinStreak").open(p);
-        });
+        setItem(23, winstreak.build(), (p,a) -> new LeaderboardGUI(plugin, "bestWinStreak").open(p));
 
         int[] fillers = {0,1,2,3,4,5,6,7,8,36,37,38,39,40,41,42,43,44};
         for(int j : fillers) {
@@ -50,9 +46,7 @@ public class LeaderboardGUI extends CustomGUI {
         ItemStack back = new SkullBuilder("edf5c2f893bd3f89ca40703ded3e42dd0fbdba6f6768c8789afdff1fa78bf6")
                 .setDisplayName("&cBack")
                 .build();
-        setItem(0, back, (p, a) -> {
-            new LeaderboardGUI(plugin).open(p);
-        });
+        setItem(0, back, (p, a) -> new LeaderboardGUI(plugin).open(p));
 
         ItemBuilder global = new ItemBuilder(Material.NETHER_STAR)
                 .setDisplayName("&a&lGlobal");

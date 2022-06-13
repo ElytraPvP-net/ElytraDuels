@@ -68,7 +68,7 @@ public class Party {
         invites.put(player.getUniqueId(), player.getName());
 
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            if(!invites.keySet().contains(player.getUniqueId())) {
+            if(!invites.containsKey(player.getUniqueId())) {
                 return;
             }
 

@@ -16,13 +16,13 @@ import java.util.List;
 public class Arena {
     private final Map map;
     private final List<Location> spawns = new ArrayList<>();
-    private Location center;
+    private final Location center;
 
     /**
      * Creates an arena object.
      * @param plugin ElytraDuels instance.
      * @param map Map the arena uses.
-     * @param id Id of the arena.
+     * @param id ID of the arena.
      */
     public Arena(ElytraDuels plugin, Map map, String id) {
         this.map = map;
@@ -31,7 +31,7 @@ public class Arena {
         FileConfiguration maps = plugin.getSettingsManager().getMaps();
         String path = "Maps." + getMap().getId() + ".arenas." + id + ".";
 
-        // Loops though all spawns for this arena in maps.yml
+        // Loops through all spawns for this arena in maps.yml
         ConfigurationSection section = maps.getConfigurationSection(path + "spawns");
         for(String spawn : section.getKeys(false)) {
             String world = maps.getString(path + "spawns." + spawn + ".World");

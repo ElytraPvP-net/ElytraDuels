@@ -19,7 +19,7 @@ public class SpectateCMD extends AbstractCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(args.length != 1) {
-            if(sender.hasPermission("specate.gui")) {
+            if(sender.hasPermission("spectate.gui")) {
                 new SpectateGUI(plugin).open((Player) sender);
                 return;
             }
