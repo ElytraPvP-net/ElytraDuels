@@ -1,7 +1,6 @@
 package net.elytrapvp.elytraduels.party;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
-import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.Bukkit;

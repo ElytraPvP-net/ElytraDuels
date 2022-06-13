@@ -3,7 +3,6 @@ package net.elytrapvp.elytraduels.gui;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.GameType;
 import net.elytrapvp.elytraduels.game.kit.Kit;
-import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.entity.Player;
