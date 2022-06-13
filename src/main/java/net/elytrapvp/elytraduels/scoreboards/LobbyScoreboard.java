@@ -28,10 +28,13 @@ public class LobbyScoreboard extends CustomScoreboard {
         }
 
         helper.setTitle("&a&lDuels");
-        helper.setSlot(6, "&7&m------------------");
-        helper.setSlot(5, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
-        helper.setSlot(4, "&aPlaying: &f" + plugin.getQueueManager().getPlaying());
-        helper.setSlot(3, "&aQueue: &f" + plugin.getQueueManager().getQueueing());
+        helper.setSlot(9, "&7&m------------------");
+        helper.setSlot(8, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
+        helper.setSlot(7, "&aPlaying: &f" + plugin.getQueueManager().getPlaying());
+        helper.setSlot(6, "&aQueue: &f" + plugin.getQueueManager().getQueueing());
+        helper.setSlot(5, "");
+        helper.setSlot(4, "&aWins: &f0");
+        helper.setSlot(3, "&aWin Streak: &f0");
         helper.setSlot(2, "&7&m------------------");
         helper.setSlot(1, "&aplay.elytrapvp.net");
     }
