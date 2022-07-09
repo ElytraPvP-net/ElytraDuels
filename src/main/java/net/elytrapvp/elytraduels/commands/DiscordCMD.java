@@ -1,7 +1,6 @@
 package net.elytrapvp.elytraduels.commands;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
-import net.elytrapvp.elytraduels.gui.SettingsGUI;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.Bukkit;
