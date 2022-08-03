@@ -2,6 +2,7 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.utils.ActionBarUtils;
 import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -68,6 +69,20 @@ public class EntityDamageByEntityListener implements Listener {
         if(!game.getKit().hasDoDamage()) {
             event.setDamage(0);
             return;
+        }
+
+        // Sends an action bar to the damager with the player's health.
+        if(event.getDamager() instanceof Player) {
+            Player damager = (Player) event.getDamager();
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                if(event.getFinalDamage() >= player.getHealth()) {
+                    ActionBarUtils.sendActionText(damager, "&a" + player.getName() + "'s Health: &c0%");
+                }
+                else {
+                    ActionBarUtils.sendActionText(damager, "&a" + player.getName() + "'s Health: " + ChatUtils.getFormattedHealthPercent(player));
+                }
+            }, 1);
         }
 
         // Makes sure the damager is an arrow before continuing.
