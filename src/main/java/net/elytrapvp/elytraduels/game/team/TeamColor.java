@@ -34,15 +34,6 @@ public enum TeamColor {
      * Gets the chat color of a team.
      * @return Chat color of the team.
      */
-    @Deprecated
-    public ChatColor getChatColor() {
-        return chatColor;
-    }
-
-    /**
-     * Gets the chat color of a team.
-     * @return Chat color of the team.
-     */
     public ChatColor chatColor() {
         return chatColor;
     }
@@ -51,26 +42,8 @@ public enum TeamColor {
      * Gets the leather color of a team.
      * @return Leather color of the team.
      */
-    @Deprecated
-    public Color getLeatherColor() {
-        return leatherColor;
-    }
-
-    /**
-     * Gets the leather color of a team.
-     * @return Leather color of the team.
-     */
     public Color leatherColor() {
         return leatherColor;
-    }
-
-    /**
-     * Gets the Wool color of the team.
-     * @return Color of the wool the team uses.
-     */
-    @Deprecated
-    public DyeColor getWoolColor() {
-        return woolColor;
     }
 
     /**

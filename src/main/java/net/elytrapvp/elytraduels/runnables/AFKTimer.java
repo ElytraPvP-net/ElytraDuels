@@ -29,7 +29,7 @@ public class AFKTimer extends BukkitRunnable {
     @Override
     public void run() {
         for(Player player : Bukkit.getOnlinePlayers()) {
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
 
             if(game == null) {
                 counter.remove(player.getUniqueId());
@@ -69,7 +69,7 @@ public class AFKTimer extends BukkitRunnable {
 
             if(counter.get(player.getUniqueId()) == 6) {
                 player.teleport(LocationUtils.getSpawn(plugin));
-                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                ItemUtils.givePartyItems(plugin.partyManager(), player);
                 ChatUtils.chat(player, "&c&lYou have been kicked for being AFK!");
                 new LobbyScoreboard(plugin, player);
                 game.playerDisconnect(player);

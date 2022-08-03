@@ -82,13 +82,13 @@ public class PartyCMD extends AbstractCommand {
      */
     private void chatCMD(Player player, String[] args) {
         // Makes sure the player is in a party.
-        if(plugin.getPartyManager().getParty(player) == null) {
+        if(plugin.partyManager().getParty(player) == null) {
             ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
             return;
         }
 
         // Gets the player's party.
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         // Checks if the player is just toggling party chat.
         if(args.length < 2) {
@@ -131,7 +131,7 @@ public class PartyCMD extends AbstractCommand {
         }
 
         // Get's the target party.
-        Party party = plugin.getPartyManager().getParty(target);
+        Party party = plugin.partyManager().getParty(target);
 
         // Makes sure the player is in a party.
         if(party == null) {
@@ -140,7 +140,7 @@ public class PartyCMD extends AbstractCommand {
         }
 
         // Makes sure the player is not playing a game at the moment.
-        if(plugin.getGameManager().getGame(player) != null) {
+        if(plugin.gameManager().getGame(player) != null) {
             ChatUtils.chat(player, "&cError &8» &cYou are already in a game.");
             return;
         }
@@ -153,7 +153,7 @@ public class PartyCMD extends AbstractCommand {
 
         party.addPlayer(player);
         party.sendMessage("&a&lParty &8» &f" + player.getName() + " &ahas joined the party.");
-        ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+        ItemUtils.givePartyItems(plugin.partyManager(), player);
     }
 
     /**
@@ -162,21 +162,21 @@ public class PartyCMD extends AbstractCommand {
      */
     private void createCMD(Player player) {
         // Makes sure the player is not already in a party.
-        if(plugin.getPartyManager().getParty(player) != null) {
+        if(plugin.partyManager().getParty(player) != null) {
             ChatUtils.chat(player, "&cError &8» &cYou are already in a party.");
             return;
         }
 
         // Makes sure the player is not playing a game at the moment.
-        if(plugin.getGameManager().getGame(player) != null) {
+        if(plugin.gameManager().getGame(player) != null) {
             ChatUtils.chat(player, "&cError &8» &cYou are already in a game.");
             return;
         }
 
         // Creates the party.
-        plugin.getPartyManager().createParty(player);
+        plugin.partyManager().createParty(player);
         ChatUtils.chat(player, "&a&lParty &8» &aParty as been created.");
-        ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+        ItemUtils.givePartyItems(plugin.partyManager(), player);
     }
 
     /**
@@ -201,7 +201,7 @@ public class PartyCMD extends AbstractCommand {
         }
 
         // Gets the target player's party.
-        Party party = plugin.getPartyManager().getParty(target);
+        Party party = plugin.partyManager().getParty(target);
 
         // Makes sure the party exists.
         if(party == null) {
@@ -227,13 +227,13 @@ public class PartyCMD extends AbstractCommand {
      */
     private void disbandCMD(Player player) {
         // Makes sure the player is in a party.
-        if(plugin.getPartyManager().getParty(player) == null) {
+        if(plugin.partyManager().getParty(player) == null) {
             ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
             return;
         }
 
         // Gets the player's party.
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         // Makes sure the player has permission to disband the party.
         if(party.getRank(player) != PartyRank.LEADER) {
@@ -243,7 +243,7 @@ public class PartyCMD extends AbstractCommand {
 
         // Disbands the party.
         party.sendMessage("&a&lParty &8» &aParty has been disbanded.");
-        plugin.getPartyManager().disbandParty(party);
+        plugin.partyManager().disbandParty(party);
     }
 
     /**
@@ -283,7 +283,7 @@ public class PartyCMD extends AbstractCommand {
         }
 
         // Makes sure they are not already in a party.
-        if(plugin.getPartyManager().getParty(target) != null) {
+        if(plugin.partyManager().getParty(target) != null) {
             ChatUtils.chat(player, "&cError &8» &cThey are already in a party.");
             return;
         }
@@ -295,25 +295,25 @@ public class PartyCMD extends AbstractCommand {
         }
 
         // Checks if the player can receive party invites.
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(target);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(target);
         if(!customPlayer.getPartyInvites()) {
             ChatUtils.chat(player, "&cError &8» &cYou cannot invite that player to a party.");
             return;
         }
 
         // Makes sure the player is not in a game.
-        if(plugin.getGameManager().getGame(player) != null) {
+        if(plugin.gameManager().getGame(player) != null) {
             ChatUtils.chat(player, "&cError &8» &cThat person is currently in a game.");
             return;
         }
 
         // Makes sure the player is in a party.
-        if(plugin.getPartyManager().getParty(player) == null) {
+        if(plugin.partyManager().getParty(player) == null) {
             player.chat("/party create");
         }
 
         // Gets the player's party,
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         // Makes sure the player has permission to invite someone to the party.
         if(!(party.getRank(player) == PartyRank.LEADER || party.getRank(player) == PartyRank.MODERATOR)) {
@@ -343,13 +343,13 @@ public class PartyCMD extends AbstractCommand {
      */
     private void leaveCMD(Player player) {
         // Makes sure the player is in a party.
-        if(plugin.getPartyManager().getParty(player) == null) {
+        if(plugin.partyManager().getParty(player) == null) {
             ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
             return;
         }
 
         // Gets the player's party.
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         // Removes the player
         party.removePlayer(player);
@@ -364,13 +364,13 @@ public class PartyCMD extends AbstractCommand {
      */
     private void listCMD(Player player) {
         // Makes sure the player is in a party.
-        if(plugin.getPartyManager().getParty(player) == null) {
+        if(plugin.partyManager().getParty(player) == null) {
             ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
             return;
         }
 
         // Gets the player's party.
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         // Gets all the party members and their roles.
         String leader = "";
@@ -412,7 +412,7 @@ public class PartyCMD extends AbstractCommand {
      */
     private void promoteCMD(Player player, String[] args) {
         // Makes sure the player is in a party.
-        if(plugin.getPartyManager().getParty(player) == null) {
+        if(plugin.partyManager().getParty(player) == null) {
             ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
             return;
         }
@@ -424,7 +424,7 @@ public class PartyCMD extends AbstractCommand {
         }
 
         // Gets the player's party.
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         // Makes sure they have permission.
         if(party.getRank(player) != PartyRank.LEADER) {

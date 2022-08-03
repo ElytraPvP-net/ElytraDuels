@@ -29,28 +29,19 @@ public class Map {
         this.id = id;
 
         // Setting these two variables makes it easier to get information.
-        FileConfiguration maps = plugin.getSettingsManager().getMaps();
+        FileConfiguration maps = plugin.settingsManager().getMaps();
         String path = "Maps." + id + ".";
 
         name = maps.getString(path + "name");
 
         for(String kit : maps.getStringList(path + "kits")) {
-            kits.add(plugin.getKitManager().getKit(kit));
+            kits.add(plugin.kitManager().getKit(kit));
         }
 
         ConfigurationSection section = maps.getConfigurationSection(path + "arenas");
         for(String arena : section.getKeys(false)) {
-            plugin.getArenaManager().addArena(new Arena(plugin, this, arena));
+            plugin.arenaManager().addArena(new Arena(plugin, this, arena));
         }
-    }
-
-    /**
-     * Get the id of the map.
-     * @return ID of the map.
-     */
-    @Deprecated
-    public String getId() {
-        return id;
     }
 
     /**
@@ -65,26 +56,8 @@ public class Map {
      * Get what kits can be used on the map.
      * @return All kits that can be used.
      */
-    @Deprecated
-    public Set<Kit> getKits() {
-        return kits;
-    }
-
-    /**
-     * Get what kits can be used on the map.
-     * @return All kits that can be used.
-     */
     public Set<Kit> kits() {
         return kits;
-    }
-
-    /**
-     *  Get the name of the map.
-     * @return Name of the map.
-     */
-    @Deprecated
-    public String getName() {
-        return name;
     }
 
     /**

@@ -41,10 +41,10 @@ public class CustomPlayer {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             // Create a list of all kits to add.
             List<String> kits = new ArrayList<>();
-            for(Kit kit : plugin.getKitManager().getKits()) {
+            for(Kit kit : plugin.kitManager().kits()) {
                 kits.add(kit.getName().toLowerCase());
             }
-            for(Kit kit : plugin.getKitManager().getDisabledKits()) {
+            for(Kit kit : plugin.kitManager().disabledKits()) {
                 kits.add(kit.getName().toLowerCase());
             }
 
@@ -53,7 +53,7 @@ public class CustomPlayer {
             try {
                 // Loops through each kit to
                 for(String kit : kits) {
-                    PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * from duels_statistics WHERE uuid = ? AND kit = ?");
+                    PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("SELECT * from duels_statistics WHERE uuid = ? AND kit = ?");
                     statement.setString(1, uuid.toString());
                     statement.setString(2, kit);
                     ResultSet results = statement.executeQuery();
@@ -67,7 +67,7 @@ public class CustomPlayer {
                     }
                     else {
                         // If it doesn't exist, create it.
-                        PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("INSERT INTO duels_statistics (uuid, kit) VALUES (?, ?)");
+                        PreparedStatement statement2 = plugin.mySQL().getConnection().prepareStatement("INSERT INTO duels_statistics (uuid, kit) VALUES (?, ?)");
                         statement2.setString(1, uuid.toString());
                         statement2.setString(2, kit);
                         statement2.executeUpdate();
@@ -79,15 +79,15 @@ public class CustomPlayer {
                     }
                 }
 
-                for(Kit kit : plugin.getKitManager().getKits()) {
+                for(Kit kit : plugin.kitManager().kits()) {
                     kitEditor.put(kit.getName() ,new HashMap<>());
                 }
 
-                for(Kit kit : plugin.getKitManager().getDisabledKits()) {
+                for(Kit kit : plugin.kitManager().disabledKits()) {
                     kitEditor.put(kit.getName() ,new HashMap<>());
                 }
 
-                PreparedStatement statement3 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_kit_editor WHERE uuid = ?");
+                PreparedStatement statement3 = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM duels_kit_editor WHERE uuid = ?");
                 statement3.setString(1, uuid.toString());
                 ResultSet results3 = statement3.executeQuery();
 
@@ -95,7 +95,7 @@ public class CustomPlayer {
                     kitEditor.get(results3.getString(2)).put(results3.getInt(3), results3.getInt(4));
                 }
 
-                PreparedStatement statement4 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_settings WHERE uuid = ?");
+                PreparedStatement statement4 = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM duels_settings WHERE uuid = ?");
                 statement4.setString(1, uuid.toString());
                 ResultSet results4 = statement4.executeQuery();
                 if(results4.next()) {
@@ -104,7 +104,7 @@ public class CustomPlayer {
                     duelRequests = results4.getBoolean(4);
                 }
                 else {
-                    PreparedStatement statement5 = plugin.getMySQL().getConnection().prepareStatement("INSERT INTO duels_settings (uuid) VALUES (?)");
+                    PreparedStatement statement5 = plugin.mySQL().getConnection().prepareStatement("INSERT INTO duels_settings (uuid) VALUES (?)");
                     statement5.setString(1, uuid.toString());
                     statement5.executeUpdate();
 
@@ -151,7 +151,7 @@ public class CustomPlayer {
      */
     private void cleanKitEditor(String kit) {
         try {
-            PreparedStatement statement3 = plugin.getMySQL().getConnection().prepareStatement("DELETE FROM duels_kit_editor WHERE uuid = ? AND kit = ?");
+            PreparedStatement statement3 = plugin.mySQL().getConnection().prepareStatement("DELETE FROM duels_kit_editor WHERE uuid = ? AND kit = ?");
             statement3.setString(1, uuid.toString());
             statement3.setString(2, kit);
             statement3.executeUpdate();
@@ -235,7 +235,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET bestWinStreak = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_statistics SET bestWinStreak = ? WHERE uuid = ? AND kit = ?");
                 statement.setInt(1, bestWinStreak);
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
@@ -256,7 +256,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_settings SET duelRequests = ? WHERE uuid = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_settings SET duelRequests = ? WHERE uuid = ?");
                 statement.setBoolean(1, duelRequests);
                 statement.setString(2, uuid.toString());
                 statement.executeUpdate();
@@ -277,7 +277,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET losses = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_statistics SET losses = ? WHERE uuid = ? AND kit = ?");
                 statement.setInt(1, losses);
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
@@ -298,7 +298,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_settings SET partyInvites = ? WHERE uuid = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_settings SET partyInvites = ? WHERE uuid = ?");
                 statement.setBoolean(1, partyInvites);
                 statement.setString(2, uuid.toString());
                 statement.executeUpdate();
@@ -318,7 +318,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_settings SET showScoreboard = ? WHERE uuid = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_settings SET showScoreboard = ? WHERE uuid = ?");
                 statement.setBoolean(1, showScoreboard);
                 statement.setString(2, uuid.toString());
                 statement.executeUpdate();
@@ -339,7 +339,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET wins = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_statistics SET wins = ? WHERE uuid = ? AND kit = ?");
                 statement.setInt(1, wins);
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
@@ -361,7 +361,7 @@ public class CustomPlayer {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE duels_statistics SET winStreak = ? WHERE uuid = ? AND kit = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_statistics SET winStreak = ? WHERE uuid = ? AND kit = ?");
                 statement.setInt(1, winStreak);
                 statement.setString(2, uuid.toString());
                 statement.setString(3, kit);
@@ -392,7 +392,7 @@ public class CustomPlayer {
                 for(int item : map.keySet()) {
                     int slot = map.get(item);
 
-                    PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("INSERT INTO duels_kit_editor (uuid,kit,item,slot) VALUES (?,?,?,?)");
+                    PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("INSERT INTO duels_kit_editor (uuid,kit,item,slot) VALUES (?,?,?,?)");
                     statement.setString(1, uuid.toString());
                     statement.setString(2, kit);
                     statement.setInt(3, item);

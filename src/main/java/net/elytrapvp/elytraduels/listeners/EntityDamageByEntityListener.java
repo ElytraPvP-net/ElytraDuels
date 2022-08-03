@@ -5,8 +5,11 @@ import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.md_5.bungee.api.ChatColor;
+import net.minecraft.server.v1_8_R3.ChatComponentText;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +28,7 @@ public class EntityDamageByEntityListener implements Listener {
         // Cancel and return if damage is a spectator.
         if(event.getDamager() instanceof Player) {
             Player player = (Player) event.getDamager();
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
             if(game != null) {
                 if(game.getSpectators().contains(player)) {
                     event.setCancelled(true);
@@ -48,7 +51,7 @@ public class EntityDamageByEntityListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         // Exit if player is not in a game.
         if(game == null) {

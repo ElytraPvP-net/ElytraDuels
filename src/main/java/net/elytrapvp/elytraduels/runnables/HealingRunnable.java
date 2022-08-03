@@ -22,7 +22,7 @@ public class HealingRunnable extends BukkitRunnable {
                 continue;
             }
 
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
 
             if(game == null) {
                 return;

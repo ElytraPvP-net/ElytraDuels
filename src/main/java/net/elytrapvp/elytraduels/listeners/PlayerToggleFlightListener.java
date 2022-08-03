@@ -24,7 +24,7 @@ public class PlayerToggleFlightListener implements Listener {
     @EventHandler
     public void onEvent(PlayerToggleFlightEvent event) {
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;

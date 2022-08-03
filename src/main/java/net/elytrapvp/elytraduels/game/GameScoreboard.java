@@ -52,7 +52,7 @@ public class GameScoreboard extends CustomScoreboard {
                 helper.setSlot(8, "&aOpponents");
 
                 int i = 4;
-                for(Team team : game.getTeamManager().getTeams()) {
+                for(Team team : game.getTeamManager().teams()) {
                     if(team.equals(game.getTeam(player))) {
                         continue;
                     }
@@ -61,7 +61,7 @@ public class GameScoreboard extends CustomScoreboard {
                         break;
                     }
 
-                    for(Player opponent : team.getAlivePlayers()) {
+                    for(Player opponent : team.alivePlayers()) {
                         String opponentName = opponent.getName();
 
                         String line = "  &f" + opponentName + "" + ChatUtils.getFormattedHealthPercent(opponent);
@@ -89,7 +89,7 @@ public class GameScoreboard extends CustomScoreboard {
                 helper.setSlot(9, " ");
                 helper.setSlot(8, "&aOpponent");
 
-                List<Player> opponents = game.getOpposingTeam(game.getTeam(player)).getPlayers();
+                List<Player> opponents = game.getOpposingTeam(game.getTeam(player)).players();
 
                 for(int i = 0; i < opponents.size(); i++) {
                     Player o = opponents.get(i);
@@ -97,7 +97,7 @@ public class GameScoreboard extends CustomScoreboard {
 
                     helper.setSlot(4 + (i * 2) + 1, "  &f" + opponentName);
 
-                    if(game.getTeam(player).getDeadPlayers().contains(player)) {
+                    if(game.getTeam(player).deadPlayers().contains(player)) {
                         helper.setSlot(4 + (i * 2), "  " + "&c0%" + " &7- " + ChatUtils.getFormattedPing(o));
                     }
                     else {

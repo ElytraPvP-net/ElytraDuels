@@ -56,7 +56,7 @@ public class Party {
             ItemUtils.giveLobbyItems(player);
         }
 
-        plugin.getPartyManager().disbandParty(this);
+        plugin.partyManager().disbandParty(this);
     }
 
 
@@ -163,7 +163,7 @@ public class Party {
      */
     public void removePlayer(Player player) {
         if(getRank(player) == PartyRank.LEADER) {
-            plugin.getPartyManager().disbandParty(this);
+            plugin.partyManager().disbandParty(this);
             return;
         }
 

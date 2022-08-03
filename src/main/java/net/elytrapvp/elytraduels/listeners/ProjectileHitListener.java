@@ -26,7 +26,7 @@ public class ProjectileHitListener implements Listener {
         }
 
         Player player = (Player) event.getEntity().getShooter();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;

@@ -33,7 +33,7 @@ public class MatchesCMD extends AbstractCommand {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE username = ?");
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE username = ?");
                 statement.setString(1, args[0]);
                 ResultSet results = statement.executeQuery();
 
@@ -58,7 +58,7 @@ public class MatchesCMD extends AbstractCommand {
             super(54, "Matches");
 
             try {
-                PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_match_history WHERE winner = ? OR loser = ? ORDER BY time DESC");
+                PreparedStatement statement2 = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM duels_match_history WHERE winner = ? OR loser = ? ORDER BY time DESC");
                 statement2.setString(1, uuid);
                 statement2.setString(2, uuid);
                 ResultSet results2 = statement2.executeQuery();
@@ -79,7 +79,7 @@ public class MatchesCMD extends AbstractCommand {
                         winner = false;
                     }
 
-                    PreparedStatement statement3 = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE uuid = ? LIMIT 1");
+                    PreparedStatement statement3 = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM player_info WHERE uuid = ? LIMIT 1");
                     statement3.setString(1, opponent);
                     ResultSet results3 = statement3.executeQuery();
 
@@ -88,7 +88,7 @@ public class MatchesCMD extends AbstractCommand {
                         opponentName = results3.getString(2);
                     }
 
-                    Kit kit = plugin.getKitManager().getKit(results2.getString(1));
+                    Kit kit = plugin.kitManager().getKit(results2.getString(1));
                     ItemBuilder builder = new ItemBuilder(kit.getIconMaterial())
                             .setDisplayName("&a" + player + " vs. " + opponentName)
                             .addLore("&aKit: &f" + kit.getName())

@@ -64,13 +64,13 @@ public class KitManager {
      * @return Kit from name.
      */
     public Kit getKit(String str) {
-        for(Kit kit : getKits()) {
+        for(Kit kit : kits()) {
             if(kit.getName().equalsIgnoreCase(str)) {
                 return kit;
             }
         }
 
-        for(Kit kit : getDisabledKits()) {
+        for(Kit kit : disabledKits()) {
             if(kit.getName().equalsIgnoreCase(str)) {
                 return kit;
             }
@@ -83,26 +83,8 @@ public class KitManager {
      * Get all existing kits.
      * @return All kits.
      */
-    @Deprecated
-    public Set<Kit> getKits() {
-        return kits;
-    }
-
-    /**
-     * Get all existing kits.
-     * @return All kits.
-     */
     public Set<Kit> kits() {
         return kits;
-    }
-
-    /**
-     * Get all disabled kits.
-     * @return All disabled kits.
-     */
-    @Deprecated
-    public Set<Kit> getDisabledKits() {
-        return disabledKits;
     }
 
     /**

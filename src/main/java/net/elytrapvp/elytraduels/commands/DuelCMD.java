@@ -43,24 +43,24 @@ public class DuelCMD extends AbstractCommand {
                 return;
             }
 
-            if(!plugin.getDuelManager().getDuelRequests().containsKey(opponent) || !plugin.getDuelManager().getDuelRequests().get(opponent).equals(p)) {
+            if(!plugin.duelManager().duelRequests().containsKey(opponent) || !plugin.duelManager().duelRequests().get(opponent).equals(p)) {
                 ChatUtils.chat(sender, "&cError &8» &cThat person has not sent a duel request.");
                 return;
             }
 
-            Game game = plugin.getGameManager().getGame(p);
+            Game game = plugin.gameManager().getGame(p);
             if(game != null) {
                 ChatUtils.chat(sender, "&cError &8» &cYou are in a match already.");
                 return;
             }
 
-            Game game2 = plugin.getGameManager().getGame(opponent);
+            Game game2 = plugin.gameManager().getGame(opponent);
             if(game2 != null) {
                 ChatUtils.chat(sender, "&cError &8» &cThey are in a match already.");
                 return;
             }
 
-            Party targetParty = plugin.getPartyManager().getParty(opponent);
+            Party targetParty = plugin.partyManager().getParty(opponent);
             if(targetParty != null && targetParty.getMembers().contains(opponent)) {
                 ChatUtils.chat(sender, "&cError &8» &cThat player is in a party.");
                 return;
@@ -68,10 +68,10 @@ public class DuelCMD extends AbstractCommand {
 
             ChatUtils.chat(sender, "&aDuel request has been accepted.");
 
-            Party senderParty = plugin.getPartyManager().getParty(p);
+            Party senderParty = plugin.partyManager().getParty(p);
 
-            Kit kit = plugin.getDuelManager().getDuelKit(p);
-            Game game3 = plugin.getGameManager().createGame(kit, GameType.DUEL);
+            Kit kit = plugin.duelManager().getDuelKit(p);
+            Game game3 = plugin.gameManager().createGame(kit, GameType.DUEL);
 
             if(senderParty == null) {
                 game3.addPlayer(p);
@@ -80,7 +80,7 @@ public class DuelCMD extends AbstractCommand {
                 game3.addPlayers(senderParty.getMembers());
             }
 
-            Party targetParty2 = plugin.getPartyManager().getParty(opponent);
+            Party targetParty2 = plugin.partyManager().getParty(opponent);
             if(targetParty == null) {
                 game3.addPlayer(opponent);
             }
@@ -89,7 +89,7 @@ public class DuelCMD extends AbstractCommand {
             }
 
             // Remove players from queue.
-            plugin.getQueueManager().removePlayer(opponent);
+            plugin.queueManager().removePlayer(opponent);
 
             game3.start();
             return;
@@ -101,14 +101,14 @@ public class DuelCMD extends AbstractCommand {
                 return;
             }
 
-            if(!plugin.getDuelManager().getDuelRequests().containsKey(opponent) || !plugin.getDuelManager().getDuelRequests().get(opponent).equals(p)) {
+            if(!plugin.duelManager().duelRequests().containsKey(opponent) || !plugin.duelManager().duelRequests().get(opponent).equals(p)) {
                 ChatUtils.chat(sender, "&cError &8» &cThat person has not sent a duel request.");
                 return;
             }
 
-            for(Player pl : plugin.getDuelManager().getDuelRequests().keySet()) {
-                if(plugin.getDuelManager().getDuelRequests().get(pl).equals(p)) {
-                    plugin.getDuelManager().getDuelRequests().remove(p);
+            for(Player pl : plugin.duelManager().duelRequests().keySet()) {
+                if(plugin.duelManager().duelRequests().get(pl).equals(p)) {
+                    plugin.duelManager().duelRequests().remove(p);
                     ChatUtils.chat(pl, "&c&l(&c!&c&l) &f" + p.getName() + " &cdeclined your duel request.");
                     ChatUtils.chat(p, "&aYou have declined &f" + pl.getName() + "&a's duel request.");
                 }
@@ -128,25 +128,25 @@ public class DuelCMD extends AbstractCommand {
             return;
         }
 
-        Game game = plugin.getGameManager().getGame(p);
+        Game game = plugin.gameManager().getGame(p);
         if(game != null) {
             ChatUtils.chat(sender, "&cError &8» &cYou are in a match already.");
             return;
         }
 
-        Game game2 = plugin.getGameManager().getGame(t);
+        Game game2 = plugin.gameManager().getGame(t);
         if(game2 != null) {
             ChatUtils.chat(sender, "&cError &8» &cThey are in a match already.");
             return;
         }
 
-        Party targetParty = plugin.getPartyManager().getParty(t);
+        Party targetParty = plugin.partyManager().getParty(t);
         if(targetParty != null && targetParty.getMembers().contains(t)) {
             ChatUtils.chat(sender, "&cError &8» &cThat player is in a party.");
             return;
         }
 
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(t);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(t);
         if(!customPlayer.getDuelRequests()) {
             ChatUtils.chat(sender, "&cError &8» &cYou cannot request to duel that player.");
             return;
@@ -163,13 +163,13 @@ public class DuelCMD extends AbstractCommand {
             kit += " " + args[2];
         }
 
-        Kit k = plugin.getKitManager().getKit(kit);
+        Kit k = plugin.kitManager().getKit(kit);
         if(k == null) {
             ChatUtils.chat(sender, "&cError &8» &cThat kit does not exist.");
             return;
         }
 
-        plugin.getDuelManager().addDuelRequest(p, t, k);
+        plugin.duelManager().addDuelRequest(p, t, k);
         ChatUtils.chat(p, "&a&l(&7!&a&l) &aDuel request sent.");
         ChatUtils.chat(t, "&a&m---------------------------------------------------");
         ChatUtils.chat(t, "&f" + p.getName() + " &awants to duel you in &f" + k.getName() + "&a!");

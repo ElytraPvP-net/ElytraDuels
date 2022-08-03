@@ -98,7 +98,7 @@ public class Kit {
         // Clear potion effects.
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
 
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
 
         Map<Integer, ItemStack> updatedKit = new HashMap<>();
         Set<Integer> slotsUsed = new HashSet<>();
@@ -138,10 +138,10 @@ public class Kit {
 
             // Dyes the item if it can be dyed.
             ItemBuilder builder = new ItemBuilder(item)
-                    .dye(game.getTeam(player).getTeamColor().getLeatherColor());
+                    .dye(game.getTeam(player).teamColor().leatherColor());
 
             if(item.getType() == Material.WOOL) {
-                builder.dye(game.getTeam(player).getTeamColor().getWoolColor());
+                builder.dye(game.getTeam(player).teamColor().woolColor());
             }
 
             player.getInventory().setItem(i, builder.build());

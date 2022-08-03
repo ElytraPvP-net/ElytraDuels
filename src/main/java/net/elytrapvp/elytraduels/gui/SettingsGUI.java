@@ -28,7 +28,7 @@ public class SettingsGUI extends CustomGUI {
 
         setItem(40, new ItemBuilder(Material.ANVIL).setDisplayName("&a&lKit Editor").build(), (p, a) -> new KitEditorGUI(plugin, player).open(p));
 
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
         ItemBuilder scoreboard = new ItemBuilder(Material.SIGN).setDisplayName("&a&lShow Scoreboard");
         if(customPlayer.getShowScoreboard()) {
             scoreboard.addLore("&aEnabled");

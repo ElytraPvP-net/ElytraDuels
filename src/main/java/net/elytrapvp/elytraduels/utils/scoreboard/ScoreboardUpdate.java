@@ -20,7 +20,7 @@ public class ScoreboardUpdate extends BukkitRunnable {
     @Override
     public void run() {
         for(Player p : Bukkit.getOnlinePlayers()) {
-            CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(p);
+            CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(p);
 
             if(!customPlayer.getShowScoreboard()) {
                 p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());

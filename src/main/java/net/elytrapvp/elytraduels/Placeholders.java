@@ -90,13 +90,13 @@ class Placeholders extends PlaceholderExpansion {
     public String onPlaceholderRequest(Player player, String identifier) {
         // Level
         if(identifier.equals("prefix")) {
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
 
             if(game == null) {
                 return PlaceholderAPI.setPlaceholders(player, "%luckperms_prefix%&7");
             }
 
-            return game.getTeamManager().getTeam(player).getTeamColor().getChatColor() + "";
+            return game.getTeamManager().getTeam(player).teamColor().chatColor() + "";
         }
 
         return null;

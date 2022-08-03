@@ -22,9 +22,9 @@ public class PartyFFAGUI extends CustomGUI {
         super(36, "Party FFA");
 
         int i = 0;
-        for(Kit kit : plugin.getKitManager().getKits()) {
-            int playing = plugin.getQueueManager().getPlaying(kit);
-            int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+        for(Kit kit : plugin.kitManager().kits()) {
+            int playing = plugin.queueManager().getPlaying(kit);
+            int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
 
             int count = playing + queue;
             if(count == 0) count = 1;
@@ -37,13 +37,13 @@ public class PartyFFAGUI extends CustomGUI {
             setItem(i, item, (p, a) -> {
                 p.closeInventory();
 
-                Party party = plugin.getPartyManager().getParty(p);
+                Party party = plugin.partyManager().getParty(p);
                 if(party.getMembers().size() == 1) {
                     ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
                     return;
                 }
 
-                Game game = plugin.getGameManager().createGame(kit, GameType.FFA);
+                Game game = plugin.gameManager().createGame(kit, GameType.FFA);
 
                 List<Player> players = new ArrayList<>(party.getMembers());
                 Collections.shuffle(players);
@@ -56,9 +56,9 @@ public class PartyFFAGUI extends CustomGUI {
             i++;
         }
 
-        for(Kit kit : plugin.getKitManager().getDisabledKits()) {
-            int playing = plugin.getQueueManager().getPlaying(kit);
-            int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+        for(Kit kit : plugin.kitManager().disabledKits()) {
+            int playing = plugin.queueManager().getPlaying(kit);
+            int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
 
             int count = playing + queue;
             if(count == 0) count = 1;
@@ -71,13 +71,13 @@ public class PartyFFAGUI extends CustomGUI {
             setItem(i, item, (p, a) -> {
                 p.closeInventory();
 
-                Party party = plugin.getPartyManager().getParty(p);
+                Party party = plugin.partyManager().getParty(p);
                 if(party.getMembers().size() == 1) {
                     ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
                     return;
                 }
 
-                Game game = plugin.getGameManager().createGame(kit, GameType.FFA);
+                Game game = plugin.gameManager().createGame(kit, GameType.FFA);
 
                 List<Player> players = new ArrayList<>(party.getMembers());
                 Collections.shuffle(players);
@@ -91,9 +91,9 @@ public class PartyFFAGUI extends CustomGUI {
         }
 
         if(opener.hasPermission("duels.disabled")) {
-            for(Kit kit : plugin.getKitManager().getDisabledKits()) {
-                int playing = plugin.getQueueManager().getPlaying(kit);
-                int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+            for(Kit kit : plugin.kitManager().disabledKits()) {
+                int playing = plugin.queueManager().getPlaying(kit);
+                int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
 
                 int count = playing + queue;
                 if(count == 0) count = 1;
@@ -106,13 +106,13 @@ public class PartyFFAGUI extends CustomGUI {
                 setItem(i, item, (p, a) -> {
                     p.closeInventory();
 
-                    Party party = plugin.getPartyManager().getParty(p);
+                    Party party = plugin.partyManager().getParty(p);
                     if(party.getMembers().size() == 1) {
                         ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
                         return;
                     }
 
-                    Game game = plugin.getGameManager().createGame(kit, GameType.FFA);
+                    Game game = plugin.gameManager().createGame(kit, GameType.FFA);
 
                     List<Player> players = new ArrayList<>(party.getMembers());
                     Collections.shuffle(players);

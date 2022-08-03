@@ -32,7 +32,7 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             event.setCancelled(true);

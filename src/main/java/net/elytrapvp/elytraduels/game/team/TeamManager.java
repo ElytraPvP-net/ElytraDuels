@@ -35,7 +35,7 @@ public class TeamManager {
     public Team createTeam(List<Player> players) {
         Team team = new Team(players, availableColors.get(0));
         availableColors.remove(availableColors.get(0));
-        getTeams().add(team);
+        teams().add(team);
         aliveTeams.add(team);
         return team;
     }
@@ -45,17 +45,8 @@ public class TeamManager {
      * @param team Team to delete.
      */
     public void deleteTeam(Team team) {
-        getTeams().remove(team);
+        teams().remove(team);
         aliveTeams.remove(team);
-    }
-
-    /**
-     * Get all teams that are still alive.
-     * @return All alive teams.
-     */
-    @Deprecated
-    public List<Team> getAliveTeams() {
-        return aliveTeams;
     }
 
     /**
@@ -73,22 +64,13 @@ public class TeamManager {
      * @return Team the player is in.
      */
     public Team getTeam(Player player) {
-        for(Team team : getTeams()) {
-            if(team.getPlayers().contains(player)) {
+        for(Team team : teams()) {
+            if(team.players().contains(player)) {
                 return team;
             }
         }
 
         return null;
-    }
-
-    /**
-     * Get all existing teams in the manager.
-     * @return All existing teams.
-     */
-    @Deprecated
-    public List<Team> getTeams() {
-        return teams;
     }
 
     /**

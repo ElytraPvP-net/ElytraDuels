@@ -57,7 +57,7 @@ public class Game {
 
         gameState = GameState.WAITING;
         timer = new Timer(plugin);
-        plugin.getArenaManager().removeArena(arena);
+        plugin.arenaManager().removeArena(arena);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -67,17 +67,17 @@ public class Game {
      */
     public void start() {
         players = getAlivePlayers().size();
-        plugin.getQueueManager().addPlaying(kit, players);
-        plugin.getQueueManager().addPlaying(players);
+        plugin.queueManager().addPlaying(kit, players);
+        plugin.queueManager().addPlaying(players);
 
         int spawn = 0;
-        for(Team team : teamManager.getTeams()) {
-            if(spawn >= arena.getSpawns().size()) {
+        for(Team team : teamManager.teams()) {
+            if(spawn >= arena.spawns().size()) {
                 spawn = 0;
             }
 
-            for(Player p : team.getPlayers()) {
-                p.teleport(arena.getSpawns().get(spawn));
+            for(Player p : team.players()) {
+                p.teleport(arena.spawns().get(spawn));
                 kit.apply(p, this);
                 new GameScoreboard(p, this);
             }
@@ -97,7 +97,7 @@ public class Game {
             ChatUtils.centeredChat(player, "&aOpponents:");
 
             int i = 1;
-            for(Team team : teamManager.getTeams()) {
+            for(Team team : teamManager.teams()) {
                 if(team.equals(getTeam(player))) {
                     continue;
                 }
@@ -106,7 +106,7 @@ public class Game {
                     break;
                 }
 
-                for(Player opponent : team.getAlivePlayers()) {
+                for(Player opponent : team.alivePlayers()) {
                     String opponentName = opponent.getName();
                     ChatUtils.centeredChat(player, opponentName);
                     i++;
@@ -163,16 +163,16 @@ public class Game {
         timer.start();
 
         int spawn = 0;
-        for(Team team : teamManager.getTeams()) {
-            for(Player p : team.getPlayers()) {
+        for(Team team : teamManager.teams()) {
+            for(Player p : team.players()) {
 
                 // Reset spawn point if not enough spawns
-                if(spawn > arena.getSpawns().size() - 1) {
+                if(spawn > arena.spawns().size() - 1) {
                     spawn = 0;
                 }
 
                 p.closeInventory();
-                p.teleport(arena.getSpawns().get(spawn));
+                p.teleport(arena.spawns().get(spawn));
                 new GameScoreboard(p, this);
                 p.setFireTicks(0);
             }
@@ -197,14 +197,14 @@ public class Game {
         gameState = GameState.END;
         timer.stop();
 
-        for(Team team : teamManager.getTeams()) {
+        for(Team team : teamManager.teams()) {
             if(team == winner) {
                 Title title = new Title(ChatUtils.translate("&aVictory!"), "", 20, 60, 20);
-                team.getPlayers().forEach(player -> player.sendTitle(title));
+                team.players().forEach(player -> player.sendTitle(title));
             }
             else {
                 Title title = new Title(ChatUtils.translate("&cYou lose!"));
-                team.getPlayers().forEach(player -> player.sendTitle(title));
+                team.players().forEach(player -> player.sendTitle(title));
             }
         }
 
@@ -212,15 +212,15 @@ public class Game {
         broadcast(" ");
         broadcastCenter("&a&l" + kit.getName() + " Duel &7- &f&l" + timer.toString());
         broadcast(" ");
-        if(winner.getPlayers().size() > 1) {
+        if(winner.players().size() > 1) {
             broadcastCenter("&aWinners:");
         }
         else {
             broadcastCenter("&aWinner:");
         }
 
-        for(Player player : winner.getPlayers()) {
-            if(teamManager.getTeam(player).getDeadPlayers().contains(player)) {
+        for(Player player : winner.players()) {
+            if(teamManager.getTeam(player).deadPlayers().contains(player)) {
                 broadcastCenter("&f" + player.getName() + " &a(&c0%&a)");
             }
             else {
@@ -242,7 +242,7 @@ public class Game {
                 player.spigot().setCollidesWithEntities(true);
                 ((CraftPlayer) player).getHandle().getDataWatcher().watch(9, (byte) 0);
 
-                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                ItemUtils.givePartyItems(plugin.partyManager(), player);
                 new LobbyScoreboard(plugin, player);
 
                 for(Player pl : Bukkit.getOnlinePlayers()) {
@@ -254,20 +254,20 @@ public class Game {
                 }
             }
 
-            for(Team team : teamManager.getTeams()) {
-                team.getPlayers().clear();
-                team.getAlivePlayers().clear();
-                team.getDeadPlayers().clear();
+            for(Team team : teamManager.teams()) {
+                team.players().clear();
+                team.alivePlayers().clear();
+                team.deadPlayers().clear();
             }
 
-            plugin.getQueueManager().removePlaying(kit, players);
-            plugin.getQueueManager().removePlaying(players);
+            plugin.queueManager().removePlaying(kit, players);
+            plugin.queueManager().removePlaying(players);
 
             spectators.clear();
-            teamManager.getTeams().clear();
-            plugin.getArenaManager().addArena(arena);
+            teamManager.teams().clear();
+            plugin.arenaManager().addArena(arena);
 
-            plugin.getGameManager().destroyGame(this);
+            plugin.gameManager().destroyGame(this);
         }, 100);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
@@ -335,7 +335,7 @@ public class Game {
 
         // Doesn't teleport player if they were in the game before.
         if(getAlivePlayers().contains(player)) {
-            player.teleport(arena.getSpawns().get(0));
+            player.teleport(arena.spawns().get(0));
         }
 
         player.getInventory().clear();
@@ -390,8 +390,8 @@ public class Game {
     public List<Player> getAlivePlayers() {
         List<Player> players = new ArrayList<>();
 
-        for(Team team : teamManager.getTeams()) {
-            players.addAll(team.getAlivePlayers());
+        for(Team team : teamManager.teams()) {
+            players.addAll(team.alivePlayers());
         }
 
         return players;
@@ -452,11 +452,11 @@ public class Game {
      * @return Opposing team.
      */
     public Team getOpposingTeam(Team team) {
-        if(team.equals(teamManager.getTeams().get(1))) {
-            return teamManager.getTeams().get(0);
+        if(team.equals(teamManager.teams().get(1))) {
+            return teamManager.teams().get(0);
         }
 
-        return teamManager.getTeams().get(1);
+        return teamManager.teams().get(1);
     }
 
     /**
@@ -467,8 +467,8 @@ public class Game {
     public List<Player> getPlayers() {
         List<Player> players = new ArrayList<>();
 
-        for(Team team : teamManager.getTeams()) {
-            players.addAll(team.getAlivePlayers());
+        for(Team team : teamManager.teams()) {
+            players.addAll(team.alivePlayers());
         }
         players.addAll(getSpectators());
 
@@ -498,8 +498,8 @@ public class Game {
      * @return Team the player is in.
      */
     public Team getTeam(Player player) {
-        for(Team team : teamManager.getTeams()) {
-            if(team.getPlayers().contains(player)) {
+        for(Team team : teamManager.teams()) {
+            if(team.players().contains(player)) {
                 return team;
             }
         }
@@ -545,12 +545,12 @@ public class Game {
         teamManager.getTeam(player).killPlayer(player);
         player.getLocation().getWorld().strikeLightning(player.getLocation());
 
-        for(Team team : teamManager.getTeams()) {
-            if(team.getAlivePlayers().size() == 0) {
+        for(Team team : teamManager.teams()) {
+            if(team.alivePlayers().size() == 0) {
                 teamManager.killTeam(team);
 
-                if(teamManager.getAliveTeams().size() == 1) {
-                    Team winner = teamManager.getAliveTeams().get(0);
+                if(teamManager.aliveTeams().size() == 1) {
+                    Team winner = teamManager.aliveTeams().get(0);
                     end(winner, team);
                     break;
                 }
@@ -581,12 +581,12 @@ public class Game {
             return;
         }
 
-        for(Team team : teamManager.getTeams()) {
-            if(team.getAlivePlayers().size() == 0) {
+        for(Team team : teamManager.teams()) {
+            if(team.alivePlayers().size() == 0) {
                 teamManager.killTeam(team);
 
-                if(teamManager.getAliveTeams().size() == 1) {
-                    Team winner = teamManager.getAliveTeams().get(0);
+                if(teamManager.aliveTeams().size() == 1) {
+                    Team winner = teamManager.aliveTeams().get(0);
                     end(winner, team);
                     break;
                 }

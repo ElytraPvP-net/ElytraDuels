@@ -32,7 +32,7 @@ public class EntityDamageListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;

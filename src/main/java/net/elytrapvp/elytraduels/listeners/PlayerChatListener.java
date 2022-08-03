@@ -24,7 +24,7 @@ public class PlayerChatListener implements Listener {
 
     public void partyChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
 
         if(party == null) {
             return;
@@ -44,7 +44,7 @@ public class PlayerChatListener implements Listener {
         }
 
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;
@@ -57,7 +57,7 @@ public class PlayerChatListener implements Listener {
             return;
         }
 
-        TeamColor teamColor = game.getTeam(player).getTeamColor();
-        game.broadcast(teamColor.getChatColor() + "[" + teamColor + "] &7" + player.getName() + " &8» &7" + event.getMessage());
+        TeamColor teamColor = game.getTeam(player).teamColor();
+        game.broadcast(teamColor.chatColor() + "[" + teamColor + "] &7" + player.getName() + " &8» &7" + event.getMessage());
     }
 }

@@ -16,9 +16,9 @@ public class DuelGUI extends CustomGUI {
 
         int i = 0;
         // Displays enabled kits.
-        for(Kit kit : plugin.getKitManager().getKits()) {
-            int playing = plugin.getQueueManager().getPlaying(kit);
-            int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+        for(Kit kit : plugin.kitManager().kits()) {
+            int playing = plugin.queueManager().getPlaying(kit);
+            int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
 
             int count = playing + queue;
             if(count == 0) count = 1;
@@ -33,16 +33,16 @@ public class DuelGUI extends CustomGUI {
                 p.closeInventory();
 
                 // Remove player from queue.
-                plugin.getQueueManager().removePlayer(p);
+                plugin.queueManager().removePlayer(p);
             });
             i++;
         }
 
         // Displays disabled kits if the player has permission.
         if(player.hasPermission("duels.disabled")) {
-            for(Kit kit : plugin.getKitManager().getDisabledKits()) {
-                int playing = plugin.getQueueManager().getPlaying(kit);
-                int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+            for(Kit kit : plugin.kitManager().disabledKits()) {
+                int playing = plugin.queueManager().getPlaying(kit);
+                int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
 
                 int count = playing + queue;
                 if(count == 0) count = 1;
@@ -57,7 +57,7 @@ public class DuelGUI extends CustomGUI {
                     p.closeInventory();
 
                     // Remove player from queue.
-                    plugin.getQueueManager().removePlayer(p);
+                    plugin.queueManager().removePlayer(p);
                 });
                 i++;
             }

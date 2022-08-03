@@ -23,7 +23,7 @@ public class PlayerBucketEmptyListener implements Listener {
     @EventHandler
     public void onEvent(PlayerBucketEmptyEvent event) {
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(event.getBucket() != null && event.getBucket() == Material.WATER_BUCKET) {
             generatesCobble(Material.STATIONARY_WATER, event.getBlockClicked().getRelative(event.getBlockFace()));

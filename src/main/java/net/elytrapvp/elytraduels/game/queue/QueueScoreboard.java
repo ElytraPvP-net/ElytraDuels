@@ -38,8 +38,8 @@ public class QueueScoreboard extends CustomScoreboard {
         helper.setTitle("&a&lDuels");
         helper.setSlot(12, "&7&m------------------");
         helper.setSlot(11, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
-        helper.setSlot(10, "&aPlaying: &f" + plugin.getQueueManager().getPlaying());
-        helper.setSlot(9, "&aQueue: &f" + plugin.getQueueManager().getQueueing());
+        helper.setSlot(10, "&aPlaying: &f" + plugin.queueManager().getPlaying());
+        helper.setSlot(9, "&aQueue: &f" + plugin.queueManager().getQueueing());
         helper.setSlot(8, "");
         helper.setSlot(7, "&aQueue");
         helper.setSlot(6, "  &aLadder: &f" + kit.getName());

@@ -19,18 +19,18 @@ public class KitGUI extends CustomGUI {
 
         int[] iconSlots = new int[]{10,11,12,13,14,15,16,28,29,30,31,32,33,34,21,23};
         int i = 0;
-        for(Kit kit : plugin.getKitManager().getKits()) {
+        for(Kit kit : plugin.kitManager().kits()) {
 
             ItemStack item = new ItemBuilder(kit.getIconMaterial(), 1)
                     .setDisplayName("&a" + kit.getName())
-                    .addLore("&7Playing: " + plugin.getQueueManager().getPlaying(kit))
-                    .addLore("&7Queuing: " + plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED))
+                    .addLore("&7Playing: " + plugin.queueManager().getPlaying(kit))
+                    .addLore("&7Queuing: " + plugin.queueManager().getQueueing(kit, GameType.UNRANKED))
                     .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
 
             setItem(iconSlots[i], item, (pl, a) -> {
                 pl.closeInventory();
-                plugin.getQueueManager().addPlayer(pl, kit, GameType.UNRANKED);
+                plugin.queueManager().addPlayer(pl, kit, GameType.UNRANKED);
             });
             i++;
         }

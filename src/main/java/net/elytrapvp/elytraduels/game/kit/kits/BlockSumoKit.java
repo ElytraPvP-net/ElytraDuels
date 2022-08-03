@@ -53,7 +53,7 @@ public class BlockSumoKit extends Kit {
         Player player = event.getPlayer();
         player.getInventory().getItemInHand().setAmount(64);
 
-        if(MathUtils.distance(game.getArena().getCenter(), event.getBlock().getLocation()) > 22) {
+        if(MathUtils.distance(game.getArena().center(), event.getBlock().getLocation()) > 22) {
             ChatUtils.chat(player, "&cError &8» &cYou cannot place blocks here!");
             event.setCancelled(true);
             return;

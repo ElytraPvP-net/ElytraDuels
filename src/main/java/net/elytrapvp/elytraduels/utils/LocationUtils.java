@@ -38,12 +38,12 @@ public class LocationUtils {
      * @return Spawn Location
      */
     public static Location getSpawn(ElytraDuels plugin) {
-        String world = plugin.getSettingsManager().getConfig().getString("Spawn.World");
-        double x = plugin.getSettingsManager().getConfig().getDouble("Spawn.X");
-        double y = plugin.getSettingsManager().getConfig().getDouble("Spawn.Y");
-        double z = plugin.getSettingsManager().getConfig().getDouble("Spawn.Z");
-        float pitch = (float) plugin.getSettingsManager().getConfig().getDouble("Spawn.Pitch");
-        float yaw = (float) plugin.getSettingsManager().getConfig().getDouble("Spawn.Yaw");
+        String world = plugin.settingsManager().getConfig().getString("Spawn.World");
+        double x = plugin.settingsManager().getConfig().getDouble("Spawn.X");
+        double y = plugin.settingsManager().getConfig().getDouble("Spawn.Y");
+        double z = plugin.settingsManager().getConfig().getDouble("Spawn.Z");
+        float pitch = (float) plugin.settingsManager().getConfig().getDouble("Spawn.Pitch");
+        float yaw = (float) plugin.settingsManager().getConfig().getDouble("Spawn.Yaw");
 
         return new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
     }
@@ -60,14 +60,14 @@ public class LocationUtils {
         float pitch = loc.getPitch();
         float yaw = loc.getYaw();
 
-        plugin.getSettingsManager().getConfig().set("Spawn.World", world);
-        plugin.getSettingsManager().getConfig().set("Spawn.X", x);
-        plugin.getSettingsManager().getConfig().set("Spawn.Y", y);
-        plugin.getSettingsManager().getConfig().set("Spawn.Z", z);
-        plugin.getSettingsManager().getConfig().set("Spawn.Pitch", pitch);
-        plugin.getSettingsManager().getConfig().set("Spawn.Yaw", yaw);
-        plugin.getSettingsManager().getConfig().set("Spawn.Set", true);
+        plugin.settingsManager().getConfig().set("Spawn.World", world);
+        plugin.settingsManager().getConfig().set("Spawn.X", x);
+        plugin.settingsManager().getConfig().set("Spawn.Y", y);
+        plugin.settingsManager().getConfig().set("Spawn.Z", z);
+        plugin.settingsManager().getConfig().set("Spawn.Pitch", pitch);
+        plugin.settingsManager().getConfig().set("Spawn.Yaw", yaw);
+        plugin.settingsManager().getConfig().set("Spawn.Set", true);
 
-        plugin.getSettingsManager().reloadConfig();
+        plugin.settingsManager().reloadConfig();
     }
 }

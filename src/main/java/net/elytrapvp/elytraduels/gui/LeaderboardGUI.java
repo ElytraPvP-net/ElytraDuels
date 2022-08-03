@@ -54,7 +54,7 @@ public class LeaderboardGUI extends CustomGUI {
         setItem(13, global.build());
 
         int i = 18;
-        for(Kit kit : plugin.getKitManager().getKits()) {
+        for(Kit kit : plugin.kitManager().kits()) {
 
             ItemBuilder item = new ItemBuilder(kit.getIconMaterial(), 1)
                     .setDisplayName("&a&l" + kit.getName())
@@ -77,7 +77,7 @@ public class LeaderboardGUI extends CustomGUI {
     }
 
     private void addLore(ItemBuilder builder, String kit, String type) {
-        Map<String, Integer> leaderboard = plugin.getLeaderboardManager().getLeaderboard(kit, type);
+        Map<String, Integer> leaderboard = plugin.leaderboardManager().getLeaderboard(kit, type);
 
         int i = 1;
         for(String player : leaderboard.keySet()) {

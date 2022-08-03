@@ -30,25 +30,8 @@ public class Team {
      * Get all alive players on the team.
      * @return All alive players.
      */
-    @Deprecated
-    public Set<Player> getAlivePlayers() {
-        return alivePlayers;
-    }
-
-    /**
-     * Get all alive players on the team.
-     * @return All alive players.
-     */
     public Set<Player> alivePlayers() {
         return alivePlayers;
-    }
-
-    /**
-     * Gets all dead players on the team.
-     * @return All dead players.
-     */
-    public Set<Player> getDeadPlayers() {
-        return deadPlayers;
     }
 
     /**
@@ -63,26 +46,8 @@ public class Team {
      * Gets the color of the team.
      * @return TeamColor the team is assigned.
      */
-    @Deprecated
-    public TeamColor getTeamColor() {
-        return teamColor;
-    }
-
-    /**
-     * Gets the color of the team.
-     * @return TeamColor the team is assigned.
-     */
     public TeamColor teamColor() {
         return teamColor;
-    }
-
-    /**
-     * Gets all players on the team, alive and dead.
-     * @return All players on the team.
-     */
-    @Deprecated
-    public List<Player> getPlayers() {
-        return players;
     }
 
     /**
@@ -108,8 +73,8 @@ public class Team {
      * @param player Player to remove.
      */
     public void removePlayer(Player player) {
-        getPlayers().remove(player);
-        getAlivePlayers().remove(player);
-        getDeadPlayers().remove(player);
+        players().remove(player);
+        alivePlayers().remove(player);
+        deadPlayers().remove(player);
     }
 }

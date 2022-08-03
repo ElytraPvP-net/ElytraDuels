@@ -36,7 +36,7 @@ public class TeleportFix implements Listener {
         final Player player = event.getPlayer();
         final int visibleDistance = server.getViewDistance() * 16;
 
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
         if(game != null) {
             if(game.getSpectators().contains(player)) {
                 return;
@@ -61,7 +61,7 @@ public class TeleportFix implements Listener {
         // and hide or show tpedPlayer to every player.
         for (Player player : players) {
             // Fix spectators being seen after teleport.
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
             if(game != null && game.getSpectators().contains(player)) {
                 continue;
             }

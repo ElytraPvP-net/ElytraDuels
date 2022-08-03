@@ -17,8 +17,6 @@ import net.elytrapvp.elytraduels.utils.scoreboard.ScoreboardUpdate;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.print.DocFlavor;
-
 public final class ElytraDuels extends JavaPlugin {
     private ArenaManager arenaManager;
     private CustomPlayerManager customPlayerManager;
@@ -73,7 +71,6 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileHitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
-        //Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
 
         new ScoreboardUpdate(this).runTaskTimer(this, 20L, 20L);
         new AFKTimer(this).runTaskTimer(this, 5 * 20, 5 * 20);
@@ -84,98 +81,41 @@ public final class ElytraDuels extends JavaPlugin {
         // Registers placeholders.
         new Placeholders(this).register();
     }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
-    @Deprecated
-    public ArenaManager getArenaManager() {
-        return arenaManager;
-    }
-
+    
     public ArenaManager arenaManager() {
         return arenaManager;
-    }
-
-    @Deprecated
-    public CustomPlayerManager getCustomPlayerManager() {
-        return customPlayerManager;
     }
 
     public CustomPlayerManager customPlayerManager() {
         return customPlayerManager;
     }
 
-    @Deprecated
-    public GameManager getGameManager() {
-        return gameManager;
-    }
-
     public GameManager gameManager() {
         return gameManager;
-    }
-
-    @Deprecated
-    public KitManager getKitManager() {
-        return kitManager;
     }
 
     public KitManager kitManager() {
         return kitManager;
     }
 
-    @Deprecated
-    public PartyManager getPartyManager() {
-        return partyManager;
-    }
-
     public PartyManager partyManager() {
         return partyManager;
     }
-
-    @Deprecated
-    public QueueManager getQueueManager() {
-        return queueManager;
-    }
-
     public QueueManager queueManager() {
         return queueManager;
     }
-
-    @Deprecated
-    public SettingsManager getSettingsManager() {
-        return settingsManager;
-    }
-
     public SettingsManager settingsManager() {
         return settingsManager;
-    }
-
-    @Deprecated
-    public LeaderboardManager getLeaderboardManager() {
-        return leaderboardManager;
     }
 
     public LeaderboardManager leaderboardManager() {
         return leaderboardManager;
     }
-
-    @Deprecated
-    public DuelManager getDuelManager() {
-        return duelManager;
-    }
-
+    
     public DuelManager duelManager() {
         return duelManager;
     }
-
-    @Deprecated
-    public MySQL getMySQL() {
-        return mySQL;
-    }
-
+    
     public MySQL mySQL() {
         return mySQL;
     }

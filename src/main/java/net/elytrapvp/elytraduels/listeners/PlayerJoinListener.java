@@ -29,6 +29,6 @@ public class PlayerJoinListener implements Listener {
 
         ItemUtils.giveLobbyItems(player);
 
-        plugin.getCustomPlayerManager().addPlayer(player);
+        plugin.customPlayerManager().addPlayer(player);
     }
 }

@@ -26,7 +26,7 @@ public class LeaderboardManager {
         leaderboard.clear();
 
         List<String> kits = new ArrayList<>();
-        plugin.getKitManager().getKits().forEach(kit -> kits.add(kit.getName().toLowerCase()));
+        plugin.kitManager().kits().forEach(kit -> kits.add(kit.getName().toLowerCase()));
         kits.add("global");
 
         for(String kit : kits) {
@@ -40,12 +40,12 @@ public class LeaderboardManager {
                 types.put(type, data);
 
                 try {
-                    PreparedStatement statement1 = plugin.getMySQL().getConnection().prepareStatement("SELECT * from duels_statistics WHERE kit = ? ORDER BY " + type + " DESC LIMIT 10");
+                    PreparedStatement statement1 = plugin.mySQL().getConnection().prepareStatement("SELECT * from duels_statistics WHERE kit = ? ORDER BY " + type + " DESC LIMIT 10");
                     statement1.setString(1, kit);
                     ResultSet results = statement1.executeQuery();
 
                     while(results.next()) {
-                        PreparedStatement statement2 = plugin.getMySQL().getConnection().prepareStatement("SELECT * from player_info WHERE uuid = ? LIMIT 1");
+                        PreparedStatement statement2 = plugin.mySQL().getConnection().prepareStatement("SELECT * from player_info WHERE uuid = ? LIMIT 1");
                         statement2.setString(1, results.getString(1));
                         ResultSet results2 = statement2.executeQuery();
 

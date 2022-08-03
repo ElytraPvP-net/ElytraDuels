@@ -41,11 +41,11 @@ public class EntityExplodeListener implements Listener {
 
         Player shooter = (Player) tnt.getSource();
 
-        if(plugin.getGameManager().getGame(shooter) == null) {
+        if(plugin.gameManager().getGame(shooter) == null) {
             return;
         }
 
-        Game game = plugin.getGameManager().getGame(shooter);
+        Game game = plugin.gameManager().getGame(shooter);
 
         if(tnt.getSourceLoc() == null) {
             return;

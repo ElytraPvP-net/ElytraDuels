@@ -13,8 +13,8 @@ public class PartyListGUI extends CustomGUI {
     public PartyListGUI(ElytraDuels plugin, Player player) {
         super(54, "All Parties");
 
-        for(int i = 0; i < plugin.getPartyManager().getParties().size(); i++) {
-            Party party = plugin.getPartyManager().getParties().get(i);
+        for(int i = 0; i < plugin.partyManager().getParties().size(); i++) {
+            Party party = plugin.partyManager().getParties().get(i);
 
             ItemBuilder item = new SkullBuilder(party.getLeader())
                     .setDisplayName("&a" + party.getLeader().getName() + "'s party");

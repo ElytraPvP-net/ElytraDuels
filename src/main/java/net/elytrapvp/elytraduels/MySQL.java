@@ -22,11 +22,11 @@ public class MySQL {
      */
     public MySQL(ElytraDuels plugin) {
         this.plugin = plugin;
-        host = plugin.getSettingsManager().getConfig().getString("MySQL.host");
-        database = plugin.getSettingsManager().getConfig().getString("MySQL.database");
-        username = plugin.getSettingsManager().getConfig().getString("MySQL.username");
-        password = plugin.getSettingsManager().getConfig().getString("MySQL.password");
-        port = plugin.getSettingsManager().getConfig().getInt("MySQL.port");
+        host = plugin.settingsManager().getConfig().getString("MySQL.host");
+        database = plugin.settingsManager().getConfig().getString("MySQL.database");
+        username = plugin.settingsManager().getConfig().getString("MySQL.username");
+        password = plugin.settingsManager().getConfig().getString("MySQL.password");
+        port = plugin.settingsManager().getConfig().getInt("MySQL.port");
     }
 
     /**

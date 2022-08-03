@@ -35,7 +35,7 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         // Prevent using items during game countdown.
         if(game != null && game.getGameState() != GameState.RUNNING) {
@@ -161,7 +161,7 @@ public class PlayerInteractListener implements Listener {
                 break;
 
             case "Leave Queue":
-                plugin.getQueueManager().removePlayer(player);
+                plugin.queueManager().removePlayer(player);
                 ItemUtils.giveLobbyItems(player);
                 new LobbyScoreboard(plugin, player);
                 event.setCancelled(true);
@@ -209,12 +209,12 @@ public class PlayerInteractListener implements Listener {
             case "Spectate Current Game":
                 event.setCancelled(true);
 
-                Party party1 = plugin.getPartyManager().getParty(player);
+                Party party1 = plugin.partyManager().getParty(player);
                 if(party1 == null) {
                     return;
                 }
 
-                Game game1 = plugin.getGameManager().getGame(party1.getLeader());
+                Game game1 = plugin.gameManager().getGame(party1.getLeader());
                 if(game1 == null) {
                     ChatUtils.chat(player, "&cError &8» &cYour party is not currently in a game.");
                     return;
