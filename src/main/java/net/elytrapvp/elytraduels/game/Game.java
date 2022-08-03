@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.github.paperspigot.Title;
 
 import java.util.*;
 
@@ -195,6 +196,17 @@ public class Game {
 
         gameState = GameState.END;
         timer.stop();
+
+        for(Team team : teamManager.getTeams()) {
+            if(team == winner) {
+                Title title = new Title(ChatUtils.translate("&aVictory!"), "", 20, 60, 20);
+                team.getPlayers().forEach(player -> player.sendTitle(title));
+            }
+            else {
+                Title title = new Title(ChatUtils.translate("&cYou lose!"));
+                team.getPlayers().forEach(player -> player.sendTitle(title));
+            }
+        }
 
         broadcast("&8&m+-----------------------***-----------------------+");
         broadcast(" ");
