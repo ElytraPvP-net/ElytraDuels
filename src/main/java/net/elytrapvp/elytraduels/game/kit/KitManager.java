@@ -83,7 +83,16 @@ public class KitManager {
      * Get all existing kits.
      * @return All kits.
      */
+    @Deprecated
     public Set<Kit> getKits() {
+        return kits;
+    }
+
+    /**
+     * Get all existing kits.
+     * @return All kits.
+     */
+    public Set<Kit> kits() {
         return kits;
     }
 
@@ -91,7 +100,16 @@ public class KitManager {
      * Get all disabled kits.
      * @return All disabled kits.
      */
+    @Deprecated
     public Set<Kit> getDisabledKits() {
+        return disabledKits;
+    }
+
+    /**
+     * Get all disabled kits.
+     * @return All disabled kits.
+     */
+    public Set<Kit> disabledKits() {
         return disabledKits;
     }
 }

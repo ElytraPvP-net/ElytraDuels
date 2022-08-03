@@ -61,7 +61,16 @@ public class ArenaManager {
      * Get all arenas that are currently open.
      * @return All currently open arenas.
      */
+    @Deprecated
     public Set<Arena> getOpenArenas() {
+        return openArenas;
+    }
+
+    /**
+     * Get all arenas that are currently open.
+     * @return All currently open arenas.
+     */
+    public Set<Arena> openArenas() {
         return openArenas;
     }
 

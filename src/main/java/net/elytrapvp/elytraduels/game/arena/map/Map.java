@@ -48,7 +48,16 @@ public class Map {
      * Get the id of the map.
      * @return ID of the map.
      */
+    @Deprecated
     public String getId() {
+        return id;
+    }
+
+    /**
+     * Get the id of the map.
+     * @return ID of the map.
+     */
+    public String id() {
         return id;
     }
 
@@ -56,7 +65,16 @@ public class Map {
      * Get what kits can be used on the map.
      * @return All kits that can be used.
      */
+    @Deprecated
     public Set<Kit> getKits() {
+        return kits;
+    }
+
+    /**
+     * Get what kits can be used on the map.
+     * @return All kits that can be used.
+     */
+    public Set<Kit> kits() {
         return kits;
     }
 
@@ -64,7 +82,16 @@ public class Map {
      *  Get the name of the map.
      * @return Name of the map.
      */
+    @Deprecated
     public String getName() {
+        return name;
+    }
+
+    /**
+     *  Get the name of the map.
+     * @return Name of the map.
+     */
+    public String name() {
         return name;
     }
 }

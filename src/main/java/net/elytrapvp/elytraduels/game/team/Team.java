@@ -30,7 +30,16 @@ public class Team {
      * Get all alive players on the team.
      * @return All alive players.
      */
+    @Deprecated
     public Set<Player> getAlivePlayers() {
+        return alivePlayers;
+    }
+
+    /**
+     * Get all alive players on the team.
+     * @return All alive players.
+     */
+    public Set<Player> alivePlayers() {
         return alivePlayers;
     }
 
@@ -43,10 +52,27 @@ public class Team {
     }
 
     /**
+     * Gets all dead players on the team.
+     * @return All dead players.
+     */
+    public Set<Player> deadPlayers() {
+        return deadPlayers;
+    }
+
+    /**
      * Gets the color of the team.
      * @return TeamColor the team is assigned.
      */
+    @Deprecated
     public TeamColor getTeamColor() {
+        return teamColor;
+    }
+
+    /**
+     * Gets the color of the team.
+     * @return TeamColor the team is assigned.
+     */
+    public TeamColor teamColor() {
         return teamColor;
     }
 
@@ -54,7 +80,16 @@ public class Team {
      * Gets all players on the team, alive and dead.
      * @return All players on the team.
      */
+    @Deprecated
     public List<Player> getPlayers() {
+        return players;
+    }
+
+    /**
+     * Gets all players on the team, alive and dead.
+     * @return All players on the team.
+     */
+    public List<Player> players() {
         return players;
     }
 

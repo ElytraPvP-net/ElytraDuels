@@ -53,7 +53,16 @@ public class TeamManager {
      * Get all teams that are still alive.
      * @return All alive teams.
      */
+    @Deprecated
     public List<Team> getAliveTeams() {
+        return aliveTeams;
+    }
+
+    /**
+     * Get all teams that are still alive.
+     * @return All alive teams.
+     */
+    public List<Team> aliveTeams() {
         return aliveTeams;
     }
 
@@ -77,7 +86,16 @@ public class TeamManager {
      * Get all existing teams in the manager.
      * @return All existing teams.
      */
+    @Deprecated
     public List<Team> getTeams() {
+        return teams;
+    }
+
+    /**
+     * Get all existing teams in the manager.
+     * @return All existing teams.
+     */
+    public List<Team> teams() {
         return teams;
     }
 

@@ -42,7 +42,16 @@ public class GameManager {
      * Get all currently active games.
      * @return All active games.
      */
+    @Deprecated
     public List<Game> getActiveGames() {
+        return activeGames;
+    }
+
+    /**
+     * Get all currently active games.
+     * @return All active games.
+     */
+    public List<Game> activeGames() {
         return activeGames;
     }
 

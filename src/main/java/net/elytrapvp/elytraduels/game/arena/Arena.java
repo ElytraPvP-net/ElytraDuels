@@ -61,7 +61,16 @@ public class Arena {
      * Get the center of a map.
      * @return Center location of the map.
      */
+    @Deprecated
     public Location getCenter() {
+        return center;
+    }
+
+    /**
+     * Get the center of a map.
+     * @return Center location of the map.
+     */
+    public Location center() {
         return center;
     }
 
@@ -69,7 +78,16 @@ public class Arena {
      * Get the map that this arena uses.
      * @return Map the arena uses.
      */
+    @Deprecated
     public Map getMap() {
+        return map;
+    }
+
+    /**
+     * Get the map that this arena uses.
+     * @return Map the arena uses.
+     */
+    public Map map() {
         return map;
     }
 
@@ -77,7 +95,16 @@ public class Arena {
      * Get all spawns of the arena.
      * @return All spawns of the arena.
      */
+    @Deprecated
     public List<Location> getSpawns() {
+        return spawns;
+    }
+
+    /**
+     * Get all spawns of the arena.
+     * @return All spawns of the arena.
+     */
+    public List<Location> spawns() {
         return spawns;
     }
 }

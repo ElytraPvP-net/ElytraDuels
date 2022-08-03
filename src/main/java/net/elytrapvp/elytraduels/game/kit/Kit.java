@@ -195,7 +195,16 @@ public class Kit {
      * Get the items in the kit.
      * @return Items in the kit.
      */
+    @Deprecated
     public Map<Integer, ItemStack> getItems() {
+        return items;
+    }
+
+    /**
+     * Get the items in the kit.
+     * @return Items in the kit.
+     */
+    public Map<Integer, ItemStack> items() {
         return items;
     }
 

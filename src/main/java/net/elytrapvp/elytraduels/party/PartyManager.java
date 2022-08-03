@@ -58,9 +58,18 @@ public class PartyManager {
 
     /**
      * Get all current parties.
-     * @return All current paries.
+     * @return All current parties.
      */
+    @Deprecated
     public List<Party> getParties() {
+        return parties;
+    }
+
+    /**
+     * Get all current parties.
+     * @return All current parties.
+     */
+    public List<Party> parties() {
         return parties;
     }
 }
