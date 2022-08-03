@@ -595,6 +595,39 @@ public class Game {
     }
 
     /**
+     * Runs when a player is killed.
+     * @param player Player who was killed.
+     * @param killer Player who killed the player.
+     */
+    public void playerKilled(Player player, Player killer) {
+        if(spectators.contains(player)) {
+            return;
+        }
+
+        player.getLocation().getWorld().strikeLightning(player.getLocation());
+        addSpectator(player);
+        teamManager.getTeam(player).killPlayer(player);
+        broadcast(getTeam(player).teamColor().chatColor()  + player.getName() + " &awas killed by " + getTeam(killer).teamColor().chatColor() + killer.getName() + " &a(" + ChatUtils.getFormattedHealthPercent(killer) + "&a)");
+
+        // Prevents stuff from breaking if the game is already over.
+        if(gameState == GameState.END) {
+            return;
+        }
+
+        for(Team team : teamManager.teams()) {
+            if(team.alivePlayers().size() == 0) {
+                teamManager.killTeam(team);
+
+                if(teamManager.aliveTeams().size() == 1) {
+                    Team winner = teamManager.aliveTeams().get(0);
+                    end(winner, team);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
      * Remove a double jump from a player.
      * @param player Player to double jump from.
      */

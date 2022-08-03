@@ -51,7 +51,7 @@ public class EntityDamageListener implements Listener {
         }
 
         // Prevents "killing" a player twice.
-        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
             return;
         }
 

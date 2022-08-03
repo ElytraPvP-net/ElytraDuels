@@ -78,6 +78,7 @@ public class EntityDamageByEntityListener implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 if(event.getFinalDamage() >= player.getHealth()) {
                     ActionBarUtils.sendActionText(damager, "&a" + player.getName() + "'s Health: &c0%");
+                    game.playerKilled(player, damager);
                 }
                 else {
                     ActionBarUtils.sendActionText(damager, "&a" + player.getName() + "'s Health: " + ChatUtils.getFormattedHealthPercent(player));
@@ -109,12 +110,12 @@ public class EntityDamageByEntityListener implements Listener {
             rangedDamage(event, player, shooter);
         }
 
-        ChatUtils.chat(shooter, "&f" + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
+        ChatUtils.chat(shooter, game.getTeam(player).teamColor().chatColor() + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
 
         if(event.getFinalDamage() >= player.getHealth()) {
             event.setCancelled(true);
 
-            Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player), 1);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player, shooter), 1);
         }
     }
 
