@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -92,6 +93,22 @@ public class PlayerInteractListener implements Listener {
         // Exit if the item is null.
         if(event.getItem() == null)
             return;
+
+        if(event.getItem().getType() == Material.MUSHROOM_SOUP) {
+            event.setCancelled(true);
+            player.getInventory().setItem(player.getInventory().getHeldItemSlot(), new ItemStack(Material.BOWL));
+
+            double health = player.getHealth();
+            health += 5;
+
+            if(health > player.getMaxHealth()) {
+                health = player.getMaxHealth();
+            }
+
+            player.setHealth(health);
+            player.playSound(player.getLocation(), Sound.DRINK,1 ,1);
+            return;
+        }
 
         // Exit if item meta is null.
         if(event.getItem().getItemMeta() == null)

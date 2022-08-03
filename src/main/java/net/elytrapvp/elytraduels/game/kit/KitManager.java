@@ -33,6 +33,7 @@ public class KitManager {
         Kit blockSumo = new BlockSumoKit(plugin);
         Kit bowFight = new BowFightKit(plugin);
         Kit shortBow = new ShortBowKit(plugin);
+        Kit soup = new SoupKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);
@@ -49,6 +50,7 @@ public class KitManager {
         kits.add(finalUHC);
         kits.add(archer);
         kits.add(shortBow);
+        kits.add(soup);
 
         disabledKits.add(sumo);
         disabledKits.add(peal);
