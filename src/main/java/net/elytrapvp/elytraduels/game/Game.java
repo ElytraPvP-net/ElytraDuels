@@ -636,7 +636,7 @@ public class Game {
         player.getLocation().getWorld().strikeLightning(player.getLocation());
         addSpectator(player);
         teamManager.getTeam(player).killPlayer(player);
-        broadcast("&a" + player.getName() + " has died!");
+        broadcast(getTeam(player).teamColor().chatColor()  + player.getName() + " &ahas died!");
 
         // Prevents stuff from breaking if the game is already over.
         if(gameState == GameState.END) {
