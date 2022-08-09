@@ -81,7 +81,7 @@ public class EntityDamageByEntityListener implements Listener {
                     game.playerKilled(player, damager);
                 }
                 else {
-                    ActionBarUtils.sendActionText(damager, "&a" + player.getName() + "'s Health: " + ChatUtils.getFormattedHealthPercent(player));
+                    ActionBarUtils.sendActionText(damager, game.getTeam(player).teamColor().chatColor() + player.getName() + "&a's Health: " + ChatUtils.getFormattedHealthPercent(player));
                 }
             }, 1);
         }
