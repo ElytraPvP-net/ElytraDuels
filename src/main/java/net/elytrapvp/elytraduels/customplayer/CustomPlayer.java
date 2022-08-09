@@ -38,6 +38,12 @@ public class CustomPlayer {
         this.plugin = plugin;
         this.uuid = uuid;
 
+        wins.put("global", 0);
+        losses.put("global", 0);
+        winStreak.put("global", 0);
+        bestWinStreak.put("global", 0);
+        elo.put("global", 0);
+
         // Run everything async to prevent lag.
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             // Create a list of all kits to add.
