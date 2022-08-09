@@ -65,7 +65,7 @@ public class MatchesCMD extends AbstractCommand {
 
                 int i = 0;
                 while(results2.next()) {
-                    if(i >= 53) {
+                    if(i >= 54) {
                         break;
                     }
 
