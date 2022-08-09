@@ -72,6 +72,9 @@ public class PartyCMD extends AbstractCommand {
             case "decline":
                 declineCMD(player, args);
                 break;
+            default:
+                helpCMD(player);
+                break;
         }
     }
 
