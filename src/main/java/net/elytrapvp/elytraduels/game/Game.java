@@ -15,6 +15,7 @@ import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -44,6 +45,7 @@ public class Game {
     private final HashMap<Player, Integer> tripleShot = new HashMap<>();
     private final HashMap<Player, Integer> repulsor = new HashMap<>();
     private final HashMap<Player, Integer> doubleJump = new HashMap<>();
+    private final List<Entity> entities = new ArrayList<>();
 
     /**
      * Create a Game object,
@@ -316,6 +318,14 @@ public class Game {
         }, 100);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            for(Entity entity : entities) {
+                if(entity.isValid()) {
+                    entity.remove();
+                }
+            }
+
+            entities.clear();
+
             for(Location location : blocks.keySet()) {
                 location.getWorld().getBlockAt(location).setType(blocks.get(location));
 
@@ -336,6 +346,10 @@ public class Game {
      */
     public void addBlock(Location location, Material material) {
         blocks.put(location, material);
+    }
+
+    public void addEntity(Entity entity) {
+        entities.add(entity);
     }
 
     /**

@@ -37,6 +37,7 @@ public class ProjectileHitListener implements Listener {
         }
 
         Arrow arrow = (Arrow) event.getEntity();
-        arrow.remove();
+        //arrow.remove();
+        game.addEntity(arrow);
     }
 }
