@@ -5,6 +5,8 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.elytrapvp.elytraduels.game.Game;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+
 /**
  * This class will be registered through the register-method in the
  * plugins onEnable-method.
@@ -97,6 +99,20 @@ class Placeholders extends PlaceholderExpansion {
             }
 
             return game.getTeamManager().getTeam(player).teamColor().chatColor() + "";
+        }
+
+        if(identifier.contains("name_top_")) {
+            ArrayList<String> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "elo").keySet());
+
+            int place = Integer.parseInt(identifier.replaceAll("\\D+",""));
+            return temp.get(place);
+        }
+
+        if(identifier.contains("elo_top_")) {
+            ArrayList<Integer> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "elo").values());
+
+            int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
+            return temp.get(place) + "";
         }
 
         return null;
