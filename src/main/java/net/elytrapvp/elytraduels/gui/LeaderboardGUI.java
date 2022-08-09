@@ -20,14 +20,20 @@ public class LeaderboardGUI extends CustomGUI {
         super(45, "Leaderboards");
         this.plugin = plugin;
 
+        ItemBuilder elo = new ItemBuilder(Material.EMERALD)
+                .setDisplayName("&a&lELO Leaderboards");
+        setItem(19, elo.build(), (p,a) -> {
+            new LeaderboardGUI(plugin, "elo").open(p);
+        });
+
         ItemBuilder wins = new ItemBuilder(Material.IRON_SWORD)
                 .setDisplayName("&a&lWins Leaderboards")
                 .addFlag(ItemFlag.HIDE_ATTRIBUTES);
-        setItem(21, wins.build(), (p,a) -> new LeaderboardGUI(plugin, "wins").open(p));
+        setItem(22, wins.build(), (p,a) -> new LeaderboardGUI(plugin, "wins").open(p));
 
         ItemBuilder winstreak = new ItemBuilder(Material.PAPER)
                 .setDisplayName("&a&lWin Streak Leaderboards");
-        setItem(23, winstreak.build(), (p,a) -> new LeaderboardGUI(plugin, "bestWinStreak").open(p));
+        setItem(25, winstreak.build(), (p,a) -> new LeaderboardGUI(plugin, "bestWinStreak").open(p));
 
         int[] fillers = {0,1,2,3,4,5,6,7,8,36,37,38,39,40,41,42,43,44};
         for(int j : fillers) {
@@ -54,7 +60,7 @@ public class LeaderboardGUI extends CustomGUI {
         setItem(13, global.build());
 
         int i = 18;
-        for(Kit kit : plugin.kitManager().kits()) {
+        for(Kit kit : plugin.kitManager().getRankedKits()) {
 
             ItemBuilder item = new ItemBuilder(kit.getIconMaterial(), 1)
                     .setDisplayName("&a&l" + kit.getName())

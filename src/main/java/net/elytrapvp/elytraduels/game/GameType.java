@@ -7,7 +7,8 @@ public enum GameType {
     UNRANKED("Unranked"),
     PARTY("Party"),
     DUEL("Duel"),
-    FFA("FFA");
+    FFA("FFA"),
+    RANKED("Ranked");
 
     private final String name;
 

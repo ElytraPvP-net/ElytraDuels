@@ -26,13 +26,13 @@ public class LeaderboardManager {
         leaderboard.clear();
 
         List<String> kits = new ArrayList<>();
-        plugin.kitManager().kits().forEach(kit -> kits.add(kit.getName().toLowerCase()));
+        plugin.kitManager().getRankedKits().forEach(kit -> kits.add(kit.getName().toLowerCase()));
         kits.add("global");
 
         for(String kit : kits) {
             Map<String, Map<String, Integer>> types = new LinkedHashMap<>();
             leaderboard.put(kit, types);
-            String[] leaderboardTypes = new String[]{"wins", "losses", "winStreak", "bestWinStreak"};
+            String[] leaderboardTypes = new String[]{"wins", "losses", "winStreak", "bestWinStreak", "elo"};
 
             int row = 3;
             for(String type : leaderboardTypes) {

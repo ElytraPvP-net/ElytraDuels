@@ -36,6 +36,7 @@ public abstract class AbstractCommand implements CommandExecutor {
         new PartyCMD(pl);
         new PartyChatCMD();
         new MatchesCMD(pl);
+        new ResetELOCMD(pl);
         new SettingsCMD(pl);
     }
 
