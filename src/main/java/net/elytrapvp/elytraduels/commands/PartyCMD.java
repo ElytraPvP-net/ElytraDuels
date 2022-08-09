@@ -49,27 +49,30 @@ public class PartyCMD extends AbstractCommand {
                 disbandCMD(player);
                 break;
             case "invite":
+            case "i":
                 inviteCMD(player, args);
-                break;
-            case "help":
-                helpCMD(player);
                 break;
             case "leave":
                 leaveCMD(player);
                 break;
             case "chat":
+            case "c":
                 chatCMD(player, args);
                 break;
             case "list":
+            case "l":
                 listCMD(player);
                 break;
             case "promote":
+            case "p":
                 promoteCMD(player, args);
                 break;
             case "accept":
+            case "a":
                 acceptCMD(player, args);
                 break;
             case "decline":
+            case "d":
                 declineCMD(player, args);
                 break;
             default:
