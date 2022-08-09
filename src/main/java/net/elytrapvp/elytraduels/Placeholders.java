@@ -101,15 +101,43 @@ class Placeholders extends PlaceholderExpansion {
             return game.getTeamManager().getTeam(player).teamColor().chatColor() + "";
         }
 
-        if(identifier.contains("name_top_")) {
+        if(identifier.contains("elo_top_name_")) {
             ArrayList<String> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "elo").keySet());
 
             int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
             return temp.get(place);
         }
 
-        if(identifier.contains("elo_top_")) {
+        if(identifier.contains("elo_top_amount_")) {
             ArrayList<Integer> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "elo").values());
+
+            int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
+            return temp.get(place) + "";
+        }
+
+        if(identifier.contains("wins_top_name_")) {
+            ArrayList<String> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "wins").keySet());
+
+            int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
+            return temp.get(place);
+        }
+
+        if(identifier.contains("wins_top_amount_")) {
+            ArrayList<Integer> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "wins").values());
+
+            int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
+            return temp.get(place) + "";
+        }
+
+        if(identifier.contains("winstreak_top_name_")) {
+            ArrayList<String> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "bestWinStreak").keySet());
+
+            int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
+            return temp.get(place);
+        }
+
+        if(identifier.contains("winstreak_top_amount_")) {
+            ArrayList<Integer> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "bestWinStreak").values());
 
             int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
             return temp.get(place) + "";
