@@ -75,6 +75,9 @@ public class PartyCMD extends AbstractCommand {
             case "d":
                 declineCMD(player, args);
                 break;
+            case "kick":
+                kickCMD(player, args);
+                break;
             default:
                 helpCMD(player);
                 break;
@@ -341,6 +344,47 @@ public class PartyCMD extends AbstractCommand {
                 " [{\"text\":\"[Accept]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party accept "  + player.getName() + "\"}},{\"text\":\" / \",\"color\":\"gray\"},{\"text\":\"[Decline]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/party decline " +  player.getName() + "\"}}]");
         ChatUtils.chat(target, "&8&m+-----------------------***-----------------------+");
         party.sendMessage("&a&lParty &8» &f" + target.getName() + " &ahas been invited to the party.");
+    }
+
+    public void kickCMD(Player player, String[] args) {
+        // Makes sure the player is in a party.
+        if(plugin.partyManager().getParty(player) == null) {
+            ChatUtils.chat(player, "&cError &8» &cYou are not in a party! /party create.");
+            return;
+        }
+
+        // Makes sure the player is using the command correctly.
+        if(args.length == 1) {
+            ChatUtils.chat(player, "&cUsage &8» &c/party kick [player]");
+            return;
+        }
+
+        // Gets the player's party.
+        Party party = plugin.partyManager().getParty(player);
+
+        // Makes sure they have permission.
+        if(party.getRank(player) != PartyRank.LEADER && party.getRank(player) != PartyRank.MODERATOR) {
+            ChatUtils.chat(player, "&cError &8» &cOnly party moderators can kick members!");
+            return;
+        }
+
+        // Get the player who the player is trying to promote.
+        Player target = Bukkit.getPlayer(args[1]);
+
+        // Makes sure the target is in the party.
+        if(target == null || !party.getMembers().contains(target)) {
+            ChatUtils.chat(player, "&cError &8» &cThat player is not in your party!");
+            return;
+        }
+
+        if(party.getRank(player) == party.getRank(target) || party.getRank(target) == PartyRank.LEADER) {
+            ChatUtils.chat(player, "&cError &8» &cYou cannot kick that player!!");
+            return;
+        }
+
+        party.removePlayer(target);
+        party.sendMessage("&a&lParty &8» &f" + target.getName() + " &awas kicked from the party by &f" + player.getName() + "&a.");
+        ChatUtils.chat(target, "&a&lParty &8» &aYou have been kicked from the party.");
     }
 
     /**
