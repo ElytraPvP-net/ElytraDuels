@@ -110,11 +110,11 @@ public class EntityDamageByEntityListener implements Listener {
             rangedDamage(event, player, shooter);
         }
 
-        ChatUtils.chat(shooter, game.getTeam(player).teamColor().chatColor() + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
-
-        if(event.getFinalDamage() >= player.getHealth()) {
+        if(player.getHealth() > event.getFinalDamage()) {
+            ChatUtils.chat(shooter, game.getTeam(player).teamColor().chatColor() + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
+        }
+        else {
             event.setCancelled(true);
-
             Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player, shooter), 1);
         }
     }
