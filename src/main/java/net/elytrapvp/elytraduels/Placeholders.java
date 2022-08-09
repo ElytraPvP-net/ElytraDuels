@@ -104,7 +104,7 @@ class Placeholders extends PlaceholderExpansion {
         if(identifier.contains("name_top_")) {
             ArrayList<String> temp = new ArrayList<>(plugin.leaderboardManager().getLeaderboard("global", "elo").keySet());
 
-            int place = Integer.parseInt(identifier.replaceAll("\\D+",""));
+            int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
             return temp.get(place);
         }
 
