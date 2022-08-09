@@ -52,7 +52,7 @@ public class PlayerMoveListener implements Listener {
         }
 
         if(player.getLocation().getY() < game.getKit().getVoidLevel()) {
-            if(game.getGameState() == GameState.COUNTDOWN) {
+            if(game.getGameState() == GameState.COUNTDOWN || game.getGameState() == GameState.END) {
                 player.teleport(game.getArena().spawns().get(0));
                 return;
             }
