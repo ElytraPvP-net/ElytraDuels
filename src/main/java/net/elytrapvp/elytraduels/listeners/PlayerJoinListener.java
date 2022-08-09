@@ -27,7 +27,6 @@ public class PlayerJoinListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        new LobbyScoreboard(plugin, player);
         player.teleport(LocationUtils.getSpawn(plugin));
         player.setGameMode(GameMode.ADVENTURE);
         event.setJoinMessage(ChatUtils.translate("&8[&a+&8] &a" + player.getName()));
@@ -35,6 +34,7 @@ public class PlayerJoinListener implements Listener {
         ItemUtils.giveLobbyItems(player);
 
         plugin.customPlayerManager().addPlayer(player);
+        new LobbyScoreboard(plugin, player);
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, ()-> {
             try {
