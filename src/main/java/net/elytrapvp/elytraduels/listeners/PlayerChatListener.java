@@ -19,7 +19,7 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
         partyChat(event);
-        gameChat(event);
+        //gameChat(event);
     }
 
     public void partyChat(AsyncPlayerChatEvent event) {
