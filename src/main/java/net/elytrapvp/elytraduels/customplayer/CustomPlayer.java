@@ -24,6 +24,8 @@ public class CustomPlayer {
     private final Map<String, Map<Integer, Integer>> kitEditor = new HashMap<>();
     private final Map<String, Integer> elo = new HashMap<>();
 
+    String title = "";
+
     // Settings
     private boolean showScoreboard;
     private boolean partyInvites;
@@ -117,6 +119,18 @@ public class CustomPlayer {
                     partyInvites = true;
                     duelRequests = true;
                 }
+
+                PreparedStatement statement5 = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM tournament_settings WHERE uuid = ?");
+                statement5.setString(1, uuid.toString());
+                ResultSet results5 = statement4.executeQuery();
+                if(results5.next()) {
+                    if(results5.getString(3) == null) {
+                        setTitle("");
+                    }
+                    else {
+                        title = results5.getString(3);
+                    }
+                }
             }
             catch (SQLException exception) {
                 ChatUtils.chat(Bukkit.getPlayer(uuid), "&cError &8» &cSomething went wrong loading your data! Please reconnect or your data could be lost.");
@@ -194,6 +208,14 @@ public class CustomPlayer {
      */
     public int getElo(String kit) {
         return elo.get(kit);
+    }
+
+    /**
+     * Get the player's current title.
+     * @return Current title.
+     */
+    public String getTitle() {
+        return title;
     }
 
     public Map<Integer, Integer> getKitEditor(String kit) {
@@ -371,6 +393,26 @@ public class CustomPlayer {
             try {
                 PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_settings SET showScoreboard = ? WHERE uuid = ?");
                 statement.setBoolean(1, showScoreboard);
+                statement.setString(2, uuid.toString());
+                statement.executeUpdate();
+            }
+            catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Set the player's current title.
+     * @param title New title.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE tournament_settings SET title = ? WHERE uuid = ?");
+                statement.setString(1, title);
                 statement.setString(2, uuid.toString());
                 statement.executeUpdate();
             }

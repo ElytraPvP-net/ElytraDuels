@@ -2,7 +2,9 @@ package net.elytrapvp.elytraduels;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -99,6 +101,21 @@ class Placeholders extends PlaceholderExpansion {
             }
 
             return game.getTeamManager().getTeam(player).teamColor().chatColor() + "";
+        }
+
+        if(identifier.equals("title")) {
+            CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
+
+            if(customPlayer.getTitle() == null) {
+                customPlayer.setTitle("");
+                return "";
+            }
+
+            if(customPlayer.getTitle().equals("")) {
+                return "";
+            }
+
+            return ChatUtils.translate(customPlayer.getTitle() + "&r ");
         }
 
         if(identifier.contains("elo_top_name_")) {
