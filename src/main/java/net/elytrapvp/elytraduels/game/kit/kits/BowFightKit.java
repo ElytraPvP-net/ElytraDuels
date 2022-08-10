@@ -21,6 +21,7 @@ public class BowFightKit extends Kit {
         setGameMode(GameMode.SURVIVAL);
 
         setNaturalRegen(false);
+        setDoDamage(false);
 
         ItemStack helmet = new ItemBuilder(Material.LEATHER_HELMET)
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1)
