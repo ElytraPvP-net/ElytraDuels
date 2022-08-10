@@ -31,7 +31,7 @@ import java.util.*;
  */
 public class Game {
     private final ElytraDuels plugin;
-    private final TeamManager teamManager = new TeamManager();
+    private final TeamManager teamManager;
 
     private int players;
     private GameState gameState;
@@ -60,6 +60,8 @@ public class Game {
         this.kit = kit;
         this.arena = arena;
         this.gameType = gameType;
+
+        teamManager = new TeamManager(plugin);
 
         gameState = GameState.WAITING;
         timer = new Timer(plugin);

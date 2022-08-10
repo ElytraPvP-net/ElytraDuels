@@ -1,19 +1,26 @@
 package net.elytrapvp.elytraduels.game.team;
 
+import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class TeamManager {
     private final List<Team> teams = new ArrayList<>();
     private final List<Team> aliveTeams = new ArrayList<>();
     private final List<TeamColor> availableColors = new ArrayList<>();
+    private final ElytraDuels plugin;
 
     /**
      * Creates the team manager.
      */
-    public TeamManager() {
+    public TeamManager(ElytraDuels plugin) {
+        this.plugin = plugin;
+
         availableColors.add(TeamColor.RED);
         availableColors.add(TeamColor.BLUE);
         availableColors.add(TeamColor.YELLOW);
@@ -33,11 +40,39 @@ public class TeamManager {
      * @return The new team.
      */
     public Team createTeam(List<Player> players) {
-        Team team = new Team(players, availableColors.get(0));
-        availableColors.remove(availableColors.get(0));
-        teams().add(team);
-        aliveTeams.add(team);
-        return team;
+        List<TeamColor> prefferedColors = new ArrayList<>();
+
+        for(Player player : players) {
+            CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
+
+            if(customPlayer.getTeamColor().equals("NONE")) {
+                continue;
+            }
+
+            prefferedColors.add(TeamColor.valueOf(customPlayer.getTeamColor()));
+        }
+
+        for(TeamColor teamColor : prefferedColors) {
+            if(!availableColors.contains(teamColor)) {
+                prefferedColors.remove(teamColor);
+            }
+        }
+
+        if(prefferedColors.size() != 0) {
+            Collections.shuffle(prefferedColors);
+            Team team = new Team(players, prefferedColors.get(0));
+            availableColors.remove(prefferedColors.get(0));
+            teams().add(team);
+            aliveTeams.add(team);
+            return team;
+        }
+        else {
+            Team team = new Team(players, availableColors.get(0));
+            availableColors.remove(availableColors.get(0));
+            teams().add(team);
+            aliveTeams.add(team);
+            return team;
+        }
     }
 
     /**

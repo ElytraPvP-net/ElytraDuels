@@ -24,7 +24,8 @@ public class CustomPlayer {
     private final Map<String, Map<Integer, Integer>> kitEditor = new HashMap<>();
     private final Map<String, Integer> elo = new HashMap<>();
 
-    String title = "";
+    private String title = "";
+    private String teamColor = "NONE";
 
     // Settings
     private boolean showScoreboard;
@@ -109,6 +110,7 @@ public class CustomPlayer {
                     showScoreboard = results4.getBoolean(2);
                     partyInvites = results4.getBoolean(3);
                     duelRequests = results4.getBoolean(4);
+                    teamColor = results4.getString(5);
                 }
                 else {
                     PreparedStatement statement5 = plugin.mySQL().getConnection().prepareStatement("INSERT INTO duels_settings (uuid) VALUES (?)");
@@ -208,6 +210,10 @@ public class CustomPlayer {
      */
     public int getElo(String kit) {
         return elo.get(kit);
+    }
+
+    public String getTeamColor() {
+        return teamColor;
     }
 
     /**
@@ -393,6 +399,22 @@ public class CustomPlayer {
             try {
                 PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_settings SET showScoreboard = ? WHERE uuid = ?");
                 statement.setBoolean(1, showScoreboard);
+                statement.setString(2, uuid.toString());
+                statement.executeUpdate();
+            }
+            catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        });
+    }
+
+    public void setTeamColor(String teamColor) {
+        this.teamColor = teamColor;
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("UPDATE duels_settings SET teamColor = ? WHERE uuid = ?");
+                statement.setString(1, teamColor);
                 statement.setString(2, uuid.toString());
                 statement.executeUpdate();
             }
