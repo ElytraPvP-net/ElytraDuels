@@ -144,8 +144,9 @@ public class ItemBuilder {
      * @return Item Builder.
      */
     public ItemBuilder dye(DyeColor color) {
-        Wool wool = new Wool(color);
-        item.setData(wool);
+        //Wool wool = new Wool(color);
+        //item.setData(wool);
+        item = new ItemStack(Material.WOOL, item.getAmount(), color.getWoolData());
 
         return this;
     }
