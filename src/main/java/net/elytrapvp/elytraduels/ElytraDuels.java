@@ -71,6 +71,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileHitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new VehicleExitListener(this), this);
 
         new ScoreboardUpdate(this).runTaskTimer(this, 20L, 20L);
         new AFKTimer(this).runTaskTimer(this, 5 * 20, 5 * 20);

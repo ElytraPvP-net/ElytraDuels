@@ -466,6 +466,7 @@ Maps:
       - build uhc
       - soup
       - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -529,6 +530,7 @@ Maps:
       - build uhc
       - soup
       - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -593,6 +595,7 @@ Maps:
       - build uhc
       - soup
       - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -657,6 +660,7 @@ Maps:
       - build uhc
       - soup
       - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -720,6 +724,7 @@ Maps:
       - build uhc
       - soup
       - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -784,6 +789,7 @@ Maps:
       - build uhc
       - soup
       - boxing
+      - horse
     arenas:
       '1':
         spawns:

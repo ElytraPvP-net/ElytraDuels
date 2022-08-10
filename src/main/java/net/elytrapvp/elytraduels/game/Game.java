@@ -190,6 +190,8 @@ public class Game {
         if(kit.getDoubleJumps() > 0) {
             getPlayers().forEach(player -> player.setAllowFlight(true));
         }
+
+        kit.onGameStart(this);
     }
 
     /**

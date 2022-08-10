@@ -51,6 +51,7 @@ public class Kit {
     private boolean waterKills = false;
     private String knockback = "default";
     private boolean boxingDamage = false;
+    private boolean exitVehicle = true;
 
     // Abilities
     private int doubleJumps = 0;
@@ -318,6 +319,10 @@ public class Kit {
         return doDamage;
     }
 
+    public boolean hasExitVehicle() {
+        return exitVehicle;
+    }
+
     /**
      * Get if the kit should have hunger.
      * @return Whether the kit has hunger.
@@ -380,6 +385,8 @@ public class Kit {
      */
     public void onBlockPlace(Game game, BlockPlaceEvent event) {}
 
+    public void onGameStart(Game game) {}
+
     /**
      * Set if players should be able to pick up arrows.
      * @param arrowPickup Whether arrows can be picked up.
@@ -406,6 +413,10 @@ public class Kit {
      */
     public void setDoubleJumps(int doubleJumps) {
         this.doubleJumps = doubleJumps;
+    }
+
+    public void setExitVehicle(boolean exitVehicle) {
+        this.exitVehicle = exitVehicle;
     }
 
     /**
