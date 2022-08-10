@@ -39,6 +39,8 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
+        game.getKit().onBlockBreak(game, event);
+
         // Prevent spectators from placing/breaking blocks.
         if(game.getSpectators().contains(player)) {
             event.setCancelled(true);

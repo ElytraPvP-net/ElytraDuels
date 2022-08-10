@@ -1651,3 +1651,27 @@ Maps:
             Z: 8200.5
             Pitch: 0
             Yaw: 90
+  spleef:
+    name: Spleef
+    builders:
+      - deep_dark_blue
+      - partykid4
+    kits:
+      - spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1990.5
+            Y: 66.5
+            Z: 8400.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2010.5
+            Y: 66.5
+            Z: 8400.5
+            Pitch: 0
+            Yaw: 90
