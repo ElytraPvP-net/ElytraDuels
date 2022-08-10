@@ -66,6 +66,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -464,6 +465,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -526,6 +528,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -589,6 +592,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -652,6 +656,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -714,6 +719,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -777,6 +783,7 @@ Maps:
       - blitz
       - build uhc
       - soup
+      - boxing
     arenas:
       '1':
         spawns:

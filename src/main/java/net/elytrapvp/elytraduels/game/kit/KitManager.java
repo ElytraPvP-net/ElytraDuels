@@ -36,6 +36,7 @@ public class KitManager {
         Kit shortBow = new ShortBowKit(plugin);
         Kit soup = new SoupKit(plugin);
         Kit spleef = new SpleefKit(plugin);
+        Kit boxing = new BoxingKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);
@@ -54,6 +55,7 @@ public class KitManager {
         kits.add(shortBow);
         kits.add(soup);
         kits.add(spleef);
+        kits.add(boxing);
 
         disabledKits.add(sumo);
         disabledKits.add(peal);

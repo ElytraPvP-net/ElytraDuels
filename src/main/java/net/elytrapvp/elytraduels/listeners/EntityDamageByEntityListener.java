@@ -71,6 +71,10 @@ public class EntityDamageByEntityListener implements Listener {
             return;
         }
 
+        if(game.getKit().hasBoxingDamage()) {
+            event.setDamage(0.2);
+        }
+
         // Sends an action bar to the damager with the player's health.
         if(event.getDamager() instanceof Player) {
             Player damager = (Player) event.getDamager();

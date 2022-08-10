@@ -50,6 +50,7 @@ public class Kit {
     private boolean takeDamage = true;
     private boolean waterKills = false;
     private String knockback = "default";
+    private boolean boxingDamage = false;
 
     // Abilities
     private int doubleJumps = 0;
@@ -305,6 +306,10 @@ public class Kit {
         return arrowPickup;
     }
 
+    public boolean hasBoxingDamage() {
+        return boxingDamage;
+    }
+
     /**
      * Check if players should do damage.
      * @return If players should do damage.
@@ -381,6 +386,10 @@ public class Kit {
      */
     public void setArrowPickup(boolean arrowPickup) {
         this.arrowPickup = arrowPickup;
+    }
+
+    public void setBoxingDamage(boolean boxingDamage) {
+        this.boxingDamage = boxingDamage;
     }
 
     /**
