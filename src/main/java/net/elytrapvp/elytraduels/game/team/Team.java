@@ -14,21 +14,23 @@ public class Team {
     private final List<Player> players;
     private final Set<Player> alivePlayers;
     private final Set<Player> deadPlayers = new HashSet<>();
+    private final TeamColor teamColor;
 
     /**
      * Creates a new team with specific players.
      * @param players Players to add to the team.
      */
-    public Team(List<Player> players) {
+    public Team(List<Player> players, TeamColor teamColor) {
         this.players = players;
         this.alivePlayers = new HashSet<>(players);
+        this.teamColor = teamColor;
     }
 
     /**
      * Get all alive players on the team.
      * @return All alive players.
      */
-    public Set<Player> getAlivePlayers() {
+    public Set<Player> alivePlayers() {
         return alivePlayers;
     }
 
@@ -36,15 +38,23 @@ public class Team {
      * Gets all dead players on the team.
      * @return All dead players.
      */
-    public Set<Player> getDeadPlayers() {
+    public Set<Player> deadPlayers() {
         return deadPlayers;
+    }
+
+    /**
+     * Gets the color of the team.
+     * @return TeamColor the team is assigned.
+     */
+    public TeamColor teamColor() {
+        return teamColor;
     }
 
     /**
      * Gets all players on the team, alive and dead.
      * @return All players on the team.
      */
-    public List<Player> getPlayers() {
+    public List<Player> players() {
         return players;
     }
 
@@ -63,8 +73,8 @@ public class Team {
      * @param player Player to remove.
      */
     public void removePlayer(Player player) {
-        getPlayers().remove(player);
-        getAlivePlayers().remove(player);
-        getDeadPlayers().remove(player);
+        players().remove(player);
+        alivePlayers().remove(player);
+        deadPlayers().remove(player);
     }
 }

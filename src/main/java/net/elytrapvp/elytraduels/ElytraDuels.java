@@ -54,7 +54,7 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityExplodeListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new EntityRegainhealthListener(), this);
+        Bukkit.getPluginManager().registerEvents(new EntityRegainHealthListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
@@ -71,58 +71,53 @@ public final class ElytraDuels extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileHitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ProjectileLaunchListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new TeleportFix(this), this);
+        Bukkit.getPluginManager().registerEvents(new VehicleExitListener(this), this);
 
         new ScoreboardUpdate(this).runTaskTimer(this, 20L, 20L);
         new AFKTimer(this).runTaskTimer(this, 5 * 20, 5 * 20);
 
         // Change pace of healing.
         new HealingRunnable(this).runTaskTimer(this, 20*8, 20*8);
-    }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+        // Registers placeholders.
+        new Placeholders(this).register();
     }
-
-    public ArenaManager getArenaManager() {
+    
+    public ArenaManager arenaManager() {
         return arenaManager;
     }
 
-    public CustomPlayerManager getCustomPlayerManager() {
+    public CustomPlayerManager customPlayerManager() {
         return customPlayerManager;
     }
 
-    public GameManager getGameManager() {
+    public GameManager gameManager() {
         return gameManager;
     }
 
-    public KitManager getKitManager() {
+    public KitManager kitManager() {
         return kitManager;
     }
 
-
-    public PartyManager getPartyManager() {
+    public PartyManager partyManager() {
         return partyManager;
     }
-
-    public QueueManager getQueueManager() {
+    public QueueManager queueManager() {
         return queueManager;
     }
-
-    public SettingsManager getSettingsManager() {
+    public SettingsManager settingsManager() {
         return settingsManager;
     }
 
-    public LeaderboardManager getLeaderboardManager() {
+    public LeaderboardManager leaderboardManager() {
         return leaderboardManager;
     }
-
-    public DuelManager getDuelManager() {
+    
+    public DuelManager duelManager() {
         return duelManager;
     }
-
-    public MySQL getMySQL() {
+    
+    public MySQL mySQL() {
         return mySQL;
     }
 }

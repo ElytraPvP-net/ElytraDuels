@@ -21,7 +21,7 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void onEvent(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;
@@ -33,12 +33,12 @@ public class PlayerMoveListener implements Listener {
 
             if(block.getType() == Material.STATIONARY_WATER || block2.getType() == Material.STATIONARY_WATER) {
                 if(game.getSpectators().contains(player)) {
-                    player.teleport(game.getArena().getSpawns().get(0));
+                    player.teleport(game.getArena().spawns().get(0));
                     return;
                 }
 
                 if(game.getGameState() == GameState.COUNTDOWN) {
-                    player.teleport(game.getArena().getSpawns().get(0));
+                    player.teleport(game.getArena().spawns().get(0));
                     return;
                 }
 
@@ -52,20 +52,20 @@ public class PlayerMoveListener implements Listener {
         }
 
         if(player.getLocation().getY() < game.getKit().getVoidLevel()) {
-            if(game.getGameState() == GameState.COUNTDOWN) {
-                player.teleport(game.getArena().getSpawns().get(0));
+            if(game.getGameState() == GameState.COUNTDOWN || game.getGameState() == GameState.END) {
+                player.teleport(game.getArena().spawns().get(0));
                 return;
             }
 
             if(game.getSpectators().contains(player)) {
-                player.teleport(game.getArena().getSpawns().get(0));
+                player.teleport(game.getArena().spawns().get(0));
                 player.setAllowFlight(true);
                 player.setFlying(true);
                 return;
             }
 
             game.playerKilled(player);
-            player.teleport(game.getArena().getSpawns().get(0));
+            player.teleport(game.getArena().spawns().get(0));
             player.setAllowFlight(true);
             player.setFlying(true);
         }

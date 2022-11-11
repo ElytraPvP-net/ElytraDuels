@@ -14,12 +14,12 @@ public class SpectateGUI extends CustomGUI {
     public SpectateGUI(ElytraDuels plugin) {
         super(54, "Current Matches");
 
-        for(int i = 0; i < plugin.getGameManager().getActiveGames().size(); i++) {
-            Game game = plugin.getGameManager().getActiveGames().get(i);
+        for(int i = 0; i < plugin.gameManager().activeGames().size(); i++) {
+            Game game = plugin.gameManager().activeGames().get(i);
 
 
             ItemBuilder item = new ItemBuilder(game.getKit().getIconMaterial())
-                    .setDisplayName("&a" + game.getKit().getName() + " &f(" + game.getArena().getMap().getName() + ")")
+                    .setDisplayName("&a" + game.getKit().getName() + " &f(" + game.getArena().map().name() + ")")
                     .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
             for(Player p : game.getAlivePlayers()) {

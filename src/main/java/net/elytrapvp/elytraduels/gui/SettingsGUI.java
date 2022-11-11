@@ -5,6 +5,7 @@ import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.gui.CustomGUI;
 import net.elytrapvp.elytraduels.utils.item.ItemBuilder;
+import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,9 +27,17 @@ public class SettingsGUI extends CustomGUI {
             setItem(i, filler);
         }
 
-        setItem(40, new ItemBuilder(Material.ANVIL).setDisplayName("&a&lKit Editor").build(), (p, a) -> new KitEditorGUI(plugin).open(p));
+        if(player.hasPermission("duels.teamcolors")) {
+            setItem(38, new ItemBuilder(Material.LEATHER_CHESTPLATE).dye(Color.RED).setDisplayName("&a&lTeam Color Selector").build(), (p, a) -> new TeamColorGUI(plugin).open(p));
+            setItem(40, new ItemBuilder(Material.ANVIL).setDisplayName("&a&lKit Editor").build(), (p, a) -> new KitEditorGUI(plugin, player).open(p));
+            setItem(42, new ItemBuilder(Material.NAME_TAG).setDisplayName("&a&lTitles").build(), (p, a) -> new TitleGUI(plugin, p).open(p));
+        }
+        else {
+            setItem(39, new ItemBuilder(Material.ANVIL).setDisplayName("&a&lKit Editor").build(), (p, a) -> new KitEditorGUI(plugin, player).open(p));
+            setItem(41, new ItemBuilder(Material.NAME_TAG).setDisplayName("&a&lTitles").build(), (p, a) -> new TitleGUI(plugin, p).open(p));
+        }
 
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
         ItemBuilder scoreboard = new ItemBuilder(Material.SIGN).setDisplayName("&a&lShow Scoreboard");
         if(customPlayer.getShowScoreboard()) {
             scoreboard.addLore("&aEnabled");

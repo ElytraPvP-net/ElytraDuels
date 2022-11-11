@@ -24,7 +24,7 @@ public class KitEditorGUI extends CustomGUI {
     private final ElytraDuels plugin;
     private String kit = "none";
 
-    public KitEditorGUI(ElytraDuels plugin) {
+    public KitEditorGUI(ElytraDuels plugin, Player player) {
         super(54, "Kit Editor");
         this.plugin = plugin;
 
@@ -46,7 +46,7 @@ public class KitEditorGUI extends CustomGUI {
         });
 
         int i = 0;
-        for(Kit kit : plugin.getKitManager().getKits()) {
+        for(Kit kit : plugin.kitManager().kits()) {
             setItem(i + 9, new ItemBuilder(kit.getIconMaterial())
                     .setDisplayName("&a&l" + kit.getName())
                     .addFlag(ItemFlag.HIDE_ATTRIBUTES)
@@ -57,20 +57,34 @@ public class KitEditorGUI extends CustomGUI {
                     });
             i++;
         }
+
+        if(player.hasPermission("duels.disabled")) {
+            for(Kit kit : plugin.kitManager().disabledKits()) {
+                setItem(i + 9, new ItemBuilder(kit.getIconMaterial())
+                                .setDisplayName("&a&l" + kit.getName())
+                                .addFlag(ItemFlag.HIDE_ATTRIBUTES)
+                                .addLore("").addLore("&aClick to edit!").build(),
+                        (p, a) -> {
+                            p.closeInventory();
+                            new KitEditorGUI(plugin, p, kit.getName()).open(p);
+                        });
+                i++;
+            }
+        }
     }
 
     public KitEditorGUI(ElytraDuels plugin, Player player, String kit) {
         super(54, "Kit Editor - " + kit);
         this.plugin = plugin;
         this.kit = kit;
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
 
         ItemStack back = new SkullBuilder("edf5c2f893bd3f89ca40703ded3e42dd0fbdba6f6768c8789afdff1fa78bf6")
                 .setDisplayName("&cBack")
                 .build();
         setItem(0, back, (p, a) -> {
             p.closeInventory();
-            new KitEditorGUI(plugin).open(p);
+            new KitEditorGUI(plugin, p).open(p);
         });
 
         ItemStack save = new SkullBuilder("4312ca4632def5ffaf2eb0d9d7cc7b55a50c4e3920d90372aab140781f5dfbc4")
@@ -78,7 +92,7 @@ public class KitEditorGUI extends CustomGUI {
                 .build();
         setItem(48, save, (p,a ) -> {
             ItemStack[] items = getInventory().getContents();
-            Kit kit1 = plugin.getKitManager().getKit(this.kit);
+            Kit kit1 = plugin.kitManager().getKit(this.kit);
             customPlayer.getKitEditor(kit1.getName()).clear();
 
             for(int i = 9; i < 45; i++) {
@@ -125,10 +139,10 @@ public class KitEditorGUI extends CustomGUI {
 
         for(int slot : customPlayer.getKitEditor(kit).keySet()) {
             slotsUsed.add(slot);
-            updatedKit.put(slot, plugin.getKitManager().getKit(kit).getItems().get(customPlayer.getKitEditor(kit).get(slot)));
+            updatedKit.put(slot, plugin.kitManager().getKit(kit).getItems().get(customPlayer.getKitEditor(kit).get(slot)));
         }
 
-        for(int slot : plugin.getKitManager().getKit(kit).getItems().keySet()) {
+        for(int slot : plugin.kitManager().getKit(kit).getItems().keySet()) {
             if(slotsUsed.contains(slot)) {
                 continue;
             }
@@ -137,7 +151,7 @@ public class KitEditorGUI extends CustomGUI {
                 continue;
             }
 
-            ItemStack item =  plugin.getKitManager().getKit(kit).getItems().get(slot);
+            ItemStack item =  plugin.kitManager().getKit(kit).getItems().get(slot);
 
             if(updatedKit.containsValue(item)) {
                 continue;
@@ -194,8 +208,8 @@ public class KitEditorGUI extends CustomGUI {
         }
 
         ItemStack[] items = getInventory().getContents();
-        Kit kit = plugin.getKitManager().getKit(this.kit);
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        Kit kit = plugin.kitManager().getKit(this.kit);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
         customPlayer.getKitEditor(kit.getName()).clear();
 
         for(int i = 9; i < 45; i++) {

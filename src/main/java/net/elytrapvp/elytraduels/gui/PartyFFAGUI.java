@@ -18,13 +18,13 @@ import java.util.List;
 
 public class PartyFFAGUI extends CustomGUI {
 
-    public PartyFFAGUI(ElytraDuels plugin) {
-        super(18, "Party FFA");
+    public PartyFFAGUI(ElytraDuels plugin, Player opener) {
+        super(36, "Party FFA");
 
         int i = 0;
-        for(Kit kit : plugin.getKitManager().getKits()) {
-            int playing = plugin.getQueueManager().getPlaying(kit);
-            int queue = plugin.getQueueManager().getQueueing(kit, GameType.UNRANKED);
+        for(Kit kit : plugin.kitManager().kits()) {
+            int playing = plugin.queueManager().getPlaying(kit);
+            int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
 
             int count = playing + queue;
             if(count == 0) count = 1;
@@ -37,15 +37,15 @@ public class PartyFFAGUI extends CustomGUI {
             setItem(i, item, (p, a) -> {
                 p.closeInventory();
 
-                Party party = plugin.getPartyManager().getParty(p);
-                if(party.getPlayers().size() == 1) {
+                Party party = plugin.partyManager().getParty(p);
+                if(party.getMembers().size() == 1) {
                     ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
                     return;
                 }
 
-                Game game = plugin.getGameManager().createGame(kit, GameType.FFA);
+                Game game = plugin.gameManager().createGame(kit, GameType.FFA);
 
-                List<Player> players = new ArrayList<>(party.getPlayers());
+                List<Player> players = new ArrayList<>(party.getMembers());
                 Collections.shuffle(players);
 
                 for(Player player : players) {
@@ -54,6 +54,42 @@ public class PartyFFAGUI extends CustomGUI {
                 game.start();
             });
             i++;
+        }
+
+        if(opener.hasPermission("duels.disabled")) {
+            for(Kit kit : plugin.kitManager().disabledKits()) {
+                int playing = plugin.queueManager().getPlaying(kit);
+                int queue = plugin.queueManager().getQueueing(kit, GameType.UNRANKED);
+
+                int count = playing + queue;
+                if(count == 0) count = 1;
+
+                ItemStack item = new ItemBuilder(kit.getIconMaterial(), count)
+                        .setDisplayName("&a" + kit.getName())
+                        .addFlag(ItemFlag.HIDE_ATTRIBUTES)
+                        .build();
+
+                setItem(i, item, (p, a) -> {
+                    p.closeInventory();
+
+                    Party party = plugin.partyManager().getParty(p);
+                    if(party.getMembers().size() == 1) {
+                        ChatUtils.chat(p, "&cError &8» &cYou cannot duel yourself!");
+                        return;
+                    }
+
+                    Game game = plugin.gameManager().createGame(kit, GameType.FFA);
+
+                    List<Player> players = new ArrayList<>(party.getMembers());
+                    Collections.shuffle(players);
+
+                    for(Player player : players) {
+                        game.addPlayer(player);
+                    }
+                    game.start();
+                });
+                i++;
+            }
         }
     }
 

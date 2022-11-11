@@ -21,13 +21,13 @@ public class RankedGUI extends CustomGUI {
         super(45, "Kits");
         filler();
 
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
 
         int[] iconSlots = new int[]{10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34,21,23};
         int i = 0;
-        for(Kit kit : plugin.getKitManager().getRankedKits()) {
+        for(Kit kit : plugin.kitManager().getRankedKits()) {
 
-            int playing = plugin.getQueueManager().getPlaying(kit) + plugin.getQueueManager().getQueueing(kit, GameType.RANKED);
+            int playing = plugin.queueManager().getPlaying(kit) + plugin.queueManager().getQueueing(kit, GameType.RANKED);
             if(playing == 0) {
                 playing = 1;
             }
@@ -44,14 +44,14 @@ public class RankedGUI extends CustomGUI {
 
             ItemBuilder item = new ItemBuilder(kit.getIconMaterial(), playing)
                     .setDisplayName("&a&l" + kit.getName())
-                    .addLore("&aPlaying: &f" + plugin.getQueueManager().getPlaying(kit))
-                    .addLore("&aQueuing: &f" + plugin.getQueueManager().getQueueing(kit, GameType.RANKED))
+                    .addLore("&aPlaying: &f" + plugin.queueManager().getPlaying(kit))
+                    .addLore("&aQueuing: &f" + plugin.queueManager().getQueueing(kit, GameType.RANKED))
                     .addLore("")
                     .addLore("&aYour Elo: &f" + elo)
                     .addLore("")
                     .addLore("&aLeaderboard:");
 
-            Map<String, Integer> lb = plugin.getLeaderboardManager().getLeaderboard(kit.getName().toLowerCase(), "elo");
+            Map<String, Integer> lb = plugin.leaderboardManager().getLeaderboard(kit.getName().toLowerCase(), "elo");
 
             int place = 0;
             for(String lbPlayer : lb.keySet()) {
@@ -66,7 +66,7 @@ public class RankedGUI extends CustomGUI {
 
             setItem(iconSlots[i], item.build(), (pl, a) -> {
                 pl.closeInventory();
-                plugin.getQueueManager().addPlayer(pl, kit, GameType.RANKED);
+                plugin.queueManager().addPlayer(pl, kit, GameType.RANKED);
             });
             i++;
         }

@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SettingsCMD extends AbstractCommand {
-    private ElytraDuels plugin;
+    private final ElytraDuels plugin;
 
     public SettingsCMD(ElytraDuels plugin) {
         super("settings", "", false);

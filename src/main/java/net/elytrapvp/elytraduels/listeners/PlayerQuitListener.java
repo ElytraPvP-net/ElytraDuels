@@ -22,22 +22,22 @@ public class PlayerQuitListener implements Listener {
         event.setQuitMessage(ChatUtils.translate("&8[&c-&8] &c" + event.getPlayer().getName()));
 
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game != null) {
             game.playerDisconnect(player);
         }
 
-        plugin.getQueueManager().removePlayer(player);
+        plugin.queueManager().removePlayer(player);
         AFKTimer.counter.remove(player.getUniqueId());
 
-        Party party = plugin.getPartyManager().getParty(player);
+        Party party = plugin.partyManager().getParty(player);
         if(party != null) {
             party.removePlayer(player);
-            party.broadcast("&aParty &8» &f" + player.getName() + " &adisconnected.");
+            party.sendMessage("&aParty &8» &f" + player.getName() + " &adisconnected.");
         }
 
-        plugin.getCustomPlayerManager().removePlayer(player);
-        plugin.getDuelManager().getDuelRequests().remove(player);
+        plugin.customPlayerManager().removePlayer(player);
+        plugin.duelManager().duelRequests().remove(player);
     }
 }

@@ -1,5 +1,5 @@
 name: ElytraDuels
-version: ${project.version}
+version: 2.0
 main: net.elytrapvp.elytraduels.ElytraDuels
 prefix: Duels
 authors: [ ElytraPvP ]
@@ -25,6 +25,10 @@ commands:
     usage: /partychat
     description: Party chat command.
     aliases: [pc]
+  partylist:
+    usage: /partylist
+    description: Party list command.
+    aliases: [pl]
   matches:
     usage: /matches
     description: View match history.

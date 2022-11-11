@@ -30,7 +30,11 @@ public class QueueManager {
         this.plugin = plugin;
         playing = 0;
 
-        for(Kit kit : plugin.getKitManager().getKits()) {
+        for(Kit kit : plugin.kitManager().kits()) {
+            playingKit.put(kit, 0);
+        }
+
+        for(Kit kit : plugin.kitManager().disabledKits()) {
             playingKit.put(kit, 0);
         }
     }
@@ -67,7 +71,7 @@ public class QueueManager {
         // If someone else is queueing that kit and GameType.
         else {
             removePlayer(other);
-            Game game = plugin.getGameManager().createGame(kit, gameType);
+            Game game = plugin.gameManager().createGame(kit, gameType);
             game.addPlayer(player);
             game.addPlayer(other);
             game.start();

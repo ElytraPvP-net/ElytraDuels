@@ -38,7 +38,8 @@ public class DuelManager {
      * Gets all current duel requests.
      * @return All current duel requests.
      */
-    public Map<Player, Player> getDuelRequests() {
+    @Deprecated
+    public Map<Player, Player> duelRequests() {
         return duelRequests;
     }
 

@@ -19,7 +19,7 @@ public class BlockPlaceListener implements Listener {
     @EventHandler
     public void onEvent(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;

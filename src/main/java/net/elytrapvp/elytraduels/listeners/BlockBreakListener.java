@@ -32,12 +32,14 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             event.setCancelled(true);
             return;
         }
+
+        game.getKit().onBlockBreak(game, event);
 
         // Prevent spectators from placing/breaking blocks.
         if(game.getSpectators().contains(player)) {

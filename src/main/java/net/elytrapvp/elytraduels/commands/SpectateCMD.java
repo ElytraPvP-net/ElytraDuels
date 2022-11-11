@@ -19,7 +19,7 @@ public class SpectateCMD extends AbstractCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(args.length != 1) {
-            if(sender.hasPermission("specate.gui")) {
+            if(sender.hasPermission("spectate.gui")) {
                 new SpectateGUI(plugin).open((Player) sender);
                 return;
             }
@@ -34,7 +34,7 @@ public class SpectateCMD extends AbstractCommand {
             return;
         }
 
-        Game game = plugin.getGameManager().getGame(target);
+        Game game = plugin.gameManager().getGame(target);
         if(game == null) {
             ChatUtils.chat(sender, "&cError &8» &cThat player is not in a game.");
             return;
@@ -42,7 +42,7 @@ public class SpectateCMD extends AbstractCommand {
 
         Player player = (Player) sender;
 
-        if(plugin.getGameManager().getGame(player) != null) {
+        if(plugin.gameManager().getGame(player) != null) {
             ChatUtils.chat(sender, "&cError &8» &cYou are already spectating someone!");
             return;
         }

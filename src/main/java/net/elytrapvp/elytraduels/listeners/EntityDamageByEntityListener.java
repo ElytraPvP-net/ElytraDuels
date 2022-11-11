@@ -2,11 +2,15 @@ package net.elytrapvp.elytraduels.listeners;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
+import net.elytrapvp.elytraduels.utils.ActionBarUtils;
 import net.elytrapvp.elytraduels.utils.MathUtils;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.md_5.bungee.api.ChatColor;
+import net.minecraft.server.v1_8_R3.ChatComponentText;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +29,7 @@ public class EntityDamageByEntityListener implements Listener {
         // Cancel and return if damage is a spectator.
         if(event.getDamager() instanceof Player) {
             Player player = (Player) event.getDamager();
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
             if(game != null) {
                 if(game.getSpectators().contains(player)) {
                     event.setCancelled(true);
@@ -48,7 +52,7 @@ public class EntityDamageByEntityListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         // Exit if player is not in a game.
         if(game == null) {
@@ -65,6 +69,25 @@ public class EntityDamageByEntityListener implements Listener {
         if(!game.getKit().hasDoDamage()) {
             event.setDamage(0);
             return;
+        }
+
+        if(game.getKit().hasBoxingDamage()) {
+            event.setDamage(0.2);
+        }
+
+        // Sends an action bar to the damager with the player's health.
+        if(event.getDamager() instanceof Player) {
+            Player damager = (Player) event.getDamager();
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                if(event.getFinalDamage() >= player.getHealth()) {
+                    ActionBarUtils.sendActionText(damager, "&a" + player.getName() + "'s Health: &c0%");
+                    game.playerKilled(player, damager);
+                }
+                else {
+                    ActionBarUtils.sendActionText(damager, game.getTeam(player).teamColor().chatColor() + player.getName() + "&a's Health: " + ChatUtils.getFormattedHealthPercent(player));
+                }
+            }, 1);
         }
 
         // Makes sure the damager is an arrow before continuing.
@@ -91,12 +114,12 @@ public class EntityDamageByEntityListener implements Listener {
             rangedDamage(event, player, shooter);
         }
 
-        ChatUtils.chat(shooter, "&f" + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
-
-        if(event.getFinalDamage() >= player.getHealth()) {
+        if(player.getHealth() > event.getFinalDamage()) {
+            ChatUtils.chat(shooter, game.getTeam(player).teamColor().chatColor() + player.getName() + " &ahas " + getHealthPercent((player.getHealth() - event.getFinalDamage()))  + " &aremaining.");
+        }
+        else {
             event.setCancelled(true);
-
-            Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player), 1);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player, shooter), 1);
         }
     }
 

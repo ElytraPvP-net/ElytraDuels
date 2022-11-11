@@ -27,6 +27,6 @@ public class PingCMD extends AbstractCommand {
             return;
         }
 
-        ChatUtils.chat(sender, "&a" + target.getName() + "\'s ping is " + ChatUtils.getFormattedPing(target) + "&a.");
+        ChatUtils.chat(sender, "&a" + target.getName() + "'s ping is " + ChatUtils.getFormattedPing(target) + "&a.");
     }
 }

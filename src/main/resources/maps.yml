@@ -65,6 +65,8 @@ Maps:
       - op
       - blitz
       - build uhc
+      - soup
+      - boxing
     arenas:
       '1':
         spawns:
@@ -462,6 +464,9 @@ Maps:
       - op
       - blitz
       - build uhc
+      - soup
+      - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -523,6 +528,9 @@ Maps:
       - classic
       - blitz
       - build uhc
+      - soup
+      - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -585,6 +593,9 @@ Maps:
       - op
       - blitz
       - build uhc
+      - soup
+      - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -647,6 +658,9 @@ Maps:
       - op
       - blitz
       - build uhc
+      - soup
+      - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -708,6 +722,9 @@ Maps:
       - op
       - blitz
       - build uhc
+      - soup
+      - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -770,6 +787,9 @@ Maps:
       - op
       - blitz
       - build uhc
+      - soup
+      - boxing
+      - horse
     arenas:
       '1':
         spawns:
@@ -1642,5 +1662,29 @@ Maps:
             X: 2017.5
             Y: 66.5
             Z: 8200.5
+            Pitch: 0
+            Yaw: 90
+  spleef:
+    name: Spleef
+    builders:
+      - deep_dark_blue
+      - partykid4
+    kits:
+      - spleef
+    arenas:
+      '1':
+        spawns:
+          '1':
+            World: world
+            X: 1990.5
+            Y: 66.5
+            Z: 8400.5
+            Pitch: 0
+            Yaw: -90
+          '2':
+            World: world
+            X: 2010.5
+            Y: 66.5
+            Z: 8400.5
             Pitch: 0
             Yaw: 90

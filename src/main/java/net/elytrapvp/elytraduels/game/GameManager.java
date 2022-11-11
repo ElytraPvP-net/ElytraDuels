@@ -25,8 +25,8 @@ public class GameManager {
      * @return Game that was created.
      */
     public Game createGame(Kit kit, GameType gameType) {
-        Game game = new Game(plugin, kit, plugin.getArenaManager().getOpenArena(kit), gameType);
-        getActiveGames().add(game);
+        Game game = new Game(plugin, kit, plugin.arenaManager().getOpenArena(kit), gameType);
+        activeGames().add(game);
         return game;
     }
 
@@ -35,14 +35,14 @@ public class GameManager {
      * @param game Game to destroy.
      */
     public void destroyGame(Game game) {
-        getActiveGames().remove(game);
+        activeGames().remove(game);
     }
 
     /**
      * Get all currently active games.
      * @return All active games.
      */
-    public List<Game> getActiveGames() {
+    public List<Game> activeGames() {
         return activeGames;
     }
 
@@ -53,7 +53,7 @@ public class GameManager {
      * @return Game player is currently in.
      */
     public Game getGame(Player player) {
-        for(Game game : getActiveGames()) {
+        for(Game game : activeGames()) {
             if(game.getPlayers().contains(player)) {
                 return game;
             }

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 /**
  * Represents a scoreborad that is easy
- * to create an customize.
+ * to create and customize.
  */
 public abstract class CustomScoreboard {
     private static final HashMap<UUID, CustomScoreboard> players = new HashMap<>();

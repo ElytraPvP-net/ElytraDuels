@@ -4,7 +4,6 @@ import net.elytrapvp.elytraduels.game.team.Team;
 import net.elytrapvp.elytraduels.utils.chat.ChatUtils;
 import net.elytrapvp.elytraduels.utils.scoreboard.CustomScoreboard;
 import net.elytrapvp.elytraduels.utils.scoreboard.ScoreHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class GameScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(player);
         }
 
-        helper.setTitle("&a&lDuels &b(Season 1)");
+        helper.setTitle("&a&lDuels");
 
         if(game.getKit().hasAbilities()) {
             helper.setSlot(13, "&7&m------------------");
@@ -41,7 +40,6 @@ public class GameScoreboard extends CustomScoreboard {
             helper.setSlot(6, "  &aDouble Jump: &f" + game.getDoubleJumps(player) + "/" + game.getKit().getDoubleJumps());
             helper.setSlot(5, "  &aTriple Shot: &f" + game.getTripleShots(player) + "/" + game.getKit().getTripleShots());
             helper.setSlot(4, "  &aRepulsor: &f" + game.getRepulsors(player) + "/" + game.getKit().getRepulsors());
-            //helper.setSlot(4, "  &aRepulsor: &c0&f/&c0");
             helper.setSlot(3, "");
             helper.setSlot(2, "&7&m------------------");
             helper.setSlot(1, "&aplay.elytrapvp.net");
@@ -54,7 +52,7 @@ public class GameScoreboard extends CustomScoreboard {
                 helper.setSlot(8, "&aOpponents");
 
                 int i = 4;
-                for(Team team : game.getTeamManager().getTeams()) {
+                for(Team team : game.getTeamManager().teams()) {
                     if(team.equals(game.getTeam(player))) {
                         continue;
                     }
@@ -63,7 +61,7 @@ public class GameScoreboard extends CustomScoreboard {
                         break;
                     }
 
-                    for(Player opponent : team.getAlivePlayers()) {
+                    for(Player opponent : team.alivePlayers()) {
                         String opponentName = opponent.getName();
 
                         String line = "  &f" + opponentName + "" + ChatUtils.getFormattedHealthPercent(opponent);
@@ -91,7 +89,7 @@ public class GameScoreboard extends CustomScoreboard {
                 helper.setSlot(9, " ");
                 helper.setSlot(8, "&aOpponent");
 
-                List<Player> opponents = game.getOpposingTeam(game.getTeam(player)).getPlayers();
+                List<Player> opponents = game.getOpposingTeam(game.getTeam(player)).players();
 
                 for(int i = 0; i < opponents.size(); i++) {
                     Player o = opponents.get(i);
@@ -99,7 +97,7 @@ public class GameScoreboard extends CustomScoreboard {
 
                     helper.setSlot(4 + (i * 2) + 1, "  &f" + opponentName);
 
-                    if(game.getTeam(player).getDeadPlayers().contains(player)) {
+                    if(game.getTeam(player).deadPlayers().contains(player)) {
                         helper.setSlot(4 + (i * 2), "  " + "&c0%" + " &7- " + ChatUtils.getFormattedPing(o));
                     }
                     else {

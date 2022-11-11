@@ -27,18 +27,18 @@ public class PlayerJoinListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        new LobbyScoreboard(plugin, player);
         player.teleport(LocationUtils.getSpawn(plugin));
         player.setGameMode(GameMode.ADVENTURE);
         event.setJoinMessage(ChatUtils.translate("&8[&a+&8] &a" + player.getName()));
 
         ItemUtils.giveLobbyItems(player);
 
-        plugin.getCustomPlayerManager().addPlayer(player);
+        plugin.customPlayerManager().addPlayer(player);
+        new LobbyScoreboard(plugin, player);
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, ()-> {
             try {
-                PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("SELECT * FROM duels_notifications WHERE uuid = ? LIMIT 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement = plugin.mySQL().getConnection().prepareStatement("SELECT * FROM duels_notifications WHERE uuid = ? LIMIT 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 statement.setString(1, player.getUniqueId().toString());
                 ResultSet results = statement.executeQuery();
 

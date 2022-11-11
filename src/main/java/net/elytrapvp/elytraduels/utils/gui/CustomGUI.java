@@ -18,12 +18,12 @@ import java.util.UUID;
  * interactive GUIs.
  */
 public abstract class CustomGUI {
-    private static Map<UUID, CustomGUI> inventories = new HashMap<>();
-    private static Map<UUID, UUID> openInventories = new HashMap<>();
+    private static final Map<UUID, CustomGUI> inventories = new HashMap<>();
+    private static final Map<UUID, UUID> openInventories = new HashMap<>();
 
-    private Inventory inventory;
-    private UUID uuid;
-    private Map<Integer, ClickAction> actions;
+    private final Inventory inventory;
+    private final UUID uuid;
+    private final Map<Integer, ClickAction> actions;
 
     /**
      * Creates a new custom GUI
@@ -58,11 +58,6 @@ public abstract class CustomGUI {
         return inventory;
     }
 
-    @Deprecated
-    public UUID getUuid() {
-        return getUUID();
-    }
-
     public UUID getUUID() {
         return uuid;
     }
@@ -91,7 +86,7 @@ public abstract class CustomGUI {
      */
     public void open(Player player) {
         player.openInventory(inventory);
-        openInventories.put(player.getUniqueId(), getUuid());
+        openInventories.put(player.getUniqueId(), getUUID());
     }
 
     public void onClose(Player p) {}

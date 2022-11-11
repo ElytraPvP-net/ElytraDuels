@@ -1,7 +1,5 @@
 package net.elytrapvp.elytraduels.listeners;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameState;
@@ -18,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -36,7 +35,7 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         // Prevent using items during game countdown.
         if(game != null && game.getGameState() != GameState.RUNNING) {
@@ -95,6 +94,22 @@ public class PlayerInteractListener implements Listener {
         if(event.getItem() == null)
             return;
 
+        if(event.getItem().getType() == Material.MUSHROOM_SOUP) {
+            event.setCancelled(true);
+            player.getInventory().setItem(player.getInventory().getHeldItemSlot(), new ItemStack(Material.BOWL));
+
+            double health = player.getHealth();
+            health += 5;
+
+            if(health > player.getMaxHealth()) {
+                health = player.getMaxHealth();
+            }
+
+            player.setHealth(health);
+            player.playSound(player.getLocation(), Sound.DRINK,1 ,1);
+            return;
+        }
+
         // Exit if item meta is null.
         if(event.getItem().getItemMeta() == null)
             return;
@@ -146,7 +161,7 @@ public class PlayerInteractListener implements Listener {
                 break;
 
             case "Leave Queue":
-                plugin.getQueueManager().removePlayer(player);
+                plugin.queueManager().removePlayer(player);
                 ItemUtils.giveLobbyItems(player);
                 new LobbyScoreboard(plugin, player);
                 event.setCancelled(true);
@@ -167,27 +182,12 @@ public class PlayerInteractListener implements Listener {
 
             case "Create a party":
                 event.setCancelled(true);
-                plugin.getPartyManager().createParty(player);
-                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                player.chat("/party create");
                 break;
 
             case "Leave Party":
                 event.setCancelled(true);
-
-                Party party = plugin.getPartyManager().getParty(player);
-                if(party == null) {
-                    return;
-                }
-
-                if(party.getLeader().equals(player)) {
-                    party.disband();
-                }
-                else {
-                    party.removePlayer(player);
-                }
-
-                ItemUtils.giveLobbyItems(player);
-
+                player.chat("/party leave");
                 break;
 
             case "Duel another party":
@@ -196,12 +196,12 @@ public class PlayerInteractListener implements Listener {
                 break;
 
             case "Duel Party Members":
-                new PartyDuelGUI(plugin).open(player);
+                new PartyDuelGUI(plugin, player).open(player);
                 event.setCancelled(true);
                 break;
 
             case "FFA Duel":
-                new PartyFFAGUI(plugin).open(player);
+                new PartyFFAGUI(plugin, player).open(player);
                 event.setCancelled(true);
                 break;
 
@@ -209,12 +209,12 @@ public class PlayerInteractListener implements Listener {
             case "Spectate Current Game":
                 event.setCancelled(true);
 
-                Party party1 = plugin.getPartyManager().getParty(player);
+                Party party1 = plugin.partyManager().getParty(player);
                 if(party1 == null) {
                     return;
                 }
 
-                Game game1 = plugin.getGameManager().getGame(party1.getLeader());
+                Game game1 = plugin.gameManager().getGame(party1.getLeader());
                 if(game1 == null) {
                     ChatUtils.chat(player, "&cError &8» &cYour party is not currently in a game.");
                     return;

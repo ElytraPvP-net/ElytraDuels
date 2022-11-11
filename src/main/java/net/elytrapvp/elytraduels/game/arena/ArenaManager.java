@@ -17,7 +17,7 @@ public class ArenaManager {
 
     public ArenaManager(ElytraDuels plugin) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            FileConfiguration maps = plugin.getSettingsManager().getMaps();
+            FileConfiguration maps = plugin.settingsManager().getMaps();
             ConfigurationSection section = maps.getConfigurationSection("Maps");
 
             for(String map : section.getKeys(false)) {
@@ -32,7 +32,7 @@ public class ArenaManager {
      * @param arena Arena to add.
      */
     public void addArena(Arena arena) {
-        getOpenArenas().add(arena);
+        openArenas().add(arena);
     }
 
     /**
@@ -43,8 +43,8 @@ public class ArenaManager {
     public Arena getOpenArena(Kit kit) {
         List<Arena> open = new ArrayList<>();
 
-        for(Arena arena : getOpenArenas()) {
-            if(arena.getMap().getKits().contains(kit)) {
+        for(Arena arena : openArenas()) {
+            if(arena.map().kits().contains(kit)) {
                 open.add(arena);
             }
         }
@@ -61,7 +61,7 @@ public class ArenaManager {
      * Get all arenas that are currently open.
      * @return All currently open arenas.
      */
-    public Set<Arena> getOpenArenas() {
+    public Set<Arena> openArenas() {
         return openArenas;
     }
 
@@ -70,6 +70,6 @@ public class ArenaManager {
      * @param arena Arena to remove.
      */
     public void removeArena(Arena arena) {
-        getOpenArenas().remove(arena);
+        openArenas().remove(arena);
     }
 }

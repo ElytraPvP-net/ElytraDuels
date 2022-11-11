@@ -9,6 +9,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -49,6 +50,8 @@ public class Kit {
     private boolean takeDamage = true;
     private boolean waterKills = false;
     private String knockback = "default";
+    private boolean boxingDamage = false;
+    private boolean exitVehicle = true;
 
     // Abilities
     private int doubleJumps = 0;
@@ -86,7 +89,7 @@ public class Kit {
      * Apply a kit to a player.
      * @param player Player to apply kit to.
      */
-    public void apply(Player player) {
+    public void apply(Player player, Game game) {
         // Clear inventory.
         player.closeInventory();
         player.getInventory().clear();
@@ -98,7 +101,7 @@ public class Kit {
         // Clear potion effects.
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
 
-        CustomPlayer customPlayer = plugin.getCustomPlayerManager().getPlayer(player);
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(player);
 
         Map<Integer, ItemStack> updatedKit = new HashMap<>();
         Set<Integer> slotsUsed = new HashSet<>();
@@ -136,7 +139,15 @@ public class Kit {
                 item.setItemMeta(meta);
             }
 
-            player.getInventory().setItem(i, item);
+            // Dyes the item if it can be dyed.
+            ItemBuilder builder = new ItemBuilder(item)
+                    .dye(game.getTeam(player).teamColor().leatherColor());
+
+            if(item.getType() == Material.WOOL) {
+                builder.dye(game.getTeam(player).teamColor().woolColor());
+            }
+
+            player.getInventory().setItem(i, builder.build());
         }
 
         // Set game mode/health/hunger/saturation.
@@ -177,7 +188,7 @@ public class Kit {
 
     /**
      * Get the material for the kit icon.
-     * @return
+     * @return The material of the kit's icon.
      */
     public Material getIconMaterial() {
         return iconMaterial;
@@ -187,7 +198,16 @@ public class Kit {
      * Get the items in the kit.
      * @return Items in the kit.
      */
+    @Deprecated
     public Map<Integer, ItemStack> getItems() {
+        return items;
+    }
+
+    /**
+     * Get the items in the kit.
+     * @return Items in the kit.
+     */
+    public Map<Integer, ItemStack> items() {
         return items;
     }
 
@@ -217,7 +237,7 @@ public class Kit {
 
     /**
      * Get the number of repulsors used in the kit.
-     * @return
+     * @return Amount of repulsors the players should start with.
      */
     public int getRepulsors() {
         return repulsors;
@@ -273,7 +293,7 @@ public class Kit {
 
     /**
      * Get whether the kit has any abilities.
-     * @return Whether or not the kit has abilities.
+     * @return Whether the kit has abilities.
      */
     public boolean hasAbilities() {
         return doubleJumps > 0 || repulsors > 0 || tripleShots > 0;
@@ -281,10 +301,14 @@ public class Kit {
 
     /**
      * Get whether the kit has arrow pickup enable.
-     * @return Wehther or not players can pick up arrows.
+     * @return Whether players can pick up arrows.
      */
     public boolean hasArrowPickup() {
         return arrowPickup;
+    }
+
+    public boolean hasBoxingDamage() {
+        return boxingDamage;
     }
 
     /**
@@ -295,9 +319,13 @@ public class Kit {
         return doDamage;
     }
 
+    public boolean hasExitVehicle() {
+        return exitVehicle;
+    }
+
     /**
      * Get if the kit should have hunger.
-     * @return Whether or not the kit has hunger.
+     * @return Whether the kit has hunger.
      */
     public boolean hasHunger() {
         return hunger;
@@ -312,8 +340,8 @@ public class Kit {
     }
 
     /**
-     * Get if the kit will have ranged ranged.
-     * @return Whether or not the kit as ranged damage.
+     * Get if the kit will have ranged damage.
+     * @return Whether the kit as ranged damage.
      */
     public boolean hasRangedDamage() {
         return rangedDamage;
@@ -321,7 +349,7 @@ public class Kit {
 
     /**
      * Get if the kit should have strong golden apples.
-     * @return Whether or not it has strong golden apples.
+     * @return Whether it has strong golden apples.
      */
     public boolean hasStrongGapple() {
         return strongGapple;
@@ -337,11 +365,18 @@ public class Kit {
 
     /**
      * Get if the kit should have natural regen.
-     * @return Whether or not the kit has natural regen.
+     * @return Whether the kit has natural regen.
      */
     public boolean naturalRegen() {
         return naturalRegen;
     }
+
+    /**
+     * Called when a block is broken in game.
+     * @param game Current Game
+     * @param event BlockBreakEvent
+     */
+    public void onBlockBreak(Game game, BlockBreakEvent event) {}
 
     /**
      * Called when a block is placed in game.
@@ -350,16 +385,22 @@ public class Kit {
      */
     public void onBlockPlace(Game game, BlockPlaceEvent event) {}
 
+    public void onGameStart(Game game) {}
+
     /**
-     * Set if players should be able to pickup arrows.
-     * @param arrowPickup Whether or not arrows can be picked up.
+     * Set if players should be able to pick up arrows.
+     * @param arrowPickup Whether arrows can be picked up.
      */
     public void setArrowPickup(boolean arrowPickup) {
         this.arrowPickup = arrowPickup;
     }
 
+    public void setBoxingDamage(boolean boxingDamage) {
+        this.boxingDamage = boxingDamage;
+    }
+
     /**
-     * Set whether or not players should do damage to others.
+     * Set whether players should do damage to others.
      * @param doDamage If players should do damage.
      */
     public void setDoDamage(boolean doDamage) {
@@ -368,10 +409,14 @@ public class Kit {
 
     /**
      * Set the number of double jumps
-     * @param doubleJumps
+     * @param doubleJumps Number of double jumps the kit has.
      */
     public void setDoubleJumps(int doubleJumps) {
         this.doubleJumps = doubleJumps;
+    }
+
+    public void setExitVehicle(boolean exitVehicle) {
+        this.exitVehicle = exitVehicle;
     }
 
     /**
@@ -384,7 +429,7 @@ public class Kit {
 
     /**
      * Set it the kit should have hunger.
-     * @param hunger Whether or not the kit has hunger.
+     * @param hunger Whether the kit has hunger.
      */
     public void setHunger(boolean hunger) {
         this.hunger = hunger;
@@ -408,7 +453,7 @@ public class Kit {
 
     /**
      * Set if the kit should have natural regen.
-     * @param naturalRegen Whether or not the kit has natural regen.
+     * @param naturalRegen Whether the kit has natural regen.
      */
     public void setNaturalRegen(boolean naturalRegen) {
         this.naturalRegen = naturalRegen;
@@ -424,7 +469,7 @@ public class Kit {
 
     /**
      * Set if the kit should have ranged damage.
-     * @param rangedDamage Whether or not the kit has ranged damage.
+     * @param rangedDamage Whether the kit has ranged damage.
      */
     public void setRangedDamage(boolean rangedDamage) {
         this.rangedDamage = rangedDamage;
@@ -432,7 +477,7 @@ public class Kit {
 
     /**
      * Set the number of repulsors
-     * @param repulsors
+     * @param repulsors Number of repulsors the kit has.
      */
     public void setRepulsors(int repulsors) {
         this.repulsors = repulsors;
@@ -488,7 +533,7 @@ public class Kit {
 
     /**
      * Set the number of triple shots
-     * @param tripleShots
+     * @param tripleShots Number of triple shots used in the kit.
      */
     public void setTripleShots(int tripleShots) {
         this.tripleShots = tripleShots;
@@ -504,7 +549,7 @@ public class Kit {
 
     /**
      * Set if water should kill players.
-     * @param waterKills Whether or not water kills players.
+     * @param waterKills Whether water kills players.
      */
     public void setWaterKills(boolean waterKills) {
         this.waterKills = waterKills;
@@ -513,7 +558,7 @@ public class Kit {
     /**
      * Get if the kit should kill the player
      *  when they touch water.
-     * @return Wether or not water kills the player.
+     * @return Whether water kills the player.
      */
     public boolean waterKills() {
         return waterKills;

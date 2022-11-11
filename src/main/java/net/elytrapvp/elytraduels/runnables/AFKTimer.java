@@ -3,6 +3,7 @@ package net.elytrapvp.elytraduels.runnables;
 import net.elytrapvp.elytraduels.ElytraDuels;
 import net.elytrapvp.elytraduels.game.Game;
 import net.elytrapvp.elytraduels.game.GameState;
+import net.elytrapvp.elytraduels.game.GameType;
 import net.elytrapvp.elytraduels.scoreboards.LobbyScoreboard;
 import net.elytrapvp.elytraduels.utils.ItemUtils;
 import net.elytrapvp.elytraduels.utils.LocationUtils;
@@ -18,8 +19,8 @@ import java.util.UUID;
 
 public class AFKTimer extends BukkitRunnable {
     private final ElytraDuels plugin;
-    public static Map<UUID, Integer> counter = new HashMap<>();
-    private Map<UUID, Location> locations = new HashMap<>();
+    public static final Map<UUID, Integer> counter = new HashMap<>();
+    private final Map<UUID, Location> locations = new HashMap<>();
 
     public AFKTimer(ElytraDuels plugin) {
         this.plugin = plugin;
@@ -28,7 +29,7 @@ public class AFKTimer extends BukkitRunnable {
     @Override
     public void run() {
         for(Player player : Bukkit.getOnlinePlayers()) {
-            Game game = plugin.getGameManager().getGame(player);
+            Game game = plugin.gameManager().getGame(player);
 
             if(game == null) {
                 counter.remove(player.getUniqueId());
@@ -41,6 +42,10 @@ public class AFKTimer extends BukkitRunnable {
             }
 
             if(game.getGameState() != GameState.RUNNING) {
+                return;
+            }
+
+            if(game.getGameType() != GameType.UNRANKED) {
                 return;
             }
 
@@ -64,7 +69,7 @@ public class AFKTimer extends BukkitRunnable {
 
             if(counter.get(player.getUniqueId()) == 6) {
                 player.teleport(LocationUtils.getSpawn(plugin));
-                ItemUtils.givePartyItems(plugin.getPartyManager(), player);
+                ItemUtils.givePartyItems(plugin.partyManager(), player);
                 ChatUtils.chat(player, "&c&lYou have been kicked for being AFK!");
                 new LobbyScoreboard(plugin, player);
                 game.playerDisconnect(player);

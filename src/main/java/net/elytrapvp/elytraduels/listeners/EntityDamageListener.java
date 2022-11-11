@@ -32,7 +32,7 @@ public class EntityDamageListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
         if(game == null) {
             return;
@@ -51,11 +51,11 @@ public class EntityDamageListener implements Listener {
         }
 
         // Prevents "killing" a player twice.
-        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
             return;
         }
 
-        // Kill player if they wont survive.
+        // Kill player if they won't survive.
         if(event.getFinalDamage() >= player.getHealth()) {
             event.setCancelled(true);
             Bukkit.getScheduler().runTaskLater(plugin, () -> game.playerKilled(player), 1);

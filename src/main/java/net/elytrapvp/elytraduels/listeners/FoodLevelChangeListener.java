@@ -22,9 +22,9 @@ public class FoodLevelChangeListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-        Game game = plugin.getGameManager().getGame(player);
+        Game game = plugin.gameManager().getGame(player);
 
-        // Hunger wont lower outside of games
+        // Hunger won't lower outside of games
         if(game == null || !game.getKit().hasHunger()) {
             event.setCancelled(true);
         }

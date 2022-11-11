@@ -5,10 +5,10 @@ package net.elytrapvp.elytraduels.game;
  */
 public enum GameType {
     UNRANKED("Unranked"),
-    RANKED("Ranked"),
     PARTY("Party"),
     DUEL("Duel"),
-    FFA("FFA");
+    FFA("FFA"),
+    RANKED("Ranked");
 
     private final String name;
 

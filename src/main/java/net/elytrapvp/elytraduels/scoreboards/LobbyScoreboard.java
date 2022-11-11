@@ -1,6 +1,7 @@
 package net.elytrapvp.elytraduels.scoreboards;
 
 import net.elytrapvp.elytraduels.ElytraDuels;
+import net.elytrapvp.elytraduels.customplayer.CustomPlayer;
 import net.elytrapvp.elytraduels.utils.scoreboard.CustomScoreboard;
 import net.elytrapvp.elytraduels.utils.scoreboard.ScoreHelper;
 import org.bukkit.Bukkit;
@@ -27,11 +28,17 @@ public class LobbyScoreboard extends CustomScoreboard {
             helper = ScoreHelper.createScore(p);
         }
 
-        helper.setTitle("&a&lDuels &b(Season 1)");
-        helper.setSlot(6, "&7&m------------------");
-        helper.setSlot(5, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
-        helper.setSlot(4, "&aPlaying: &f" + plugin.getQueueManager().getPlaying());
-        helper.setSlot(3, "&aQueue: &f" + plugin.getQueueManager().getQueueing());
+        CustomPlayer customPlayer = plugin.customPlayerManager().getPlayer(p);
+
+        helper.setTitle("&a&lDuels");
+        helper.setSlot(10, "&7&m------------------");
+        helper.setSlot(9, "&aOnline: &f" + Bukkit.getOnlinePlayers().size());
+        helper.setSlot(8, "&aPlaying: &f" + plugin.queueManager().getPlaying());
+        helper.setSlot(7, "&aQueue: &f" + plugin.queueManager().getQueueing());
+        helper.setSlot(6, "");
+        helper.setSlot(5, "&aWins: &f" + customPlayer.getWins("global"));
+        helper.setSlot(4, "&aWin Streak: &f" + customPlayer.getWinStreak("global"));
+        helper.setSlot(3, "&aBest Win Streak: &f" + customPlayer.getBestWinStreak("global"));
         helper.setSlot(2, "&7&m------------------");
         helper.setSlot(1, "&aplay.elytrapvp.net");
     }

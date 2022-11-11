@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class KitManager {
     private final Set<Kit> kits = new LinkedHashSet<>();
+    private final Set<Kit> disabledKits = new LinkedHashSet<>();
     private final Set<Kit> rankedKits = new LinkedHashSet<>();
 
     public KitManager(ElytraDuels plugin) {
@@ -33,6 +34,10 @@ public class KitManager {
         Kit blockSumo = new BlockSumoKit(plugin);
         Kit bowFight = new BowFightKit(plugin);
         Kit shortBow = new ShortBowKit(plugin);
+        Kit soup = new SoupKit(plugin);
+        Kit spleef = new SpleefKit(plugin);
+        Kit boxing = new BoxingKit(plugin);
+        Kit horse = new HorseKit(plugin);
 
         kits.add(speedArcher);
         kits.add(bow);
@@ -47,44 +52,25 @@ public class KitManager {
         kits.add(cactus);
         kits.add(sg);
         kits.add(finalUHC);
-        kits.add(sumo);
         kits.add(archer);
-        kits.add(peal);
-        kits.add(blockSumo);
-        //kits.add(bowFight);
         kits.add(shortBow);
+        kits.add(soup);
+        kits.add(spleef);
+        kits.add(boxing);
+        kits.add(horse);
 
-        // Season 0 Ranked Kits
-        //rankedKits.add(speedArcher);
+        disabledKits.add(sumo);
+        disabledKits.add(peal);
+        disabledKits.add(blockSumo);
+        disabledKits.add(bowFight);
+
         rankedKits.add(bow);
-        //rankedKits.add(iron);
-        //rankedKits.add(diamond);
         rankedKits.add(bowSpleef);
         rankedKits.add(classic);
-        //rankedKits.add(noDebuff);
         rankedKits.add(op);
         rankedKits.add(blitz);
         rankedKits.add(buildUHC);
         rankedKits.add(cactus);
-        //rankedKits.add(sg);
-        //rankedKits.add(finalUHC);
-        //rankedKits.add(sumo);
-
-        // Current Planned Ranked Kits for Season 1. Subject to change.
-        /*
-        rankedKits.add(bow);
-        rankedKits.add(bowSpleef);
-        rankedKits.add(noDebuff);
-        rankedKits.add(op);
-        rankedKits.add(blitz);
-        rankedKits.add(buildUHC);
-        rankedKits.add(cactus);
-        rankedKits.add(sg);
-        rankedKits.add(sumo);
-        rankedKits.add(iron);
-        rankedKits.add(diamond);
-        rankedKits.add(finalUHC);
-         */
     }
 
     /**
@@ -93,7 +79,13 @@ public class KitManager {
      * @return Kit from name.
      */
     public Kit getKit(String str) {
-        for(Kit kit : getKits()) {
+        for(Kit kit : kits()) {
+            if(kit.getName().equalsIgnoreCase(str)) {
+                return kit;
+            }
+        }
+
+        for(Kit kit : disabledKits()) {
             if(kit.getName().equalsIgnoreCase(str)) {
                 return kit;
             }
@@ -106,8 +98,16 @@ public class KitManager {
      * Get all existing kits.
      * @return All kits.
      */
-    public Set<Kit> getKits() {
+    public Set<Kit> kits() {
         return kits;
+    }
+
+    /**
+     * Get all disabled kits.
+     * @return All disabled kits.
+     */
+    public Set<Kit> disabledKits() {
+        return disabledKits;
     }
 
     /**

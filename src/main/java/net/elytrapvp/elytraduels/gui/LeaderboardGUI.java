@@ -29,15 +29,11 @@ public class LeaderboardGUI extends CustomGUI {
         ItemBuilder wins = new ItemBuilder(Material.IRON_SWORD)
                 .setDisplayName("&a&lWins Leaderboards")
                 .addFlag(ItemFlag.HIDE_ATTRIBUTES);
-        setItem(22, wins.build(), (p,a) -> {
-            new LeaderboardGUI(plugin, "wins").open(p);
-        });
+        setItem(22, wins.build(), (p,a) -> new LeaderboardGUI(plugin, "wins").open(p));
 
         ItemBuilder winstreak = new ItemBuilder(Material.PAPER)
                 .setDisplayName("&a&lWin Streak Leaderboards");
-        setItem(25, winstreak.build(), (p,a) -> {
-            new LeaderboardGUI(plugin, "bestWinStreak").open(p);
-        });
+        setItem(25, winstreak.build(), (p,a) -> new LeaderboardGUI(plugin, "bestWinStreak").open(p));
 
         int[] fillers = {0,1,2,3,4,5,6,7,8,36,37,38,39,40,41,42,43,44};
         for(int j : fillers) {
@@ -56,9 +52,7 @@ public class LeaderboardGUI extends CustomGUI {
         ItemStack back = new SkullBuilder("edf5c2f893bd3f89ca40703ded3e42dd0fbdba6f6768c8789afdff1fa78bf6")
                 .setDisplayName("&cBack")
                 .build();
-        setItem(0, back, (p, a) -> {
-            new LeaderboardGUI(plugin).open(p);
-        });
+        setItem(0, back, (p, a) -> new LeaderboardGUI(plugin).open(p));
 
         ItemBuilder global = new ItemBuilder(Material.NETHER_STAR)
                 .setDisplayName("&a&lGlobal");
@@ -66,7 +60,7 @@ public class LeaderboardGUI extends CustomGUI {
         setItem(13, global.build());
 
         int i = 18;
-        for(Kit kit : plugin.getKitManager().getRankedKits()) {
+        for(Kit kit : plugin.kitManager().getRankedKits()) {
 
             ItemBuilder item = new ItemBuilder(kit.getIconMaterial(), 1)
                     .setDisplayName("&a&l" + kit.getName())
@@ -89,7 +83,7 @@ public class LeaderboardGUI extends CustomGUI {
     }
 
     private void addLore(ItemBuilder builder, String kit, String type) {
-        Map<String, Integer> leaderboard = plugin.getLeaderboardManager().getLeaderboard(kit, type);
+        Map<String, Integer> leaderboard = plugin.leaderboardManager().getLeaderboard(kit, type);
 
         int i = 1;
         for(String player : leaderboard.keySet()) {
